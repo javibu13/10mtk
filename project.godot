@@ -10,9 +10,19 @@ config_version=5
 
 [application]
 
-config/name="10mtk"
+config/name="10' To Kill"
+run/main_scene="uid://chyfiqusrxmpw"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
+
+[autoload]
+
+NetworkManager="*res://scripts/autoload/network_manager.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [rendering]
 
