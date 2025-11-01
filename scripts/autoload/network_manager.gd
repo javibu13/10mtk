@@ -7,10 +7,10 @@ signal connection_failed
 signal player_connected(id)
 signal player_disconnected(id)
 
-const IP_ADDRESS := "127.0.0.1"
-const PORT := 9999
-const MAX_PLAYERS := 64
 
+var ip_address := "127.0.0.1"
+var port := 9999
+var max_players := 64
 var peer: ENetMultiplayerPeer
 var is_server_mode := false
 
@@ -20,33 +20,29 @@ func _ready():
 	var args: Array = OS.get_cmdline_args()
 	if "--server" in args:
 		print("Starting as SERVER")
-		var port := PORT
 		if "--port" in args:
 			var port_index: int = args.find("--port")
 			port = args.get(port_index + 1).to_int()
-		var max_players := MAX_PLAYERS
 		if "--maxplayers" in args:
 			var max_players_index: int = args.find("--maxplayers")
 			max_players = args.get(max_players_index + 1).to_int()
-		create_server(port, max_players)
+		create_server()
 		get_tree().change_scene_to_file.call_deferred("res://scenes/Server.tscn")
 		return
 	if "--client" in args:
 		print("Starting as CLIENT")
-		var port := PORT
 		if "--port" in args:
 			var port_index: int = args.find("--port")
 			port = args.get(port_index + 1).to_int()
-		var ip_address := IP_ADDRESS
 		if "--ip" in args:
 			var ip_index: int = args.find("--ip")
 			ip_address = args.get(ip_index + 1)
 		await get_tree().create_timer(1.0).timeout  # Wait for server launch
-		create_client(ip_address, port)
+		create_client()
 		return
 
 
-func create_server(port: int = PORT, max_players: int = MAX_PLAYERS):
+func create_server():
 	# Signal connection
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
@@ -62,12 +58,12 @@ func create_server(port: int = PORT, max_players: int = MAX_PLAYERS):
 	multiplayer.multiplayer_peer = peer
 	is_server_mode = true
 	# Notify server creation
-	print("Server created at port: ", PORT)
+	print("Server created at port: ", port)
 	server_created.emit()
 	return true
 
 
-func create_client(ip_address: String = IP_ADDRESS, port: int = PORT):
+func create_client():
 	# Signal connection
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
@@ -78,7 +74,7 @@ func create_client(ip_address: String = IP_ADDRESS, port: int = PORT):
 	# Check client creation
 	if result != OK:
 		print("Error at server connection: ", result)
-		connection_failed.emit()
+		multiplayer.connection_failed.emit()
 		return false
 	# Assign peer
 	multiplayer.multiplayer_peer = peer

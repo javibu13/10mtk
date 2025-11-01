@@ -13,8 +13,8 @@ config_version=5
 config/name="10' To Kill"
 run/main_scene="uid://chyfiqusrxmpw"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-boot_splash/show_image=false
 config/icon="res://icon.svg"
+boot_splash/show_image=false
 
 [autoload]
 
@@ -23,6 +23,10 @@ NetworkManager="*res://scripts/autoload/network_manager.gd"
 [display]
 
 window/stretch/mode="canvas_items"
+
+[editor]
+
+run/main_run_args="--client --ip 127.0.0.1 --port 2828"
 
 [rendering]
 
