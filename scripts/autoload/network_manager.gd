@@ -10,7 +10,7 @@ signal server_print_msg(msg)
 
 
 var ip_address := "127.0.0.1"
-var port := 9999
+var port := 2828
 var max_players := 64
 var peer: ENetMultiplayerPeer
 var is_server_mode := false
@@ -54,7 +54,7 @@ func create_server():
 	# Check server creation
 	if result != OK:
 		print("Error at server creation: ", result)
-		server_print_msg.emit("Error at server creation: " + result)
+		server_print_msg.emit("Error at server creation: " + str(result))
 		server_creation_failed.emit()
 		return false
 	# Assign peer
@@ -90,13 +90,13 @@ func create_client():
 
 func _on_peer_connected(id):
 	print("Player connected: ", id)
-	server_print_msg.emit("Player connected: " + id)
+	server_print_msg.emit("Player connected: " + str(id))
 	player_connected.emit(id)
 
 
 func _on_peer_disconnected(id):
 	print("Player disconnected: ", id)
-	server_print_msg.emit("Player disconnected: " + id)
+	server_print_msg.emit("Player disconnected: " + str(id))
 	player_disconnected.emit(id)
 
 

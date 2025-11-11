@@ -68,16 +68,16 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 208.0
+offset_left = 326.0
 offset_top = 117.0
-offset_right = -208.0
+offset_right = -326.0
 offset_bottom = -117.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="Login_VBoxContainer"]
+[node name="Email_LineEdit" type="LineEdit" parent="Login_VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -88,9 +88,37 @@ emoji_menu_enabled = false
 virtual_keyboard_type = 5
 caret_blink = true
 
+[node name="PasswordGroup_VBoxContainer" type="VBoxContainer" parent="Login_VBoxContainer"]
+layout_mode = 2
+
+[node name="Password_LineEdit" type="LineEdit" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Password"
+max_length = 100
+emoji_menu_enabled = false
+virtual_keyboard_type = 6
+caret_blink = true
+secret = true
+
+[node name="ForgotPassword_RichTextLabel" type="RichTextLabel" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+bbcode_enabled = true
+text = "[url][u]Forgot your password?[/u][/url]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+vertical_alignment = 3
+
 [node name="Login_Button" type="Button" parent="Login_VBoxContainer"]
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
-text = "Retry"
+text = "Log in"
