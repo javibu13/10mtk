@@ -6,6 +6,7 @@ signal connected_to_server
 signal connection_failed
 signal player_connected(id)
 signal player_disconnected(id)
+signal server_print_msg(msg)
 
 
 var ip_address := "127.0.0.1"
@@ -26,8 +27,9 @@ func _ready():
 		if "--maxplayers" in args:
 			var max_players_index: int = args.find("--maxplayers")
 			max_players = args.get(max_players_index + 1).to_int()
-		create_server()
 		get_tree().change_scene_to_file.call_deferred("res://scenes/Server.tscn")
+		await get_tree().create_timer(1.0).timeout  # Wait for server scene load
+		create_server()
 		return
 	if "--client" in args:
 		print("Starting as CLIENT")
@@ -52,6 +54,7 @@ func create_server():
 	# Check server creation
 	if result != OK:
 		print("Error at server creation: ", result)
+		server_print_msg.emit("Error at server creation: " + result)
 		server_creation_failed.emit()
 		return false
 	# Assign peer
@@ -59,6 +62,7 @@ func create_server():
 	is_server_mode = true
 	# Notify server creation
 	print("Server created at port: ", port)
+	server_print_msg.emit("Server created at port: " + str(port))
 	server_created.emit()
 	return true
 
@@ -86,11 +90,13 @@ func create_client():
 
 func _on_peer_connected(id):
 	print("Player connected: ", id)
+	server_print_msg.emit("Player connected: " + id)
 	player_connected.emit(id)
 
 
 func _on_peer_disconnected(id):
 	print("Player disconnected: ", id)
+	server_print_msg.emit("Player disconnected: " + id)
 	player_disconnected.emit(id)
 
 

@@ -13,6 +13,7 @@ size_flags_horizontal = 4
 script = ExtResource("1_yqorp")
 
 [node name="TryingToConnect_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,8 +63,7 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Retry"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
+[node name="Login_VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,7 +77,20 @@ grow_vertical = 2
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="client_button" type="Button" parent="VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Login_VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "Client"
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Email"
+max_length = 100
+emoji_menu_enabled = false
+virtual_keyboard_type = 5
+caret_blink = true
+
+[node name="Login_Button" type="Button" parent="Login_VBoxContainer"]
+custom_minimum_size = Vector2(200, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Retry"
