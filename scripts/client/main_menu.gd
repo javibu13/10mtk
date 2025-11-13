@@ -8,6 +8,11 @@ var server_timeout: float = 5.0
 @onready var forgot_your_password_container: VBoxContainer = $ForgotYourPassword_VBoxContainer
 @onready var try_again_button: Button = $ConnectionFailed_VBoxContainer/TryAgain_Button
 @onready var forgot_your_password_text_button: RichTextLabel = $Login_VBoxContainer/PasswordGroup_VBoxContainer/ForgotPassword_RichTextLabel
+@onready var reset_password_button: Button = $ForgotYourPassword_VBoxContainer/ButtonsGroup_VBoxContainer/Reset_Button
+@onready var return_from_forgot_your_password_button: Button = $ForgotYourPassword_VBoxContainer/ButtonsGroup_VBoxContainer/Return_Button
+@onready var email_login_line_edit: LineEdit = $Login_VBoxContainer/Email_LineEdit
+@onready var password_login_line_edit: LineEdit = $Login_VBoxContainer/PasswordGroup_VBoxContainer/Password_LineEdit
+@onready var email_forgot_your_password_line_edit: LineEdit = $ForgotYourPassword_VBoxContainer/Email_LineEdit
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,8 +21,11 @@ func _ready() -> void:
 	NetworkManager.connected_to_server.connect(_connection_to_server_successful)
 	try_again_button.pressed.connect(_retry_server_connection)
 	forgot_your_password_text_button.meta_clicked.connect(_change_to_forgot_your_password_panel)
+	reset_password_button.pressed.connect(_request_password_reset)
+	return_from_forgot_your_password_button.pressed.connect(_return_from_forgot_your_password)
 	connection_failed_container.hide()
 	login_container.hide()
+	forgot_your_password_container.hide()
 	trying_to_connect_container.show()
 
 
@@ -46,7 +54,23 @@ func _connection_to_server_successful():
 	# Show Log In menu
 	login_container.show()
 
+
 # Change to Forgot Your Password panel from Log In panel
 func _change_to_forgot_your_password_panel(meta):
 	login_container.hide()
 	forgot_your_password_container.show()
+	email_login_line_edit.clear()
+	password_login_line_edit.clear()
+
+
+# Send password reset request
+func _request_password_reset():
+	# TODO
+	pass
+
+
+# Return to login panel from forgot your password panel
+func _return_from_forgot_your_password():
+	forgot_your_password_container.hide()
+	login_container.show()
+	email_forgot_your_password_line_edit.clear()
