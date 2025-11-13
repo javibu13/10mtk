@@ -64,7 +64,6 @@ theme_override_font_sizes/font_size = 32
 text = "Retry"
 
 [node name="Login_VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,6 +124,7 @@ theme_override_font_sizes/font_size = 32
 text = "Log in"
 
 [node name="ForgotYourPassword_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

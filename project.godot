@@ -13,11 +13,12 @@ config_version=5
 config/name="10' To Kill"
 run/main_scene="uid://chyfiqusrxmpw"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
 boot_splash/show_image=false
+config/icon="res://icon.svg"
 
 [autoload]
 
+DatabaseManager="*res://scripts/autoload/database_manager.gd"
 NetworkManager="*res://scripts/autoload/network_manager.gd"
 
 [display]

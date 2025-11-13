@@ -27,6 +27,7 @@ func _ready():
 		if "--maxplayers" in args:
 			var max_players_index: int = args.find("--maxplayers")
 			max_players = args.get(max_players_index + 1).to_int()
+		DatabaseManager.initialize_server_database()
 		get_tree().change_scene_to_file.call_deferred("res://scenes/Server.tscn")
 		await get_tree().create_timer(1.0).timeout  # Wait for server scene load
 		create_server()
