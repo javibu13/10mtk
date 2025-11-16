@@ -162,7 +162,51 @@ func _request_register_new_user():
 	# Check if there are errors
 	if !error:
 		# Send request
-		# TODO:
-		pass 
+		AuthManager.server_register_user.rpc_id(1, nickname, email, password.sha256_text())
+		_set_register_inputs_interaction_status(false)
+		var result = await wait_for_register_response(10.0)
+		if result.success:
+			email_login_line_edit.text = email
+			_return_to_login_panel()
+		else:
+			_show_accept_dialog("Error", result.message)
+		_set_register_inputs_interaction_status(true)
 	else:
 		_show_accept_dialog("Error", "Please, fill the gaps with correct info.", "Sorry, I will do it again...")
+
+
+# Wait until register response is received or the timeout is reached
+func wait_for_register_response(timeout) -> Dictionary:
+	var timer = get_tree().create_timer(timeout)
+	var state = {
+		"response_received": false,
+		"result": {},
+	}
+	# Temporarily connect the signal
+	var on_response = func(success: bool, message: String):
+		state.response_received = true
+		state.result = {
+			"success": success,
+			"message": message
+		}
+	AuthManager.register_user_end.connect(on_response)
+	# Wait response or timeout
+	while not state.response_received and timer.time_left > 0:
+		await get_tree().process_frame
+	# Disconnect signal
+	AuthManager.register_user_end.disconnect(on_response)
+	# Check if response has been received or not
+	if not state.response_received:
+		return {
+			"success": false,
+			"message": "❌ Timeout: Server is not responding"
+		}
+	return state.result
+
+
+func _set_register_inputs_interaction_status(status: bool):
+	nickname_register_line_edit.editable = status
+	email_register_line_edit.editable = status
+	password_register_line_edit.editable = status
+	register_button.disabled = !status
+	return_from_register_button.disabled = !status
