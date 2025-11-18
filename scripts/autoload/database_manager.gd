@@ -102,6 +102,25 @@ func player_create_new(nickname: String, email: String, password_hash: String):
 		return {}
 	db.query_with_bindings("""
 	    INSERT INTO player (user_name, password, nickname, email)
-	    VALUES (?, ?, ?, ?);
+	    VALUES (?, ?, ?, ?)
+		RETURNING *;
 	""", [nickname, password_hash, nickname, email])
-	
+	if not db.query_result.is_empty():
+		return db.query_result[0]
+	else:
+		return {}
+
+
+func player_get_by_login(email: String, password_hash: String):
+	if not is_initialized:
+		return {}
+	db.query_with_bindings("""
+		SELECT *
+		FROM player
+		WHERE email = ? AND password = ?
+	""", [email, password_hash])
+	var result = db.query_result
+	if not result.is_empty():
+		return result[0]
+	else:
+		return {}

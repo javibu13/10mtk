@@ -2,6 +2,7 @@ extends Node
 
 
 signal register_user_end(success, message)
+signal login_user_end(success, message)
 
 
 # Request for server to create new user
@@ -33,8 +34,8 @@ func server_register_user(nickname: String, email: String, password_hash: String
 		client_register_response.rpc_id(client_id, false, error_message)
 		return
 	# Create user in database
-	var player_id = DatabaseManager.player_create_new(nickname, email, password_hash)
-	if player_id == -1:
+	var player = DatabaseManager.player_create_new(nickname, email, password_hash)
+	if player.is_empty():
 		var error_message = "❌ Error during user creation"
 		NetworkManager.server_print_msg.emit(error_message)
 		client_register_response.rpc_id(client_id, false, error_message)
@@ -63,3 +64,24 @@ func _validate_user_register_data(nickname: String, email: String, password_hash
 @rpc("authority", "call_remote", "reliable")
 func client_register_response(success: bool, message: String):
 	register_user_end.emit(success, message)
+
+
+# Request for server to login user
+@rpc("any_peer", "call_remote", "reliable")
+func server_login_user(email: String, password_hash: String):
+	if not multiplayer.is_server():
+		return
+	var client_id := multiplayer.get_remote_sender_id()
+	var user = DatabaseManager.player_get_by_login(email, password_hash)
+	if user.is_empty():
+		var error_message = "❌ Incorrect email or password"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_login_response.rpc_id(client_id, false, error_message)
+		return
+	# TODO: Link user info to client_id and store in global dict
+	# TODO: Response to client with user data to show in main logged menu
+
+
+@rpc("authority", "call_remote", "reliable")
+func client_login_response(success: bool, message: String):
+	login_user_end.emit(success, message)

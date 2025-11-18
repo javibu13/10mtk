@@ -8,6 +8,7 @@ var confirm_dialog: ConfirmationDialog = ConfirmationDialog.new()
 @onready var connection_failed_container: VBoxContainer = $ConnectionFailed_VBoxContainer
 @onready var login_container: VBoxContainer = $Login_VBoxContainer
 @onready var forgot_your_password_container: VBoxContainer = $ForgotYourPassword_VBoxContainer
+@onready var login_button: Button = $Login_VBoxContainer/LoginRegister_VBoxContainer/Login_Button
 @onready var register_container: VBoxContainer = $Register_VBoxContainer
 @onready var try_again_button: Button = $ConnectionFailed_VBoxContainer/TryAgain_Button
 @onready var forgot_your_password_text_button: RichTextLabel = $Login_VBoxContainer/PasswordGroup_VBoxContainer/ForgotPassword_RichTextLabel
@@ -35,6 +36,7 @@ func _ready() -> void:
 	NetworkManager.connected_to_server.connect(_connection_to_server_successful)
 	try_again_button.pressed.connect(_retry_server_connection)
 	forgot_your_password_text_button.meta_clicked.connect(_change_to_forgot_your_password_panel)
+	login_button.pressed.connect(_request_login)
 	reset_password_button.pressed.connect(_request_password_reset)
 	return_from_forgot_your_password_button.pressed.connect(_return_to_login_panel)
 	register_now_login_text_button.meta_clicked.connect(_change_to_register_panel)
@@ -102,8 +104,9 @@ func _change_to_forgot_your_password_panel(meta):
 
 # Send password reset request
 func _request_password_reset():
-	# TODO
-	pass
+	if login_button.disabled:
+		return
+	# TODO: Implement the password reset request
 
 
 # Return to login panel from forgot your password panel
@@ -125,6 +128,8 @@ func _return_to_login_panel():
 # Change to Register panel from Log In panel
 @warning_ignore("unused_parameter")
 func _change_to_register_panel(meta):
+	if login_button.disabled:
+		return
 	login_container.hide()
 	register_container.show()
 	email_login_line_edit.clear()
@@ -164,7 +169,7 @@ func _request_register_new_user():
 		# Send request
 		AuthManager.server_register_user.rpc_id(1, nickname, email, password.sha256_text())
 		_set_register_inputs_interaction_status(false)
-		var result = await wait_for_register_response(10.0)
+		var result = await wait_for_signal_response(AuthManager.register_user_end, 10.0)
 		if result.success:
 			email_login_line_edit.text = email
 			_return_to_login_panel()
@@ -175,8 +180,39 @@ func _request_register_new_user():
 		_show_accept_dialog("Error", "Please, fill the gaps with correct info.", "Sorry, I will do it again...")
 
 
-# Wait until register response is received or the timeout is reached
-func wait_for_register_response(timeout) -> Dictionary:
+func _set_register_inputs_interaction_status(status: bool):
+	nickname_register_line_edit.editable = status
+	email_register_line_edit.editable = status
+	password_register_line_edit.editable = status
+	register_button.disabled = !status
+	return_from_register_button.disabled = !status
+
+
+func _set_login_inputs_interaction_status(status: bool):
+	email_login_line_edit.editable = status
+	password_login_line_edit.editable = status
+	login_button.disabled = !status
+
+
+# Send login request to server
+func _request_login():
+	var email = email_login_line_edit.text
+	var password = password_login_line_edit.text
+	# Send request
+	AuthManager.server_login_user.rpc_id(1, email,password.sha256_text())
+	_set_login_inputs_interaction_status(false)
+	var result = await wait_for_signal_response(AuthManager.login_user_end, 10.0)
+	if result.success:
+		email_login_line_edit.clear()
+		password_login_line_edit.clear()
+		#_store_user_data() #TODO:
+	else:
+		_show_accept_dialog("Error", result.message)
+	_set_login_inputs_interaction_status(true)
+
+
+# Wait until signal response is received or the timeout is reached
+func wait_for_signal_response(desired_signal: Signal, timeout: float) -> Dictionary:
 	var timer = get_tree().create_timer(timeout)
 	var state = {
 		"response_received": false,
@@ -189,12 +225,12 @@ func wait_for_register_response(timeout) -> Dictionary:
 			"success": success,
 			"message": message
 		}
-	AuthManager.register_user_end.connect(on_response)
+	desired_signal.connect(on_response)
 	# Wait response or timeout
 	while not state.response_received and timer.time_left > 0:
 		await get_tree().process_frame
 	# Disconnect signal
-	AuthManager.register_user_end.disconnect(on_response)
+	desired_signal.disconnect(on_response)
 	# Check if response has been received or not
 	if not state.response_received:
 		return {
@@ -202,11 +238,3 @@ func wait_for_register_response(timeout) -> Dictionary:
 			"message": "❌ Timeout: Server is not responding"
 		}
 	return state.result
-
-
-func _set_register_inputs_interaction_status(status: bool):
-	nickname_register_line_edit.editable = status
-	email_register_line_edit.editable = status
-	password_register_line_edit.editable = status
-	register_button.disabled = !status
-	return_from_register_button.disabled = !status
