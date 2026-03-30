@@ -96,7 +96,7 @@ func player_get_by_email(email: String) -> Dictionary:
 		return {}
 
 
-func player_create_new(nickname: String, email: String, password_hash: String):
+func player_create_new(nickname: String, email: String, password_hash: String) -> Dictionary:
 	# TODO: Implement asking to new users for user for login and nickname for display inside game
 	if not is_initialized:
 		return {}
@@ -110,6 +110,20 @@ func player_create_new(nickname: String, email: String, password_hash: String):
 	else:
 		return {}
 
+
+func player_update_password_by_id(player_id: int, new_password: String) -> Dictionary:
+	if not is_initialized:
+		return {}
+	db.query_with_bindings("""
+	    UPDATE player
+	    SET new_password = ?
+		WHERE id = ?
+		RETURNING *;
+	""", [new_password, player_id])
+	if not db.query_result.is_empty():
+		return db.query_result[0]
+	else:
+		return {}
 
 func player_get_by_login(email: String, password_hash: String):
 	if not is_initialized:

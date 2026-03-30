@@ -3,6 +3,7 @@ extends Node
 
 signal register_user_end(success, message)
 signal login_user_end(success, message)
+signal reset_password_end(success, message)
 
 
 # Request for server to create new user
@@ -78,10 +79,74 @@ func server_login_user(email: String, password_hash: String):
 		NetworkManager.server_print_msg.emit(error_message)
 		client_login_response.rpc_id(client_id, false, error_message)
 		return
-	# TODO: Link user info to client_id and store in global dict
-	# TODO: Response to client with user data to show in main logged menu
+	# Check if the client_id has the id registered in the logged_in_users dict
+	if ServerGlobalData.logged_in_users.has(client_id):
+		var error_message = "❌ Client is already logged in"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_login_response.rpc_id(client_id, false, error_message)
+		return
+	# Check if the user has been logged in by other client
+	if ServerGlobalData.logged_in_users.values().any(func(logged_in_user): return logged_in_user.id == user.id):
+		var error_message = "❌ User already has an active session"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_login_response.rpc_id(client_id, false, error_message)
+		return
+	user.erase('password')
+	user.erase('new_password')
+	ServerGlobalData.logged_in_users[client_id] = user
+	client_login_response.rpc_id(client_id, true, JSON.stringify(user))
 
 
 @rpc("authority", "call_remote", "reliable")
 func client_login_response(success: bool, message: String):
 	login_user_end.emit(success, message)
+
+
+# Request for server to reset password
+@rpc("any_peer", "call_remote", "reliable")
+func server_reset_password(email: String):
+	if not multiplayer.is_server():
+		return
+	# Get the ID of the client who requested the creation of the user
+	var client_id := multiplayer.get_remote_sender_id()
+	var user = DatabaseManager.player_get_by_email(email)
+	if user.is_empty():
+		var error_message = "❌ Email not found"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_reset_password_response.rpc_id(client_id, false, error_message)
+		return
+	# TODO: Close active sessions?
+	# Create new password and assign to user
+	var new_password = _generate_password(8, true)
+	var user_new_password = DatabaseManager.player_update_password_by_id(user.id, new_password.sha256_text())
+	if user_new_password.is_empty():
+		var error_message = "❌ Error during password reset"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_reset_password_response.rpc_id(client_id, false, error_message)
+		return
+	var email_sending_result = await ServerGlobalData.send_reset_password_email(user_new_password.email, user_new_password.user_name, new_password)
+	if !email_sending_result:
+		var error_message = "❌ Error during password reset email sending process"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_reset_password_response.rpc_id(client_id, false, error_message)
+	else:
+		client_reset_password_response.rpc_id(client_id, true, "Email sent to " + str(user_new_password.email))
+
+
+@rpc("authority", "call_remote", "reliable")
+func client_reset_password_response(success: bool, message: String):
+	reset_password_end.emit(success, message)
+
+
+func _generate_password(length: int = 12, use_symbols: bool = true) -> String:
+	var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	var symbols = "!@#$%&*()-_=+"
+	if use_symbols:
+		characters += symbols
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var password = ""
+	for i in range(length):
+		var index = rng.randi_range(0, characters.length() - 1)
+		password += characters[index]
+	return password

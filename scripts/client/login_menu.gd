@@ -104,9 +104,27 @@ func _change_to_forgot_your_password_panel(meta):
 
 # Send password reset request
 func _request_password_reset():
-	if login_button.disabled:
-		return
-	# TODO: Implement the password reset request
+	var email = email_forgot_your_password_line_edit.text.strip_edges()
+	var error = false
+	# Validate Email
+	if email.is_empty() || RegEx.create_from_string("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$").search(email) == null:
+		# Add info to validation field
+		error = true
+	# Check if there are errors
+	if !error:
+		# Send request
+		AuthManager.server_reset_password.rpc_id(1, email)
+		_set_forgot_password_inputs_interaction_status(false)
+		var result = await wait_for_signal_response(AuthManager.reset_password_end, 10.0)
+		if result.success:
+			_show_accept_dialog("Success", result.message)
+			_return_to_login_panel()
+			email_forgot_your_password_line_edit.clear()
+		else:
+			_show_accept_dialog("Error", result.message)
+		_set_forgot_password_inputs_interaction_status(true)
+	else:
+		_show_accept_dialog("Error", "Please, fill the gaps with correct info.", "Sorry, I will do it again...")
 
 
 # Return to login panel from forgot your password panel
@@ -194,6 +212,12 @@ func _set_login_inputs_interaction_status(status: bool):
 	login_button.disabled = !status
 
 
+func _set_forgot_password_inputs_interaction_status(status: bool):
+	email_forgot_your_password_line_edit.editable = status
+	reset_password_button.disabled = !status
+	return_from_forgot_your_password_button.disabled = !status
+
+
 # Send login request to server
 func _request_login():
 	var email = email_login_line_edit.text
@@ -205,10 +229,16 @@ func _request_login():
 	if result.success:
 		email_login_line_edit.clear()
 		password_login_line_edit.clear()
-		#_store_user_data() #TODO:
+		_store_user_data(JSON.parse_string(result.message))
+		_change_to_logged_in_menu()
 	else:
 		_show_accept_dialog("Error", result.message)
 	_set_login_inputs_interaction_status(true)
+
+
+# Store in global client dict the user info
+func _store_user_data(user_info: Dictionary):
+	ClientGlobalData.storeUserInfo(user_info)
 
 
 # Wait until signal response is received or the timeout is reached
@@ -238,3 +268,8 @@ func wait_for_signal_response(desired_signal: Signal, timeout: float) -> Diction
 			"message": "❌ Timeout: Server is not responding"
 		}
 	return state.result
+
+
+# Change scene to 
+func _change_to_logged_in_menu():
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")

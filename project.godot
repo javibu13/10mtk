@@ -21,6 +21,8 @@ config/icon="res://icon.svg"
 DatabaseManager="*res://scripts/autoload/database_manager.gd"
 NetworkManager="*res://scripts/autoload/network_manager.gd"
 AuthManager="*res://scripts/autoload/auth_manager.gd"
+ServerGlobalData="*res://scripts/autoload/server_global_data.gd"
+ClientGlobalData="*res://scripts/autoload/client_global_data.gd"
 
 [display]
 
@@ -29,6 +31,12 @@ window/stretch/mode="canvas_items"
 [editor]
 
 run/main_run_args="--client --ip 127.0.0.1 --port 2828"
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg")
 
 [rendering]
 
