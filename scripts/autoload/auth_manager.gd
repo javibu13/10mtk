@@ -91,6 +91,10 @@ func server_login_user(email: String, password_hash: String):
 		NetworkManager.server_print_msg.emit(error_message)
 		client_login_response.rpc_id(client_id, false, error_message)
 		return
+	# Check if new_password stores something to clear it and assign as main password the used to access this time
+	if user.new_password != null or str(user.new_password) == "":
+		DatabaseManager.player_update_new_password_by_id(user.id, null)
+		DatabaseManager.player_update_password_by_id(user.id, password_hash)
 	user.erase('password')
 	user.erase('new_password')
 	ServerGlobalData.logged_in_users[client_id] = user
@@ -118,7 +122,7 @@ func server_reset_password(email: String):
 	# TODO: Close active sessions?
 	# Create new password and assign to user
 	var new_password = _generate_password(8, true)
-	var user_new_password = DatabaseManager.player_update_password_by_id(user.id, new_password.sha256_text())
+	var user_new_password = DatabaseManager.player_update_new_password_by_id(user.id, new_password.sha256_text())
 	if user_new_password.is_empty():
 		var error_message = "❌ Error during password reset"
 		NetworkManager.server_print_msg.emit(error_message)

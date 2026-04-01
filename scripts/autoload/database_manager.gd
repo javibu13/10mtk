@@ -111,7 +111,22 @@ func player_create_new(nickname: String, email: String, password_hash: String) -
 		return {}
 
 
-func player_update_password_by_id(player_id: int, new_password: String) -> Dictionary:
+func player_update_password_by_id(player_id: int, password: String) -> Dictionary:
+	if not is_initialized:
+		return {}
+	db.query_with_bindings("""
+	    UPDATE player
+	    SET password = ?
+		WHERE id = ?
+		RETURNING *;
+	""", [password, player_id])
+	if not db.query_result.is_empty():
+		return db.query_result[0]
+	else:
+		return {}
+
+
+func player_update_new_password_by_id(player_id: int, new_password) -> Dictionary:
 	if not is_initialized:
 		return {}
 	db.query_with_bindings("""
@@ -125,14 +140,15 @@ func player_update_password_by_id(player_id: int, new_password: String) -> Dicti
 	else:
 		return {}
 
+
 func player_get_by_login(email: String, password_hash: String):
 	if not is_initialized:
 		return {}
 	db.query_with_bindings("""
 		SELECT *
 		FROM player
-		WHERE email = ? AND password = ?
-	""", [email, password_hash])
+		WHERE email = ? AND (password = ? OR new_password = ?)
+	""", [email, password_hash, password_hash])
 	var result = db.query_result
 	if not result.is_empty():
 		return result[0]
