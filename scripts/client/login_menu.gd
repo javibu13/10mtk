@@ -1,5 +1,7 @@
 extends Control
 
+const login_menu_theme = preload("res://themes/login_menu.theme")
+
 var server_timeout: float = 5.0
 var accept_dialog: AcceptDialog = AcceptDialog.new()
 var confirm_dialog: ConfirmationDialog = ConfirmationDialog.new()
@@ -49,6 +51,10 @@ func _ready() -> void:
 	register_container.hide()
 	trying_to_connect_container.show()
 	# Config dialogs
+	accept_dialog.transparent = true
+	confirm_dialog.transparent = true
+	accept_dialog.set_theme(login_menu_theme)
+	confirm_dialog.set_theme(login_menu_theme)
 	add_child(accept_dialog)
 	add_child(confirm_dialog)
 	accept_dialog.confirmed.connect(_hide_dialog_background)

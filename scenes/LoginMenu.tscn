@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://chyfiqusrxmpw"]
+[gd_scene load_steps=5 format=3 uid="uid://chyfiqusrxmpw"]
 
 [ext_resource type="Script" uid="uid://cyh8s5sr3c7ir" path="res://scripts/client/login_menu.gd" id="1_bqwap"]
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="2_c13uq"]
 
-[sub_resource type="Gradient" id="Gradient_bqwap"]
-offsets = PackedFloat32Array(0, 0.7610063, 1)
-colors = PackedColorArray(0.98039216, 0.98039216, 0.98039216, 1, 0.90359825, 0.90359825, 0.9035982, 1, 0.8627451, 0.8627451, 0.8627451, 1)
+[sub_resource type="Gradient" id="Gradient_c13uq"]
+offsets = PackedFloat32Array(0, 0.8103448, 1)
+colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_c13uq"]
-gradient = SubResource("Gradient_bqwap")
+gradient = SubResource("Gradient_c13uq")
 
 [node name="LoginMenu" type="Control"]
 layout_mode = 3
@@ -50,6 +51,7 @@ alignment = 1
 
 [node name="ServerConnection_Label" type="Label" parent="TryingToConnect_VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 text = "Connecting to Server..."
 horizontal_alignment = 1
@@ -72,6 +74,7 @@ alignment = 1
 
 [node name="ServerConnectionFailure_Label" type="Label" parent="ConnectionFailed_VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 text = "Server connection failure"
 horizontal_alignment = 1
@@ -81,6 +84,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 text = "Retry"
 
@@ -102,6 +106,7 @@ alignment = 1
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Email"
 max_length = 100
@@ -111,16 +116,19 @@ caret_blink = true
 
 [node name="PasswordGroup_VBoxContainer" type="VBoxContainer" parent="Login_VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Password_LineEdit" type="LineEdit" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Password"
 max_length = 100
 emoji_menu_enabled = false
 virtual_keyboard_type = 6
+clear_button_enabled = true
 caret_blink = true
 secret = true
 
@@ -130,6 +138,7 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
 bbcode_enabled = true
 text = "[url][u]Forgot your password?[/u][/url]"
 fit_content = true
@@ -145,8 +154,10 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
-text = "Log in"
+text = "Log In"
 
 [node name="ForgotPassword_RichTextLabel" type="RichTextLabel" parent="Login_VBoxContainer/LoginRegister_VBoxContainer"]
 clip_contents = false
@@ -154,6 +165,7 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
 bbcode_enabled = true
 text = "[url]Register now![/url]"
 fit_content = true
@@ -178,11 +190,14 @@ alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ForgotYourPassword_VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_c13uq")
+fit_content = true
 
 [node name="Email_LineEdit" type="LineEdit" parent="ForgotYourPassword_VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Email"
 max_length = 100
@@ -198,6 +213,7 @@ theme_override_constants/separation = 24
 custom_minimum_size = Vector2(350, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 text = "Send password reset"
 
@@ -205,6 +221,7 @@ text = "Send password reset"
 custom_minimum_size = Vector2(125, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 24
 text = "Return"
 
@@ -230,6 +247,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Nickname"
 max_length = 16
@@ -242,6 +260,7 @@ clip_contents = false
 custom_minimum_size = Vector2(497, 30)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("2_c13uq")
 scroll_active = false
 vertical_alignment = 3
 
@@ -252,6 +271,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Email"
 max_length = 100
@@ -264,6 +284,7 @@ clip_contents = false
 custom_minimum_size = Vector2(497, 30)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("2_c13uq")
 scroll_active = false
 vertical_alignment = 3
 
@@ -274,6 +295,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Password"
 max_length = 100
@@ -287,6 +309,7 @@ clip_contents = false
 custom_minimum_size = Vector2(497, 30)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("2_c13uq")
 scroll_active = false
 vertical_alignment = 3
 
@@ -298,6 +321,7 @@ theme_override_constants/separation = 24
 custom_minimum_size = Vector2(192.41, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 text = "Register"
 
@@ -305,6 +329,7 @@ text = "Register"
 custom_minimum_size = Vector2(125, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 24
 text = "Return"
 

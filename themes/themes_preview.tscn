@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://luemjt57m2rv"]
+
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_b2lpe"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+transparent_bg = true
+oversampling_override = 1.0
+initial_position = 5
+visible = true
+transparent = true
+theme = ExtResource("1_b2lpe")

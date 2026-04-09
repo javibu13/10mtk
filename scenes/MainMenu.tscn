@@ -1,4 +1,13 @@
-[gd_scene format=3 uid="uid://dj33iaayeuttc"]
+[gd_scene load_steps=4 format=3 uid="uid://dj33iaayeuttc"]
+
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_yqorp"]
+
+[sub_resource type="Gradient" id="Gradient_bqwap"]
+offsets = PackedFloat32Array(0, 0.8103448, 1)
+colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0ykhv"]
+gradient = SubResource("Gradient_bqwap")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -8,6 +17,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+
+[node name="DialogBackground_ColorRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 2.2117962e-05
+offset_right = 647.9999
+offset_bottom = 506.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_0ykhv")
 
 [node name="PlayButtons_VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -27,6 +50,7 @@ alignment = 1
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("1_yqorp")
 theme_override_font_sizes/font_size = 32
 text = "Quick Match"
 
@@ -34,6 +58,7 @@ text = "Quick Match"
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("1_yqorp")
 theme_override_font_sizes/font_size = 32
 text = "Create Match"
 
@@ -41,6 +66,7 @@ text = "Create Match"
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("1_yqorp")
 theme_override_font_sizes/font_size = 32
 text = "Join Match"
 
