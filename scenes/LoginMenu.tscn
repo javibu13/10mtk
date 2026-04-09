@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://chyfiqusrxmpw"]
+[gd_scene load_steps=6 format=3 uid="uid://chyfiqusrxmpw"]
 
 [ext_resource type="Script" uid="uid://cyh8s5sr3c7ir" path="res://scripts/client/login_menu.gd" id="1_bqwap"]
 [ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="2_c13uq"]
+[ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="3_1oovu"]
 
 [sub_resource type="Gradient" id="Gradient_c13uq"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
@@ -89,18 +90,26 @@ theme_override_font_sizes/font_size = 32
 text = "Retry"
 
 [node name="Login_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 326.0
-offset_top = 117.0
+offset_top = 2.0
 offset_right = -326.0
-offset_bottom = -117.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 64
+theme_override_constants/separation = 48
 alignment = 1
+
+[node name="GameLogo_TextureRect" type="TextureRect" parent="Login_VBoxContainer"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+texture = ExtResource("3_1oovu")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Email_LineEdit" type="LineEdit" parent="Login_VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
@@ -191,7 +200,11 @@ alignment = 1
 [node name="RichTextLabel" type="RichTextLabel" parent="ForgotYourPassword_VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_c13uq")
+theme_override_font_sizes/normal_font_size = 48
+text = "Reset Password"
 fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Email_LineEdit" type="LineEdit" parent="ForgotYourPassword_VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
@@ -226,7 +239,6 @@ theme_override_font_sizes/font_size = 24
 text = "Return"
 
 [node name="Register_VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -239,6 +251,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 32
 alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Register_VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/normal_font_size = 48
+text = "Create your account"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NicknameGroup_VBoxContainer2" type="VBoxContainer" parent="Register_VBoxContainer"]
 layout_mode = 2
