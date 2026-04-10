@@ -54,7 +54,7 @@ func create_server():
 	var result = peer.create_server(port, max_players)
 	# Check server creation
 	if result != OK:
-		print("Error at server creation: ", result)
+		#print("Error at server creation: ", result)
 		server_print_msg.emit("Error at server creation: " + str(result))
 		server_creation_failed.emit()
 		return false
@@ -90,13 +90,13 @@ func create_client():
 
 
 func _on_peer_connected(id):
-	print("Player connected: ", id)
+	#print("Player connected: ", id)
 	server_print_msg.emit("Player connected: " + str(id))
 	player_connected.emit(id)
 
 
 func _on_peer_disconnected(id):
-	print("Player disconnected: ", id)
+	#print("Player disconnected: ", id)
 	server_print_msg.emit("Player disconnected: " + str(id))
 	player_disconnected.emit(id)
 

@@ -23,6 +23,7 @@ var api_email := {}
 
 func _ready() -> void:
 	_read_config_file()
+	NetworkManager.player_disconnected.connect(remove_logged_in_user)
 
 
 # Used to read the config file with important data to setup and private info/keys
@@ -100,7 +101,7 @@ func send_reset_password_email(user_email: String, user_name: String, new_passwo
 	var json_body = JSON.stringify(body)
 	var response = http_request.request(api_email.url, headers, HTTPClient.METHOD_POST, json_body)
 	if response != OK:
-		print("ERROR SENDING EMAIL: ", response)
+		#print("ERROR SENDING EMAIL: ", response)
 		NetworkManager.server_print_msg.emit("ERROR SENDING EMAIL: " + str(response))
 		return false
 	# Wait for request completed
@@ -111,11 +112,17 @@ func send_reset_password_email(user_email: String, user_name: String, new_passwo
 	var response_completed_response_code = response_completed[1]
 	
 	if response_completed_result == HTTPRequest.RESULT_SUCCESS and (response_completed_response_code == 200 || response_completed_response_code == 201 || response_completed_response_code == 202):
-		print("SUCCESSFUL EMAIL!!")
+		#print("SUCCESSFUL EMAIL!!")
 		NetworkManager.server_print_msg.emit("SUCCESSFUL EMAIL!!")
 		return true
 	else:
 		var response_text = response_completed[3].get_string_from_utf8()
-		print("Error response: ", response_text)
+		#print("Error response: ", response_text)
 		NetworkManager.server_print_msg.emit("Error response: " + str(response_text))
 		return false
+
+
+# Remove client_id and its previous info saved at loggin from logged_in_users dictionary
+func remove_logged_in_user(client_id) -> void:
+	if not logged_in_users.erase(client_id):
+		NetworkManager.server_print_msg.emit(str("⚠️ Trying to remove the logged_in_user info of a nonexistant client_id (", client_id, ")"))

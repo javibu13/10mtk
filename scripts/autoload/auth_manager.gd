@@ -154,3 +154,11 @@ func _generate_password(length: int = 12, use_symbols: bool = true) -> String:
 		var index = rng.randi_range(0, characters.length() - 1)
 		password += characters[index]
 	return password
+
+
+# Request for server to close the session
+@rpc("any_peer", "call_remote", "reliable")
+func server_log_out():
+	# Get the ID of the client who requested the close of the session
+	var client_id := multiplayer.get_remote_sender_id()
+	ServerGlobalData.remove_logged_in_user(client_id)

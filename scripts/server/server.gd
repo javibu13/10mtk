@@ -6,7 +6,7 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	NetworkManager.server_print_msg.connect(_on_server_print)
-	print("Server working ⚙️...")
+	#print("Server working ⚙️...")
 	NetworkManager.server_print_msg.emit("Server working ⚙️...")
 	add_child(ServerGlobalData.http_request)
 
@@ -20,6 +20,7 @@ func _on_server_print(msg: String):
 	var new_label := Label.new()
 	new_label.text = msg
 	vbox_container_print.add_child(new_label)
+	print(msg)
 
 
 func _is_valid_email(email: String) -> bool:

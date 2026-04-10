@@ -39,6 +39,8 @@ func _ready() -> void:
 	try_again_button.pressed.connect(_retry_server_connection)
 	forgot_your_password_text_button.meta_clicked.connect(_change_to_forgot_your_password_panel)
 	login_button.pressed.connect(_request_login)
+	password_login_line_edit.text_submitted.connect(_request_login)
+	email_login_line_edit.text_submitted.connect(_request_login)
 	reset_password_button.pressed.connect(_request_password_reset)
 	return_from_forgot_your_password_button.pressed.connect(_return_to_login_panel)
 	register_now_login_text_button.meta_clicked.connect(_change_to_register_panel)
@@ -59,6 +61,8 @@ func _ready() -> void:
 	add_child(confirm_dialog)
 	accept_dialog.confirmed.connect(_hide_dialog_background)
 	accept_dialog.canceled.connect(_hide_dialog_background)
+	if multiplayer.has_multiplayer_peer():
+		_connection_to_server_successful()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -94,7 +98,6 @@ func _retry_server_connection():
 # Look for previous login and connect or show login
 func _connection_to_server_successful():
 	trying_to_connect_container.hide()
-	# TODO: Verify if there was a previous connection
 	# Show Log In menu
 	login_container.show()
 
@@ -225,7 +228,8 @@ func _set_forgot_password_inputs_interaction_status(status: bool):
 
 
 # Send login request to server
-func _request_login():
+@warning_ignore("unused_parameter")
+func _request_login(new_text: String = ""):
 	var email = email_login_line_edit.text
 	var password = password_login_line_edit.text
 	# Send request
