@@ -1,5 +1,8 @@
 extends Node
 
+var http_request: HTTPRequest = HTTPRequest.new()
+var config_reader = ConfigFile.new()
+var api_email := {}
 ## Stores the IDs of clients that have been logged in and their basic user info
 ## [codeblock]
 ## {
@@ -16,9 +19,20 @@ extends Node
 ## }
 ## [/codeblock]
 var logged_in_users: Dictionary[int, Dictionary] = {}
-var http_request: HTTPRequest = HTTPRequest.new()
-var config_reader = ConfigFile.new()
-var api_email := {}
+## Stores the lobbies that are being filled up with players to create a new match
+## [codeblock]
+## {
+##	2f4d5th9sj4cug514g3d7eg6x8th4f2v: {
+##				players: [471290087, 1416429352],
+##				type: "quick"
+##				},
+##	14g3d7eg6x8th4f2v2f4d5th9sj4cug5: {
+##				players: [2416429352, 371290087],
+##				type: "custom"
+##				}
+## }
+## [/codeblock]
+var lobbies: Dictionary[String, Dictionary] = {}
 
 
 func _ready() -> void:

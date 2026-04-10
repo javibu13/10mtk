@@ -23,6 +23,7 @@ NetworkManager="*res://scripts/autoload/network_manager.gd"
 AuthManager="*res://scripts/autoload/auth_manager.gd"
 ServerGlobalData="*res://scripts/autoload/server_global_data.gd"
 ClientGlobalData="*res://scripts/autoload/client_global_data.gd"
+MatchmakingManager="*res://scripts/autoload/matchmaking_manager.gd"
 
 [display]
 

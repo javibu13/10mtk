@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dj33iaayeuttc"]
+[gd_scene load_steps=13 format=3 uid="uid://dj33iaayeuttc"]
 
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="1_0ykhv"]
 [ext_resource type="Script" uid="uid://dj0xseni82by2" path="res://scripts/client/main_menu.gd" id="1_826wr"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://d32j3g4mviarh" path="res://themes/style_boxes/main_menu_logout_texture_button_base.svg" id="2_ucygd"]
 [ext_resource type="Texture2D" uid="uid://c8xujkjtw67h7" path="res://themes/style_boxes/main_menu_logout_texture_button_pressed.svg" id="3_mipys"]
 [ext_resource type="Texture2D" uid="uid://bv1djar5kwiq" path="res://themes/style_boxes/main_menu_logout_texture_button_hover.svg" id="3_ucygd"]
+[ext_resource type="Script" uid="uid://dycsrvmx5hnil" path="res://scripts/client/main_menu_game_buttons.gd" id="8_8a8k8"]
+[ext_resource type="Script" uid="uid://mf8vroyq1qj6" path="res://scripts/client/quick_match_menu.gd" id="10_7la6k"]
 
 [sub_resource type="Gradient" id="Gradient_bqwap"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
@@ -113,6 +115,7 @@ text = "John Doe"
 vertical_alignment = 1
 
 [node name="MainMenuButtons_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -122,6 +125,7 @@ offset_right = -394.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
+script = ExtResource("8_8a8k8")
 
 [node name="GameLogo_TextureRect" type="TextureRect" parent="MainMenuButtons_VBoxContainer"]
 custom_minimum_size = Vector2(0, 260)
@@ -145,6 +149,7 @@ alignment = 1
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_yqorp")
 theme_override_font_sizes/font_size = 32
 text = "Quick Match"
@@ -153,19 +158,83 @@ text = "Quick Match"
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_yqorp")
 theme_override_font_sizes/font_size = 32
+disabled = true
 text = "Create Match"
 
 [node name="JoinMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer"]
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_yqorp")
 theme_override_font_sizes/font_size = 32
+disabled = true
 text = "Join Match"
 
 [node name="HSeparator2" type="HSeparator" parent="MainMenuButtons_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="QuickMatchMenu_VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 394.0
+offset_right = -394.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("10_7la6k")
+
+[node name="WaitingEffect_Timer" type="Timer" parent="QuickMatchMenu_VBoxContainer"]
+
+[node name="GameLogo_TextureRect" type="TextureRect" parent="QuickMatchMenu_VBoxContainer"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+texture = ExtResource("1_0ykhv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="QuickMatchMenu_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="QuickMatchInfo_VBoxContainer" type="VBoxContainer" parent="QuickMatchMenu_VBoxContainer"]
+custom_minimum_size = Vector2(0, 263)
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Info_RichTextLabel" type="RichTextLabel" parent="QuickMatchMenu_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/normal_font_size = 36
+text = "Waiting for players"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="QuickMatchMenu_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Return_Button" type="Button" parent="QuickMatchMenu_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/font_size = 24
+text = "Return"
+
+[node name="HSeparator2" type="HSeparator" parent="QuickMatchMenu_VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
