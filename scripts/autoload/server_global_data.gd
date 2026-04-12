@@ -1,5 +1,12 @@
 extends Node
 
+enum LobbyType {
+	QUICK,
+	CUSTOM,
+}
+
+const MAX_PLAYERS_PER_GAME = 4
+
 var http_request: HTTPRequest = HTTPRequest.new()
 var config_reader = ConfigFile.new()
 var api_email := {}
@@ -7,14 +14,14 @@ var api_email := {}
 ## [codeblock]
 ## {
 ##	471290087: {
-##				user_name: "Montse",
-##				nickname: "mgoon13".
-##				email: "false@email.tk"
+##				"user_name": "Montse",
+##				"nickname": "mgoon13",
+##				"email": "false@email.tk",
 ##				},
 ##	1416429352: {
-##				user_name: "Javier",
-##				nickname: "Javibu13".
-##				email: "superfalse@email.tk"
+##				"user_name": "Javier",
+##				"nickname": "Javibu13",
+##				"email": "superfalse@email.tk",
 ##				}
 ## }
 ## [/codeblock]
@@ -23,16 +30,28 @@ var logged_in_users: Dictionary[int, Dictionary] = {}
 ## [codeblock]
 ## {
 ##	2f4d5th9sj4cug514g3d7eg6x8th4f2v: {
-##				players: [471290087, 1416429352],
-##				type: "quick"
+##				"players": [471290087, 1416429352],
+##				"game_accepted": {
+##					471290087: true,
+##					471290087: false,
+##				}
+##				"max_players": 4,
+##				"type": LobbyType.QUICK,
 ##				},
 ##	14g3d7eg6x8th4f2v2f4d5th9sj4cug5: {
-##				players: [2416429352, 371290087],
-##				type: "custom"
+##				"players": [2416429352, 371290087],
+##				"game_accepted": {
+##					2416429352: false,
+##					371290087: false,
+##				}
+##				"max_players": 3,
+##				"type": LobbyType.CUSTOM,
 ##				}
 ## }
 ## [/codeblock]
 var lobbies: Dictionary[String, Dictionary] = {}
+var available_lobbies_quick: Array[String] = []
+var available_lobbies_custom: Array[String] = []
 
 
 func _ready() -> void:
@@ -66,23 +85,6 @@ func _read_config_file():
 
 # Send email using External API to user who asked for password reset
 func send_reset_password_email(user_email: String, user_name: String, new_password: String) -> bool:
-	# Build request body for SendGrid API
-	#var body = {
-		#"personalizations": [{
-			#"to": [{"email": to}],
-			#"subject": "10' To Kill - Account Password Reset"
-		#}],
-		#"from": {"email": api_email.sender},
-		#"content": [{
-			#"type": "text/plain",
-			#"value": "10' To Kill\n\nNew Password:\n" + new_password
-		#}]
-	#}
-	# Needed headers for SendGrid
-	#var headers = [
-		#"Authorization: Bearer " + api_email.key,
-		#"Content-Type: application/json"
-	#]
 	# Build request body for Mailjet API v3.1
 	var body = {
 		"SandboxMode": false,
@@ -140,3 +142,75 @@ func send_reset_password_email(user_email: String, user_name: String, new_passwo
 func remove_logged_in_user(client_id) -> void:
 	if not logged_in_users.erase(client_id):
 		NetworkManager.server_print_msg.emit(str("⚠️ Trying to remove the logged_in_user info of a nonexistant client_id (", client_id, ")"))
+
+
+# Check if given client_id is already joined to any lobby or game
+func check_client_id_already_joined_or_playing(client_id: int) -> bool:
+	var is_in_lobby = lobbies.values().any(func(lobby): return lobby.players.has(client_id))
+	#var is_in_game = false # TODO: Check if client_id is playing a game
+	return is_in_lobby
+
+
+# Get the oldest quick lobby id to fill up
+func get_quick_lobby_available() -> String:
+	var lobby_id := ""
+	for available_lobby_id in available_lobbies_quick:
+		if lobbies.has(available_lobby_id) and lobbies[available_lobby_id].players.size() < lobbies[available_lobby_id].max_players:
+			lobby_id = available_lobby_id
+			break
+	return lobby_id
+
+
+# Add player to lobby. Returns true if there is more space available in the lobby and false if the lobby is full after join player
+func add_player_to_lobby(client_id: int, lobby_id: String) -> bool:
+	lobbies[lobby_id].players.append(client_id)
+	return lobbies[lobby_id].players.size() < lobbies[lobby_id].max_players
+
+
+# Remove player from the lobby that is joined. Returns true if the lobby is empty after player removal
+func remove_player_from_lobby(client_id: int, lobby_id: String = "") -> bool:
+	if not lobby_id:
+		lobby_id = get_lobby_of_client(client_id)
+	if not lobby_id:
+		NetworkManager.server_print_msg.emit(str("❌ Client (", client_id, ") is not found in any lobby"))
+		return false
+	lobbies[lobby_id].players.erase(client_id)
+	return lobbies[lobby_id].players.is_empty()
+
+
+func get_lobby_of_client(client_id: int) -> String:
+	var joined_lobby_id = ""
+	for lobby_id in lobbies.keys():
+		if lobbies[lobby_id].players.has(client_id):
+			joined_lobby_id = lobby_id
+			break
+	return joined_lobby_id
+
+
+# Create new lobby and return its id
+func create_new_lobby(type: LobbyType, max_players: int = MAX_PLAYERS_PER_GAME) -> String:
+	var lobby_id = Utils.generate_uuid()
+	lobbies[lobby_id] = {
+		"players": [],
+		"max_players": max_players,
+		"type": type
+	}
+	match type:
+		LobbyType.QUICK:
+			available_lobbies_quick.append(lobby_id)
+		LobbyType.CUSTOM:
+			available_lobbies_custom.append(lobby_id)
+	return lobby_id
+
+
+# Remove lobby. Returns true if it has been removed or false if it was not empty and it could not be removed
+func remove_lobby(lobby_id: String) -> bool:
+	if lobbies.has(lobby_id) and lobbies[lobby_id].players.is_empty():
+		lobbies.erase(lobby_id)
+		return true
+	else:
+		if lobbies.has(lobby_id):
+			NetworkManager.server_print_msg.emit(str("❌ Error trying to remove lobby ", lobby_id, " NOT EMPTY"))
+		else:
+			NetworkManager.server_print_msg.emit(str("❌ Error trying to remove lobby ", lobby_id, " NOT FOUND IN LOBBIES"))
+		return false
