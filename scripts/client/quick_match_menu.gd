@@ -29,8 +29,8 @@ func _update_waiting_effect() -> void:
 		waiting_effect_text = ""
 	var lobby_size_status_formatted = ""
 	if ClientGlobalData.lobby_size_status:
-		lobby_size_status_formatted = " (" + ClientGlobalData.lobby_size_status + ") "
-	info_text_label.text = waiting_for_players_text + lobby_size_status_formatted + waiting_effect_text
+		lobby_size_status_formatted = "\n (" + ClientGlobalData.lobby_size_status + ") "
+	info_text_label.text = waiting_for_players_text + waiting_effect_text + lobby_size_status_formatted
 
 
 func _change_to_main_menu_buttons() -> void:
