@@ -40,6 +40,10 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg", "res://addons/tile-run-instances/plugin.cfg")
 
+[gui]
+
+common/snap_controls_to_pixels=false
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
