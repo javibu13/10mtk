@@ -2,23 +2,38 @@ extends VBoxContainer
 
 var waiting_for_players_text = "Waiting for players"
 var waiting_effect_text = ""
+var countdown_time_left := 0
 
 @onready var waiting_effect_timer: Timer = $WaitingEffect_Timer
 @onready var info_text_label: RichTextLabel = $QuickMatchInfo_VBoxContainer/Info_RichTextLabel
 @onready var return_button: Button = $QuickMatchInfo_VBoxContainer/Return_Button
 @onready var main_menu_buttons_v_box_container: VBoxContainer = $"../MainMenuButtons_VBoxContainer"
 @onready var log_out_button: TextureButton = $"../LogOut_TextureButton"
+@onready var animation_player: AnimationPlayer = $"../CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/Aim_TextureRect/AnimationPlayer"
+@onready var countdown_quick_match_v_box_container: VBoxContainer = $"../CountdownQuickMatch_VBoxContainer"
+@onready var countdown_timer: Timer = $"../CountdownQuickMatch_VBoxContainer/Countdown_Timer"
+@onready var dialog_background_color_rect: ColorRect = $"../DialogBackground_ColorRect"
+@onready var counter_text: RichTextLabel = $"../CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/Counter_RichTextLabel"
+@onready var accept_button: Button = $"../CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer/Accept_Button"
+@onready var reject_button: Button = $"../CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer/Reject_Button"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	waiting_effect_timer.timeout.connect(_update_waiting_effect)
 	return_button.pressed.connect(_change_to_main_menu_buttons)
+	MatchmakingManager.request_accept_match_start.connect(_launch_match_accept_countdown)
+	countdown_timer.timeout.connect(_countdown_timeout)
+	accept_button.pressed.connect(_accept_game_start)
+	reject_button.pressed.connect(_reject_game_start)
+	MatchmakingManager.return_to_quick_mode_search.connect(_return_to_quick_mode_search)
+	MatchmakingManager.kicked_from_quick_mode_search_to_main_menu.connect(_return_to_main_menu_buttons_kicked_from_quick_mode_search)
 
 
 func initialize() -> void:
 	info_text_label.text = waiting_for_players_text
 	info_text_label.show()
+	waiting_effect_timer.paused = false
 	waiting_effect_timer.start()
 	MatchmakingManager.server_join_client_to_quick_lobby.rpc_id(1)
 
@@ -40,4 +55,57 @@ func _change_to_main_menu_buttons() -> void:
 	main_menu_buttons_v_box_container.show()
 	# Inform that lobby is leaved and reset data stored about lobby
 	MatchmakingManager.server_client_leaves_lobby.rpc_id(1)
+	ClientGlobalData.resetLobbyData()
+
+
+func _launch_match_accept_countdown(countdown_time: int) -> void:
+	waiting_effect_timer.paused = false
+	animation_player.play("idle")
+	countdown_time_left = countdown_time
+	counter_text.text = str("[b]", countdown_time_left, "[/b]")
+	accept_button.disabled = false
+	reject_button.disabled = false
+	dialog_background_color_rect.show()
+	countdown_quick_match_v_box_container.show()
+	countdown_timer.start()
+
+
+func _countdown_timeout() -> void:
+	countdown_time_left -= 1
+	if countdown_time_left < 0:
+		countdown_timer.stop()
+		MatchmakingManager.server_client_rejects_match.rpc_id(1)
+	else:
+		# Update counter text
+		counter_text.text = str("[b]", countdown_time_left, "[/b]")
+
+
+func _accept_game_start() -> void:
+	countdown_timer.stop()
+	MatchmakingManager.server_client_accepts_match.rpc_id(1)
+	accept_button.disabled = true
+	reject_button.disabled = true
+
+
+func _reject_game_start() -> void:
+	countdown_timer.stop()
+	MatchmakingManager.server_client_rejects_match.rpc_id(1)
+	accept_button.disabled = true
+	reject_button.disabled = true
+
+
+func _return_to_quick_mode_search() -> void:
+	dialog_background_color_rect.hide()
+	countdown_quick_match_v_box_container.hide()
+	waiting_effect_timer.paused = false
+
+
+func _return_to_main_menu_buttons_kicked_from_quick_mode_search() -> void:
+	dialog_background_color_rect.hide()
+	countdown_quick_match_v_box_container.hide()
+	waiting_effect_timer.stop()
+	self.hide()
+	log_out_button.show()
+	main_menu_buttons_v_box_container.show()
+	# Reset data stored about lobby
 	ClientGlobalData.resetLobbyData()

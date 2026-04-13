@@ -5,7 +5,7 @@ enum LobbyType {
 	CUSTOM,
 }
 
-const MAX_PLAYERS_PER_GAME = 4
+const MAX_PLAYERS_PER_GAME = 2
 
 var http_request: HTTPRequest = HTTPRequest.new()
 var config_reader = ConfigFile.new()
@@ -92,18 +92,18 @@ func send_reset_password_email(user_email: String, user_name: String, new_passwo
 			{
 				"From": {
 					"Email": api_email.sender_email,
-					"Name": api_email.sender_name
+					"Name": api_email.sender_name,
 				},
 				"To": [
 					{
 						"Email": user_email,
-						"Name": user_name
+						"Name": user_name,
 					}
 				],
 				"Subject": "10' To Kill - Password Reset",
-				"TextPart": "10' To Kill\n\nNew Password:\n" + new_password
-			}
-		]
+				"TextPart": "10' To Kill\n\nNew Password:\n" + new_password,
+			},
+		],
 	}
 	# Needed headers for Mailjet API v3.1
 	var auth_raw = api_email.key + ":" + api_email.secret
@@ -192,8 +192,9 @@ func create_new_lobby(type: LobbyType, max_players: int = MAX_PLAYERS_PER_GAME) 
 	var lobby_id = Utils.generate_uuid()
 	lobbies[lobby_id] = {
 		"players": [],
+		"game_accepted": {},
 		"max_players": max_players,
-		"type": type
+		"type": type,
 	}
 	match type:
 		LobbyType.QUICK:
@@ -214,3 +215,7 @@ func remove_lobby(lobby_id: String) -> bool:
 		else:
 			NetworkManager.server_print_msg.emit(str("❌ Error trying to remove lobby ", lobby_id, " NOT FOUND IN LOBBIES"))
 		return false
+
+# Check if all players joined to a lobby have answered to game start request (it does not check if they have answered "accept" or "reject")
+func check_if_all_clients_answered_game_start(lobby_id: String) -> bool:
+	return lobbies[lobby_id].players.size() == lobbies[lobby_id].game_accepted.size()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dj33iaayeuttc"]
+[gd_scene load_steps=17 format=3 uid="uid://dj33iaayeuttc"]
 
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="1_0ykhv"]
 [ext_resource type="Script" uid="uid://dj0xseni82by2" path="res://scripts/client/main_menu.gd" id="1_826wr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bv1djar5kwiq" path="res://themes/style_boxes/main_menu_logout_texture_button_hover.svg" id="3_ucygd"]
 [ext_resource type="Script" uid="uid://dycsrvmx5hnil" path="res://scripts/client/main_menu_game_buttons.gd" id="8_8a8k8"]
 [ext_resource type="Script" uid="uid://mf8vroyq1qj6" path="res://scripts/client/quick_match_menu.gd" id="10_7la6k"]
+[ext_resource type="Texture2D" uid="uid://c5fq4yh8shail" path="res://images/aim.svg" id="11_2nypq"]
 
 [sub_resource type="Gradient" id="Gradient_bqwap"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
@@ -17,6 +18,43 @@ colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_0ykhv"]
 gradient = SubResource("Gradient_bqwap")
+
+[sub_resource type="Animation" id="Animation_bky6r"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_2nypq"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(3, 3, 3, 3, 3),
+"points": PackedFloat32Array(0, -0.25, 2.5, 0.25, -2.5, -10, -0.25, 0, 0.25, 0, 0, -0.25, -5, 0.25, 5, 10, -0.25, 0, 0.25, 0, 0, -0.25, 2.5, 0.25, -2.5),
+"times": PackedFloat32Array(0, 1, 2, 3, 4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(3, 3, 3, 3, 3, 3, 3, 3, 3),
+"points": PackedFloat32Array(-0.9575096, -0.1, 2.5, 0.1, -2.5, -5.96449, -0.125, 0, 0.125, 0, -0.9575096, -0.125, -2.5034904, 0.125, 2.5034904, 4.0494714, -0.125, 0, 0.125, 0, -0.9575096, -0.125, 2.5034904, 0.125, -2.5034904, -5.96449, -0.125, 0, 0.125, 0, -0.9575096, -0.125, -2.5034904, 0.125, 2.5034904, 4.0494714, -0.125, 0, 0.125, 0, -0.9575096, -0.1, 2.5, 0.1, -2.5),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l4mxc"]
+_data = {
+&"RESET": SubResource("Animation_bky6r"),
+&"idle": SubResource("Animation_2nypq")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -36,7 +74,7 @@ anchor_bottom = 1.0
 offset_left = 1152.0
 offset_top = 2.2117962e-05
 offset_right = 647.9999
-offset_bottom = 506.0
+offset_bottom = 504.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 1.5707964
@@ -240,11 +278,104 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="DialogBackground_ColorRect" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.6627451)
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="CountdownQuickMatch_VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 357.0
+offset_right = -357.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Countdown_Timer" type="Timer" parent="CountdownQuickMatch_VBoxContainer"]
+
+[node name="HSeparator1" type="HSeparator" parent="CountdownQuickMatch_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="CountdownCounter_Container" type="Control" parent="CountdownQuickMatch_VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Aim_TextureRect" type="TextureRect" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.9575096
+offset_bottom = -0.95751953
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_2nypq")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/Aim_TextureRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_l4mxc")
+}
+autoplay = "idle"
+next/idle = &"idle"
+
+[node name="Counter_RichTextLabel" type="RichTextLabel" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/normal_font_size = 128
+theme_override_font_sizes/bold_font_size = 128
+bbcode_enabled = true
+text = "[b]10[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CountdownQuickMatch_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="QuickMatchInfo_VBoxContainer" type="VBoxContainer" parent="CountdownQuickMatch_VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+alignment = 1
+
+[node name="Accept_Button" type="Button" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+custom_minimum_size = Vector2(215, 85)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/font_size = 40
+text = "Accept"
+
+[node name="HSeparator" type="HSeparator" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Reject_Button" type="Button" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/font_size = 24
+text = "Decline"
+
+[node name="HSeparator3" type="HSeparator" parent="CountdownQuickMatch_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2

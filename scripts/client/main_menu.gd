@@ -4,6 +4,8 @@ extends Control
 @onready var log_out_button: TextureButton = $LogOut_TextureButton
 @onready var main_menu_container: Container =  $MainMenuButtons_VBoxContainer
 @onready var quick_match_menu_v_box_container: VBoxContainer = $QuickMatchMenu_VBoxContainer
+@onready var dialog_background_color_rect: ColorRect = $DialogBackground_ColorRect
+@onready var countdown_quick_match_v_box_container: VBoxContainer = $CountdownQuickMatch_VBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,6 +13,8 @@ func _ready() -> void:
 	log_out_button.pressed.connect(_logout)
 	main_menu_container.show()
 	quick_match_menu_v_box_container.hide()
+	dialog_background_color_rect.hide()
+	countdown_quick_match_v_box_container.hide()
 
 
 # Execute function to ask the server to end user's session and change to login view
