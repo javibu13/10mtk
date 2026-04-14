@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dj33iaayeuttc"]
+[gd_scene load_steps=19 format=3 uid="uid://dj33iaayeuttc"]
 
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="1_0ykhv"]
 [ext_resource type="Script" uid="uid://dj0xseni82by2" path="res://scripts/client/main_menu.gd" id="1_826wr"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://dycsrvmx5hnil" path="res://scripts/client/main_menu_game_buttons.gd" id="8_8a8k8"]
 [ext_resource type="Script" uid="uid://mf8vroyq1qj6" path="res://scripts/client/quick_match_menu.gd" id="10_7la6k"]
 [ext_resource type="Texture2D" uid="uid://c5fq4yh8shail" path="res://images/aim.svg" id="11_2nypq"]
+[ext_resource type="Texture2D" uid="uid://cnv6557f4q31" path="res://images/accepted_match.svg" id="12_l4mxc"]
+[ext_resource type="Texture2D" uid="uid://trkq61gmkwia" path="res://images/rejected_match.svg" id="13_5faoh"]
 
 [sub_resource type="Gradient" id="Gradient_bqwap"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
@@ -153,7 +155,6 @@ text = "John Doe"
 vertical_alignment = 1
 
 [node name="MainMenuButtons_VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,6 +219,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="QuickMatchMenu_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,6 +280,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="DialogBackground_ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -287,6 +290,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.78431374)
 
 [node name="CountdownQuickMatch_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -342,6 +346,34 @@ bbcode_enabled = true
 text = "[b]10[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AcceptedMatch_TextureRect" type="TextureRect" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.9575096
+offset_bottom = -0.95751953
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_l4mxc")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RejectedMatch_TextureRect" type="TextureRect" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.9575096
+offset_bottom = -0.95751953
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_5faoh")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="HSeparator2" type="HSeparator" parent="CountdownQuickMatch_VBoxContainer"]
 modulate = Color(1, 1, 1, 0)

@@ -10,12 +10,15 @@ var countdown_time_left := 0
 @onready var main_menu_buttons_v_box_container: VBoxContainer = $"../MainMenuButtons_VBoxContainer"
 @onready var log_out_button: TextureButton = $"../LogOut_TextureButton"
 @onready var animation_player: AnimationPlayer = $"../CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/Aim_TextureRect/AnimationPlayer"
+@onready var aim_texture_rect: TextureRect = $"../CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/Aim_TextureRect"
 @onready var countdown_quick_match_v_box_container: VBoxContainer = $"../CountdownQuickMatch_VBoxContainer"
 @onready var countdown_timer: Timer = $"../CountdownQuickMatch_VBoxContainer/Countdown_Timer"
 @onready var dialog_background_color_rect: ColorRect = $"../DialogBackground_ColorRect"
 @onready var counter_text: RichTextLabel = $"../CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/Counter_RichTextLabel"
 @onready var accept_button: Button = $"../CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer/Accept_Button"
 @onready var reject_button: Button = $"../CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer/Reject_Button"
+@onready var accepted_match_texture_rect: TextureRect = $"../CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/AcceptedMatch_TextureRect"
+@onready var rejected_match_texture_rect: TextureRect = $"../CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/RejectedMatch_TextureRect"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +34,7 @@ func _ready() -> void:
 
 
 func initialize() -> void:
+	return_button.disabled = false
 	info_text_label.text = waiting_for_players_text
 	info_text_label.show()
 	waiting_effect_timer.paused = false
@@ -59,6 +63,10 @@ func _change_to_main_menu_buttons() -> void:
 
 
 func _launch_match_accept_countdown(countdown_time: int) -> void:
+	accepted_match_texture_rect.hide()
+	rejected_match_texture_rect.hide()
+	aim_texture_rect.modulate = Color.WHITE
+	return_button.disabled = true
 	waiting_effect_timer.paused = false
 	animation_player.play("idle")
 	countdown_time_left = countdown_time
@@ -83,6 +91,7 @@ func _countdown_timeout() -> void:
 func _accept_game_start() -> void:
 	countdown_timer.stop()
 	MatchmakingManager.server_client_accepts_match.rpc_id(1)
+	accepted_match_texture_rect.show()
 	accept_button.disabled = true
 	reject_button.disabled = true
 
@@ -90,6 +99,8 @@ func _accept_game_start() -> void:
 func _reject_game_start() -> void:
 	countdown_timer.stop()
 	MatchmakingManager.server_client_rejects_match.rpc_id(1)
+	#aim_texture_rect.modulate = Color("#696969")
+	rejected_match_texture_rect.show()
 	accept_button.disabled = true
 	reject_button.disabled = true
 
@@ -98,6 +109,7 @@ func _return_to_quick_mode_search() -> void:
 	dialog_background_color_rect.hide()
 	countdown_quick_match_v_box_container.hide()
 	waiting_effect_timer.paused = false
+	return_button.disabled = false
 
 
 func _return_to_main_menu_buttons_kicked_from_quick_mode_search() -> void:

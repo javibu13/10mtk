@@ -175,6 +175,7 @@ func remove_player_from_lobby(client_id: int, lobby_id: String = "") -> bool:
 		NetworkManager.server_print_msg.emit(str("❌ Client (", client_id, ") is not found in any lobby"))
 		return false
 	lobbies[lobby_id].players.erase(client_id)
+	lobbies[lobby_id].game_accepted.erase(client_id)
 	return lobbies[lobby_id].players.is_empty()
 
 

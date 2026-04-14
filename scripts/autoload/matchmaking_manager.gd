@@ -114,9 +114,11 @@ func server_client_accepts_match():
 				client_kick_from_quick_match_search.rpc_id(reject_client_id)
 			if not accept_clients_id.is_empty():
 				for accept_client_id in accept_clients_id:
+					ServerGlobalData.lobbies[lobby_id].game_accepted.erase(accept_client_id)
 					client_return_to_quick_match_search.rpc_id(accept_client_id)
-				for client_id_still_joined_to_lobby in ServerGlobalData.lobbies[lobby_id].players:
-					client_update_joined_players_to_quick_lobby.rpc_id(client_id_still_joined_to_lobby, str(ServerGlobalData.lobbies[lobby_id].players.size(), "/", ServerGlobalData.lobbies[lobby_id].max_players))
+					client_update_joined_players_to_quick_lobby.rpc_id(accept_client_id, str(ServerGlobalData.lobbies[lobby_id].players.size(), "/", ServerGlobalData.lobbies[lobby_id].max_players))
+				#for client_id_still_joined_to_lobby in ServerGlobalData.lobbies[lobby_id].players:
+					#client_update_joined_players_to_quick_lobby.rpc_id(client_id_still_joined_to_lobby, str(ServerGlobalData.lobbies[lobby_id].players.size(), "/", ServerGlobalData.lobbies[lobby_id].max_players))
 
 
 # Client rejects the match
@@ -149,9 +151,11 @@ func server_client_rejects_match():
 			client_kick_from_quick_match_search.rpc_id(reject_client_id)
 		if not accept_clients_id.is_empty():
 			for accept_client_id in accept_clients_id:
+				ServerGlobalData.lobbies[lobby_id].game_accepted.erase(accept_client_id)
 				client_return_to_quick_match_search.rpc_id(accept_client_id)
-			for client_id_still_joined_to_lobby in ServerGlobalData.lobbies[lobby_id].players:
-				client_update_joined_players_to_quick_lobby.rpc_id(client_id_still_joined_to_lobby, str(ServerGlobalData.lobbies[lobby_id].players.size(), "/", ServerGlobalData.lobbies[lobby_id].max_players))
+				client_update_joined_players_to_quick_lobby.rpc_id(accept_client_id, str(ServerGlobalData.lobbies[lobby_id].players.size(), "/", ServerGlobalData.lobbies[lobby_id].max_players))
+			#for client_id_still_joined_to_lobby in ServerGlobalData.lobbies[lobby_id].players:
+				#client_update_joined_players_to_quick_lobby.rpc_id(client_id_still_joined_to_lobby, str(ServerGlobalData.lobbies[lobby_id].players.size(), "/", ServerGlobalData.lobbies[lobby_id].max_players))
 
 
 # Return client to the previous quick match search maintaining the previous lobby too
