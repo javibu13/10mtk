@@ -25,6 +25,8 @@ AuthManager="*res://scripts/autoload/auth_manager.gd"
 ServerGlobalData="*res://scripts/autoload/server_global_data.gd"
 ClientGlobalData="*res://scripts/autoload/client_global_data.gd"
 MatchmakingManager="*res://scripts/autoload/matchmaking_manager.gd"
+ServerGameData="*res://scripts/autoload/server_game_data.gd"
+GameManager="*res://scripts/autoload/game_manager.gd"
 
 [display]
 

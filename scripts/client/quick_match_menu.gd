@@ -31,6 +31,7 @@ func _ready() -> void:
 	reject_button.pressed.connect(_reject_game_start)
 	MatchmakingManager.return_to_quick_mode_search.connect(_return_to_quick_mode_search)
 	MatchmakingManager.kicked_from_quick_mode_search_to_main_menu.connect(_return_to_main_menu_buttons_kicked_from_quick_mode_search)
+	MatchmakingManager.start_match.connect(_change_to_game_scene)
 
 
 func initialize() -> void:
@@ -121,3 +122,7 @@ func _return_to_main_menu_buttons_kicked_from_quick_mode_search() -> void:
 	main_menu_buttons_v_box_container.show()
 	# Reset data stored about lobby
 	ClientGlobalData.resetLobbyData()
+
+
+func _change_to_game_scene() -> void:
+	get_tree().change_scene_to_file("res://scenes/Game.tscn")

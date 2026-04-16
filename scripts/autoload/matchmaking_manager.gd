@@ -4,6 +4,7 @@ signal join_client_to_quick_lobby_failed(message)
 signal request_accept_match_start(countdown_timer)
 signal return_to_quick_mode_search
 signal kicked_from_quick_mode_search_to_main_menu
+signal start_match
 
 const COUNTDOWN_TIME := 10
 
@@ -103,8 +104,10 @@ func server_client_accepts_match():
 				# ❌ Rejected the game start
 				reject_clients_id.append(answered_client_id)
 		if reject_clients_id.is_empty():
-			# TODO: START GAME!!!
 			NetworkManager.server_print_msg.emit(str("START GAME FOR LOBBY ", lobby_id))
+			for accept_client_id in accept_clients_id:
+				client_start_match.rpc_id(accept_client_id)
+			
 		else:
 			# Some client has rejected the game start. Kick them from lobby and keep the others
 			for reject_client_id in reject_clients_id:
@@ -164,6 +167,13 @@ func client_return_to_quick_match_search():
 	return_to_quick_mode_search.emit()
 
 
+# Return client to main menu due to his negative response to game start
 @rpc("authority", "call_remote", "reliable")
 func client_kick_from_quick_match_search():
 	kicked_from_quick_mode_search_to_main_menu.emit()
+
+
+# Change client to game scene and wait for game config
+@rpc("authority", "call_remote", "reliable")
+func client_start_match():
+	start_match.emit()
