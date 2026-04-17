@@ -6,6 +6,7 @@ enum LobbyType {
 }
 
 const MAX_PLAYERS_PER_GAME = 2
+const VERSION : String = "v0.0.1"
 
 var http_request: HTTPRequest = HTTPRequest.new()
 var config_reader = ConfigFile.new()
@@ -14,11 +15,13 @@ var api_email := {}
 ## [codeblock]
 ## {
 ##	471290087: {
+##				"db_id": 28
 ##				"user_name": "Montse",
 ##				"nickname": "mgoon13",
 ##				"email": "false@email.tk",
 ##				},
 ##	1416429352: {
+##				"db_id": 9
 ##				"user_name": "Javier",
 ##				"nickname": "Javibu13",
 ##				"email": "superfalse@email.tk",

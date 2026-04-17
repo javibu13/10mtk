@@ -124,5 +124,6 @@ func _return_to_main_menu_buttons_kicked_from_quick_mode_search() -> void:
 	ClientGlobalData.resetLobbyData()
 
 
-func _change_to_game_scene() -> void:
+func _change_to_game_scene(match_id: int) -> void:
+	ClientGlobalData.match_id = match_id
 	get_tree().change_scene_to_file("res://scenes/Game.tscn")

@@ -11,6 +11,8 @@ extends Node
 var user_info: Dictionary[String, Variant] = {}
 var lobby_joined: String = ""
 var lobby_size_status: String = ""
+var match_id: int = 0
+
 
 func storeUserInfo(user_info_to_store: Dictionary):
 	user_info["nickname"] = user_info_to_store["nickname"]

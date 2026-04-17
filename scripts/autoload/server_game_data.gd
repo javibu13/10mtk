@@ -9,6 +9,14 @@ extends Node
 ## [/codeblock]
 var games: Dictionary[int, Game] = {}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
+# Creates an entry in DB for the match and get the generated ID to create the main data structure for the match in the server side
+func create_db_match_and_get_id(match_type: ServerGlobalData.LobbyType) -> int:
+	var new_match := DatabaseManager.match_game.create_new(ServerGlobalData.VERSION, match_type)
+	return new_match.id if not new_match.is_empty() else 0
+
+
+# Create and configure the new match
+func set_up_match(match_id: int, clients_id: Array[int]) -> void:
+	# TODO: CONTINUE HERE
+	pass

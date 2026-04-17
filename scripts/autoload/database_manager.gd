@@ -9,6 +9,7 @@ var db: SQLite
 var db_path: String = "user://game_database.db"
 var is_initialized: bool = false
 var player: PlayerRepository
+var match_game: MatchRepository
 
 
 # Initialize database, configure connection and try to create tables if they do not exist 
@@ -66,3 +67,4 @@ func _create_tables() -> void:
 
 func _init_repositories() -> void:
 	player = PlayerRepository.new(self)
+	match_game = MatchRepository.new(self)
