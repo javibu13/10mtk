@@ -21,21 +21,21 @@ func server_register_user(nickname: String, email: String, password_hash: String
 		client_register_response.rpc_id(client_id, false, error_message)
 		return
 	# Validate if nickname already exists
-	var existing_nickname = DatabaseManager.player_get_by_nickname(nickname)
+	var existing_nickname = DatabaseManager.player.get_by_nickname(nickname)
 	if not existing_nickname.is_empty():
 		var error_message = "❌ Nickname is not available"
 		NetworkManager.server_print_msg.emit(error_message)
 		client_register_response.rpc_id(client_id, false, error_message)
 		return
 	# Validate if email already exists
-	var existing_email = DatabaseManager.player_get_by_email(email)
+	var existing_email = DatabaseManager.player.get_by_email(email)
 	if not existing_email.is_empty():
 		var error_message = "❌ Email is already registered"
 		NetworkManager.server_print_msg.emit(error_message)
 		client_register_response.rpc_id(client_id, false, error_message)
 		return
 	# Create user in database
-	var player = DatabaseManager.player_create_new(nickname, email, password_hash)
+	var player = DatabaseManager.player.create_new(nickname, email, password_hash)
 	if player.is_empty():
 		var error_message = "❌ Error during user creation"
 		NetworkManager.server_print_msg.emit(error_message)
@@ -73,7 +73,7 @@ func server_login_user(email: String, password_hash: String):
 	if not multiplayer.is_server():
 		return
 	var client_id := multiplayer.get_remote_sender_id()
-	var user = DatabaseManager.player_get_by_login(email, password_hash)
+	var user = DatabaseManager.player.get_by_login(email, password_hash)
 	if user.is_empty():
 		var error_message = "❌ Incorrect email or password"
 		NetworkManager.server_print_msg.emit(error_message)
@@ -93,8 +93,8 @@ func server_login_user(email: String, password_hash: String):
 		return
 	# Check if new_password stores something to clear it and assign as main password the used to access this time
 	if user.new_password != null or str(user.new_password) == "":
-		DatabaseManager.player_update_new_password_by_id(user.id, null)
-		DatabaseManager.player_update_password_by_id(user.id, password_hash)
+		DatabaseManager.player.update_new_password_by_id(user.id, null)
+		DatabaseManager.player.update_password_by_id(user.id, password_hash)
 	user.erase('password')
 	user.erase('new_password')
 	ServerGlobalData.logged_in_users[client_id] = user
@@ -113,7 +113,7 @@ func server_reset_password(email: String):
 		return
 	# Get the ID of the client who requested the creation of the user
 	var client_id := multiplayer.get_remote_sender_id()
-	var user = DatabaseManager.player_get_by_email(email)
+	var user = DatabaseManager.player.get_by_email(email)
 	if user.is_empty():
 		var error_message = "❌ Email not found"
 		NetworkManager.server_print_msg.emit(error_message)
@@ -122,7 +122,7 @@ func server_reset_password(email: String):
 	# TODO: Close active sessions?
 	# Create new password and assign to user
 	var new_password = _generate_password(8, true)
-	var user_new_password = DatabaseManager.player_update_new_password_by_id(user.id, new_password.sha256_text())
+	var user_new_password = DatabaseManager.player.update_new_password_by_id(user.id, new_password.sha256_text())
 	if user_new_password.is_empty():
 		var error_message = "❌ Error during password reset"
 		NetworkManager.server_print_msg.emit(error_message)
