@@ -9,24 +9,25 @@ var base_sniper_probability: float = 0.1
 var sniper_left_count = sniper_tile_num
 var board: Dictionary[int, Dictionary] = {}
 
-func _init(characters_to_place: Array[int],
-		   new_tile_num: int = tile_num, 
-		   new_sniper_tile_num: int = sniper_tile_num, 
-		   new_base_sniper_probability: float = base_sniper_probability) -> void:
-	tile_num = new_tile_num
-	sniper_tile_num = new_sniper_tile_num
-	base_sniper_probability = new_base_sniper_probability
+static func server_new(characters_to_place: Array[int],
+		   new_tile_num: int = 16, 
+		   new_sniper_tile_num: int = 8, 
+		   new_base_sniper_probability: float = 0.1) -> Board:
+	var new_board: Board = Board.new()
+	new_board.tile_num = new_tile_num
+	new_board.sniper_tile_num = new_sniper_tile_num
+	new_board.base_sniper_probability = new_base_sniper_probability
 	# Initialize left sniper tiles counter and left tiles counter
-	sniper_left_count = sniper_tile_num
-	tile_left_count = tile_num
+	new_board.sniper_left_count = new_board.sniper_tile_num
+	new_board.tile_left_count = new_board.tile_num
 	# Creates the aux variable to store the random character to assign
 	var random_character_to_place = characters_to_place.pick_random()
 	# Create initial tile
-	board[0] = { 0 : Tile.new(Vector2i(0, 0), random_character_to_place, _is_sniper_generated_and_update_left())}
+	new_board.board[0] = { 0 : Tile.server_new(Vector2i(0, 0), random_character_to_place, new_board._is_sniper_generated_and_update_left())}
 	characters_to_place.erase(random_character_to_place)
-	tile_left_count -= 1
-	for tile_index in tile_left_count:
-		var no_checked_board : Dictionary = board.duplicate(true)
+	new_board.tile_left_count -= 1
+	for tile_index in new_board.tile_left_count:
+		var no_checked_board : Dictionary = new_board.board.duplicate(true)
 		var tile_placed = false
 		while !tile_placed:
 			var column_found : bool = false
@@ -44,36 +45,37 @@ func _init(characters_to_place: Array[int],
 			var row : int = rows.pick_random()
 			var available_coords: Array[Vector2i] = []
 			# Check if right is free to place +(1,0)
-			if (column+1 in board.keys()):
-				if !(row in board[column+1].keys()):
+			if (column+1 in new_board.board.keys()):
+				if !(row in new_board.board[column+1].keys()):
 					available_coords.append(Vector2i(column+1, row))
 			else:
 				available_coords.append(Vector2i(column+1, row))
 			# Check if left is free to place -(1,0)
-			if (column-1 in board.keys()):
-				if !(row in board[column-1].keys()):
+			if (column-1 in new_board.board.keys()):
+				if !(row in new_board.board[column-1].keys()):
 					available_coords.append(Vector2i(column-1, row))
 			else:
 				available_coords.append(Vector2i(column-1, row))
 			# Check if up is free to place +(0,1)
-			if !(row+1 in board[column].keys()):
+			if !(row+1 in new_board.board[column].keys()):
 				available_coords.append(Vector2i(column, row+1))
 			# Check if up is free to place +(0,1)
-			if !(row-1 in board[column].keys()):
+			if !(row-1 in new_board.board[column].keys()):
 				available_coords.append(Vector2i(column, row-1))
 			# Check if free space has ben found
 			if (available_coords.size() > 0):
 				var new_coord = available_coords.pick_random()
 				# Create square in the selected place
-				if !board.has(new_coord.x):
-					board[new_coord.x] = {}
+				if !new_board.board.has(new_coord.x):
+					new_board.board[new_coord.x] = {}
 				random_character_to_place = characters_to_place.pick_random()
-				board[new_coord.x][new_coord.y] = Tile.new(new_coord, random_character_to_place, _is_sniper_generated_and_update_left())
+				new_board.board[new_coord.x][new_coord.y] = Tile.server_new(new_coord, random_character_to_place, new_board._is_sniper_generated_and_update_left())
 				characters_to_place.erase(random_character_to_place)
-				tile_left_count -= 1
+				new_board.tile_left_count -= 1
 				tile_placed = true
 			else:
 				no_checked_board[column].erase(row)
+	return new_board
 
 
 func _is_sniper_generated_and_update_left() -> bool:
@@ -105,3 +107,20 @@ func to_dict() -> Dictionary:
 		"sniper_left_count": sniper_left_count,
 		"board": board_dict_tiles,
 	}
+
+
+# Create object using dictionary and basic data type structure
+static func from_dict(new_dict: Dictionary) -> Board:
+	var new_board: Board = Board.new()
+	new_board.tile_num = new_dict.tile_num
+	new_board.tile_left_count = new_dict.tile_left_count
+	new_board.sniper_tile_num = new_dict.sniper_tile_num
+	new_board.base_sniper_probability = new_dict.base_sniper_probability
+	new_board.sniper_left_count = new_dict.sniper_left_count
+	var board_tiles: Dictionary[int, Dictionary] = {}
+	for x in new_dict.board.keys():
+		board_tiles[x] = {}
+		for y in new_dict.board[x].keys():
+			board_tiles[x][y] = Tile.from_dict(new_dict.board[x][y])
+	new_board.board = board_tiles
+	return new_board

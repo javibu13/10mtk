@@ -24,10 +24,10 @@ func _init(match_id: int, client_ids_and_match_player_ids: Dictionary[int, int])
 		for objective_index in range(objectives.size()):
 			objectives[objective_index] = characters_to_assign.pick_random()
 			characters_to_assign.erase(objectives[objective_index])
-		players.append(Player.new(client_id, user_name, shuffled_client_index, assassin, objectives))
+		players.append(Player.server_new(client_id, user_name, shuffled_client_index, assassin, objectives))
 	private = PrivateGame.new(players, client_ids_and_match_player_ids)
 	var public_players: Array[Player] = []
 	public_players.assign(players.map(func (player: Player): return player.generate_initial_public_version()))
-	public = PublicGame.new(match_id, public_players, characters_to_place, ServerGameData.TIME_PER_TURN)
+	public = PublicGame.server_new(match_id, public_players, characters_to_place, ServerGameData.TIME_PER_TURN)
 	# Store map_display in database
 	DatabaseManager.match_game.update_map_display_by_id(match_id, public.board.to_dict())

@@ -10,10 +10,12 @@ var polices: Dictionary[Enums.Character, bool] = {}
 var type: Enums.TileType
 
 
-func _init(new_location: Vector2i, character: Enums.Character, is_sniper: bool) -> void:
-	location = new_location
-	characters[character] = true
-	type = Enums.TileType.COMMON if not is_sniper else Enums.TileType.SNIPER
+static func server_new(new_location: Vector2i, character: Enums.Character, is_sniper: bool) -> Tile:
+	var new_tile: Tile = Tile.new()
+	new_tile.location = new_location
+	new_tile.characters[character] = true
+	new_tile.type = Enums.TileType.COMMON if not is_sniper else Enums.TileType.SNIPER
+	return new_tile
 
 
 func set_type_sniper() -> void:
@@ -31,3 +33,13 @@ func to_dict() -> Dictionary:
 		"polices": polices,
 		"type": type
 	}
+
+
+# Create object using dictionary and basic data type structure
+static func from_dict(new_dict: Dictionary) -> Tile:
+	var new_tile: Tile = Tile.new()
+	new_tile.location = Vector2i(new_dict.location[0], new_dict.location[1])
+	new_tile.characters = new_dict.characters
+	new_tile.polices = new_dict.polices
+	new_tile.type = new_dict.type
+	return new_tile
