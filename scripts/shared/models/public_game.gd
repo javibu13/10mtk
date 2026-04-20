@@ -36,7 +36,7 @@ static func from_dict(new_dict: Dictionary) -> PublicGame:
 	new_public_game.game_id = new_dict.game_id
 	new_public_game.board = Board.from_dict(new_dict.board)
 	var new_players: Array[Player] = []
-	new_players.append(new_dict.players.map(func(dict_player: Dictionary): return Player.from_dict(dict_player)))
+	new_players.assign(new_dict.players.map(func(dict_player: Dictionary): return Player.from_dict(dict_player)))
 	new_public_game.players = new_players
 	new_public_game.turn = Turn.from_dict(new_dict.turn)
 	new_public_game.time_per_turn = new_dict.time_per_turn
