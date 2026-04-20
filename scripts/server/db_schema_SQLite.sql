@@ -2,7 +2,7 @@ PRAGMA foreign_keys = ON;
 
 
 CREATE TABLE IF NOT EXISTS `match` (
-    `id` TEXT PRIMARY KEY NOT NULL, 
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
     `start_time` DATETIME NULL,
     `end_time` DATETIME NULL,
     `version` TEXT NOT NULL, 
@@ -22,9 +22,9 @@ CREATE TABLE IF NOT EXISTS `player` (
 );
 
 
-CREATE TABLE IF NOT EXISTS `match_players` (
+CREATE TABLE IF NOT EXISTS `match_player` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-    `match` TEXT NOT NULL,
+    `match` INTEGER NOT NULL,
     `player` INTEGER NOT NULL,
     `character` INTEGER NOT NULL,
     `status` TEXT NOT NULL DEFAULT 'LIVE',
@@ -33,11 +33,11 @@ CREATE TABLE IF NOT EXISTS `match_players` (
 );
 
 
-CREATE TABLE IF NOT EXISTS `match_player_objetive` (
+CREATE TABLE IF NOT EXISTS `match_player_objective` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT,
     `match_player` INTEGER NOT NULL,
     `character` INTEGER NOT NULL,
-    FOREIGN KEY(`match_player`) REFERENCES `match_players`(`id`) ON DELETE CASCADE
+    FOREIGN KEY(`match_player`) REFERENCES `match_player`(`id`) ON DELETE CASCADE
 );
 
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `match_player_kill` (
     `match_player` INTEGER NOT NULL,
     `character` INTEGER NOT NULL,
     `points` INTEGER NOT NULL,
-    FOREIGN KEY(`match_player`) REFERENCES `match_players`(`id`) ON DELETE CASCADE
+    FOREIGN KEY(`match_player`) REFERENCES `match_player`(`id`) ON DELETE CASCADE
 );
 
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `turn` (
     `action_info` TEXT NULL, 
     `time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `character` INTEGER NOT NULL,
-    FOREIGN KEY(`match_player`) REFERENCES `match_players`(`id`) ON DELETE CASCADE
+    FOREIGN KEY(`match_player`) REFERENCES `match_player`(`id`) ON DELETE CASCADE
 );
 
 
@@ -67,12 +67,12 @@ CREATE TABLE IF NOT EXISTS `match_player_arrest` (
     `match_player` INTEGER NOT NULL,
     `character` INTEGER NOT NULL,
     `points` INTEGER NOT NULL,
-    FOREIGN KEY(`match_player`) REFERENCES `match_players`(`id`) ON DELETE CASCADE
+    FOREIGN KEY(`match_player`) REFERENCES `match_player`(`id`) ON DELETE CASCADE
 );
 
 
 CREATE INDEX IF NOT EXISTS idx_match_type ON `match`(type);
-CREATE INDEX IF NOT EXISTS idx_match_players_match ON `match_players`(`match`);
-CREATE INDEX IF NOT EXISTS idx_match_players_player ON `match_players`(`player`);
+CREATE INDEX IF NOT EXISTS idx_match_player_match ON `match_player`(`match`);
+CREATE INDEX IF NOT EXISTS idx_match_player_player ON `match_player`(`player`);
 CREATE INDEX IF NOT EXISTS idx_turn_match_player ON `turn`(`match_player`);
 CREATE INDEX IF NOT EXISTS idx_player_active ON `player`(`active`);

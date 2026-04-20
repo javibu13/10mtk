@@ -94,8 +94,8 @@ func server_client_accepts_match():
 	ServerGlobalData.lobbies[lobby_id].game_accepted[client_id] = true
 	if ServerGlobalData.check_if_all_clients_answered_game_start(lobby_id):
 		# Check which clients have accepted the game start and which have rejected it
-		var reject_clients_id := []
-		var accept_clients_id := []
+		var reject_clients_id: Array[int] = []
+		var accept_clients_id: Array[int] = []
 		for answered_client_id in ServerGlobalData.lobbies[lobby_id].game_accepted:
 			if ServerGlobalData.lobbies[lobby_id].game_accepted[answered_client_id]:
 				# ✅ Accepted the game start
@@ -106,9 +106,16 @@ func server_client_accepts_match():
 		if reject_clients_id.is_empty():
 			NetworkManager.server_print_msg.emit(str("START GAME FOR LOBBY ", lobby_id))
 			var new_match_id := ServerGameData.create_db_match_and_get_id(ServerGlobalData.LobbyType.QUICK)
+			if not new_match_id:
+				# TODO: Send error to clients that are waiting for game launch
+				return
 			for accept_client_id in accept_clients_id:
 				client_start_match.rpc_id(accept_client_id, new_match_id)
-			ServerGameData.set_up_match(new_match_id, accept_clients_id)
+			var new_client_ids_and_match_player_ids := ServerGameData.create_db_match_player_entries(new_match_id, accept_clients_id)
+			ServerGameData.set_up_match(new_match_id, new_client_ids_and_match_player_ids)
+			for accept_client_id in accept_clients_id:
+				GameManager.client_send_initial_info.rpc_id(accept_client_id, ServerGameData.games[new_match_id].public.to_dict())
+			#NetworkManager.server_print_msg.emit(var_to_str(ServerGameData.games[new_match_id]))
 		else:
 			# Some client has rejected the game start. Kick them from lobby and keep the others
 			for reject_client_id in reject_clients_id:

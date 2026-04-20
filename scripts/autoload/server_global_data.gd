@@ -15,13 +15,13 @@ var api_email := {}
 ## [codeblock]
 ## {
 ##	471290087: {
-##				"db_id": 28
+##				"id": 28
 ##				"user_name": "Montse",
 ##				"nickname": "mgoon13",
 ##				"email": "false@email.tk",
 ##				},
 ##	1416429352: {
-##				"db_id": 9
+##				"id": 9
 ##				"user_name": "Javier",
 ##				"nickname": "Javibu13",
 ##				"email": "superfalse@email.tk",

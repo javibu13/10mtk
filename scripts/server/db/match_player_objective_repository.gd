@@ -1,4 +1,4 @@
-class_name MatchRepository
+class_name MatchPlayerObjectiveRepository
 extends RefCounted
 
 ## DatabaseManager global instance reference
@@ -10,40 +10,39 @@ func _init(manager: DatabaseManager):
 		return
 	_db_manager = manager
 
-# ==================== MATCH FUNCTIONS ====================
+# ==================== MATCH_PLAYER_OBJECTIVE FUNCTIONS ====================
 func get_all() -> Array:
 	_db_manager.db.query("""
 		SELECT *
-		FROM match
+		FROM match_player_objective
 	""")
 	return _db_manager.db.query_result
 
 
-func get_by_id(match_id: int) -> Dictionary:
+func get_by_id(match_player_objective_id: int) -> Dictionary:
 	_db_manager.db.query_with_bindings("""
 		SELECT *
-		FROM match
+		FROM match_player_objective
 		WHERE id = ?
-	""", [match_id])
+	""", [match_player_objective_id])
 	var result = _db_manager.db.query_result
 	return result[0] if not result.is_empty() else {}
 
 
-func create_new(server_version: String, match_type: ServerGlobalData.LobbyType, map_display: Dictionary = {}) -> Dictionary:
+func create_new(match_player_id: int, character: int) -> Dictionary:
 	_db_manager.db.query_with_bindings("""
-	    INSERT INTO match (version, type, map_display)
-	    VALUES (?, ?, ?)
+	    INSERT INTO match_player_objective (match_player, character)
+	    VALUES (?, ?)
 		RETURNING *;
-	""", [server_version, match_type, JSON.stringify(map_display)])
+	""", [match_player_id, character])
 	return _db_manager.db.query_result[0] if not _db_manager.db.query_result.is_empty() else {}
 
 
-func update_map_display_by_id(match_id: int, new_map_display: Dictionary) -> Dictionary:
-	var new_map_json = JSON.stringify(new_map_display)
+func update_by_id(match_player_objective_id: int, character: int) -> Dictionary:
 	_db_manager.db.query_with_bindings("""
-	    UPDATE match
-	    SET map_display = ?
+	    UPDATE match_player_objective
+	    SET character = ?
 		WHERE id = ?
 		RETURNING *;
-	""", [new_map_json, match_id])
+	""", [character, match_player_objective_id])
 	return _db_manager.db.query_result[0] if not _db_manager.db.query_result.is_empty() else {}

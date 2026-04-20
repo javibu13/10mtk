@@ -10,6 +10,8 @@ var db_path: String = "user://game_database.db"
 var is_initialized: bool = false
 var player: PlayerRepository
 var match_game: MatchRepository
+var match_player: MatchPlayerRepository
+var match_player_objective: MatchPlayerObjectiveRepository
 
 
 # Initialize database, configure connection and try to create tables if they do not exist 
@@ -68,3 +70,5 @@ func _create_tables() -> void:
 func _init_repositories() -> void:
 	player = PlayerRepository.new(self)
 	match_game = MatchRepository.new(self)
+	match_player = MatchPlayerRepository.new(self)
+	match_player_objective = MatchPlayerObjectiveRepository.new(self)

@@ -3,3 +3,31 @@ extends RefCounted
 
 var public: PublicGame
 var private: PrivateGame
+
+func _init(match_id: int, client_ids_and_match_player_ids: Dictionary[int, int]) -> void:
+	var shuffled_clients_id := client_ids_and_match_player_ids.keys()
+	shuffled_clients_id.shuffle()
+	var characters_to_assign := Enums.Character.values()
+	# Remove police characters (and NONE = 0) from list of characters because this list will be used for assassins and objectives assignments
+	for police in Enums.Character_Police.values():
+		characters_to_assign.erase(police)
+	# Duplicate to keep and use it later
+	var characters_to_place: Array[int] = []
+	characters_to_place.assign(characters_to_assign.duplicate())
+	var players: Array[Player] = []
+	for shuffled_client_index in range(shuffled_clients_id.size()):
+		var client_id = shuffled_clients_id[shuffled_client_index]
+		var user_name = ServerGlobalData.logged_in_users[client_id].user_name
+		var assassin = characters_to_assign.pick_random()
+		characters_to_assign.erase(assassin)
+		var objectives: Array[Enums.Character] = [Enums.Character.NONE, Enums.Character.NONE, Enums.Character.NONE]
+		for objective_index in range(objectives.size()):
+			objectives[objective_index] = characters_to_assign.pick_random()
+			characters_to_assign.erase(objectives[objective_index])
+		players.append(Player.new(client_id, user_name, shuffled_client_index, assassin, objectives))
+	private = PrivateGame.new(players, client_ids_and_match_player_ids)
+	var public_players: Array[Player] = []
+	public_players.assign(players.map(func (player: Player): return player.generate_initial_public_version()))
+	public = PublicGame.new(match_id, public_players, characters_to_place, ServerGameData.TIME_PER_TURN)
+	# Store map_display in database
+	DatabaseManager.match_game.update_map_display_by_id(match_id, public.board.to_dict())
