@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4rgpmpdraxfi"]
+
+[ext_resource type="Script" uid="uid://b5ecbemqtf5l2" path="res://scripts/client/game/tile3d.gd" id="1_37jpg"]
+[ext_resource type="Material" uid="uid://cx4pyysdx8tmp" path="res://materials/TileSniperMaterial.tres" id="2_c3tfh"]
+[ext_resource type="PackedScene" uid="uid://des8uhakyv33g" path="res://scenes/game/TileSelector.tscn" id="3_i8lru"]
+[ext_resource type="PackedScene" uid="uid://605jtbkbk088" path="res://scenes/game/TileBase.tscn" id="4_cqwc2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rp1iq"]
+size = Vector3(1, 0.1, 1)
+
+[node name="Tile3D" type="Node3D" node_paths=PackedStringArray("tile_base", "tile_selector")]
+script = ExtResource("1_37jpg")
+sniper_material = ExtResource("2_c3tfh")
+tile_base = NodePath("TileBase")
+tile_selector = NodePath("TileSelector")
+
+[node name="TileSelector" parent="." instance=ExtResource("3_i8lru")]
+visible = false
+
+[node name="TileBase" parent="." instance=ExtResource("4_cqwc2")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_rp1iq")

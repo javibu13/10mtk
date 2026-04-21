@@ -15,5 +15,6 @@ func _ready() -> void:
 func _change_to_quick_match_menu() -> void:
 	self.hide()
 	log_out_button.hide()
+	quick_match_button.disabled = true
 	quick_match_menu_v_box_container.initialize()
 	quick_match_menu_v_box_container.show()

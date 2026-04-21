@@ -14,12 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://cnv6557f4q31" path="res://images/accepted_match.svg" id="12_l4mxc"]
 [ext_resource type="Texture2D" uid="uid://trkq61gmkwia" path="res://images/rejected_match.svg" id="13_5faoh"]
 
-[sub_resource type="Gradient" id="Gradient_bqwap"]
+[sub_resource type="Gradient" id="Gradient_l4mxc"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
 colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_0ykhv"]
-gradient = SubResource("Gradient_bqwap")
+gradient = SubResource("Gradient_l4mxc")
 
 [sub_resource type="Animation" id="Animation_bky6r"]
 length = 0.001

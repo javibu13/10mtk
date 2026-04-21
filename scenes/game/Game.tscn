@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://2r8awemlrgmc"]
+
+[ext_resource type="Script" uid="uid://bxqvpypk3xbba" path="res://scripts/client/game/game.gd" id="1_7qcb4"]
+[ext_resource type="Script" uid="uid://kcmqyohtj2ht" path="res://scripts/client/game/3d_inputs.gd" id="2_lyhax"]
+[ext_resource type="Script" uid="uid://dcpfyrgyc2w34" path="res://scripts/client/game/loading_screen.gd" id="3_365ku"]
+[ext_resource type="Script" uid="uid://c7dav7ty05vjp" path="res://scripts/client/game/board3d.gd" id="3_lyhax"]
+[ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="4_gg4pt"]
+
+[sub_resource type="Environment" id="Environment_qbsmt"]
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_bqwap"]
+offsets = PackedFloat32Array(0, 0.8103448, 1)
+colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aug50"]
+gradient = SubResource("Gradient_bqwap")
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_7qcb4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qbsmt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 1.995, 0)
+
+[node name="CameraPosition" type="Node3D" parent="."]
+
+[node name="CameraRotation" type="Node3D" parent="CameraPosition"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPosition/CameraRotation" node_paths=PackedStringArray("pivotPosition", "pivotRotation")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+script = ExtResource("2_lyhax")
+pivotPosition = NodePath("../..")
+pivotRotation = NodePath("..")
+
+[node name="Board3D" type="Node3D" parent="." node_paths=PackedStringArray("cameraController")]
+script = ExtResource("3_lyhax")
+cameraController = NodePath("../CameraPosition/CameraRotation/Camera3D")
+metadata/_custom_type_script = "uid://c7dav7ty05vjp"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="LoadingScreen_Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_365ku")
+
+[node name="DialogBackground_ColorRect2" type="TextureRect" parent="CanvasLayer/LoadingScreen_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 2.2117962e-05
+offset_right = 647.9999
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_aug50")
+
+[node name="Default_VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LoadingScreen_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 191.0
+offset_right = -191.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GameLogo_TextureRect" type="TextureRect" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+texture = ExtResource("4_gg4pt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="LoadingInfo_VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
+custom_minimum_size = Vector2(0, 263)
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer/LoadingInfo_VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+show_percentage = false
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2

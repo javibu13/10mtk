@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://605jtbkbk088"]
+
+[ext_resource type="PackedScene" uid="uid://cfak3ocbgrw75" path="res://geometry/tileBaseGeo.glb" id="1_65hwh"]
+[ext_resource type="Material" uid="uid://0b6m7f0wrh1m" path="res://materials/TileMaterial.tres" id="2_yqvgg"]
+
+[node name="TileBase" instance=ExtResource("1_65hwh")]
+
+[node name="SquareBaseGeo_Low" parent="." index="0"]
+material_override = ExtResource("2_yqvgg")

@@ -7,8 +7,8 @@ signal initial_info_received(public_game: PublicGame)
 # Send to client the initial info needed to set up everything to start first turn
 @rpc("authority", "call_remote", "reliable")
 func client_send_initial_info(public_game_info: Dictionary):
-	initial_info_received.emit(PublicGame.from_dict(public_game_info))
-	# TODO: Continue connecting the signal to main client scene game to set up client 3d environment and HUD
+	ClientGlobalData.public_game = PublicGame.from_dict(public_game_info)
+	initial_info_received.emit()
 
 
 # Notify server that the player is ready to start the match after game set up

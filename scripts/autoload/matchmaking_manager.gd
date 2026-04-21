@@ -4,7 +4,7 @@ signal join_client_to_quick_lobby_failed(message)
 signal request_accept_match_start(countdown_timer)
 signal return_to_quick_mode_search
 signal kicked_from_quick_mode_search_to_main_menu
-signal start_match(match_id)
+signal change_to_match(match_id)
 
 const COUNTDOWN_TIME := 10
 
@@ -184,4 +184,5 @@ func client_kick_from_quick_match_search():
 # Change client to game scene and wait for game config
 @rpc("authority", "call_remote", "reliable")
 func client_start_match(match_id: int):
-	start_match.emit(match_id)
+	ClientGlobalData.public_game = null
+	change_to_match.emit(match_id)

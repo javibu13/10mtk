@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cluggnatw8vob"]
+
+[ext_resource type="PackedScene" uid="uid://yvn7f0hsgi7e" path="res://geometry/tokenCharacterGeo.glb" id="1_nq2s3"]
+[ext_resource type="Material" uid="uid://ut1ori48k1g7" path="res://materials/TokenCharacterBasePanelMaterial.tres" id="2_y34fh"]
+[ext_resource type="Material" uid="uid://c2bwqmlbebxsw" path="res://materials/TokenCharacterPanelMaterial.tres" id="3_hxhn3"]
+
+[node name="TokenCharacterBase" instance=ExtResource("1_nq2s3")]
+
+[node name="base_low" parent="." index="0"]
+material_override = ExtResource("2_y34fh")
+
+[node name="imagePanel" parent="base_low" index="0"]
+material_override = ExtResource("3_hxhn3")

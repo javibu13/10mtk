@@ -12,6 +12,7 @@ var user_info: Dictionary[String, Variant] = {}
 var lobby_joined: String = ""
 var lobby_size_status: String = ""
 var match_id: int = 0
+var public_game: PublicGame
 
 
 func storeUserInfo(user_info_to_store: Dictionary):
