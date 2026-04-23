@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://cluggnatw8vob"]
+
+[ext_resource type="PackedScene" uid="uid://yvn7f0hsgi7e" path="res://geometry/tokenCharacterGeo.glb" id="1_nq2s3"]
+[ext_resource type="Script" uid="uid://b0cen6inai8c2" path="res://scripts/client/game/tokenCharacter3d.gd" id="2_p6ait"]
+[ext_resource type="Material" uid="uid://ut1ori48k1g7" path="res://materials/TokenCharacterBasePanelMaterial.tres" id="2_y34fh"]
+[ext_resource type="PackedScene" uid="uid://dy5ll8hdk1h5u" path="res://geometry/tokenCharacterBaseGeo.glb" id="3_acq36"]
+[ext_resource type="Material" uid="uid://c2bwqmlbebxsw" path="res://materials/TokenCharacterPanelMaterial.tres" id="3_hxhn3"]
+[ext_resource type="Material" uid="uid://0c7xte4x7j5g" path="res://materials/TokenCharacterBaseGeoMaterial.tres" id="4_ndxgx"]
+
+[node name="TokenCharacter3D" instance=ExtResource("1_nq2s3")]
+script = ExtResource("2_p6ait")
+
+[node name="tokenCharacterBaseGeo" parent="." index="0" instance=ExtResource("3_acq36")]
+
+[node name="Cylinder" parent="tokenCharacterBaseGeo" index="0"]
+material_override = ExtResource("4_ndxgx")
+
+[node name="Cube" parent="tokenCharacterBaseGeo" index="1"]
+material_override = ExtResource("4_ndxgx")
+
+[node name="base_low" parent="." index="1"]
+visible = false
+material_override = ExtResource("2_y34fh")
+
+[node name="imagePanel" parent="base_low" index="0"]
+material_override = ExtResource("3_hxhn3")
+
+[editable path="tokenCharacterBaseGeo"]

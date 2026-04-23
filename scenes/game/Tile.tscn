@@ -1,16 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4rgpmpdraxfi"]
+[gd_scene load_steps=12 format=3 uid="uid://b4rgpmpdraxfi"]
 
 [ext_resource type="Script" uid="uid://b5ecbemqtf5l2" path="res://scripts/client/game/tile3d.gd" id="1_37jpg"]
-[ext_resource type="Material" uid="uid://cx4pyysdx8tmp" path="res://materials/TileSniperMaterial.tres" id="2_c3tfh"]
+[ext_resource type="Material" uid="uid://c3vdti8ftpesn" path="res://materials/tiles/TileSniperMaterial.tres" id="2_37jpg"]
+[ext_resource type="Texture2D" uid="uid://66tblady6yue" path="res://textures/tiles/7_tile_AlbedoMap.png" id="3_2doth"]
 [ext_resource type="PackedScene" uid="uid://des8uhakyv33g" path="res://scenes/game/TileSelector.tscn" id="3_i8lru"]
 [ext_resource type="PackedScene" uid="uid://605jtbkbk088" path="res://scenes/game/TileBase.tscn" id="4_cqwc2"]
+[ext_resource type="Texture2D" uid="uid://k8ofuuq05aal" path="res://textures/tiles/8_tile_AlbedoMap.png" id="4_ywerg"]
+[ext_resource type="Texture2D" uid="uid://cmhkcl2yck3jt" path="res://textures/tiles/9_tile_AlbedoMap.png" id="5_qsf5x"]
+[ext_resource type="Texture2D" uid="uid://ca5fv4lso4446" path="res://textures/tiles/10_tile_AlbedoMap.png" id="6_oacwp"]
+[ext_resource type="Texture2D" uid="uid://qh2tfs8vlrsh" path="res://textures/tiles/11_tile_AlbedoMap.png" id="7_3eqv3"]
+[ext_resource type="Texture2D" uid="uid://cc3476d28isdk" path="res://textures/tiles/12_tile_AlbedoMap.png" id="8_iio8x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rp1iq"]
 size = Vector3(1, 0.1, 1)
 
 [node name="Tile3D" type="Node3D" node_paths=PackedStringArray("tile_base", "tile_selector")]
 script = ExtResource("1_37jpg")
-sniper_material = ExtResource("2_c3tfh")
+sniper_material_overlay = ExtResource("2_37jpg")
+texture_tile_base_pool = Array[Texture2D]([null, null, null, null, null, null, ExtResource("3_2doth"), ExtResource("4_ywerg"), ExtResource("5_qsf5x"), ExtResource("6_oacwp"), ExtResource("7_3eqv3"), ExtResource("8_iio8x"), null, null, null, null])
 tile_base = NodePath("TileBase")
 tile_selector = NodePath("TileSelector")
 

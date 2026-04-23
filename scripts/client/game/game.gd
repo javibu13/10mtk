@@ -1,9 +1,11 @@
 extends Node3D
+class_name GameRootNode
 
 signal tile_resource_loaded
 signal token_character_resource_loaded
 signal board_built
 signal public_data_received
+signal set_up_ended
 
 
 const TILE_SCENE_PATH = "res://scenes/game/Tile.tscn"
@@ -19,6 +21,7 @@ var token_character_resource: Resource
 
 
 func _ready() -> void:
+	set_up_ended.connect(_set_up_ended)
 	# Check if ClientGlobalData.public_game has received the game_info to set up the beginning of the match (board, characters, ui...)
 	if ClientGlobalData.public_game != null:
 		# Launch game set up
@@ -38,9 +41,11 @@ func _process(delta: float) -> void:
 		token_character_resource = _check_load_threaded_request(TOKEN_CHARACTER_SCENE_PATH, token_character_resource_loaded)
 	if tile_resource and token_character_resource and ClientGlobalData.public_game:
 		board_3d.tile_resource = tile_resource
+		board_3d.token_character_resource = token_character_resource
 		board_3d.generate_board(ClientGlobalData.public_game.board)
-		loading_screen_control.hide()
+		board_built.emit()
 		set_process(false)
+
 
 func _public_data_received() -> void:
 	public_data_received.emit()
@@ -56,3 +61,8 @@ func _check_load_threaded_request(scene_path: String, signal_completed: Signal) 
 		ResourceLoader.THREAD_LOAD_FAILED:
 			push_error(str("Error loading ", scene_path))
 	return request_result
+
+
+func _set_up_ended() -> void:
+	# TODO: Notify server that client is ready to start with the first turn
+	loading_screen_control.hide() # TODO: Change this to start of the first turn

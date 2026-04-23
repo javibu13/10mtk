@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://16yyfy2rpfhn"]
+
+[ext_resource type="PackedScene" uid="uid://bosibpafd5m6x" path="res://geometry/characters/7_character.glb" id="1_i5roj"]
+[ext_resource type="Texture2D" uid="uid://dtsijsy7rlsud" path="res://textures/characters/7_mouse.png" id="2_d7xlv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5roj"]
+albedo_color = Color(0.76, 0.59279996, 0.5955866, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7xlv"]
+transparency = 1
+albedo_texture = ExtResource("2_d7xlv")
+
+[node name="7_character" instance=ExtResource("1_i5roj")]
+
+[node name="Curve_041" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_i5roj")
+material_overlay = SubResource("StandardMaterial3D_d7xlv")

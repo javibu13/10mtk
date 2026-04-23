@@ -3,7 +3,7 @@ extends Control
 
 var load_signals: Array[Signal] = []
 
-@onready var game_root: Node3D = $"../.."
+@onready var game_root: GameRootNode = $"../.."
 @onready var progress_bar: ProgressBar = $Default_VBoxContainer/LoadingInfo_VBoxContainer/ProgressBar
 
 
@@ -18,3 +18,5 @@ func _ready() -> void:
 
 func _update_progress_bar() -> void:
 	progress_bar.value += 100.0 / load_signals.size()
+	if progress_bar.value >= 100:
+		game_root.set_up_ended.emit()

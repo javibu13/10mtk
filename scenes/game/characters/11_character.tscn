@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn77l8odx5ody"]
+
+[ext_resource type="PackedScene" uid="uid://bxetvd31a13s" path="res://geometry/characters/11_character.glb" id="1_fdd3m"]
+[ext_resource type="Texture2D" uid="uid://dabb005a8b62b" path="res://textures/characters/11_wolf.png" id="2_jnt5b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdd3m"]
+albedo_color = Color(0.5668201, 0.52930003, 0.67, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jnt5b"]
+transparency = 1
+albedo_texture = ExtResource("2_jnt5b")
+
+[node name="11_character" instance=ExtResource("1_fdd3m")]
+
+[node name="Curve_045" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_fdd3m")
+material_overlay = SubResource("StandardMaterial3D_jnt5b")

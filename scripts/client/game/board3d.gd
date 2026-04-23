@@ -4,6 +4,7 @@ class_name Board3D
 
 @export var cameraController : CameraInputs3D
 var tile_resource: Resource
+var token_character_resource: Resource
 var board : Dictionary = {}
 
 
@@ -26,6 +27,7 @@ func generate_board(new_board: Board) -> void:
 			if new_tile.type == Enums.TileType.SNIPER:
 				new_tile3d.set_sniper()
 			board[x][y] = new_tile3d
+			new_tile3d.create_token_character(token_character_resource, new_tile.characters.keys()[0])
 
 
 # Create sample initial square

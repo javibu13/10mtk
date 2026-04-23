@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv8nml4k6j4gh"]
+
+[ext_resource type="PackedScene" uid="uid://otlssk2gxqlw" path="res://geometry/characters/6_character.glb" id="1_6xhrl"]
+[ext_resource type="Texture2D" uid="uid://vkldgsanukie" path="res://textures/characters/6_tiger.png" id="2_6f1x7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xhrl"]
+albedo_color = Color(0.4968, 0.69, 0.64814, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6f1x7"]
+transparency = 1
+albedo_texture = ExtResource("2_6f1x7")
+
+[node name="6_character" instance=ExtResource("1_6xhrl")]
+
+[node name="Curve_040" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_6xhrl")
+material_overlay = SubResource("StandardMaterial3D_6f1x7")
