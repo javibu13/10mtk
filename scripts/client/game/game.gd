@@ -1,10 +1,11 @@
 extends Node3D
 class_name GameRootNode
 
+signal public_data_received
 signal tile_resource_loaded
 signal token_character_resource_loaded
+signal player_info_panels_loaded
 signal board_built
-signal public_data_received
 signal set_up_ended
 
 
@@ -18,9 +19,11 @@ var token_character_resource: Resource
 
 @onready var board_3d: Board3D = $Board3D
 @onready var loading_screen_control: Control = $CanvasLayer/LoadingScreen_Control
+@onready var hud_control: GameHUD = $CanvasLayer/HUD_Control
 
 
 func _ready() -> void:
+	loading_screen_control.show()
 	set_up_ended.connect(_set_up_ended)
 	# Check if ClientGlobalData.public_game has received the game_info to set up the beginning of the match (board, characters, ui...)
 	if ClientGlobalData.public_game != null:
@@ -40,6 +43,8 @@ func _process(delta: float) -> void:
 	if not token_character_resource:
 		token_character_resource = _check_load_threaded_request(TOKEN_CHARACTER_SCENE_PATH, token_character_resource_loaded)
 	if tile_resource and token_character_resource and ClientGlobalData.public_game:
+		hud_control.set_up_player_info_panels(multiplayer.get_unique_id(), ClientGlobalData.public_game.players)
+		player_info_panels_loaded.emit()
 		board_3d.tile_resource = tile_resource
 		board_3d.token_character_resource = token_character_resource
 		board_3d.generate_board(ClientGlobalData.public_game.board)

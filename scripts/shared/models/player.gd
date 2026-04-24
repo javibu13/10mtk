@@ -25,7 +25,8 @@ static func server_new(new_client_id: int, new_user_name: String, new_index: int
 
 
 func generate_initial_public_version() -> Player:
-	return Player.server_new(0, user_name, index, Enums.Character.NONE, [Enums.Character.NONE, Enums.Character.NONE, Enums.Character.NONE])
+	# TODO: Client_id could be private for all clients but for the client with the exact client_id
+	return Player.server_new(client_id, user_name, index, Enums.Character.NONE, [Enums.Character.NONE, Enums.Character.NONE, Enums.Character.NONE])
 
 
 func to_dict() -> Dictionary:

@@ -120,6 +120,7 @@ func _return_to_main_menu_buttons_kicked_from_quick_mode_search() -> void:
 	countdown_quick_match_v_box_container.hide()
 	waiting_effect_timer.stop()
 	self.hide()
+	quick_match_button.disabled = false
 	log_out_button.show()
 	main_menu_buttons_v_box_container.show()
 	# Reset data stored about lobby

@@ -24,7 +24,7 @@ func to_dict() -> Dictionary:
 	return {
 		"game_id": game_id,
 		"board": board.to_dict(),
-		"players": players.map(func(player): return player.to_dict()),
+		"players": players.map(func(player: Player): return player.to_dict()),
 		"turn": turn.to_dict(),
 		"time_per_turn": time_per_turn
 	}
