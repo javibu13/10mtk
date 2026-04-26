@@ -19,12 +19,16 @@ static func server_new(new_game_id: int, public_players: Array[Player], characte
 	return public_game
 
 
-# Transform object (and its content) into a dictionary
-func to_dict() -> Dictionary:
+## Transform object (and its content) into a dictionary. If there is a client_id specified, his private info of the game will be added to his public player definition (players have to know their own game info)
+func to_dict(client_id: int = 0) -> Dictionary:
+	var custom_players = players.map(func(player: Player): return player.to_dict())
+	if client_id:
+		var private_player_index: int = ServerGameData.games[game_id].private.players.find_custom(func(player: Player): return player.client_id == client_id)
+		custom_players[private_player_index] = ServerGameData.games[game_id].private.players[private_player_index].to_dict()
 	return {
 		"game_id": game_id,
 		"board": board.to_dict(),
-		"players": players.map(func(player: Player): return player.to_dict()),
+		"players": custom_players,
 		"turn": turn.to_dict(),
 		"time_per_turn": time_per_turn
 	}

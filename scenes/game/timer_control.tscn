@@ -1,0 +1,317 @@
+[gd_scene load_steps=17 format=3 uid="uid://l8p12gupl5vc"]
+
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_2q6y2"]
+[ext_resource type="Script" uid="uid://bo8jwxcf04lcg" path="res://scripts/client/game/timer_control.gd" id="1_tupuu"]
+
+[sub_resource type="Animation" id="Animation_7fler"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-20, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-20, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_i5ybx"]
+resource_name = "hidden_bottom"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(30, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_hfevh"]
+resource_name = "hidden_left"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(-165.665, -0.17654943, -51.141537, 0.36666667, 106.2133),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_i20pd"]
+resource_name = "hidden_right"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(135, -0.15354906, 76.84748, 0.16666667, -83.41251),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_4ujp3"]
+resource_name = "hidden_top"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-70, 0, 0, 0.06666667, -11.642929),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_lknbp"]
+resource_name = "hide_bottom_to_top"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 3, 0),
+"points": PackedFloat32Array(-20, -0.100000024, -0.10942268, 0.06666667, -7.8401833, -5, -0.13333334, -0.12361145, 0.13333334, 0.12361145, -70, 0, 0, 0, -24.123034),
+"times": PackedFloat32Array(0, 0.23333333, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_ndmxw"]
+resource_name = "hide_left_to_right"
+length = 0.7
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 3, 3),
+"points": PackedFloat32Array(-20, -0.100000024, -0.12566757, 0.25, 0, -50, -0.16666666, 1.5548964, 0.16666666, -1.5548964, 135, -0.13333333, 0.39100647, 0.13333333, -0.39100647),
+"times": PackedFloat32Array(0, 0.33333334, 0.7)
+}
+
+[sub_resource type="Animation" id="Animation_t3hlc"]
+resource_name = "hide_right_to_left"
+length = 0.7
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 3, 3),
+"points": PackedFloat32Array(-20, -0.100000024, -0.12566757, 0.25, 0, 10, -0.16666666, 1.5548964, 0.16666666, -1.5548964, -165.665, -0.13333333, 0.39100647, 0.13333333, -0.39100647),
+"times": PackedFloat32Array(0, 0.33333334, 0.7)
+}
+
+[sub_resource type="Animation" id="Animation_n2o6v"]
+resource_name = "hide_top_to_bottom"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 3, 0),
+"points": PackedFloat32Array(-20, -0.100000024, -0.10942268, 0.06666667, -7.8401833, -35, -0.13333334, -0.12361145, 0.13333334, 0.12361145, 30, 0, 0, 0, -24.123034),
+"times": PackedFloat32Array(0, 0.23333333, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_tupuu"]
+resource_name = "show_bottom_to_top"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 3, 0),
+"points": PackedFloat32Array(30, 0, 0, 0.06666667, -11.642929, -30, -0.099999994, -0.044075012, 0.099999994, 0.044075012, -20, -0.100000024, -0.10942268, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_4pnle"]
+resource_name = "show_left_to_right"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(-165.665, -0.17654943, -51.141537, 0.36666667, 106.2133, -10, -0.100000024, -0.46265706, 0.099999964, -0.2974217, -20, -0.100000024, -0.12566757, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+
+[sub_resource type="Animation" id="Animation_boos6"]
+resource_name = "show_right_to_left"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 3, 0),
+"points": PackedFloat32Array(135, -0.15354906, 76.84748, 0.16666667, -83.41251, -30, -0.06666666, 0.51686096, 0.06666666, -0.51686096, -20, -0.100000024, -0.12566757, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.6)
+}
+
+[sub_resource type="Animation" id="Animation_bj0np"]
+resource_name = "show_top_to_bottom"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 3, 0),
+"points": PackedFloat32Array(-70, 0, 0, 0.06666667, -11.642929, -10, -0.099999994, -0.044075012, 0.099999994, 0.044075012, -20, -0.100000024, -0.10942268, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2o6v"]
+_data = {
+&"RESET": SubResource("Animation_7fler"),
+&"hidden_bottom": SubResource("Animation_i5ybx"),
+&"hidden_left": SubResource("Animation_hfevh"),
+&"hidden_right": SubResource("Animation_i20pd"),
+&"hidden_top": SubResource("Animation_4ujp3"),
+&"hide_bottom_to_top": SubResource("Animation_lknbp"),
+&"hide_left_to_right": SubResource("Animation_ndmxw"),
+&"hide_right_to_left": SubResource("Animation_t3hlc"),
+&"hide_top_to_bottom": SubResource("Animation_n2o6v"),
+&"show_bottom_to_top": SubResource("Animation_tupuu"),
+&"show_left_to_right": SubResource("Animation_4pnle"),
+&"show_right_to_left": SubResource("Animation_boos6"),
+&"show_top_to_bottom": SubResource("Animation_bj0np")
+}
+
+[node name="Timer_Control" type="Control"]
+show_behind_parent = true
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tupuu")
+y_position_increment = -20.0
+metadata/_edit_horizontal_guides_ = [27.0, -27.0]
+metadata/_edit_vertical_guides_ = [-96.0, 81.0, 54.0]
+
+[node name="Position_Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.000137
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Position_Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -40.00007
+offset_right = 88.0
+offset_bottom = -6.866455e-05
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Action_RichTextLabel" type="RichTextLabel" parent="Position_Control/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("1_2q6y2")
+theme_type_variation = &"RichText_White"
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[b]1/2[/b]"
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Position_Control/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Position_Control/HBoxContainer/CenterContainer"]
+self_modulate = Color(0.8, 0.8, 0.8, 1)
+layout_mode = 2
+theme = ExtResource("1_2q6y2")
+theme_type_variation = &"PanelContainerTimer"
+
+[node name="Timer_RichTextLabel" type="RichTextLabel" parent="Position_Control/HBoxContainer/CenterContainer/PanelContainer"]
+custom_minimum_size = Vector2(90, 40)
+layout_mode = 2
+theme = ExtResource("1_2q6y2")
+theme_type_variation = &"RichText_White"
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[b]00:30[/b]"
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Position_Control/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Position_Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_n2o6v")
+}
+
+[node name="Timer" type="Timer" parent="."]

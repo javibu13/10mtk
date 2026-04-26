@@ -114,10 +114,10 @@ func server_client_accepts_match():
 			var new_client_ids_and_match_player_ids := ServerGameData.create_db_match_player_entries(new_match_id, accept_clients_id)
 			ServerGameData.set_up_match(new_match_id, new_client_ids_and_match_player_ids)
 			for accept_client_id in accept_clients_id:
-				var custom_public_game_for_client = ServerGameData.games[new_match_id].public.to_dict()
-				var private_player_index: int = ServerGameData.games[new_match_id].private.players.find_custom(func(player: Player): return player.client_id == accept_client_id)
-				custom_public_game_for_client.players[private_player_index] = ServerGameData.games[new_match_id].private.players[private_player_index].to_dict()
-				GameManager.client_send_initial_info.rpc_id(accept_client_id, custom_public_game_for_client)
+				#var custom_public_game_for_client = ServerGameData.games[new_match_id].public.to_dict()
+				#var private_player_index: int = ServerGameData.games[new_match_id].private.players.find_custom(func(player: Player): return player.client_id == accept_client_id)
+				#custom_public_game_for_client.players[private_player_index] = ServerGameData.games[new_match_id].private.players[private_player_index].to_dict()
+				GameManager.client_send_initial_info.rpc_id(accept_client_id, ServerGameData.games[new_match_id].public.to_dict(accept_client_id))
 			#NetworkManager.server_print_msg.emit(var_to_str(ServerGameData.games[new_match_id]))
 		else:
 			# Some client has rejected the game start. Kick them from lobby and keep the others

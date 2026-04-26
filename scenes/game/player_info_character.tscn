@@ -82,6 +82,7 @@ texture = ExtResource("3_xqhd6")
 expand_mode = 4
 
 [node name="X_TextureRect" type="TextureRect" parent="FreePlace_Control/Character_CenterContainer"]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
 clip_children = 2
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2

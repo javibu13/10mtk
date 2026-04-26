@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://2r8awemlrgmc"]
+[gd_scene load_steps=14 format=3 uid="uid://2r8awemlrgmc"]
 
 [ext_resource type="Script" uid="uid://bxqvpypk3xbba" path="res://scripts/client/game/game.gd" id="1_7qcb4"]
 [ext_resource type="Script" uid="uid://kcmqyohtj2ht" path="res://scripts/client/game/3d_inputs.gd" id="2_lyhax"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://ctd0sls7y52ao" path="res://scripts/client/game/gameHUD.gd" id="6_wnrko"]
 [ext_resource type="PackedScene" uid="uid://dfld1s4yllhvo" path="res://scenes/game/player_info_character.tscn" id="7_gg4pt"]
 [ext_resource type="Script" uid="uid://cxo3mn2x368wr" path="res://scripts/client/game/playerInfoPanel.gd" id="8_qf6a8"]
+[ext_resource type="PackedScene" uid="uid://l8p12gupl5vc" path="res://scenes/game/timer_control.tscn" id="10_56wml"]
 
 [sub_resource type="Environment" id="Environment_qbsmt"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -127,7 +128,7 @@ left_player_panel_container = NodePath("LeftPlayer_PanelContainer")
 top_player_panel_container = NodePath("TopPlayer_PanelContainer")
 right_player_panel_container = NodePath("RightPlayer_PanelContainer")
 
-[node name="MainPlayer_PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD_Control" node_paths=PackedStringArray("player_info_assassin", "player_info_objectives")]
+[node name="MainPlayer_PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD_Control" node_paths=PackedStringArray("player_info_assassin", "player_info_objectives", "timer_control")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -143,6 +144,14 @@ theme = ExtResource("6_365ku")
 script = ExtResource("8_qf6a8")
 player_info_assassin = NodePath("HBoxContainer/AssassinInfo_MarginControl")
 player_info_objectives = [NodePath("HBoxContainer/0_ObjectiveInfo_MarginControl"), NodePath("HBoxContainer/1_ObjectiveInfo_MarginControl"), NodePath("HBoxContainer/2_ObjectiveInfo_MarginControl")]
+timer_control = NodePath("Timer_Control")
+
+[node name="Timer_Control" parent="CanvasLayer/HUD_Control/MainPlayer_PanelContainer" node_paths=PackedStringArray("game_root") instance=ExtResource("10_56wml")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+game_root = NodePath("../../../..")
+enable_position_change_in_editor = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Control/MainPlayer_PanelContainer"]
 layout_mode = 2
@@ -182,7 +191,7 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="LeftPlayer_PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD_Control" node_paths=PackedStringArray("player_info_assassin", "player_info_objectives", "user_name_text")]
+[node name="LeftPlayer_PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD_Control" node_paths=PackedStringArray("player_info_assassin", "player_info_objectives", "user_name_text", "timer_control")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -199,6 +208,18 @@ type = 1
 player_info_assassin = NodePath("VBoxContainer/AssassinInfo_MarginControl")
 player_info_objectives = [NodePath("VBoxContainer/0_ObjectiveInfo_MarginControl"), NodePath("VBoxContainer/1_ObjectiveInfo_MarginControl"), NodePath("VBoxContainer/2_ObjectiveInfo_MarginControl")]
 user_name_text = NodePath("UserName_Control/UserName_PanelContainer/UserName_RichTextLabel")
+timer_control = NodePath("Timer_Control")
+metadata/_edit_lock_ = true
+
+[node name="Timer_Control" parent="CanvasLayer/HUD_Control/LeftPlayer_PanelContainer" node_paths=PackedStringArray("game_root") instance=ExtResource("10_56wml")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+game_root = NodePath("../../../..")
+screen_location = 1
+enable_position_change_in_editor = true
+x_position_increment = 128.0
+y_position_increment = 0.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD_Control/LeftPlayer_PanelContainer"]
 layout_mode = 2
@@ -267,7 +288,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TopPlayer_PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD_Control" node_paths=PackedStringArray("player_info_assassin", "player_info_objectives", "user_name_text")]
+[node name="TopPlayer_PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD_Control" node_paths=PackedStringArray("player_info_assassin", "player_info_objectives", "user_name_text", "timer_control")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -284,6 +305,17 @@ type = 2
 player_info_assassin = NodePath("HBoxContainer/AssassinInfo_MarginControl")
 player_info_objectives = [NodePath("HBoxContainer/0_ObjectiveInfo_MarginControl"), NodePath("HBoxContainer/1_ObjectiveInfo_MarginControl"), NodePath("HBoxContainer/2_ObjectiveInfo_MarginControl")]
 user_name_text = NodePath("UserName_Control/UserName_PanelContainer/UserName_RichTextLabel")
+timer_control = NodePath("Timer_Control")
+metadata/_edit_lock_ = true
+
+[node name="Timer_Control" parent="CanvasLayer/HUD_Control/TopPlayer_PanelContainer" node_paths=PackedStringArray("game_root") instance=ExtResource("10_56wml")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+game_root = NodePath("../../../..")
+screen_location = 2
+enable_position_change_in_editor = true
+y_position_increment = 60.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Control/TopPlayer_PanelContainer"]
 layout_mode = 2
@@ -350,7 +382,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RightPlayer_PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD_Control" node_paths=PackedStringArray("player_info_assassin", "player_info_objectives", "user_name_text")]
+[node name="RightPlayer_PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD_Control" node_paths=PackedStringArray("player_info_assassin", "player_info_objectives", "user_name_text", "timer_control")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -371,6 +403,18 @@ type = 3
 player_info_assassin = NodePath("VBoxContainer/AssassinInfo_MarginControl")
 player_info_objectives = [NodePath("VBoxContainer/0_ObjectiveInfo_MarginControl"), NodePath("VBoxContainer/1_ObjectiveInfo_MarginControl"), NodePath("VBoxContainer/2_ObjectiveInfo_MarginControl")]
 user_name_text = NodePath("UserName_Control/UserName_PanelContainer/UserName_RichTextLabel")
+timer_control = NodePath("Timer_Control")
+metadata/_edit_lock_ = true
+
+[node name="Timer_Control" parent="CanvasLayer/HUD_Control/RightPlayer_PanelContainer" node_paths=PackedStringArray("game_root") instance=ExtResource("10_56wml")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+game_root = NodePath("../../../..")
+screen_location = 3
+enable_position_change_in_editor = true
+x_position_increment = -85.0
+y_position_increment = 0.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD_Control/RightPlayer_PanelContainer"]
 layout_mode = 2

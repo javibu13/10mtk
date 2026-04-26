@@ -37,6 +37,7 @@ func set_up_player_info_panels(local_client_id: int, players: Array[Player]) -> 
 		player_info_panel_container.show()
 		player_info_panel_container.player_index = index_assign
 		player_info_panel_container.set_user_name(players[index_assign].user_name)
+		player_info_panel_container.set_timer_hidden()
 		index_assign += 1
 		if index_assign == players_num:
 			index_assign = 0

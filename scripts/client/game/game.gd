@@ -7,6 +7,7 @@ signal token_character_resource_loaded
 signal player_info_panels_loaded
 signal board_built
 signal set_up_ended
+signal turn_timeout
 
 
 const TILE_SCENE_PATH = "res://scenes/game/Tile.tscn"
@@ -34,6 +35,8 @@ func _ready() -> void:
 	# Load tile scene
 	ResourceLoader.load_threaded_request(TILE_SCENE_PATH)
 	ResourceLoader.load_threaded_request(TOKEN_CHARACTER_SCENE_PATH)
+	GameManager.new_turn_received.connect(_new_turn_process)
+	turn_timeout.connect(_turn_timeout)
 
 
 @warning_ignore("unused_parameter")
@@ -69,5 +72,32 @@ func _check_load_threaded_request(scene_path: String, signal_completed: Signal) 
 
 
 func _set_up_ended() -> void:
-	# TODO: Notify server that client is ready to start with the first turn
-	loading_screen_control.hide() # TODO: Change this to start of the first turn
+	GameManager.server_notify_client_ready_to_start_match.rpc_id(1, ClientGlobalData.public_game.game_id)
+
+
+func _new_turn_process() -> void:
+	if ClientGlobalData.public_game.turn.previous:
+		var previous_turn: TurnPrev = ClientGlobalData.public_game.turn.previous
+		var player_info_panel_index_for_prev_turn = hud_control.player_info_panel_containers_active.find_custom(func(player_info_panel: PlayerInfoPanel): return player_info_panel.player_index == previous_turn.player_index)
+		hud_control.player_info_panel_containers_active[player_info_panel_index_for_prev_turn].hide_timer()
+		# TODO: Show and update last action
+		pass
+	else:
+		# First turn received
+		loading_screen_control.hide()
+	var new_turn = ClientGlobalData.public_game.turn
+	var player_info_panel_index_for_new_turn = hud_control.player_info_panel_containers_active.find_custom(func(player_info_panel: PlayerInfoPanel): return player_info_panel.player_index == new_turn.player_index)
+	hud_control.player_info_panel_containers_active[player_info_panel_index_for_new_turn].show_and_start_timer(new_turn.time, new_turn.action_number)
+	# Check if the player_panel_index is the first in the array. This means that local player has to play the turn
+	if player_info_panel_index_for_new_turn == 0:
+		pass # TODO: CONTINUE
+
+
+func _turn_timeout() -> void:
+	var current_turn = ClientGlobalData.public_game.turn
+	var player_info_panel_index_for_new_turn = hud_control.player_info_panel_containers_active.find_custom(func(player_info_panel: PlayerInfoPanel): return player_info_panel.player_index == current_turn.player_index)
+	# Check if the player_panel_index is the first in the array. This means that local player had to play the turn
+	hud_control.player_info_panel_containers_active[player_info_panel_index_for_new_turn].hide_timer()
+	if player_info_panel_index_for_new_turn == 0:
+		# TODO: Disable local player interaction to avoid sending 2 turn actions
+		pass

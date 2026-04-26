@@ -2,6 +2,7 @@ extends Node
 
 
 signal initial_info_received(public_game: PublicGame)
+signal new_turn_received
 
 
 # Send to client the initial info needed to set up everything to start first turn
@@ -22,8 +23,17 @@ func server_notify_client_ready_to_start_match(match_id: int):
 		# TODO: Control the error: Client_id is not assigned to the game that has been sent with the ready request
 		return
 	ServerGameData.games[match_id].public.players[player_index].ready = true
-	print(str("Player ", player_index, " (", client_id, ") is ready to start the game..."))
+	print(str("Player ", player_index, " (", client_id, ") has set up everything and is ready to start the game..."))
 	# Check if all the players are ready or not
 	if ServerGameData.games[match_id].public.players.all(func(player: Player): return player.ready):
 		# Send notification to start with the first turn
-		print("FIRST TURN STARTS!!!")
+		for player in ServerGameData.games[match_id].public.players:
+			client_send_new_turn.rpc_id(player.client_id, ServerGameData.games[match_id].public.to_dict(player.client_id))
+
+
+# Send to clients the new turn update
+@rpc("authority", "call_remote", "reliable")
+func client_send_new_turn(public_game_info: Dictionary):
+	print("NEW TURN RECEIVED signal emit!")
+	ClientGlobalData.public_game = PublicGame.from_dict(public_game_info)
+	new_turn_received.emit()

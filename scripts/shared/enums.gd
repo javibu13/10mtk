@@ -44,6 +44,7 @@ enum PlayerStatus {
 }
 
 enum Action {
+	NONE,
 	MOVE,
 	KILL,
 	ASK,
