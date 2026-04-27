@@ -8,10 +8,14 @@ signal player_info_panels_loaded
 signal board_built
 signal set_up_ended
 signal turn_timeout
+signal token_character_selected(token_character: TokenCharacter3D)
 
 
 const TILE_SCENE_PATH = "res://scenes/game/Tile.tscn"
 const TOKEN_CHARACTER_SCENE_PATH = "res://scenes/game/TokenCharacterBase.tscn"
+
+
+@export var actions_panel: ActionsPanel
 
 
 var tile_resource: Resource
@@ -21,6 +25,8 @@ var token_character_resource: Resource
 @onready var board_3d: Board3D = $Board3D
 @onready var loading_screen_control: Control = $CanvasLayer/LoadingScreen_Control
 @onready var hud_control: GameHUD = $CanvasLayer/HUD_Control
+
+
 
 
 func _ready() -> void:
@@ -37,6 +43,7 @@ func _ready() -> void:
 	ResourceLoader.load_threaded_request(TOKEN_CHARACTER_SCENE_PATH)
 	GameManager.new_turn_received.connect(_new_turn_process)
 	turn_timeout.connect(_turn_timeout)
+	token_character_selected.connect(_token_charecter_selected)
 
 
 @warning_ignore("unused_parameter")
@@ -90,7 +97,12 @@ func _new_turn_process() -> void:
 	hud_control.player_info_panel_containers_active[player_info_panel_index_for_new_turn].show_and_start_timer(new_turn.time, new_turn.action_number)
 	# Check if the player_panel_index is the first in the array. This means that local player has to play the turn
 	if player_info_panel_index_for_new_turn == 0:
-		pass # TODO: CONTINUE
+		# Local player turn
+		ClientGlobalData.is_local_player_turn = true
+		# TODO: CONTINUE
+	else:
+		# Remote player turn
+		ClientGlobalData.is_local_player_turn = false
 
 
 func _turn_timeout() -> void:
@@ -101,3 +113,8 @@ func _turn_timeout() -> void:
 	if player_info_panel_index_for_new_turn == 0:
 		# TODO: Disable local player interaction to avoid sending 2 turn actions
 		pass
+
+
+func _token_charecter_selected(token_character: TokenCharacter3D) -> void:
+	# TODO: Check which actions can be executed over the selected character
+	actions_panel.set_up_panel(token_character.character)

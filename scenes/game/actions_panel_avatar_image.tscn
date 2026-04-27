@@ -1,0 +1,342 @@
+[gd_scene load_steps=22 format=3 uid="uid://b8ufcssc2km2k"]
+
+[ext_resource type="Script" uid="uid://c4dv0a3fylklu" path="res://scripts/client/game/actions_panel_avatar.gd" id="1_tyt52"]
+[ext_resource type="Texture2D" uid="uid://7bhxkclb3a7e" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_avatar_background.svg" id="1_yqqvg"]
+[ext_resource type="Texture2D" uid="uid://ckexxnvvfjg0v" path="res://textures/characters/1_cockatoo.png" id="2_kwg13"]
+[ext_resource type="Texture2D" uid="uid://dll8txt2eg8qn" path="res://textures/characters/-2_police.png" id="2_wvswp"]
+[ext_resource type="Texture2D" uid="uid://cjgl6uo1fmla6" path="res://textures/characters/2_walrus.png" id="3_kgbya"]
+[ext_resource type="Texture2D" uid="uid://bgjtrrlmc5776" path="res://textures/characters/-1_police.png" id="3_tyt52"]
+[ext_resource type="Texture2D" uid="uid://ch4u2k3pgga2y" path="res://textures/characters/3_cat.png" id="4_bt4hf"]
+[ext_resource type="Texture2D" uid="uid://c6npn4e43xpr7" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_avatar_border.svg" id="5_71d7r"]
+[ext_resource type="Texture2D" uid="uid://dvap5h7w7mlny" path="res://textures/characters/4_snow_leopard.png" id="5_kgbya"]
+[ext_resource type="Texture2D" uid="uid://bwmevpbrkm8t4" path="res://textures/characters/5_kangaroo.png" id="6_bt4hf"]
+[ext_resource type="Texture2D" uid="uid://vkldgsanukie" path="res://textures/characters/6_tiger.png" id="7_bt4hf"]
+[ext_resource type="Texture2D" uid="uid://dtsijsy7rlsud" path="res://textures/characters/7_mouse.png" id="8_71d7r"]
+[ext_resource type="Texture2D" uid="uid://dlocwb0lhcayw" path="res://textures/characters/8_penguin.png" id="9_puhu3"]
+[ext_resource type="Texture2D" uid="uid://cgrioagwyeirj" path="res://textures/characters/9_fox.png" id="10_343x2"]
+[ext_resource type="Texture2D" uid="uid://bulc01gj110kl" path="res://textures/characters/10_giraffe.png" id="11_2g785"]
+[ext_resource type="Texture2D" uid="uid://dabb005a8b62b" path="res://textures/characters/11_wolf.png" id="12_3yu17"]
+[ext_resource type="Texture2D" uid="uid://od80yg7r31ri" path="res://textures/characters/12_koala.png" id="13_ls7of"]
+[ext_resource type="Texture2D" uid="uid://djmeh5rcw47kn" path="res://textures/characters/13_dog_dalmatian.png" id="14_0m0wm"]
+[ext_resource type="Texture2D" uid="uid://8ot5kyj237pj" path="res://textures/characters/14_opossum.png" id="15_0m0wm"]
+[ext_resource type="Texture2D" uid="uid://cnag2o4nri44p" path="res://textures/characters/15_panda.png" id="16_vv2tq"]
+[ext_resource type="Texture2D" uid="uid://b7je8tavfxeby" path="res://textures/characters/16_crocodile.png" id="17_pcifa"]
+
+[node name="Avatar_Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 126.0
+offset_bottom = 126.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_tyt52")
+
+[node name="Background_TextureRect" type="TextureRect" parent="."]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_yqqvg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="-3_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.0793651
+anchor_top = -0.04761905
+anchor_right = 2.0
+anchor_bottom = 3.997869
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wvswp")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="-2_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.88095236
+anchor_top = -0.023809524
+anchor_right = 2.1190476
+anchor_bottom = 3.9174132
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_tyt52")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="-1_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.0793651
+anchor_top = -0.04761905
+anchor_right = 2.0
+anchor_bottom = 3.997869
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wvswp")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="1_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.8015873
+anchor_top = -0.34920636
+anchor_right = 2.7222223
+anchor_bottom = 4.991641
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_kwg13")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="2_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.1269841
+anchor_top = -0.1984127
+anchor_right = 1.8412699
+anchor_bottom = 3.7011046
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_kgbya")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="3_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.031746
+anchor_top = -0.15873016
+anchor_right = 1.9365079
+anchor_bottom = 3.740787
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_bt4hf")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="4_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.0714285
+anchor_top = -0.2857143
+anchor_right = 2.1349206
+anchor_bottom = 3.9265985
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_kgbya")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="5_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.8333333
+anchor_top = -0.11904762
+anchor_right = 2.2460318
+anchor_bottom = 3.9264405
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_bt4hf")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="6_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.2539682
+anchor_top = -0.053531706
+anchor_right = 2.063492
+anchor_bottom = 4.304751
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_bt4hf")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="7_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.0952381
+anchor_top = -0.21630909
+anchor_right = 2.047619
+anchor_bottom = 3.912591
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_71d7r")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="8_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.2777778
+anchor_top = -0.18253969
+anchor_right = 1.9126984
+anchor_bottom = 4.0089192
+offset_bottom = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_puhu3")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="9_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.3571428
+anchor_top = -0.41767812
+anchor_right = 2.2777777
+anchor_bottom = 4.3576655
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_343x2")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="10_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.8730159
+anchor_top = -0.07936508
+anchor_right = 2.2063491
+anchor_bottom = 3.966123
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_2g785")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="11_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.1031746
+anchor_top = -0.26190478
+anchor_right = 2.0555556
+anchor_bottom = 3.887848
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_3yu17")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="12_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.84126985
+anchor_top = -0.1736702
+anchor_right = 1.9047619
+anchor_bottom = 3.4339046
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_ls7of")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="13_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.3095238
+anchor_top = -0.2777778
+anchor_right = 2.0238094
+anchor_bottom = 4.1013584
+offset_right = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_0m0wm")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="14_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.0
+anchor_top = -0.18253969
+anchor_right = 2.1111112
+anchor_bottom = 3.9046538
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_0m0wm")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="15_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.0
+anchor_top = -0.103174604
+anchor_right = 2.079365
+anchor_bottom = 3.9423134
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_vv2tq")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="16_Character_TextureRect" type="TextureRect" parent="Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.2063493
+anchor_top = -0.23015873
+anchor_right = 1.8730159
+anchor_bottom = 3.8153293
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_pcifa")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Border_TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_71d7r")
+expand_mode = 1
+stretch_mode = 5

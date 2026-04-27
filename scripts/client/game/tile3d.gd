@@ -35,10 +35,11 @@ func set_sniper() -> void:
 	tile_base.get_child(0).material_overlay = sniper_material_overlay
 
 
-func select() -> void:
+func select(show_selection_graphic: bool = false) -> void:
 	print('Select: ' + self.name)
-	tile_selector.find_child('AnimationPlayer').play('idle')
-	tile_selector.visible = true
+	if show_selection_graphic:
+		tile_selector.find_child('AnimationPlayer').play('idle')
+		tile_selector.visible = true
 
 
 func deselect() -> void:

@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://de42nh2pstc31"]
+
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_ieefh"]
+[ext_resource type="PackedScene" uid="uid://b8ufcssc2km2k" path="res://scenes/game/actions_panel_avatar_image.tscn" id="2_0cbgp"]
+[ext_resource type="Script" uid="uid://ddt0spxtupwe6" path="res://scripts/client/game/actions_panel.gd" id="2_3gd0y"]
+
+[node name="Actions_PanelContainer" type="PanelContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 260.0
+offset_top = -203.0
+offset_right = 441.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("1_ieefh")
+theme_type_variation = &"PanelContainerActionsPanel"
+script = ExtResource("2_3gd0y")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="HSplitContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 51)
+layout_mode = 2
+
+[node name="Avatar_Control" parent="MarginContainer/VBoxContainer/HSplitContainer" instance=ExtResource("2_0cbgp")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.6
+mouse_filter = 2
+
+[node name="CharacterInfo_RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "Harambe
+Gorilla
+Police"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="MoveAction_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_ieefh")
+theme_type_variation = &"ButtonMoveAction"
+text = "MOVE"
+
+[node name="KillAction_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_ieefh")
+theme_type_variation = &"ButtonKillAction"
+text = "KILL"
+
+[node name="InvestigateAction_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_ieefh")
+theme_type_variation = &"ButtonInvestigateAction"
+text = "INVESTIGATE"

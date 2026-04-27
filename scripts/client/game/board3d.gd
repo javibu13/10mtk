@@ -12,7 +12,7 @@ var board : Dictionary = {}
 func _ready() -> void:
 	pass
 	#_fillBoard()
-	#cameraController.selectSquare(board[0][0])
+	#cameraController.select_tile(board[0][0])
 
 
 func generate_board(new_board: Board) -> void:

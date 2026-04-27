@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://2r8awemlrgmc"]
+[gd_scene load_steps=15 format=3 uid="uid://2r8awemlrgmc"]
 
 [ext_resource type="Script" uid="uid://bxqvpypk3xbba" path="res://scripts/client/game/game.gd" id="1_7qcb4"]
 [ext_resource type="Script" uid="uid://kcmqyohtj2ht" path="res://scripts/client/game/3d_inputs.gd" id="2_lyhax"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="4_gg4pt"]
 [ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="6_365ku"]
 [ext_resource type="Script" uid="uid://ctd0sls7y52ao" path="res://scripts/client/game/gameHUD.gd" id="6_wnrko"]
+[ext_resource type="PackedScene" uid="uid://de42nh2pstc31" path="res://scenes/game/actions_panel_container.tscn" id="7_aptqa"]
 [ext_resource type="PackedScene" uid="uid://dfld1s4yllhvo" path="res://scenes/game/player_info_character.tscn" id="7_gg4pt"]
 [ext_resource type="Script" uid="uid://cxo3mn2x368wr" path="res://scripts/client/game/playerInfoPanel.gd" id="8_qf6a8"]
 [ext_resource type="PackedScene" uid="uid://l8p12gupl5vc" path="res://scenes/game/timer_control.tscn" id="10_56wml"]
@@ -21,8 +22,9 @@ colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_aug50"]
 gradient = SubResource("Gradient_bqwap")
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("actions_panel")]
 script = ExtResource("1_7qcb4")
+actions_panel = NodePath("CanvasLayer/HUD_Control/Actions_PanelContainer")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qbsmt")
@@ -34,11 +36,12 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 
 [node name="CameraRotation" type="Node3D" parent="CameraPosition"]
 
-[node name="Camera3D" type="Camera3D" parent="CameraPosition/CameraRotation" node_paths=PackedStringArray("pivotPosition", "pivotRotation")]
+[node name="Camera3D" type="Camera3D" parent="CameraPosition/CameraRotation" node_paths=PackedStringArray("pivot_position", "pivot_rotation", "game_root")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
 script = ExtResource("2_lyhax")
-pivotPosition = NodePath("../..")
-pivotRotation = NodePath("..")
+pivot_position = NodePath("../..")
+pivot_rotation = NodePath("..")
+game_root = NodePath("../../..")
 
 [node name="Board3D" type="Node3D" parent="." node_paths=PackedStringArray("cameraController")]
 script = ExtResource("3_lyhax")
@@ -122,11 +125,18 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
+mouse_behavior_recursive = 2
 script = ExtResource("6_wnrko")
 main_player_panel_container = NodePath("MainPlayer_PanelContainer")
 left_player_panel_container = NodePath("LeftPlayer_PanelContainer")
 top_player_panel_container = NodePath("TopPlayer_PanelContainer")
 right_player_panel_container = NodePath("RightPlayer_PanelContainer")
+
+[node name="Actions_PanelContainer" parent="CanvasLayer/HUD_Control" instance=ExtResource("7_aptqa")]
+layout_mode = 1
+offset_left = 262.0
+offset_right = 443.0
 
 [node name="MainPlayer_PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD_Control" node_paths=PackedStringArray("player_info_assassin", "player_info_objectives", "timer_control")]
 layout_mode = 1
@@ -140,6 +150,8 @@ offset_top = -112.0
 offset_right = 275.5
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
+mouse_behavior_recursive = 2
 theme = ExtResource("6_365ku")
 script = ExtResource("8_qf6a8")
 player_info_assassin = NodePath("HBoxContainer/AssassinInfo_MarginControl")
@@ -150,12 +162,14 @@ timer_control = NodePath("Timer_Control")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+mouse_filter = 2
 game_root = NodePath("../../../..")
 enable_position_change_in_editor = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD_Control/MainPlayer_PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 theme = ExtResource("6_365ku")
 alignment = 1
 
@@ -201,6 +215,7 @@ offset_right = 113.0
 offset_bottom = 342.0
 grow_vertical = 2
 scale = Vector2(0.75, 0.75)
+mouse_behavior_recursive = 1
 theme = ExtResource("6_365ku")
 theme_type_variation = &"PanelContainerLeft"
 script = ExtResource("8_qf6a8")
@@ -298,6 +313,7 @@ offset_right = 345.0
 offset_bottom = 112.0
 grow_horizontal = 2
 scale = Vector2(0.75, 0.75)
+mouse_behavior_recursive = 1
 theme = ExtResource("6_365ku")
 theme_type_variation = &"PanelContainerVFlip"
 script = ExtResource("8_qf6a8")
@@ -396,6 +412,7 @@ offset_bottom = 342.0
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(0.75, 0.75)
+mouse_behavior_recursive = 1
 theme = ExtResource("6_365ku")
 theme_type_variation = &"PanelContainerLeftHFlip"
 script = ExtResource("8_qf6a8")
@@ -495,4 +512,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
+mouse_behavior_recursive = 2
 metadata/_edit_lock_ = true
