@@ -30,9 +30,16 @@ func generate_board(new_board: Board) -> void:
 			new_tile3d.create_token_character(token_character_resource, new_tile.characters.keys()[0])
 
 
-# Create sample initial square
-#func sample_tile_generation():
-	#board[0] = { 0 : tile_resource.instantiate()}
-	#add_child(board[0][0])
-	#board[0][0].place(Vector2(0,0))
-	#board[0][0].setSniper()
+# Return the Tile3D where the character is placed
+func get_tile3d_of_character(character: Enums.Character) -> Tile3D:
+	var character_tile: Tile3D = null
+	for tile in get_children(): # TODO: Chenge the iterated collection (and its logic) by the Board.board dictionary stored in PublicGame in ClientGlobalData.public_game
+		if tile is Tile3D:
+			var token_characters_in_tile: Array[TokenCharacter3D] = tile.get_token_characters()
+			for token_character in token_characters_in_tile:
+				if token_character.character == character:
+					character_tile = tile
+					break
+			if character_tile:
+				break
+	return character_tile

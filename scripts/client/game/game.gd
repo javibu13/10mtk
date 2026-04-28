@@ -22,7 +22,7 @@ var tile_resource: Resource
 var token_character_resource: Resource
 
 
-@onready var board_3d: Board3D = $Board3D
+@onready var board_3d:  = $Board3D
 @onready var loading_screen_control: Control = $CanvasLayer/LoadingScreen_Control
 @onready var hud_control: GameHUD = $CanvasLayer/HUD_Control
 
@@ -116,5 +116,47 @@ func _turn_timeout() -> void:
 
 
 func _token_charecter_selected(token_character: TokenCharacter3D) -> void:
-	# TODO: Check which actions can be executed over the selected character
-	actions_panel.set_up_panel(token_character.character)
+	# Get the local player's assassin
+	var local_player_index: int = ClientGlobalData.public_game.players.find_custom(func(player: Player): return player.client_id == multiplayer.get_unique_id())
+	var assassin: Enums.Character = ClientGlobalData.public_game.players[local_player_index].assassin
+	# Get if is possible to execute each action over the selected character
+	var allow_kill_action = can_be_killed(token_character.character, assassin) if token_character.character != assassin else false
+	var allow_investigate_action = can_be_investigated(token_character.character) if token_character.character != assassin else false
+	actions_panel.set_up_panel(token_character.character, true, allow_kill_action, allow_investigate_action)
+
+
+func can_be_killed(character_to_kill: Enums.Character, assassin: Enums.Character) -> bool:
+	# Check if there are any police near
+	var orthogonal_cross_of_tiles_of_assassin: Array[Tile] = ClientGlobalData.public_game.board.get_orthogonal_cross_tiles_of_character(assassin)
+	if orthogonal_cross_of_tiles_of_assassin.any(func(tile: Tile): return tile.polices.keys().size() > 0):
+		return false
+	# Check if character_to_kill and assassin share tile
+	if character_to_kill in orthogonal_cross_of_tiles_of_assassin[0].characters.keys():
+		print("Allow knife kill")
+		return true
+	# Check if the assassin is not alone in his tile because gun and sniper need this condition
+	if orthogonal_cross_of_tiles_of_assassin[0].characters.keys().size() != 1:
+		return false
+	# Check if character_to_kill is placed in any of the directly adjacent tiles to the assassin's tile
+	var characters_in_tiles_in_cross_arround_assassin: Array[Enums.Character] = []
+	for tile in orthogonal_cross_of_tiles_of_assassin:
+		characters_in_tiles_in_cross_arround_assassin.append_array(tile.characters.keys())
+	if character_to_kill in characters_in_tiles_in_cross_arround_assassin:
+		print("Allow gun kill")
+		return true
+	# Check if assassin is placed in a sniper tile
+	if orthogonal_cross_of_tiles_of_assassin[0].type == Enums.TileType.SNIPER:
+		# Check if character_to_kill is placed any tile orthogonal to the assassin's tile
+		var orthogonal_extension_of_tiles_arround_assassin: Array[Tile] = ClientGlobalData.public_game.board.get_orthogonal_cross_tiles_of_character(assassin, ClientGlobalData.public_game.board.tile_num)
+		var characters_in_tiles_in_extension_arround_assassin: Array[Enums.Character] = []
+		for tile in orthogonal_extension_of_tiles_arround_assassin:
+			characters_in_tiles_in_extension_arround_assassin.append_array(tile.characters.keys())
+		if character_to_kill in characters_in_tiles_in_extension_arround_assassin:
+			print("Allow sniper kill")
+			return true
+	print("Kill not allow")
+	return false
+
+
+func can_be_investigated(character_to_investigate: Enums.Character) -> bool:
+	return not ClientGlobalData.public_game.board.get_tile_of_character(character_to_investigate).polices.is_empty()

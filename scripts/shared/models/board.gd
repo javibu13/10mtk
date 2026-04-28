@@ -124,3 +124,38 @@ static func from_dict(new_dict: Dictionary) -> Board:
 			board_tiles[x][y] = Tile.from_dict(new_dict.board[x][y])
 	new_board.board = board_tiles
 	return new_board
+
+
+# Return the Tile where the character is placed
+func get_tile_of_character(character: Enums.Character) -> Tile:
+	var character_tile: Tile = null
+	for x_tile in board.keys():
+		for tile: Tile in board[x_tile].values():
+			if character in tile.get_characters_and_police():
+				character_tile = tile
+				break
+		if character_tile:
+			break
+	return character_tile
+
+
+## Return all Tile in the orthogonal cross of specified size arround the character (it includes the Tile where character is placed at index 0)
+func get_orthogonal_cross_tiles_of_character(character: Enums.Character, cross_size := 1) -> Array[Tile]:
+	var orthogonal_cross: Array[Tile] = []
+	# Get Tile where the character is placed
+	var central_tile: Tile = get_tile_of_character(character)
+	orthogonal_cross.append(central_tile)
+	for index in range(1, cross_size+1):
+		# Check if there is a tile at top and get it
+		if board[central_tile.location.x].has(central_tile.location.y + index):
+			orthogonal_cross.append(board[central_tile.location.x][central_tile.location.y + index])
+		# Check if there is a tile at right and get it
+		if board.has(central_tile.location.x + index) and board[central_tile.location.x + index].has(central_tile.location.y):
+			orthogonal_cross.append(board[central_tile.location.x + index][central_tile.location.y])
+		# Check if there is a tile at bottom and get it
+		if board[central_tile.location.x].has(central_tile.location.y - index):
+			orthogonal_cross.append(board[central_tile.location.x][central_tile.location.y - index])
+		# Check if there is a tile at left and get it
+		if board.has(central_tile.location.x - index) and board[central_tile.location.x - index].has(central_tile.location.y):
+			orthogonal_cross.append(board[central_tile.location.x - index][central_tile.location.y])
+	return orthogonal_cross

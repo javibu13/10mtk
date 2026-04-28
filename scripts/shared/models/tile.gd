@@ -43,3 +43,10 @@ static func from_dict(new_dict: Dictionary) -> Tile:
 	new_tile.polices = new_dict.polices
 	new_tile.type = new_dict.type
 	return new_tile
+
+
+func get_characters_and_police() -> Array[Enums.Character]:
+	var token_characters: Array[Enums.Character] = []
+	token_characters.append_array(characters.keys())
+	token_characters.append_array(polices.keys())
+	return token_characters

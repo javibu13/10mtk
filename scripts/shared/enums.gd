@@ -104,7 +104,7 @@ const CHARACTER_INFO: Dictionary[int, Dictionary] = {
 		"color": Color("6c87a6")
 	},
 	3: {
-		"name": "Whiskers",
+		"name": "Theodor",
 		"animal": "Cat",
 		"profession": "Cardinal",
 		"image_path": "res://textures/characters/3_cat.png",
@@ -146,35 +146,35 @@ const CHARACTER_INFO: Dictionary[int, Dictionary] = {
 		"color": Color("767ea6")
 	},
 	9: {
-		"name": "Tod",
+		"name": "Ari",
 		"animal": "Fox",
 		"profession": "Nurse",
 		"image_path": "res://textures/characters/9_fox.png",
 		"color": Color("6c9e5f")
 	},
 	10: {
-		"name": "Stretch",
+		"name": "Twiga",
 		"animal": "Giraffe",
 		"profession": "Tennis Pro Player",
 		"image_path": "res://textures/characters/10_giraffe.png",
 		"color": Color("b39f79")
 	},
 	11: {
-		"name": "Balto",
+		"name": "Shaki",
 		"animal": "Wolf",
 		"profession": "Office Worker",
 		"image_path": "res://textures/characters/11_wolf.png",
 		"color": Color("9187ab")
 	},
 	12: {
-		"name": "Eucalyptus",
+		"name": "Kaly",
 		"animal": "Koala",
 		"profession": "Artist",
 		"image_path": "res://textures/characters/12_koala.png",
 		"color": Color("c2be53")
 	},
 	13: {
-		"name": "Pongo",
+		"name": "Dottie",
 		"animal": "Dog Dalmatian",
 		"profession": "Musician",
 		"image_path": "res://textures/characters/13_dog_dalmatian.png",

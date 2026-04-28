@@ -54,3 +54,11 @@ func create_token_character(token_character_resource: Resource, character: Enums
 	# TODO: Set random position to place the token character
 	var new_position = Vector3.ZERO
 	new_token_character.initial_set_up(character, new_position)
+
+
+func get_token_characters() -> Array[TokenCharacter3D]:
+	var token_characters: Array[TokenCharacter3D] = []
+	for child in get_children():
+		if child is TokenCharacter3D:
+			token_characters.append(child)
+	return token_characters
