@@ -120,7 +120,7 @@ func send_reset_password_email(user_email: String, user_name: String, new_passwo
 	var json_body = JSON.stringify(body)
 	var response = http_request.request(api_email.url, headers, HTTPClient.METHOD_POST, json_body)
 	if response != OK:
-		#print("ERROR SENDING EMAIL: ", response)
+		#Log.pr("ERROR SENDING EMAIL: ", response)
 		NetworkManager.server_print_msg.emit("ERROR SENDING EMAIL: " + str(response))
 		return false
 	# Wait for request completed
@@ -131,12 +131,12 @@ func send_reset_password_email(user_email: String, user_name: String, new_passwo
 	var response_completed_response_code = response_completed[1]
 	
 	if response_completed_result == HTTPRequest.RESULT_SUCCESS and (response_completed_response_code == 200 || response_completed_response_code == 201 || response_completed_response_code == 202):
-		#print("SUCCESSFUL EMAIL!!")
+		#Log.pr("SUCCESSFUL EMAIL!!")
 		NetworkManager.server_print_msg.emit("SUCCESSFUL EMAIL!!")
 		return true
 	else:
 		var response_text = response_completed[3].get_string_from_utf8()
-		#print("Error response: ", response_text)
+		#Log.pr("Error response: ", response_text)
 		NetworkManager.server_print_msg.emit("Error response: " + str(response_text))
 		return false
 

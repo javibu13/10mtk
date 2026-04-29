@@ -4,6 +4,8 @@ class_name CameraInputs3D
 
 # Selection variables
 var allow_select := false
+var allow_player_selection := true
+var show_tile_selection_graphic := false
 var is_pressed := false
 var tile_selected: Tile3D = null
 var token_character_selected: TokenCharacter3D = null
@@ -37,6 +39,8 @@ var prev_touch_distance := -1.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_root.actions_panel_closed.connect(close_action_panel)
+	game_root.action_editing_started.connect(action_editing_started)
+	game_root.action_editing_canceled.connect(action_editing_canceled)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -46,7 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			is_pressed = true
 			is_camera_rotating = false
 		elif ((event is InputEventMouseButton and event.button_index == 1) or (event is InputEventScreenTouch and event.index == 0)) and allow_select and !event.is_pressed():
-			#print('Shoot ray to select')
+			#Log.pr('Shoot ray to select')
 			#debug_label.text = 'Shoot ray to select'
 			shoot_ray(event.position)
 			is_pressed = false
@@ -97,7 +101,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				prev_touch_distance = -1.0
 			elif ((event is InputEventScreenTouch or event is InputEventScreenDrag) and event.index == 1) or (event is InputEventMouseButton and (event.button_index == 4 or event.button_index == 5)):
 				if (event is InputEventMouseButton and (event.button_index == 4 or event.button_index == 5)): await get_tree().create_timer(0.1).timeout
-				#print("End Zoom")
+				#Log.pr("End Zoom")
 				is_zoom = false
 				second_touch = null
 				prev_touch_distance = -1.0
@@ -125,7 +129,7 @@ func _process(delta: float) -> void:
 			is_first_frame_rotating = false
 		prev_mouse_position = new_mouse_position
 	elif is_zoom and new_mouse_position != Vector2.ZERO and second_touch != null:
-		#print("ZOOOM PROCESS")
+		#Log.pr("ZOOOM PROCESS")
 		if prev_touch_distance > 0.0:
 			var current_distance = new_mouse_position.distance_to(second_touch)
 			var touch_distance_increment = current_distance-prev_touch_distance
@@ -148,12 +152,14 @@ func shoot_ray(eventPosition : Vector2) -> void:
 	var ray_query = PhysicsRayQueryParameters3D.new()
 	ray_query.from = from
 	ray_query.to = to
+	if not allow_player_selection:
+		ray_query.collision_mask = 0b00000000_00000000_00000000_00000010
 	var raycast_result = space.intersect_ray(ray_query)
 	if 'collider' in raycast_result:
 		var col_parent = raycast_result.collider.get_parent()
-		#print(col_parent)
+		#Log.pr(col_parent)
 		if col_parent is Tile3D:
-			select_tile(col_parent)
+			select_tile(col_parent, show_tile_selection_graphic)
 		elif col_parent is TokenCharacter3D:
 			select_token_character(col_parent)
 	else:
@@ -164,6 +170,7 @@ func shoot_ray(eventPosition : Vector2) -> void:
 func select_tile(tile: Tile3D, show_selection_graphic: bool = false) -> void:
 	if tile_selected:
 		tile_selected.deselect()
+	Log.pr(tile)
 	tile_selected = tile
 	tile_selected.select(show_selection_graphic)
 	set_up_move_to_square(tile_selected)
@@ -196,3 +203,17 @@ func close_action_panel():
 	deselect_token_character()
 	tile_selected.deselect()
 	tile_selected.select()
+
+
+func action_editing_started(action: Enums.Action) -> void:
+	match action:
+		Enums.Action.MOVE:
+			allow_player_selection = false
+			show_tile_selection_graphic = true
+			if tile_selected: tile_selected.select(true)
+
+
+func action_editing_canceled() -> void:
+	allow_player_selection = true
+	show_tile_selection_graphic = false
+	tile_selected.deselect()

@@ -39,7 +39,7 @@ func initialize_server_database():
 	# Initialize repositories
 	_init_repositories()
 	
-	print("✓ Database initialized at: ", db.path)
+	Log.pr("✓ Database initialized at: ", db.path)
 	emit_signal("database_ready")
 
 
@@ -64,7 +64,7 @@ func _create_tables() -> void:
 	# Execute table creation query
 	db.query(sql_content)
 	
-	print("✓ Schema executed")
+	Log.pr("✓ Schema executed")
 
 
 func _init_repositories() -> void:

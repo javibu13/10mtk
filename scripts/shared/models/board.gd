@@ -84,11 +84,11 @@ func _is_sniper_generated_and_update_left() -> bool:
 		var left_prob : float = 1 / (float(tile_left_count) / sniper_left_count)
 		var additional_prob : float = left_prob * (1-base_sniper_probability)
 		var current_prob : float = base_sniper_probability + additional_prob
-		print("LeftSquares: " + str(tile_left_count) + "; LeftSnipers: " + str(sniper_left_count) + "; Prob: " + str(current_prob) + str(" (leftProb:", left_prob, " + additionalProb:", additional_prob, ")"))
+		Log.pr("LeftSquares: " + str(tile_left_count) + "; LeftSnipers: " + str(sniper_left_count) + "; Prob: " + str(current_prob) + str(" (leftProb:", left_prob, " + additionalProb:", additional_prob, ")"))
 		if randf() <= current_prob:
 			sniper_left_count -= 1
 			result = true
-	print("Sniper: ", "✅" if result else "❌")
+	Log.pr("Sniper: ", "✅" if result else "❌")
 	return result
 
 

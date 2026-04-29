@@ -528,7 +528,7 @@ curve = SubResource("Curve3D_aptqa")
 debug_custom_color = Color(0.88883, 0.15259808, 0.6314438, 1)
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-0.999976, -8.675573e-09, -2.8511442e-08, 0, 0.9566915, -0.29110202, 2.9801607e-08, -0.29110393, -0.95668525, 0, 0.41833183, -0.5668107)
+transform = Transform3D(-0.999976, -8.675573e-09, -2.8511444e-08, 0, 0.9566915, -0.29110205, 2.9801607e-08, -0.29110393, -0.9566853, 0, 0.41833183, -0.5668107)
 progress = 0.6459306
 rotation_mode = 4
 

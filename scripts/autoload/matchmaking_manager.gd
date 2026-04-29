@@ -42,7 +42,7 @@ func server_join_client_to_quick_lobby():
 
 @rpc("authority", "call_remote", "reliable")
 func client_join_client_to_quick_lobby_response(success: bool, message: String):
-	print(str("Joined to lobby: ", message))
+	Log.pr(str("Joined to lobby: ", message))
 	if success:
 		ClientGlobalData.lobby_joined = message
 	else:

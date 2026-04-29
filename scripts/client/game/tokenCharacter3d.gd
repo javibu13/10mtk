@@ -26,11 +26,12 @@ func initial_set_up(new_character: Enums.Character, new_position: Vector3):
 
 
 func get_parent_tile() -> Tile3D:
-	var parent = get_parent()
-	if parent is Tile3D:
-		return parent
-	else:
-		return null
+	var parent = null
+	for index in range(0, 5):
+		parent = parent.get_parent() if parent else get_parent()
+		if parent is Tile3D:
+			break
+	return parent
 
 
 func select() -> void:

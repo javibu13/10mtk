@@ -1,9 +1,103 @@
-[gd_scene load_steps=11 format=3 uid="uid://de42nh2pstc31"]
+[gd_scene load_steps=19 format=3 uid="uid://de42nh2pstc31"]
 
 [ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_ieefh"]
 [ext_resource type="PackedScene" uid="uid://b8ufcssc2km2k" path="res://scenes/game/actions_panel_avatar_image.tscn" id="2_0cbgp"]
 [ext_resource type="Script" uid="uid://ddt0spxtupwe6" path="res://scripts/client/game/actions_panel.gd" id="2_3gd0y"]
 [ext_resource type="Texture2D" uid="uid://7o74b030edv7" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_close_x.svg" id="4_3gd0y"]
+[ext_resource type="Texture2D" uid="uid://d0458fh5uu3j1" path="res://themes/style_boxes/main_menu_button_normal_base.svg" id="4_6pxys"]
+[ext_resource type="Texture2D" uid="uid://cwbplus2ui3c" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_cancel.svg" id="4_7rpkf"]
+[ext_resource type="Texture2D" uid="uid://b8bgbrx1xg1xv" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_confirm.svg" id="5_6pxys"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_63pli"]
+texture = ExtResource("4_6pxys")
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="Animation" id="Animation_63pli"]
+resource_name = "actions_to_action_details"
+length = 0.35
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions_VBoxContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.13333334, 0.11916023, 140, -0.13349926, -70.17408, 0, 0),
+"times": PackedFloat32Array(0, 0.23333333)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActionConfirmation_VBoxContainer2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(140, -0.25, 0, 0.06666667, -0.020492554, 140, -0.03333334, -0.1694336, 0.053956166, -24.298698, 0, -0.099999994, 0.11916023, 0, 0),
+"times": PackedFloat32Array(0, 0.10000001, 0.33333334)
+}
+
+[sub_resource type="Animation" id="Animation_wt318"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions_VBoxContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActionConfirmation_VBoxContainer2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(140, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_duu40"]
+resource_name = "action_details_to_actions"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions_VBoxContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(140, -0.25, 0, 0.06666667, -0.020492554, 140, -0.03333334, -0.1694336, 0.053956166, -24.298698, 0, -0.099999994, 0.11916023, 0, 0),
+"times": PackedFloat32Array(0, 0.06666667, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActionConfirmation_VBoxContainer2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.13333334, 0.11916023, 140, -0.13349926, -70.17408, 0, 0),
+"times": PackedFloat32Array(0.00028510392, 0.23333333)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_duu40"]
+_data = {
+&"RESET": SubResource("Animation_wt318"),
+&"action_details_to_actions": SubResource("Animation_duu40"),
+&"actions_to_action_details": SubResource("Animation_63pli")
+}
 
 [sub_resource type="Animation" id="Animation_3gd0y"]
 length = 0.001
@@ -193,7 +287,68 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="MoveAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer"]
+[node name="ButtonsArea_Control" type="Control" parent="Main_MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 122)
+layout_mode = 2
+
+[node name="ActionConfirmation_VBoxContainer2" type="VBoxContainer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 140.0
+offset_bottom = 139.99945
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="HSeparator" type="HSeparator" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="ActionInfo_RichTextLabel" type="RichTextLabel" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "Select the tile you want to move the character to and confirm"
+fit_content = true
+scroll_active = false
+
+[node name="PlayersToInvestigate_OptionButton" type="OptionButton" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_63pli")
+
+[node name="ConfirmCancel_HBoxContainer" type="HBoxContainer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Cancel_TextureButton" type="TextureButton" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2/ConfirmCancel_HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("4_7rpkf")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Confirm_TextureButton" type="TextureButton" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2/ConfirmCancel_HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_6pxys")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Actions_VBoxContainer" type="VBoxContainer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 0.000579834
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="MoveAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/Actions_VBoxContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 mouse_behavior_recursive = 2
@@ -202,7 +357,7 @@ theme = ExtResource("1_ieefh")
 theme_type_variation = &"ButtonMoveAction"
 text = "MOVE"
 
-[node name="KillAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer"]
+[node name="KillAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/Actions_VBoxContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 mouse_behavior_recursive = 2
@@ -211,7 +366,7 @@ theme = ExtResource("1_ieefh")
 theme_type_variation = &"ButtonKillAction"
 text = "KILL"
 
-[node name="InvestigateAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer"]
+[node name="InvestigateAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/Actions_VBoxContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 mouse_behavior_recursive = 2
@@ -220,6 +375,11 @@ theme = ExtResource("1_ieefh")
 theme_type_variation = &"ButtonInvestigateAction"
 text = "INVESTIGATE"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_duu40")
+}
+
 [node name="X_MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -227,7 +387,7 @@ size_flags_vertical = 0
 theme_override_constants/margin_top = 13
 theme_override_constants/margin_right = 10
 
-[node name="TextureButton" type="TextureButton" parent="X_MarginContainer"]
+[node name="X_TextureButton" type="TextureButton" parent="X_MarginContainer"]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_horizontal = 4
