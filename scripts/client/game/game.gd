@@ -9,6 +9,7 @@ signal board_built
 signal set_up_ended
 signal turn_timeout
 signal token_character_selected(token_character: TokenCharacter3D)
+signal actions_panel_closed
 
 
 const TILE_SCENE_PATH = "res://scenes/game/Tile.tscn"

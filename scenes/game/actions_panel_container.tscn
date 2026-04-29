@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://de42nh2pstc31"]
+[gd_scene load_steps=11 format=3 uid="uid://de42nh2pstc31"]
 
 [ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_ieefh"]
 [ext_resource type="PackedScene" uid="uid://b8ufcssc2km2k" path="res://scenes/game/actions_panel_avatar_image.tscn" id="2_0cbgp"]
 [ext_resource type="Script" uid="uid://ddt0spxtupwe6" path="res://scripts/client/game/actions_panel.gd" id="2_3gd0y"]
+[ext_resource type="Texture2D" uid="uid://7o74b030edv7" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_close_x.svg" id="4_3gd0y"]
 
 [sub_resource type="Animation" id="Animation_3gd0y"]
 length = 0.001
@@ -158,28 +159,28 @@ theme = ExtResource("1_ieefh")
 theme_type_variation = &"PanelContainerActionsPanel"
 script = ExtResource("2_3gd0y")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Main_MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Main_MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="HSplitContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HSplitContainer" type="HBoxContainer" parent="Main_MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 51)
 layout_mode = 2
 
-[node name="Avatar_Control" parent="MarginContainer/VBoxContainer/HSplitContainer" instance=ExtResource("2_0cbgp")]
+[node name="Avatar_Control" parent="Main_MarginContainer/VBoxContainer/HSplitContainer" instance=ExtResource("2_0cbgp")]
 layout_mode = 2
 size_flags_stretch_ratio = 0.6
 mouse_filter = 2
 
-[node name="CharacterInfo_RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="CharacterInfo_RichTextLabel" type="RichTextLabel" parent="Main_MarginContainer/VBoxContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
@@ -192,7 +193,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="MoveAction_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MoveAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 mouse_behavior_recursive = 2
@@ -201,7 +202,7 @@ theme = ExtResource("1_ieefh")
 theme_type_variation = &"ButtonMoveAction"
 text = "MOVE"
 
-[node name="KillAction_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="KillAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 mouse_behavior_recursive = 2
@@ -210,7 +211,7 @@ theme = ExtResource("1_ieefh")
 theme_type_variation = &"ButtonKillAction"
 text = "KILL"
 
-[node name="InvestigateAction_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="InvestigateAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 mouse_behavior_recursive = 2
@@ -218,6 +219,23 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("1_ieefh")
 theme_type_variation = &"ButtonInvestigateAction"
 text = "INVESTIGATE"
+
+[node name="X_MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_right = 10
+
+[node name="TextureButton" type="TextureButton" parent="X_MarginContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_3gd0y")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

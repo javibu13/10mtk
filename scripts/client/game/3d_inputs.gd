@@ -36,7 +36,7 @@ var prev_touch_distance := -1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	game_root.actions_panel_closed.connect(close_action_panel)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -157,7 +157,8 @@ func shoot_ray(eventPosition : Vector2) -> void:
 		elif col_parent is TokenCharacter3D:
 			select_token_character(col_parent)
 	else:
-		deselect_token_character()
+		pass
+		#deselect_token_character()
 
 
 func select_tile(tile: Tile3D, show_selection_graphic: bool = false) -> void:
@@ -188,3 +189,10 @@ func deselect_token_character():
 	if token_character_selected:
 		token_character_selected.deselect()
 		token_character_selected = null
+
+
+# Reset elements shown during character and actions selection
+func close_action_panel():
+	deselect_token_character()
+	tile_selected.deselect()
+	tile_selected.select()
