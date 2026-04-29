@@ -42,6 +42,18 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg", "res://addons/tile-run-instances/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://geometry/": "orange",
+"res://images/": "green",
+"res://materials/": "red",
+"res://scenes/": "purple",
+"res://scripts/": "blue",
+"res://textures/": "green",
+"res://themes/": "gray"
+}
+
 [gui]
 
 common/snap_controls_to_pixels=false
