@@ -115,6 +115,7 @@ func _timer_timeout() -> void:
 	# Check if new time is lower than 0 to allow player to play his turn in the very last second
 	if left_time < 0:
 		game_root.turn_timeout.emit()
+		timer.stop()
 	else:
 		# Update visual timer
 		_update_visual_timer(left_time)

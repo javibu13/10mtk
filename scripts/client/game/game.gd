@@ -20,9 +20,6 @@ const TILE_SCENE_PATH = "res://scenes/game/Tile.tscn"
 const TOKEN_CHARACTER_SCENE_PATH = "res://scenes/game/TokenCharacterBase.tscn"
 
 
-@export var actions_panel: ActionsPanel
-
-
 var tile_resource: Resource
 var token_character_resource: Resource
 
@@ -31,6 +28,7 @@ var token_character_resource: Resource
 @onready var loading_screen_control: Control = $CanvasLayer/LoadingScreen_Control
 @onready var hud_control: GameHUD = $CanvasLayer/HUD_Control
 @onready var camera3D_inputs: CameraInputs3D = $CameraPosition/CameraRotation/Camera3D
+@onready var actions_panel: ActionsPanel = $CanvasLayer/HUD_Control/Actions_PanelContainer
 @onready var action_executor: ActionExecutor = $ActionExecutor
 
 
@@ -118,8 +116,15 @@ func _turn_timeout() -> void:
 	# Check if the player_panel_index is the first in the array. This means that local player had to play the turn
 	hud_control.player_info_panel_containers_active[player_info_panel_index_for_new_turn].hide_timer()
 	if player_info_panel_index_for_new_turn == 0:
-		# TODO: Disable local player interaction to avoid sending 2 turn actions
-		pass
+		# Skip Turn
+		actions_panel.x_close_pressed()
+		var turn_result = TurnResult.client_new(hud_control.main_player_panel_container.player_index,
+									 ClientGlobalData.public_game.turn.action_number,
+									 hud_control.main_player_panel_container.timer_control.left_time,
+									 Enums.Action.NONE,
+									 Enums.Character.NONE)
+		GameManager.server_send_turn_result.rpc_id(1, ClientGlobalData.match_id, turn_result.to_dict())
+		
 
 
 func _token_charecter_selected(token_character: TokenCharacter3D) -> void:

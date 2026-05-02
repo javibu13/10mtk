@@ -36,14 +36,14 @@ func set_sniper() -> void:
 
 
 func select(show_selection_graphic: bool = false) -> void:
-	Log.pr('Select: ' + self.name)
+	#Log.pr('Select: ' + self.name)
 	if show_selection_graphic:
 		tile_selector.find_child('AnimationPlayer').play('idle')
 		tile_selector.visible = true
 
 
 func deselect() -> void:
-	Log.pr('Deselect: ' + self.name)
+	#Log.pr('Deselect: ' + self.name)
 	tile_selector.visible = false
 	tile_selector.find_child('AnimationPlayer').stop()
 
@@ -51,7 +51,6 @@ func deselect() -> void:
 func create_token_character(token_character_resource: Resource, character: Enums.Character):
 	var new_token_character: TokenCharacter3D = token_character_resource.instantiate()
 	get_first_available_position_for_token_character().add_child(new_token_character)
-	# TODO: Set random position to place the token character
 	var new_position = Vector3.ZERO
 	new_token_character.initial_set_up(character, new_position)
 

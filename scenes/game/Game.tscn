@@ -30,9 +30,8 @@ _data = {
 }
 point_count = 2
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("actions_panel")]
+[node name="Game" type="Node3D"]
 script = ExtResource("1_7qcb4")
-actions_panel = NodePath("CanvasLayer/HUD_Control/Actions_PanelContainer")
 
 [node name="ActionExecutor" type="Node3D" parent="."]
 script = ExtResource("2_gynul")

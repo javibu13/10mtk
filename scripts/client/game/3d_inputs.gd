@@ -171,7 +171,7 @@ func shoot_ray(eventPosition : Vector2) -> void:
 func select_tile(tile: Tile3D, show_selection_graphic: bool = false) -> void:
 	if tile_selected:
 		tile_selected.deselect()
-	Log.pr(tile)
+	#Log.pr(tile)
 	tile_selected = tile
 	tile_selected.select(show_selection_graphic)
 	set_up_move_to_square(tile_selected)
