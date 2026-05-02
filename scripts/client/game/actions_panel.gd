@@ -69,6 +69,13 @@ func x_close_pressed() -> void:
 		game_root.action_editing_canceled.emit()
 
 
+func close_after_confirm_action() -> void:
+	game_root.actions_panel_closed.emit()
+	actions_panel_animation_player.play("hide_panel")
+	is_action_editing_in_progress = false
+	game_root.action_editing_finished.emit()
+
+
 func move_action_pressed() -> void:
 	is_action_editing_in_progress = true
 	restart_action_details_panel()
@@ -115,15 +122,23 @@ func cancel_action_editing() -> void:
 
 func move_action_confirmed() -> void:
 	is_action_editing_in_progress = false
-	game_root.action_confirmed.emit(Enums.Action.MOVE)
+	game_root.action_confirmed.emit({
+		"type": Enums.Action.MOVE
+	})
+	close_after_confirm_action.call_deferred()
 
 
 func move_kill_confirmed() -> void:
 	is_action_editing_in_progress = false
-	game_root.action_confirmed.emit(Enums.Action.KILL)
+	game_root.action_confirmed.emit({
+		"type": Enums.Action.KILL
+	})
 
 
 func move_investigate_confirmed() -> void:
 	is_action_editing_in_progress = false
 	# TODO: Check if there is a player selected in de optionButtob
-	game_root.action_confirmed.emit(Enums.Action.ASK, players_to_investigate_option_button.get_selected_id())
+	game_root.action_confirmed.emit({
+		"type": Enums.Action.ASK, 
+		"player_index_option": players_to_investigate_option_button.get_selected_id()
+	})

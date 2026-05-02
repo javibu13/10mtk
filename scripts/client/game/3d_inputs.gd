@@ -41,6 +41,7 @@ func _ready() -> void:
 	game_root.actions_panel_closed.connect(close_action_panel)
 	game_root.action_editing_started.connect(action_editing_started)
 	game_root.action_editing_canceled.connect(action_editing_canceled)
+	game_root.action_editing_finished.connect(action_editing_finished)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -217,3 +218,7 @@ func action_editing_canceled() -> void:
 	allow_player_selection = true
 	show_tile_selection_graphic = false
 	tile_selected.deselect()
+
+
+func action_editing_finished() -> void:
+	action_editing_canceled()

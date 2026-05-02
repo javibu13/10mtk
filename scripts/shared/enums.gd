@@ -67,6 +67,12 @@ enum PlayerInfoCharacterType {
 	OBJECTIVE,
 }
 
+enum DiscoveredCharacter {
+	NONE,
+	ASSASSIN,
+	OBJECTIVE,
+}
+
 const CHARACTER_INFO: Dictionary[int, Dictionary] = {
 	-3: {
 		"name": "Kong",

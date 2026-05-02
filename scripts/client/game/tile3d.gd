@@ -56,15 +56,24 @@ func create_token_character(token_character_resource: Resource, character: Enums
 	new_token_character.initial_set_up(character, new_position)
 
 
+func get_token_character(character: Enums.Character) -> TokenCharacter3D:
+	var token_character: TokenCharacter3D = null
+	for tile_position_marker in token_character_positions_to_place.get_children():
+		if tile_position_marker.get_child_count() > 0 and tile_position_marker.get_child(0) is TokenCharacter3D and tile_position_marker.get_child(0).character == character:
+			token_character = tile_position_marker.get_child(0)
+			break
+	return token_character
+
+
 func get_token_characters() -> Array[TokenCharacter3D]:
 	var token_characters: Array[TokenCharacter3D] = []
-	for child in get_children():
-		if child is TokenCharacter3D:
-			token_characters.append(child)
+	for tile_position_marker in token_character_positions_to_place.get_children():
+		if tile_position_marker.get_child_count() > 0 and tile_position_marker.get_child(0) is TokenCharacter3D:
+			token_characters.append(tile_position_marker.get_child(0))
 	return token_characters
 
 
 func get_first_available_position_for_token_character() -> Marker3D:
 	var children = token_character_positions_to_place.get_children()
-	var available_marker_position_index = token_character_positions_to_place.get_children().find_custom(func(marker3d: Marker3D): return true if marker3d.get_child_count() else false)
+	var available_marker_position_index = token_character_positions_to_place.get_children().find_custom(func(marker3d: Marker3D): return true if marker3d.get_child_count() == 0 else false)
 	return children[available_marker_position_index]

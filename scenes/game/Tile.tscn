@@ -36,66 +36,66 @@ shape = SubResource("BoxShape3D_rp1iq")
 
 [node name="TokenCharacterPositions_Node3D" type="Node3D" parent="."]
 
-[node name="16_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33641547, 0, -0.33071506)
-gizmo_extents = 0.1
-
-[node name="15_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3722685, 0, -0.339707)
-gizmo_extents = 0.1
-
-[node name="14_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34581012, 0, 0.3541947)
-gizmo_extents = 0.1
-
-[node name="13_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3177234, 0, 0.32182756)
-gizmo_extents = 0.1
-
-[node name="12_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07576692, 0, 0.3637853)
-gizmo_extents = 0.1
-
-[node name="11_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36593968, 0, -0.08415446)
-gizmo_extents = 0.1
-
-[node name="10_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08426595, 0, -0.35529125)
-gizmo_extents = 0.1
-
-[node name="9_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13886756, 0, -0.31870404)
-gizmo_extents = 0.1
-
-[node name="8_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35128975, 0, 0.093856916)
-gizmo_extents = 0.1
-
-[node name="7_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3130381, 0, 0.13323236)
-gizmo_extents = 0.1
-
-[node name="6_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32286358, 0, -0.12506486)
-gizmo_extents = 0.1
-
-[node name="5_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12822789, 0, 0.28526837)
-gizmo_extents = 0.1
-
-[node name="4_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15512466, 0, -0.14906695)
-gizmo_extents = 0.1
-
-[node name="3_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12071246, 0, 0.13992675)
+[node name="1_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102913976, 0, -0.08972938)
 gizmo_extents = 0.1
 
 [node name="2_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09426361, 0, 0.059912816)
 gizmo_extents = 0.1
 
-[node name="1_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102913976, 0, -0.08972938)
+[node name="3_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12071246, 0, 0.13992675)
+gizmo_extents = 0.1
+
+[node name="4_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15512466, 0, -0.14906695)
+gizmo_extents = 0.1
+
+[node name="5_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12822789, 0, 0.28526837)
+gizmo_extents = 0.1
+
+[node name="6_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32286358, 0, -0.12506486)
+gizmo_extents = 0.1
+
+[node name="7_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3130381, 0, 0.13323236)
+gizmo_extents = 0.1
+
+[node name="8_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35128975, 0, 0.093856916)
+gizmo_extents = 0.1
+
+[node name="9_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13886756, 0, -0.31870404)
+gizmo_extents = 0.1
+
+[node name="10_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08426595, 0, -0.35529125)
+gizmo_extents = 0.1
+
+[node name="11_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36593968, 0, -0.08415446)
+gizmo_extents = 0.1
+
+[node name="12_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07576692, 0, 0.3637853)
+gizmo_extents = 0.1
+
+[node name="13_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3177234, 0, 0.32182756)
+gizmo_extents = 0.1
+
+[node name="14_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34581012, 0, 0.3541947)
+gizmo_extents = 0.1
+
+[node name="15_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3722685, 0, -0.339707)
+gizmo_extents = 0.1
+
+[node name="16_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33641547, 0, -0.33071506)
 gizmo_extents = 0.1

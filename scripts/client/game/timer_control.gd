@@ -94,7 +94,13 @@ func hide_anim():
 			animation_player.play("hide_left_to_right")
 
 
+func pause_timer() -> void:
+	timer.paused = true
+
+
 func set_and_start_timer(new_time: int) -> void:
+	timer.stop()
+	timer.paused = false
 	left_time = new_time
 	_update_visual_timer(left_time)
 	timer.start()

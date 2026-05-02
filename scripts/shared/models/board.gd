@@ -92,7 +92,7 @@ func _is_sniper_generated_and_update_left() -> bool:
 	return result
 
 
-# Transform object (and its content) into a dictionary
+## Transform object (and its content) into a dictionary
 func to_dict() -> Dictionary:
 	var board_dict_tiles = {}
 	for x in board.keys():
@@ -109,7 +109,7 @@ func to_dict() -> Dictionary:
 	}
 
 
-# Create object using dictionary and basic data type structure
+## Create object using dictionary and basic data type structure
 static func from_dict(new_dict: Dictionary) -> Board:
 	var new_board: Board = Board.new()
 	new_board.tile_num = new_dict.tile_num
@@ -126,7 +126,7 @@ static func from_dict(new_dict: Dictionary) -> Board:
 	return new_board
 
 
-# Return the Tile where the character is placed
+## Return the Tile where the character is placed
 func get_tile_of_character(character: Enums.Character) -> Tile:
 	var character_tile: Tile = null
 	for x_tile in board.keys():
@@ -138,6 +138,13 @@ func get_tile_of_character(character: Enums.Character) -> Tile:
 			break
 	return character_tile
 
+
+func get_tile_from_location(tile_location: Vector2i) -> Tile:
+	var tile: Tile = null
+	if board.has(tile_location.x):
+		if board[tile_location.x].has(tile_location.y):
+			tile = board[tile_location.x][tile_location.y]
+	return tile
 
 ## Return all Tile in the orthogonal cross of specified size arround the character (it includes the Tile where character is placed at index 0)
 func get_orthogonal_cross_tiles_of_character(character: Enums.Character, cross_size := 1) -> Array[Tile]:
@@ -159,3 +166,38 @@ func get_orthogonal_cross_tiles_of_character(character: Enums.Character, cross_s
 		if board.has(central_tile.location.x - index) and board[central_tile.location.x - index].has(central_tile.location.y):
 			orthogonal_cross.append(board[central_tile.location.x - index][central_tile.location.y])
 	return orthogonal_cross
+
+
+func move_character_to_tile(character: Enums.Character, tile_coords: Vector2i) -> bool:
+	var objective_tile: Tile = get_tile_from_location(tile_coords)
+	if not objective_tile:
+		Log.error(str("Tile in objective tile location (", tile_coords, ") where character ", character, " was going to be moved does not exist"))
+		return false
+	var current_tile: Tile = get_tile_of_character(character)
+	if not current_tile:
+		Log.error(str("Character ", character, " is not found in any tile"))
+		return false
+	# Police or character
+	var character_store_variable: String
+	if character in Enums.Character_Police.keys():
+		character_store_variable = "polices"
+	else:
+		character_store_variable = "characters"
+	current_tile[character_store_variable].erase(character)
+	objective_tile[character_store_variable][character] = true
+	return true
+
+
+func remove_character(character: Enums.Character) -> bool:
+	var character_tile: Tile = get_tile_of_character(character)
+	if not character_tile:
+		Log.error(str("Tile not found for character ", character, ". Impossible character removal"))
+		return false
+	# Police or character
+	var character_store_variable: String
+	if character in Enums.Character_Police.keys():
+		character_store_variable = "polices"
+	else:
+		character_store_variable = "characters"
+	character_tile[character_store_variable].erase(character)
+	return true

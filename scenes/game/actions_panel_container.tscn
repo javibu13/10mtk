@@ -15,32 +15,6 @@ expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 
-[sub_resource type="Animation" id="Animation_63pli"]
-resource_name = "actions_to_action_details"
-length = 0.35
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Actions_VBoxContainer:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.13333334, 0.11916023, 140, -0.13349926, -70.17408, 0, 0),
-"times": PackedFloat32Array(0, 0.23333333)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ActionConfirmation_VBoxContainer2:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(140, -0.25, 0, 0.06666667, -0.020492554, 140, -0.03333334, -0.1694336, 0.053956166, -24.298698, 0, -0.099999994, 0.11916023, 0, 0),
-"times": PackedFloat32Array(0, 0.10000001, 0.33333334)
-}
-
 [sub_resource type="Animation" id="Animation_wt318"]
 length = 0.001
 tracks/0/type = "bezier"
@@ -90,6 +64,32 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.13333334, 0.11916023, 140, -0.13349926, -70.17408, 0, 0),
 "times": PackedFloat32Array(0.00028510392, 0.23333333)
+}
+
+[sub_resource type="Animation" id="Animation_63pli"]
+resource_name = "actions_to_action_details"
+length = 0.35
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions_VBoxContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.13333334, 0.11916023, 140, -0.13349926, -70.17408, 0, 0),
+"times": PackedFloat32Array(0, 0.23333333)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActionConfirmation_VBoxContainer2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(140, -0.25, 0, 0.06666667, -0.020492554, 140, -0.03333334, -0.1694336, 0.053956166, -24.298698, 0, -0.099999994, 0.11916023, 0, 0),
+"times": PackedFloat32Array(0, 0.10000001, 0.33333334)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duu40"]
@@ -327,6 +327,7 @@ alignment = 1
 [node name="Cancel_TextureButton" type="TextureButton" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2/ConfirmCancel_HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_7rpkf")
 ignore_texture_size = true
 stretch_mode = 5
@@ -334,6 +335,7 @@ stretch_mode = 5
 [node name="Confirm_TextureButton" type="TextureButton" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2/ConfirmCancel_HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_6pxys")
 ignore_texture_size = true
 stretch_mode = 5

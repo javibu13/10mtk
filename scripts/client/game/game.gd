@@ -12,7 +12,8 @@ signal token_character_selected(token_character: TokenCharacter3D)
 signal actions_panel_closed
 signal action_editing_started(action: Enums.Action)
 signal action_editing_canceled
-signal action_confirmed(action: Enums.Action, info)
+signal action_editing_finished
+signal action_confirmed(action_info: Dictionary)
 
 
 const TILE_SCENE_PATH = "res://scenes/game/Tile.tscn"
@@ -26,10 +27,11 @@ var tile_resource: Resource
 var token_character_resource: Resource
 
 
-@onready var board_3d:  = $Board3D
+@onready var board_3d: Board3D = $Board3D
 @onready var loading_screen_control: Control = $CanvasLayer/LoadingScreen_Control
 @onready var hud_control: GameHUD = $CanvasLayer/HUD_Control
-
+@onready var camera3D_inputs: CameraInputs3D = $CameraPosition/CameraRotation/Camera3D
+@onready var action_executor: ActionExecutor = $ActionExecutor
 
 
 
@@ -48,6 +50,7 @@ func _ready() -> void:
 	GameManager.new_turn_received.connect(_new_turn_process)
 	turn_timeout.connect(_turn_timeout)
 	token_character_selected.connect(_token_charecter_selected)
+	action_confirmed.connect(confirm_action)
 
 
 @warning_ignore("unused_parameter")
@@ -90,9 +93,9 @@ func _new_turn_process() -> void:
 	if ClientGlobalData.public_game.turn.previous:
 		var previous_turn: TurnPrev = ClientGlobalData.public_game.turn.previous
 		var player_info_panel_index_for_prev_turn = hud_control.player_info_panel_containers_active.find_custom(func(player_info_panel: PlayerInfoPanel): return player_info_panel.player_index == previous_turn.player_index)
+		update_board_with_turn_prev_result(previous_turn)
+		await action_executor.action_execution_finished
 		hud_control.player_info_panel_containers_active[player_info_panel_index_for_prev_turn].hide_timer()
-		# TODO: Show and update last action
-		pass
 	else:
 		# First turn received
 		loading_screen_control.hide()
@@ -164,3 +167,30 @@ func can_be_killed(character_to_kill: Enums.Character, assassin: Enums.Character
 
 func can_be_investigated(character_to_investigate: Enums.Character) -> bool:
 	return not ClientGlobalData.public_game.board.get_tile_of_character(character_to_investigate).polices.is_empty()
+
+
+func confirm_action(action_info := {}) -> void:
+	hud_control.main_player_panel_container.timer_control.pause_timer()
+	var turn_result = TurnResult.client_new(hud_control.main_player_panel_container.player_index,
+									 ClientGlobalData.public_game.turn.action_number,
+									 hud_control.main_player_panel_container.timer_control.left_time,
+									 action_info.type,
+									 camera3D_inputs.token_character_selected.character,
+									 action_info.player_index_option if action_info.has("player_index_option") else -1,
+									 camera3D_inputs.tile_selected.position_in_board if camera3D_inputs.tile_selected and action_info.type == Enums.Action.MOVE else Vector2i.ZERO)
+	GameManager.server_send_turn_result.rpc_id(1, ClientGlobalData.match_id, turn_result.to_dict())
+
+
+func update_board_with_turn_prev_result(turn_prev_result: TurnPrev) -> void:
+	match turn_prev_result.action:
+		Enums.Action.NONE:
+			# Skipped turn
+			# TODO: Show to player something to inform about this
+			action_executor.set_up_none_action_process(turn_prev_result.player_index)
+			pass
+		Enums.Action.MOVE:
+			action_executor.set_up_move_action_process(turn_prev_result.character, turn_prev_result.tile)
+		Enums.Action.KILL:
+			pass
+		Enums.Action.ASK:
+			pass
