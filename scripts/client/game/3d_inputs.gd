@@ -202,8 +202,9 @@ func deselect_token_character():
 # Reset elements shown during character and actions selection
 func close_action_panel():
 	deselect_token_character()
-	tile_selected.deselect()
-	tile_selected.select()
+	if tile_selected:
+		tile_selected.deselect()
+		tile_selected.select()
 
 
 func action_editing_started(action: Enums.Action) -> void:
@@ -217,7 +218,8 @@ func action_editing_started(action: Enums.Action) -> void:
 func action_editing_canceled() -> void:
 	allow_player_selection = true
 	show_tile_selection_graphic = false
-	tile_selected.deselect()
+	if tile_selected:
+		tile_selected.deselect()
 
 
 func action_editing_finished() -> void:

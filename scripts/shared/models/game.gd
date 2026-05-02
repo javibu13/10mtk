@@ -43,6 +43,8 @@ func try_to_discover_character(character: Enums.Character) -> Enums.DiscoveredCh
 	for player in private.players:
 		if player.assassin == character:
 			public.players[player.index].assassin = character
+			public.players[player.index].status = Enums.PlayerStatus.DEAD
+			private.players[player.index].status = Enums.PlayerStatus.DEAD
 			return Enums.DiscoveredCharacter.ASSASSIN
 		if character in player.objectives:
 			var objective_index = player.objectives.find_custom(func(objective_character: Enums.Character): return character == objective_character)
@@ -57,6 +59,8 @@ func apply_ask_to_player(player_index: int, character: Enums.Character, asked_pl
 		public.players[asked_player_index].assassin = character
 		public.players[player_index].arrests.append(character)
 		private.players[player_index].arrests.append(character)
+		public.players[asked_player_index].status = Enums.PlayerStatus.ARRESTED
+		private.players[asked_player_index].status = Enums.PlayerStatus.ARRESTED
 		return true
 	else:
 		return false

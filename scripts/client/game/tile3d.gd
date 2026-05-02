@@ -76,3 +76,12 @@ func get_first_available_position_for_token_character() -> Marker3D:
 	var children = token_character_positions_to_place.get_children()
 	var available_marker_position_index = token_character_positions_to_place.get_children().find_custom(func(marker3d: Marker3D): return true if marker3d.get_child_count() == 0 else false)
 	return children[available_marker_position_index]
+
+
+func remove_token_character_3d(character: Enums.Character) -> bool:
+	var token_character_3d_to_remove = get_token_character(character)
+	if not token_character_3d_to_remove:
+		Log.error("TokenCharacter3D ", character, "not found to be removed from Tile3D at ", position_in_board)
+		return false
+	token_character_3d_to_remove.queue_free()
+	return true

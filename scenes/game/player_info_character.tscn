@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfld1s4yllhvo"]
+[gd_scene load_steps=12 format=3 uid="uid://dfld1s4yllhvo"]
 
 [ext_resource type="Script" uid="uid://cjfl7qip1dtmc" path="res://scripts/client/game/playerInfoCharacter.gd" id="1_0w80q"]
 [ext_resource type="Texture2D" uid="uid://cptmhjunr8itd" path="res://themes/style_boxes/in_game/game_player_info_character_square.svg" id="1_nxf8k"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://j046nhfb05ph" path="res://themes/style_boxes/in_game/game_player_info_character_type_square.svg" id="4_0w80q"]
 [ext_resource type="Texture2D" uid="uid://br1ix0qgixo8w" path="res://themes/style_boxes/in_game/game_player_info_character_square_X.svg" id="4_33xmm"]
 [ext_resource type="Texture2D" uid="uid://yyiifkhsmnyo" path="res://themes/style_boxes/in_game/game_player_info_type_objective.svg" id="5_g1ko0"]
+[ext_resource type="Texture2D" uid="uid://bx7iwru1lwmhp" path="res://themes/style_boxes/in_game/game_player_info_arrested.svg" id="5_hh17w"]
 [ext_resource type="Texture2D" uid="uid://xx6mnrhulx3j" path="res://themes/style_boxes/in_game/game_player_info_type_player.svg" id="6_hh17w"]
 [ext_resource type="Texture2D" uid="uid://c64387pfsv1n8" path="res://themes/style_boxes/in_game/game_player_info_character_type_square_border.svg" id="7_5w7tf"]
 
@@ -73,6 +74,22 @@ offset_bottom = -10.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_0w80q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Arrested_TextureRect" type="TextureRect" parent="FreePlace_Control/Character_CenterContainer/Background_TextureRect"]
+self_modulate = Color(0.23753911, 0.23753914, 0.23753911, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.5
+offset_top = 0.1000061
+offset_right = -0.5
+offset_bottom = 1.8999939
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_hh17w")
 expand_mode = 1
 stretch_mode = 5
 

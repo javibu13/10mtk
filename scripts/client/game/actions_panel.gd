@@ -51,6 +51,7 @@ func set_up_panel(character: Enums.Character, allow_move_action := true, allow_k
 	is_action_editing_in_progress = false
 	buttons_area_animation_player.play("RESET")
 	actions_panel_animation_player.play("show_panel")
+	confirm_texture_button.disabled = false
 
 
 func x_close_mouse_enter() -> void:
@@ -90,6 +91,7 @@ func kill_action_pressed() -> void:
 	restart_action_details_panel()
 	game_root.action_editing_started.emit(Enums.Action.KILL)
 	action_info_rich_text_label.text = "Are you sure you want to kill this character?"
+	confirm_texture_button.pressed.connect(kill_action_confirmed)
 	buttons_area_animation_player.play("actions_to_action_details")
 
 
@@ -97,13 +99,13 @@ func investigate_action_pressed() -> void:
 	is_action_editing_in_progress = true
 	restart_action_details_panel()
 	game_root.action_editing_started.emit(Enums.Action.ASK)
-	# TODO: Load players which identity is still unknown
 	var unknown_players: Array[Player] = ClientGlobalData.public_game.players.filter(func(player: Player): return player.assassin <= 0)
 	players_to_investigate_option_button.clear()
 	for player in unknown_players:
 		players_to_investigate_option_button.add_item(player.user_name, player.index)
 	players_to_investigate_option_button.show()
 	action_info_rich_text_label.text = "Select the player to investigate if they are the character"
+	confirm_texture_button.pressed.connect(investigate_action_confirmed)
 	buttons_area_animation_player.play("actions_to_action_details")
 
 
@@ -111,6 +113,7 @@ func restart_action_details_panel() -> void:
 	var confirm_button_connections = confirm_texture_button.pressed.get_connections()
 	for confirm_button_connection in confirm_button_connections:
 		confirm_button_connection.signal.disconnect(confirm_button_connection.callable)
+	confirm_texture_button.disabled = false
 	players_to_investigate_option_button.hide()
 
 
@@ -125,20 +128,28 @@ func move_action_confirmed() -> void:
 	game_root.action_confirmed.emit({
 		"type": Enums.Action.MOVE
 	})
+	confirm_texture_button.disabled = true
 	close_after_confirm_action.call_deferred()
 
 
-func move_kill_confirmed() -> void:
+func kill_action_confirmed() -> void:
 	is_action_editing_in_progress = false
 	game_root.action_confirmed.emit({
 		"type": Enums.Action.KILL
 	})
+	confirm_texture_button.disabled = true
+	close_after_confirm_action.call_deferred()
 
 
-func move_investigate_confirmed() -> void:
+func investigate_action_confirmed() -> void:
+	if players_to_investigate_option_button.get_selected_id() < 0:
+		# OptionButton hasn't got any player selected
+		players_to_investigate_option_button.show_popup()
+		return
 	is_action_editing_in_progress = false
-	# TODO: Check if there is a player selected in de optionButtob
 	game_root.action_confirmed.emit({
 		"type": Enums.Action.ASK, 
 		"player_index_option": players_to_investigate_option_button.get_selected_id()
 	})
+	confirm_texture_button.disabled = true
+	close_after_confirm_action.call_deferred()

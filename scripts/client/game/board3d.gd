@@ -42,13 +42,18 @@ func get_tile3d_of_character(character: Enums.Character) -> Tile3D:
 					break
 			if character_tile:
 				break
+	if not character_tile:
+		if character < 0:
+			Log.warn("Police not found in board")
+		else:
+			Log.error("Character not found in board")
 	return character_tile
 
 
 func get_tile_3d_by_location(tile_location: Vector2i) -> Tile3D:
 	var tile_3d: Tile3D = null
 	if board.has(tile_location.x):
-		if board.has(tile_location.y):
+		if board[tile_location.x].has(tile_location.y):
 			tile_3d = board[tile_location.x][tile_location.y]
 	if not tile_3d:
 		Log.error("No Tile3d found at location ", str(tile_location))

@@ -146,6 +146,7 @@ func get_tile_from_location(tile_location: Vector2i) -> Tile:
 			tile = board[tile_location.x][tile_location.y]
 	return tile
 
+
 ## Return all Tile in the orthogonal cross of specified size arround the character (it includes the Tile where character is placed at index 0)
 func get_orthogonal_cross_tiles_of_character(character: Enums.Character, cross_size := 1) -> Array[Tile]:
 	var orthogonal_cross: Array[Tile] = []
@@ -179,7 +180,7 @@ func move_character_to_tile(character: Enums.Character, tile_coords: Vector2i) -
 		return false
 	# Police or character
 	var character_store_variable: String
-	if character in Enums.Character_Police.keys():
+	if character in Enums.Character_Police.values():
 		character_store_variable = "polices"
 	else:
 		character_store_variable = "characters"
@@ -201,3 +202,60 @@ func remove_character(character: Enums.Character) -> bool:
 		character_store_variable = "characters"
 	character_tile[character_store_variable].erase(character)
 	return true
+
+
+func move_characters_from_tile_to_random(tile_location: Vector2i) -> void:
+	var origin_tile: Tile = get_tile_from_location(tile_location)
+	if not origin_tile:
+		Log.error("Tile not found at location ", tile_location)
+		return
+	var available_board := board.duplicate_deep()
+	# Remove origin tile from available_board dict to avoid its selection
+	available_board[tile_location.x].erase(tile_location.y)
+	if available_board[tile_location.x].is_empty():
+		available_board.erase(tile_location.x)
+	for character in origin_tile.get_characters_and_police():
+		if available_board.is_empty():
+			# If there are more characters to move from tile and all tiles has been used in previous characters, regenerate available_board and continue assigning. This is only possible if ALL characters of the game are in the same tile and one is killed
+			available_board = board.duplicate_deep()
+			available_board[tile_location.x].erase(tile_location.y)
+			if available_board[tile_location.x].is_empty():
+				available_board.erase(tile_location.x)
+		# Get random tile from available_board dict
+		var x: int = available_board.keys().pick_random()
+		var y: int = available_board[x].keys().pick_random()
+		var objective_tile: Tile = available_board[x][y]
+		move_character_to_tile(character, objective_tile.location)
+		# Remove used tile from available_board
+		available_board[x].erase(y)
+		if available_board[x].is_empty():
+			available_board.erase(x)
+
+
+func add_police(tile_location: Vector2i, players_number: int) -> void:
+	# Check all polices that are already placed in board
+	var current_polices: Array[Enums.Character] = []
+	for x in board.keys():
+		for y in board[x].keys():
+			var tile: Tile = board[x][y]
+			current_polices.append_array(tile.polices.keys())
+	# Check how many players are in the match because if there are 2 players, 3 polices can be placed in board but if there are more than 2 players, only 2 polices can be placed
+	if (players_number > 2 and current_polices.size() == 2) or (players_number == 2 and current_polices.size() == 3):
+		# Max number of polices placed. Move police instead of adding a new one
+		move_character_to_tile(current_polices.pick_random(), tile_location)
+	else :
+		# Add new police to the board
+		var new_police: Enums.Character
+		if current_polices.is_empty():
+			new_police = Enums.Character.POLICE_1
+		else:
+			current_polices.sort()
+			new_police = (current_polices[0] - 1) as Enums.Character
+			if new_police < Enums.Character.POLICE_3:
+				var available_polices = Enums.Character_Police.values()
+				available_polices.erase(0)
+				for current_police in current_polices:
+					available_polices.erase(current_police)
+				available_polices.sort()
+				new_police = available_polices[-1]
+		get_tile_from_location(tile_location).polices[new_police] = true

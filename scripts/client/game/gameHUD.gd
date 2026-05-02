@@ -44,3 +44,8 @@ func set_up_player_info_panels(local_client_id: int, players: Array[Player]) -> 
 	main_player_panel_container.player_info_assassin.set_new_character(players[local_player_index].assassin, load(Enums.CHARACTER_INFO[players[local_player_index].assassin].image_path), Enums.CHARACTER_INFO[players[local_player_index].assassin].color)
 	for index in range(3):
 		main_player_panel_container.player_info_objectives[index].set_new_character(players[local_player_index].objectives[index], load(Enums.CHARACTER_INFO[players[local_player_index].objectives[index]].image_path), Enums.CHARACTER_INFO[players[local_player_index].objectives[index]].color)
+
+
+func get_player_info_panel_by_player_index(player_index: int) -> PlayerInfoPanel:
+	var player_info_panel_containers_active_of_player_index = player_info_panel_containers_active.find_custom(func(player_info_panel: PlayerInfoPanel): return player_info_panel.player_index == player_index)
+	return player_info_panel_containers_active[player_info_panel_containers_active_of_player_index]

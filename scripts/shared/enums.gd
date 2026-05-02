@@ -78,21 +78,21 @@ const CHARACTER_INFO: Dictionary[int, Dictionary] = {
 		"name": "Kong",
 		"animal": "Gorilla",
 		"profession": "Police",
-		"image_path": "res://textures/characters/-2_police.png",
+		"image_path": "res://textures/characters/-3_police.png",
 		"color": Color("f2f2f2ff")
 	},
 	-2: {
 		"name": "Shenzi",
 		"animal": "Hyena",
 		"profession": "Police",
-		"image_path": "res://textures/characters/-1_police.png",
+		"image_path": "res://textures/characters/-2_police.png",
 		"color": Color("f2f2f2ff")
 	},
 	-1: {
 		"name": "Harambe",
 		"animal": "Gorilla",
 		"profession": "Police",
-		"image_path": "res://textures/characters/-2_police.png",
+		"image_path": "res://textures/characters/-1_police.png",
 		"color": Color("f2f2f2ff")
 	},
 	1: {

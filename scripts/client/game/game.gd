@@ -128,11 +128,12 @@ func _turn_timeout() -> void:
 
 
 func _token_charecter_selected(token_character: TokenCharacter3D) -> void:
-	# Get the local player's assassin
+	# Get the local player's assassin and status
 	var local_player_index: int = ClientGlobalData.public_game.players.find_custom(func(player: Player): return player.client_id == multiplayer.get_unique_id())
 	var assassin: Enums.Character = ClientGlobalData.public_game.players[local_player_index].assassin
+	var status: Enums.PlayerStatus = ClientGlobalData.public_game.players[local_player_index].status
 	# Get if is possible to execute each action over the selected character
-	var allow_kill_action = can_be_killed(token_character.character, assassin) if token_character.character != assassin else false
+	var allow_kill_action = can_be_killed(token_character.character, assassin) if token_character.character != assassin and status == Enums.PlayerStatus.LIVE else false
 	var allow_investigate_action = can_be_investigated(token_character.character) if token_character.character != assassin else false
 	actions_panel.set_up_panel(token_character.character, true, allow_kill_action, allow_investigate_action)
 
@@ -171,6 +172,8 @@ func can_be_killed(character_to_kill: Enums.Character, assassin: Enums.Character
 
 
 func can_be_investigated(character_to_investigate: Enums.Character) -> bool:
+	if character_to_investigate <= Enums.Character.POLICE_1:
+		return false
 	return not ClientGlobalData.public_game.board.get_tile_of_character(character_to_investigate).polices.is_empty()
 
 
@@ -196,6 +199,6 @@ func update_board_with_turn_prev_result(turn_prev_result: TurnPrev) -> void:
 		Enums.Action.MOVE:
 			action_executor.set_up_move_action_process(turn_prev_result.character, turn_prev_result.tile)
 		Enums.Action.KILL:
-			pass
+			action_executor.set_up_kill_action_process(turn_prev_result.character)
 		Enums.Action.ASK:
-			pass
+			action_executor.set_up_ask_action_process(turn_prev_result.character, turn_prev_result.asked_player_index)

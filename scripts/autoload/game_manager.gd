@@ -34,7 +34,7 @@ func server_notify_client_ready_to_start_match(match_id: int):
 # Send to clients the new turn update
 @rpc("authority", "call_remote", "reliable")
 func client_send_new_turn(public_game_info: Dictionary):
-	Log.pr("NEW TURN RECEIVED signal emit!")
+	Log.debug("NEW TURN RECEIVED signal emit!")
 	ClientGlobalData.public_game = PublicGame.from_dict(public_game_info)
 	new_turn_received.emit()
 
@@ -54,6 +54,8 @@ func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
 			# Move character from current tile to objective tile
 			ServerGameData.games[match_id].public.board.move_character_to_tile(turn_result.character, turn_result.tile)
 		Enums.Action.KILL:
+			# Get the tile where the kill took place
+			var tile_kill: Tile = ServerGameData.games[match_id].public.board.get_tile_of_character(turn_result.character)
 			# Remove character from current tile
 			ServerGameData.games[match_id].public.board.remove_character(turn_result.character)
 			# Add killed character to player's kill list in both types of game data info (public and private)
@@ -61,8 +63,10 @@ func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
 			# Check if killed character was assigned as assassin or objective of any player to make it public
 			var killed_assign_type_character := ServerGameData.games[match_id].try_to_discover_character(turn_result.character)
 			# TODO: Store in DB the character kill for player
-			# TODO: Move characters in the tile where the kill was made to random positions
-			# TODO: Add a police to the now empty tile where the kill was made
+			# Move characters from tile where kill took place to other different tiles
+			ServerGameData.games[match_id].public.board.move_characters_from_tile_to_random(tile_kill.location)
+			# Add police to the tile where kill took place
+			ServerGameData.games[match_id].public.board.add_police(tile_kill.location, ServerGameData.games[match_id].private.players.size())
 		Enums.Action.ASK:
 			# Check if asked player's assassin is the selected character
 			var is_assassin_discovered := ServerGameData.games[match_id].apply_ask_to_player(turn_result.player_index, turn_result.character, turn_result.asked_player_index)
