@@ -73,3 +73,6 @@ func set_up_ask_action_process(character_ask: Enums.Character, player_index_aske
 	if ClientGlobalData.public_game.players[player_index_asked].assassin == character_ask:
 		var player_info_panel: PlayerInfoPanel = game_root.hud_control.get_player_info_panel_by_player_index(player_index_asked)
 		player_info_panel.reveal_character(character_ask, Enums.PlayerStatus.ARRESTED)
+		var arrest_tile_3d: Tile3D = game_root.board_3d.get_tile3d_of_character(character_ask)
+		arrest_tile_3d.remove_token_character_3d(character_ask)
+	action_execution_finished.emit.call_deferred()
