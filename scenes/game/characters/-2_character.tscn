@@ -4,9 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://bgjtrrlmc5776" path="res://textures/characters/-2_police.png" id="2_yhy5g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wp3o"]
+diffuse_mode = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4y3d8"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_yhy5g")
 
 [node name="-2_character" instance=ExtResource("1_fu0or")]

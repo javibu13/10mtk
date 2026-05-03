@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://vkldgsanukie" path="res://textures/characters/6_tiger.png" id="2_6f1x7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xhrl"]
+diffuse_mode = 3
 albedo_color = Color(0.4968, 0.69, 0.64814, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6f1x7"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_6f1x7")
 
 [node name="6_character" instance=ExtResource("1_6xhrl")]

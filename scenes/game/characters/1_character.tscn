@@ -4,10 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://ckexxnvvfjg0v" path="res://textures/characters/1_cockatoo.png" id="2_4hyon"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74gqq"]
+diffuse_mode = 3
 albedo_color = Color(0.5921569, 0.6509804, 0.42352942, 1)
+distance_fade_max_distance = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qspp"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_4hyon")
 
 [node name="1_character" instance=ExtResource("1_p85eo")]

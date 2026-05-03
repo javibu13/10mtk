@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://dabb005a8b62b" path="res://textures/characters/11_wolf.png" id="2_jnt5b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdd3m"]
+diffuse_mode = 3
 albedo_color = Color(0.5668201, 0.52930003, 0.67, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jnt5b"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_jnt5b")
 
 [node name="11_character" instance=ExtResource("1_fdd3m")]

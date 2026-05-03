@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://2r8awemlrgmc"]
+[gd_scene load_steps=20 format=3 uid="uid://2r8awemlrgmc"]
 
 [ext_resource type="Script" uid="uid://bxqvpypk3xbba" path="res://scripts/client/game/game.gd" id="1_7qcb4"]
 [ext_resource type="Script" uid="uid://bmtimog66kbia" path="res://scripts/client/game/action_executor.gd" id="2_gynul"]
 [ext_resource type="Script" uid="uid://kcmqyohtj2ht" path="res://scripts/client/game/3d_inputs.gd" id="2_lyhax"]
+[ext_resource type="Texture2D" uid="uid://bajr47c3cwgvx" path="res://images/hdr_sky.png" id="3_60iot"]
 [ext_resource type="Script" uid="uid://dcpfyrgyc2w34" path="res://scripts/client/game/loading_screen.gd" id="3_365ku"]
 [ext_resource type="Script" uid="uid://c7dav7ty05vjp" path="res://scripts/client/game/board3d.gd" id="3_lyhax"]
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="4_gg4pt"]
@@ -13,8 +14,23 @@
 [ext_resource type="Script" uid="uid://cxo3mn2x368wr" path="res://scripts/client/game/playerInfoPanel.gd" id="8_qf6a8"]
 [ext_resource type="PackedScene" uid="uid://l8p12gupl5vc" path="res://scenes/game/timer_control.tscn" id="10_56wml"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5xhyk"]
+panorama = ExtResource("3_60iot")
+
+[sub_resource type="Sky" id="Sky_2iokk"]
+sky_material = SubResource("PanoramaSkyMaterial_5xhyk")
+
 [sub_resource type="Environment" id="Environment_qbsmt"]
+background_mode = 2
+sky = SubResource("Sky_2iokk")
+sky_custom_fov = 90.0
+ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.95
+reflected_light_source = 2
+tonemap_white = 4.81
+fog_sky_affect = 0.04
+volumetric_fog_density = 0.426
 
 [sub_resource type="Gradient" id="Gradient_bqwap"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
@@ -41,6 +57,24 @@ environment = SubResource("Environment_qbsmt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 1.995, 0)
+light_energy = 0.07
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_max_distance = 75.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.50000006, 0.6123724, -0.6123724, 0, 0.70710677, 0.70710677, 0.8660254, 0.3535534, -0.3535534, 0, 1.995, 0)
+light_energy = 0.07
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_max_distance = 75.0
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.50000006, -0.6123724, 0.6123724, 0, 0.70710677, 0.70710677, -0.8660254, 0.3535534, -0.3535534, 0, 1.995, 0)
+light_energy = 0.07
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_max_distance = 75.0
 
 [node name="CameraPosition" type="Node3D" parent="."]
 
@@ -51,6 +85,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5
 script = ExtResource("2_lyhax")
 pivot_position = NodePath("../..")
 pivot_rotation = NodePath("..")
+initial_rotation = Vector2(69, -140)
 game_root = NodePath("../../..")
 
 [node name="Board3D" type="Node3D" parent="." node_paths=PackedStringArray("cameraController")]

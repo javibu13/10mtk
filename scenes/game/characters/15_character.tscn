@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://cnag2o4nri44p" path="res://textures/characters/15_panda.png" id="2_owyc7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1bum"]
+diffuse_mode = 3
 albedo_color = Color(0.41, 0.36572, 0.29930001, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owyc7"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_owyc7")
 
 [node name="15_character" instance=ExtResource("1_b1bum")]

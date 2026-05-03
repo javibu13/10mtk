@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://bwmevpbrkm8t4" path="res://textures/characters/5_kangaroo.png" id="2_hgdit"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nksgk"]
+diffuse_mode = 3
 albedo_color = Color(0.5544, 0.69240004, 0.72, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hgdit"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_hgdit")
 
 [node name="5_character" instance=ExtResource("1_nksgk")]

@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://8ot5kyj237pj" path="res://textures/characters/14_opossum.png" id="2_ngu2w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paphy"]
+diffuse_mode = 3
 albedo_color = Color(0.57, 0.496375, 0.3933, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngu2w"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_ngu2w")
 
 [node name="14_character" instance=ExtResource("1_paphy")]

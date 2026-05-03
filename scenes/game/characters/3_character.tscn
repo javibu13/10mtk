@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://ch4u2k3pgga2y" path="res://textures/characters/3_cat.png" id="2_i3xbh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejtrd"]
+diffuse_mode = 3
 albedo_color = Color(0.62, 0.5823867, 0.5332, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2blaq"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_i3xbh")
 
 [node name="3_character" instance=ExtResource("1_rbk6c")]

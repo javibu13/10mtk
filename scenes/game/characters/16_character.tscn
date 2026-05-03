@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://b7je8tavfxeby" path="res://textures/characters/16_crocodile.png" id="2_s3x00"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebs71"]
+diffuse_mode = 3
 albedo_color = Color(0.52206004, 0.66, 0.2838, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3x00"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_s3x00")
 
 [node name="16_character" instance=ExtResource("1_ebs71")]

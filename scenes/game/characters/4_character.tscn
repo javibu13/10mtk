@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://dvap5h7w7mlny" path="res://textures/characters/4_snow_leopard.png" id="2_jbnki"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5lqeh"]
+diffuse_mode = 3
 albedo_color = Color(0.69, 0.5037, 0.60927, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlqad"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_jbnki")
 
 [node name="4_character" instance=ExtResource("1_puost")]

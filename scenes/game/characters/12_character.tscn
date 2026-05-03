@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://od80yg7r31ri" path="res://textures/characters/12_koala.png" id="2_1b77r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3x3cf"]
+diffuse_mode = 3
 albedo_color = Color(0.76, 0.74556, 0.3268, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1b77r"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_1b77r")
 
 [node name="12_character" instance=ExtResource("1_3x3cf")]

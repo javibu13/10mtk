@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://dtsijsy7rlsud" path="res://textures/characters/7_mouse.png" id="2_d7xlv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5roj"]
+diffuse_mode = 3
 albedo_color = Color(0.76, 0.59279996, 0.5955866, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7xlv"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_d7xlv")
 
 [node name="7_character" instance=ExtResource("1_i5roj")]

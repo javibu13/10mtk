@@ -18,6 +18,8 @@ var move_final_position: Vector3
 @export var pivot_position: Node3D
 # Rotation camera variables
 @export var pivot_rotation: Node3D
+## In degrees
+@export var initial_rotation: Vector2
 @export var CAMERA_MOVE_SENSITIVITY := 2.0	#TODO: Modify this value in user's settings
 const CAMERA_MOVE_THRESHOLD := 10.0
 var is_camera_rotating := false
@@ -38,6 +40,7 @@ var prev_touch_distance := -1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pivot_rotation.rotation_degrees = Vector3(initial_rotation.x, initial_rotation.y, 0)
 	game_root.actions_panel_closed.connect(close_action_panel)
 	game_root.action_editing_started.connect(action_editing_started)
 	game_root.action_editing_canceled.connect(action_editing_canceled)

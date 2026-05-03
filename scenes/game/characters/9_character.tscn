@@ -4,10 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://cgrioagwyeirj" path="res://textures/characters/9_fox.png" id="2_u263s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywff5"]
+diffuse_mode = 3
 albedo_color = Color(0.42159998, 0.62, 0.372, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u263s"]
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("2_u263s")
 
 [node name="9_character" instance=ExtResource("1_ywff5")]
