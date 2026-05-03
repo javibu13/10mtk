@@ -163,7 +163,7 @@ func can_be_killed(character_to_kill: Enums.Character, assassin: Enums.Character
 		var orthogonal_extension_of_tiles_arround_assassin: Array[Tile] = ClientGlobalData.public_game.board.get_orthogonal_cross_tiles_of_character(assassin, ClientGlobalData.public_game.board.tile_num)
 		var characters_in_tiles_in_extension_arround_assassin: Array[Enums.Character] = []
 		for tile in orthogonal_extension_of_tiles_arround_assassin:
-			characters_in_tiles_in_extension_arround_assassin.append_array(tile.characters.keys())
+			characters_in_tiles_in_extension_arround_assassin.append_array(tile.get_characters_and_police())
 		if character_to_kill in characters_in_tiles_in_extension_arround_assassin:
 			Log.pr("Allow sniper kill")
 			return true
