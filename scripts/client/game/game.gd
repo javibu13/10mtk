@@ -14,6 +14,7 @@ signal action_editing_started(action: Enums.Action)
 signal action_editing_canceled
 signal action_editing_finished
 signal action_confirmed(action_info: Dictionary)
+signal match_ended
 
 
 const TILE_SCENE_PATH = "res://scenes/game/Tile.tscn"
@@ -30,11 +31,13 @@ var token_character_resource: Resource
 @onready var camera3D_inputs: CameraInputs3D = $CameraPosition/CameraRotation/Camera3D
 @onready var actions_panel: ActionsPanel = $CanvasLayer/HUD_Control/Actions_PanelContainer
 @onready var action_executor: ActionExecutor = $ActionExecutor
+@onready var match_result_control: PlayerResultControl = $CanvasLayer/MatchResult_Control
 
 
 
 func _ready() -> void:
 	loading_screen_control.show()
+	match_result_control.hide()
 	set_up_ended.connect(_set_up_ended)
 	# Check if ClientGlobalData.public_game has received the game_info to set up the beginning of the match (board, characters, ui...)
 	if ClientGlobalData.public_game != null:
@@ -97,6 +100,12 @@ func _new_turn_process() -> void:
 	else:
 		# First turn received
 		loading_screen_control.hide()
+	if ClientGlobalData.public_game.status == Enums.GameStatus.END:
+		# END GAME - Change to score screen
+		match_result_control.set_up()
+		match_result_control.show()
+		match_ended.emit()
+		return
 	var new_turn = ClientGlobalData.public_game.turn
 	var player_info_panel_index_for_new_turn = hud_control.player_info_panel_containers_active.find_custom(func(player_info_panel: PlayerInfoPanel): return player_info_panel.player_index == new_turn.player_index)
 	hud_control.player_info_panel_containers_active[player_info_panel_index_for_new_turn].show_and_start_timer(new_turn.time, new_turn.action_number)
@@ -104,7 +113,6 @@ func _new_turn_process() -> void:
 	if player_info_panel_index_for_new_turn == 0:
 		# Local player turn
 		ClientGlobalData.is_local_player_turn = true
-		# TODO: CONTINUE
 	else:
 		# Remote player turn
 		ClientGlobalData.is_local_player_turn = false

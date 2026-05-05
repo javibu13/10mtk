@@ -45,6 +45,7 @@ func try_to_discover_character(character: Enums.Character) -> Enums.DiscoveredCh
 			public.players[player.index].assassin = character
 			public.players[player.index].status = Enums.PlayerStatus.DEAD
 			private.players[player.index].status = Enums.PlayerStatus.DEAD
+			public.player_elimination_order.append(player.index)
 			return Enums.DiscoveredCharacter.ASSASSIN
 		if character in player.objectives:
 			var objective_index = player.objectives.find_custom(func(objective_character: Enums.Character): return character == objective_character)
@@ -61,6 +62,14 @@ func apply_ask_to_player(player_index: int, character: Enums.Character, asked_pl
 		private.players[player_index].arrests.append(character)
 		public.players[asked_player_index].status = Enums.PlayerStatus.ARRESTED
 		private.players[asked_player_index].status = Enums.PlayerStatus.ARRESTED
+		public.player_elimination_order.append(asked_player_index)
 		return true
 	else:
 		return false
+
+
+## Set in public players their private info (assassin and objectives to ensure everything is known by clients at end of the match)
+func make_private_info_public() -> void:
+	for public_player in public.players:
+		public_player.assassin = private.players[public_player.index].assassin
+		public_player.objectives = private.players[public_player.index].objectives

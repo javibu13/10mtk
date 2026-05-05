@@ -26,6 +26,7 @@ func server_notify_client_ready_to_start_match(match_id: int):
 	Log.pr(str("Player ", player_index, " (", client_id, ") has set up everything and is ready to start the game..."))
 	# Check if all the players are ready or not
 	if ServerGameData.games[match_id].public.players.all(func(player: Player): return player.ready):
+		ServerGameData.games[match_id].public.status = Enums.GameStatus.ACTIVE
 		# Send notification to start with the first turn
 		for player in ServerGameData.games[match_id].public.players:
 			client_send_new_turn.rpc_id(player.client_id, ServerGameData.games[match_id].public.to_dict(player.client_id))
@@ -42,9 +43,12 @@ func client_send_new_turn(public_game_info: Dictionary):
 # Send to server the turn result info
 @rpc("any_peer", "call_remote", "reliable")
 func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
+	Log.debug(turn_result_dict)
 	var turn_result: TurnResult = TurnResult.from_dict(turn_result_dict)
 	# Check if this is the player and action number expected to accept the turn_result and if the match_id is correct
 	# TODO: ↑
+	# Store turn in private game turn history
+	ServerGameData.games[match_id].private.turn_history.append(turn_result)
 	# Apply action from turn result
 	match turn_result.action:
 		Enums.Action.NONE:
@@ -75,7 +79,21 @@ func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
 				pass
 	# Store in DB the turn result (if there was a kill, store the resulted characters' locations in board to know where the characters in the same tile of the kill went)
 	# TODO: ↑
-	# Generate new turn	
+	# Check if any player have completed their 3 objectives or all players' assassins have been discovered (arrested or killed)
+	# # 3 objectives
+	if ServerGameData.games[match_id].public.check_any_player_all_objectives_dead():
+		ServerGameData.games[match_id].public.status = Enums.GameStatus.ENDING
+		Log.debug("Match ending method 1")
+		if turn_result.player_index == (ServerGameData.games[match_id].public.players.size() - 1) and turn_result.action_number == 2:
+			ServerGameData.games[match_id].public.status = Enums.GameStatus.END
+			ServerGameData.games[match_id].make_private_info_public()
+			Log.debug("Match end method 1")
+	# # All players discovered
+	if ServerGameData.games[match_id].public.check_all_players_discovered() and ServerGameData.games[match_id].public.status == Enums.GameStatus.ACTIVE:
+		ServerGameData.games[match_id].public.status = Enums.GameStatus.END
+		ServerGameData.games[match_id].make_private_info_public()
+		Log.debug("Match end method 2")
+	# Generate new turn
 	var new_action_number: int = 2 if turn_result.action_number == 1 else 1
 	var new_player_index: int = turn_result.player_index
 	if new_action_number == 1:
@@ -84,3 +102,9 @@ func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
 	ServerGameData.games[match_id].public.turn = new_turn
 	for player in ServerGameData.games[match_id].public.players:
 		client_send_new_turn.rpc_id(player.client_id, ServerGameData.games[match_id].public.to_dict(player.client_id))
+	# Check public_game.status END
+	if ServerGameData.games[match_id].public.status == Enums.GameStatus.END:
+		# After last turn result sent and set public_game result as END, set everything and delete current game
+		# TODO: Store in DB the last info about game
+		Log.debug("Match ended!")
+		ServerGameData.games.erase(match_id)

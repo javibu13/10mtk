@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfld1s4yllhvo"]
+[gd_scene load_steps=13 format=3 uid="uid://dfld1s4yllhvo"]
 
 [ext_resource type="Script" uid="uid://cjfl7qip1dtmc" path="res://scripts/client/game/playerInfoCharacter.gd" id="1_0w80q"]
 [ext_resource type="Texture2D" uid="uid://cptmhjunr8itd" path="res://themes/style_boxes/in_game/game_player_info_character_square.svg" id="1_nxf8k"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bx7iwru1lwmhp" path="res://themes/style_boxes/in_game/game_player_info_arrested.svg" id="5_hh17w"]
 [ext_resource type="Texture2D" uid="uid://xx6mnrhulx3j" path="res://themes/style_boxes/in_game/game_player_info_type_player.svg" id="6_hh17w"]
 [ext_resource type="Texture2D" uid="uid://c64387pfsv1n8" path="res://themes/style_boxes/in_game/game_player_info_character_type_square_border.svg" id="7_5w7tf"]
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="11_hh17w"]
 
 [node name="CharacterInfo_MarginControl" type="MarginContainer"]
 clip_contents = true
@@ -159,6 +160,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_hh17w")
 expand_mode = 1
+
+[node name="ResultPosition_RichTextLabel" type="RichTextLabel" parent="FreePlace_Control/Type_CenterContainer/Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_hh17w")
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[b]1º[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Border_TextureRect2" type="TextureRect" parent="FreePlace_Control/Type_CenterContainer"]
 clip_children = 2

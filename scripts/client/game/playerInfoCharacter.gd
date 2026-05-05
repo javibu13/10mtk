@@ -13,6 +13,7 @@ var character: Enums.Character
 @onready var character_image_texture_rect: TextureRect = $FreePlace_Control/Character_CenterContainer/Background_TextureRect/CharacterImage_TextureRect
 @onready var x_texture_rect: TextureRect = $FreePlace_Control/Character_CenterContainer/X_TextureRect
 @onready var arrested_texture_rect: TextureRect = $FreePlace_Control/Character_CenterContainer/Background_TextureRect/Arrested_TextureRect
+@onready var result_position_label: RichTextLabel = $FreePlace_Control/Type_CenterContainer/Background_TextureRect/ResultPosition_RichTextLabel
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,6 +29,7 @@ func _ready() -> void:
 		unknown_image_texture_rect.hide()
 	x_texture_rect.hide()
 	arrested_texture_rect.hide()
+	result_position_label.hide()
 
 
 func set_new_character(new_character: Enums.Character, new_image: Texture2D, new_self_modulate_color: Color) -> void:
@@ -47,3 +49,12 @@ func set_character_as_dead() -> void:
 func set_character_as_arrested() -> void:
 	arrested_texture_rect.show()
 	background_texture_rect.modulate = Color("aaaaaaff")
+
+
+func set_character_for_results_view(podium_order: int = 0) -> void:
+	objective_texture_rect.hide()
+	player_tecture_rect.hide()
+	arrested_texture_rect.hide()
+	x_texture_rect.hide()
+	result_position_label.text = str(podium_order, "º") if podium_order > 0 else "?"
+	result_position_label.show()

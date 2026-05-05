@@ -7,6 +7,9 @@ var board: Board
 var players: Array[Player] = []
 var turn: Turn
 var time_per_turn: int
+var status: Enums.GameStatus = Enums.GameStatus.STARTING
+## Ordered array with the index of the players that have been eliminated (arrested or killed)
+var player_elimination_order: Array[int] = []
 
 
 static func server_new(new_game_id: int, public_players: Array[Player], characters_to_place: Array[int], new_time_per_turn: int) -> PublicGame:
@@ -30,7 +33,9 @@ func to_dict(client_id: int = 0) -> Dictionary:
 		"board": board.to_dict(),
 		"players": custom_players,
 		"turn": turn.to_dict(),
-		"time_per_turn": time_per_turn
+		"time_per_turn": time_per_turn,
+		"status": status,
+		"player_elimination_order": player_elimination_order,
 	}
 
 
@@ -44,4 +49,25 @@ static func from_dict(new_dict: Dictionary) -> PublicGame:
 	new_public_game.players = new_players
 	new_public_game.turn = Turn.from_dict(new_dict.turn)
 	new_public_game.time_per_turn = new_dict.time_per_turn
+	new_public_game.status = new_dict.status
+	new_public_game.player_elimination_order = new_dict.player_elimination_order
 	return new_public_game
+
+
+func check_all_players_discovered() -> bool:
+	var all_discovered: bool = true
+	for player in players:
+		if player.assassin <= 0:
+			all_discovered = false
+			break
+	return all_discovered
+
+
+func check_any_player_all_objectives_dead() -> bool:
+	var all_objectives_of_player = false
+	for player in players:
+		#Log.pr(player.to_dict())
+		if player.objectives.all(func(objective): return objective > Enums.Character.NONE):
+			all_objectives_of_player = true
+			break
+	return all_objectives_of_player

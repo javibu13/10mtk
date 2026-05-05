@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsfg7m0kc7mcl"]
+
+[ext_resource type="Script" uid="uid://b44hq75rlfams" path="res://scripts/client/game/points_item.gd" id="1_l6rf3"]
+
+[node name="PointsItem_MarginContainer" type="MarginContainer"]
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 2
+script = ExtResource("1_l6rf3")
+
+[node name="HSplitContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Points_RichTextLabel" type="RichTextLabel" parent="HSplitContainer"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "+20"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Description_RichTextLabel" type="RichTextLabel" parent="HSplitContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "Safe and sound"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1

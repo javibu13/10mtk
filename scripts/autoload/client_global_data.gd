@@ -15,6 +15,7 @@ var match_id: int = 0
 var public_game: PublicGame
 var is_local_player_turn: bool = false
 
+
 func storeUserInfo(user_info_to_store: Dictionary):
 	user_info["nickname"] = user_info_to_store["nickname"]
 	user_info["id"] = user_info_to_store["id"]
@@ -24,3 +25,11 @@ func storeUserInfo(user_info_to_store: Dictionary):
 func resetLobbyData() -> void:
 	lobby_joined = ""
 	lobby_size_status = ""
+
+
+func reset_all_match_related_data() -> void:
+	lobby_joined = ""
+	lobby_size_status = ""
+	match_id = 0
+	public_game = null
+	is_local_player_turn = false

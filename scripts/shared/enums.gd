@@ -73,6 +73,13 @@ enum DiscoveredCharacter {
 	OBJECTIVE,
 }
 
+enum GameStatus {
+	STARTING,
+	ACTIVE,
+	ENDING,
+	END,
+}
+
 const CHARACTER_INFO: Dictionary[int, Dictionary] = {
 	-3: {
 		"name": "Kong",
