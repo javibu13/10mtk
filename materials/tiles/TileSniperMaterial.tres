@@ -5,7 +5,7 @@
 
 [resource]
 transparency = 1
-albedo_color = Color(0.8, 0.8, 0.8, 1)
+albedo_color = Color(0.75, 0.75, 0.75, 1)
 albedo_texture = ExtResource("1_ibi8x")
 roughness = 0.85
 normal_enabled = true
