@@ -125,7 +125,7 @@ func _turn_timeout() -> void:
 	hud_control.player_info_panel_containers_active[player_info_panel_index_for_new_turn].hide_timer()
 	if player_info_panel_index_for_new_turn == 0:
 		# Skip Turn
-		actions_panel.x_close_pressed()
+		actions_panel.safe_x_close_pressed()
 		var turn_result = TurnResult.client_new(hud_control.main_player_panel_container.player_index,
 									 ClientGlobalData.public_game.turn.action_number,
 									 hud_control.main_player_panel_container.timer_control.left_time,

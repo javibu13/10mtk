@@ -6,6 +6,7 @@ class_name ActionsPanel
 var x_close_scale_normal: Vector2 = Vector2(15, 15)
 var x_close_scale_hover: Vector2 = Vector2(18, 18)
 var is_action_editing_in_progress := false
+var _last_anim_played_action_container := ""
 
 @onready var avatar_control: ActionsPanelAvatar = $Main_MarginContainer/VBoxContainer/HSplitContainer/Avatar_Control
 @onready var character_info_rich_text_label: RichTextLabel = $Main_MarginContainer/VBoxContainer/HSplitContainer/CharacterInfo_RichTextLabel
@@ -23,6 +24,7 @@ var is_action_editing_in_progress := false
 
 func _ready() -> void:
 	actions_panel_animation_player.play("hidden")
+	_last_anim_played_action_container = "hidden"
 	buttons_area_animation_player.play("RESET")
 	x_texture_button.mouse_entered.connect(x_close_mouse_enter)
 	x_texture_button.mouse_exited.connect(x_close_mouse_exit)
@@ -51,6 +53,7 @@ func set_up_panel(character: Enums.Character, allow_move_action := true, allow_k
 	is_action_editing_in_progress = false
 	buttons_area_animation_player.play("RESET")
 	actions_panel_animation_player.play("show_panel")
+	_last_anim_played_action_container = "show_panel"
 	confirm_texture_button.disabled = false
 
 
@@ -65,14 +68,22 @@ func x_close_mouse_exit() -> void:
 func x_close_pressed() -> void:
 	game_root.actions_panel_closed.emit()
 	actions_panel_animation_player.play("hide_panel")
+	_last_anim_played_action_container = "hide_panel"
 	if is_action_editing_in_progress:
 		is_action_editing_in_progress = false
 		game_root.action_editing_canceled.emit()
 
 
+## Executes x_close_pressed() only if the panel was not hidden
+func safe_x_close_pressed() -> void:
+	if _last_anim_played_action_container != "hide_panel":
+		x_close_pressed()
+
+
 func close_after_confirm_action() -> void:
 	game_root.actions_panel_closed.emit()
 	actions_panel_animation_player.play("hide_panel")
+	_last_anim_played_action_container = "hide_panel"
 	is_action_editing_in_progress = false
 	game_root.action_editing_finished.emit()
 
