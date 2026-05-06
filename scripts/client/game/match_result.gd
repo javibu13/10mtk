@@ -44,6 +44,10 @@ func set_up() -> void:
 				if eliminated_player_index in winner_player_results.map(func(winner_player_result_map: PlayerInfoResult): return winner_player_result_map.player.index):
 					winner_player_result = winner_player_results[winner_player_results.find_custom(func(player_res: PlayerInfoResult): return player_res.player.index == eliminated_player_index)]
 					break
+		elif winner_player_results.any(func(winner_player_result_all: PlayerInfoResult): return winner_player_result_all.player.index in ClientGlobalData.public_game.player_elimination_order):
+			var winner_player_results_alive: Array = winner_player_results.filter(func(winner_player_result_all: PlayerInfoResult): return not winner_player_result_all.player.index in ClientGlobalData.public_game.player_elimination_order)
+			var winner_player_index: Array = winner_player_results_alive.map(func(winner_player_result_map: PlayerInfoResult): return winner_player_result_map.player.index)
+			winner_player_result = winner_player_results[winner_player_results.find_custom(func(player_res: PlayerInfoResult): return player_res.player.index == winner_player_index.min())]
 		else:
 			var winner_player_index: Array = winner_player_results.map(func(winner_player_result_map: PlayerInfoResult): return winner_player_result_map.player.index)
 			winner_player_result = winner_player_results[winner_player_results.find_custom(func(player_res: PlayerInfoResult): return player_res.player.index == winner_player_index.min())]
