@@ -220,6 +220,13 @@ func remove_lobby(lobby_id: String) -> bool:
 			NetworkManager.server_print_msg.emit(str("❌ Error trying to remove lobby ", lobby_id, " NOT FOUND IN LOBBIES"))
 		return false
 
+
 # Check if all players joined to a lobby have answered to game start request (it does not check if they have answered "accept" or "reject")
 func check_if_all_clients_answered_game_start(lobby_id: String) -> bool:
 	return lobbies[lobby_id].players.size() == lobbies[lobby_id].game_accepted.size()
+
+
+func remove_lobby_after_match_creation(lobby_id: String) -> void:
+	lobbies.erase(lobby_id)
+	available_lobbies_quick.erase(lobby_id)
+	available_lobbies_custom.erase(lobby_id)
