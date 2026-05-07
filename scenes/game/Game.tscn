@@ -97,71 +97,6 @@ metadata/_custom_type_script = "uid://c7dav7ty05vjp"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="LoadingScreen_Control" type="Control" parent="CanvasLayer"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("3_365ku")
-
-[node name="DialogBackground_ColorRect2" type="TextureRect" parent="CanvasLayer/LoadingScreen_Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1152.0
-offset_top = 2.2117962e-05
-offset_right = 647.9999
-offset_bottom = 504.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 1.5707964
-texture = SubResource("GradientTexture1D_aug50")
-
-[node name="Default_VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LoadingScreen_Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 191.0
-offset_right = -191.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="GameLogo_TextureRect" type="TextureRect" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
-custom_minimum_size = Vector2(0, 260)
-layout_mode = 2
-texture = ExtResource("4_gg4pt")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="LoadingInfo_VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
-custom_minimum_size = Vector2(0, 263)
-layout_mode = 2
-theme_override_constants/separation = 28
-alignment = 1
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer/LoadingInfo_VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-show_percentage = false
-
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
 [node name="HUD_Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("main_player_panel_container", "left_player_panel_container", "top_player_panel_container", "right_player_panel_container")]
 layout_mode = 3
 anchors_preset = 15
@@ -562,6 +497,7 @@ mouse_behavior_recursive = 2
 metadata/_edit_lock_ = true
 
 [node name="MatchResult_Control" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -625,7 +561,7 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Continue_Button" type="Button" parent="CanvasLayer/MatchResult_Control/VBoxContainer"]
+[node name="Continue_Button" type="Button" parent="CanvasLayer/MatchResult_Control/VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(143.615, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -639,6 +575,71 @@ text = "Continue"
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 24
+
+[node name="LoadingScreen_Control" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_365ku")
+
+[node name="DialogBackground_ColorRect2" type="TextureRect" parent="CanvasLayer/LoadingScreen_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 2.2117962e-05
+offset_right = 647.9999
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_aug50")
+
+[node name="Default_VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LoadingScreen_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 191.0
+offset_right = -191.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GameLogo_TextureRect" type="TextureRect" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+texture = ExtResource("4_gg4pt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="LoadingInfo_VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
+custom_minimum_size = Vector2(0, 263)
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer/LoadingInfo_VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+show_percentage = false
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/LoadingScreen_Control/Default_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
 
 [node name="Path3D" type="Path3D" parent="."]
 visible = false

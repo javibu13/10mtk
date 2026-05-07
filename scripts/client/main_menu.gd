@@ -15,6 +15,8 @@ func _ready() -> void:
 	quick_match_menu_v_box_container.hide()
 	dialog_background_color_rect.hide()
 	countdown_quick_match_v_box_container.hide()
+	SoundManager.play_main_menu_music()
+	SoundManager.resync_control_sounds()
 
 
 # Execute function to ask the server to end user's session and change to login view

@@ -27,6 +27,7 @@ ClientGlobalData="*res://scripts/autoload/client_global_data.gd"
 MatchmakingManager="*res://scripts/autoload/matchmaking_manager.gd"
 ServerGameData="*res://scripts/autoload/server_game_data.gd"
 GameManager="*res://scripts/autoload/game_manager.gd"
+SoundManager="*res://scripts/autoload/sound_manager.gd"
 
 [display]
 
@@ -50,9 +51,15 @@ folder_colors={
 "res://materials/": "red",
 "res://scenes/": "purple",
 "res://scripts/": "blue",
+"res://sounds/": "pink",
 "res://textures/": "green",
 "res://themes/": "gray"
 }
+
+[global_group]
+
+buttons="All interactive buttons "
+lineEdits="All line edit nodes"
 
 [gui]
 

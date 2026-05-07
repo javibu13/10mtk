@@ -9,6 +9,7 @@ func _ready() -> void:
 	#Log.pr("Server working ⚙️...")
 	NetworkManager.server_print_msg.emit("Server working ⚙️...")
 	add_child(ServerGlobalData.http_request)
+	SoundManager.stop_background_music()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

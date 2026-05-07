@@ -36,6 +36,8 @@ var token_character_resource: Resource
 
 
 func _ready() -> void:
+	SoundManager.play_in_game_music()
+	SoundManager.resync_control_sounds()
 	loading_screen_control.show()
 	match_result_control.hide()
 	set_up_ended.connect(_set_up_ended)
@@ -99,6 +101,7 @@ func _new_turn_process() -> void:
 		hud_control.player_info_panel_containers_active[player_info_panel_index_for_prev_turn].hide_timer()
 	else:
 		# First turn received
+		await get_tree().create_timer(1.0).timeout
 		loading_screen_control.hide()
 	if ClientGlobalData.public_game.status == Enums.GameStatus.END:
 		# END GAME - Change to score screen

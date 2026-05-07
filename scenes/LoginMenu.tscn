@@ -81,7 +81,7 @@ text = "Server connection failure"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TryAgain_Button" type="Button" parent="ConnectionFailed_VBoxContainer"]
+[node name="TryAgain_Button" type="Button" parent="ConnectionFailed_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -111,7 +111,7 @@ texture = ExtResource("3_1oovu")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Email_LineEdit" type="LineEdit" parent="Login_VBoxContainer"]
+[node name="Email_LineEdit" type="LineEdit" parent="Login_VBoxContainer" groups=["lineEdits"]]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -128,7 +128,7 @@ caret_blink = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Password_LineEdit" type="LineEdit" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer"]
+[node name="Password_LineEdit" type="LineEdit" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer" groups=["lineEdits"]]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -143,7 +143,7 @@ clear_button_enabled = true
 caret_blink = true
 secret = true
 
-[node name="ForgotPassword_RichTextLabel" type="RichTextLabel" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer"]
+[node name="ForgotPassword_RichTextLabel" type="RichTextLabel" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer" groups=["buttons"]]
 clip_contents = false
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
@@ -161,7 +161,7 @@ vertical_alignment = 3
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Login_Button" type="Button" parent="Login_VBoxContainer/LoginRegister_VBoxContainer"]
+[node name="Login_Button" type="Button" parent="Login_VBoxContainer/LoginRegister_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -170,7 +170,7 @@ theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 text = "Log In"
 
-[node name="ForgotPassword_RichTextLabel" type="RichTextLabel" parent="Login_VBoxContainer/LoginRegister_VBoxContainer"]
+[node name="ForgotPassword_RichTextLabel" type="RichTextLabel" parent="Login_VBoxContainer/LoginRegister_VBoxContainer" groups=["buttons"]]
 clip_contents = false
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
@@ -208,7 +208,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Email_LineEdit" type="LineEdit" parent="ForgotYourPassword_VBoxContainer"]
+[node name="Email_LineEdit" type="LineEdit" parent="ForgotYourPassword_VBoxContainer" groups=["lineEdits"]]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -224,7 +224,7 @@ caret_blink = true
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Reset_Button" type="Button" parent="ForgotYourPassword_VBoxContainer/ButtonsGroup_VBoxContainer"]
+[node name="Reset_Button" type="Button" parent="ForgotYourPassword_VBoxContainer/ButtonsGroup_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(350, 69)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -233,7 +233,7 @@ theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 text = "Send password reset"
 
-[node name="Return_Button" type="Button" parent="ForgotYourPassword_VBoxContainer/ButtonsGroup_VBoxContainer"]
+[node name="Return_Button" type="Button" parent="ForgotYourPassword_VBoxContainer/ButtonsGroup_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(125, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -268,7 +268,7 @@ vertical_alignment = 1
 [node name="NicknameGroup_VBoxContainer2" type="VBoxContainer" parent="Register_VBoxContainer"]
 layout_mode = 2
 
-[node name="Nickname_LineEdit" type="LineEdit" parent="Register_VBoxContainer/NicknameGroup_VBoxContainer2"]
+[node name="Nickname_LineEdit" type="LineEdit" parent="Register_VBoxContainer/NicknameGroup_VBoxContainer2" groups=["lineEdits"]]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -292,7 +292,7 @@ vertical_alignment = 3
 [node name="EmailGroup_VBoxContainer" type="VBoxContainer" parent="Register_VBoxContainer"]
 layout_mode = 2
 
-[node name="Email_LineEdit" type="LineEdit" parent="Register_VBoxContainer/EmailGroup_VBoxContainer"]
+[node name="Email_LineEdit" type="LineEdit" parent="Register_VBoxContainer/EmailGroup_VBoxContainer" groups=["lineEdits"]]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -316,7 +316,7 @@ vertical_alignment = 3
 [node name="PasswordGroup_VBoxContainer" type="VBoxContainer" parent="Register_VBoxContainer"]
 layout_mode = 2
 
-[node name="Password_LineEdit" type="LineEdit" parent="Register_VBoxContainer/PasswordGroup_VBoxContainer"]
+[node name="Password_LineEdit" type="LineEdit" parent="Register_VBoxContainer/PasswordGroup_VBoxContainer" groups=["lineEdits"]]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -342,7 +342,7 @@ vertical_alignment = 3
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Register_Button" type="Button" parent="Register_VBoxContainer/ButtonsGroup_VBoxContainer"]
+[node name="Register_Button" type="Button" parent="Register_VBoxContainer/ButtonsGroup_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(192.41, 69)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -351,7 +351,7 @@ theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 32
 text = "Register"
 
-[node name="Return_Button" type="Button" parent="Register_VBoxContainer/ButtonsGroup_VBoxContainer"]
+[node name="Return_Button" type="Button" parent="Register_VBoxContainer/ButtonsGroup_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(125, 50)
 layout_mode = 2
 size_flags_horizontal = 4

@@ -82,7 +82,7 @@ grow_vertical = 2
 rotation = 1.5707964
 texture = SubResource("GradientTexture1D_0ykhv")
 
-[node name="LogOut_TextureButton" type="TextureButton" parent="."]
+[node name="LogOut_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -184,7 +184,7 @@ layout_mode = 2
 theme_override_constants/separation = 28
 alignment = 1
 
-[node name="QuickMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer"]
+[node name="QuickMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -193,7 +193,7 @@ theme = ExtResource("1_yqorp")
 theme_override_font_sizes/font_size = 32
 text = "Quick Match"
 
-[node name="CreateMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer"]
+[node name="CreateMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -203,7 +203,7 @@ theme_override_font_sizes/font_size = 32
 disabled = true
 text = "Create Match"
 
-[node name="JoinMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer"]
+[node name="JoinMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(200, 69)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -265,7 +265,7 @@ modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="Return_Button" type="Button" parent="QuickMatchMenu_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+[node name="Return_Button" type="Button" parent="QuickMatchMenu_VBoxContainer/QuickMatchInfo_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(125, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -318,7 +318,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -0.9575145
-offset_bottom = -0.9575145
+offset_bottom = -0.95751953
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_2nypq")
@@ -384,7 +384,7 @@ custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 alignment = 1
 
-[node name="Accept_Button" type="Button" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+[node name="Accept_Button" type="Button" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(215, 85)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -398,7 +398,7 @@ modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="Reject_Button" type="Button" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+[node name="Reject_Button" type="Button" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(125, 50)
 layout_mode = 2
 size_flags_horizontal = 4
