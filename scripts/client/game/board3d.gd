@@ -58,3 +58,11 @@ func get_tile_3d_by_location(tile_location: Vector2i) -> Tile3D:
 	if not tile_3d:
 		Log.error("No Tile3d found at location ", str(tile_location))
 	return tile_3d
+
+
+func get_token_character_3d_by_character(character: Enums.Character) -> TokenCharacter3D:
+	var token_character: TokenCharacter3D = null
+	var character_tile_3d: Tile3D = get_tile3d_of_character(character)
+	if character_tile_3d:
+		token_character = character_tile_3d.get_token_character(character)
+	return token_character

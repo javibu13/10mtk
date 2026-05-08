@@ -9,6 +9,7 @@ signal board_built
 signal set_up_ended
 signal turn_timeout
 signal token_character_selected(token_character: TokenCharacter3D)
+signal character_info_selected(character: Enums.Character) # TODO: CONTINUE HERE USING THE SIGNAL IN BOARD3D TO SELECT THE PLAYER IF POSSIBLE
 signal actions_panel_closed
 signal action_editing_started(action: Enums.Action)
 signal action_editing_canceled

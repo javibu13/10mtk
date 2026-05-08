@@ -97,7 +97,7 @@ metadata/_custom_type_script = "uid://c7dav7ty05vjp"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="HUD_Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("main_player_panel_container", "left_player_panel_container", "top_player_panel_container", "right_player_panel_container")]
+[node name="HUD_Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("game_root", "main_player_panel_container", "left_player_panel_container", "top_player_panel_container", "right_player_panel_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,6 +109,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 mouse_behavior_recursive = 2
 script = ExtResource("6_wnrko")
+game_root = NodePath("../..")
 main_player_panel_container = NodePath("MainPlayer_PanelContainer")
 left_player_panel_container = NodePath("LeftPlayer_PanelContainer")
 top_player_panel_container = NodePath("TopPlayer_PanelContainer")
@@ -134,6 +135,7 @@ mouse_filter = 2
 mouse_behavior_recursive = 2
 theme = ExtResource("6_365ku")
 script = ExtResource("8_qf6a8")
+type = null
 player_info_assassin = NodePath("HBoxContainer/AssassinInfo_MarginControl")
 player_info_objectives = [NodePath("HBoxContainer/0_ObjectiveInfo_MarginControl"), NodePath("HBoxContainer/1_ObjectiveInfo_MarginControl"), NodePath("HBoxContainer/2_ObjectiveInfo_MarginControl")]
 timer_control = NodePath("Timer_Control")

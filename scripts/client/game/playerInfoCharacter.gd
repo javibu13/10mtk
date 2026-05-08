@@ -14,6 +14,7 @@ var character: Enums.Character
 @onready var x_texture_rect: TextureRect = $FreePlace_Control/Character_CenterContainer/X_TextureRect
 @onready var arrested_texture_rect: TextureRect = $FreePlace_Control/Character_CenterContainer/Background_TextureRect/Arrested_TextureRect
 @onready var result_position_label: RichTextLabel = $FreePlace_Control/Type_CenterContainer/Background_TextureRect/ResultPosition_RichTextLabel
+@onready var character_selection_texture_button: TextureButton = $FreePlace_Control/Character_CenterContainer/CharacterSelection_TextureButton
 
 
 # Called when the node enters the scene tree for the first time.
@@ -58,3 +59,15 @@ func set_character_for_results_view(podium_order: int = 0) -> void:
 	x_texture_rect.hide()
 	result_position_label.text = str(podium_order, "º") if podium_order > 0 else "?"
 	result_position_label.show()
+
+
+func set_character_info_of_local_player(game_root: GameRootNode) -> void:
+	character_selection_texture_button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_ENABLED
+	character_selection_texture_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	character_selection_texture_button.pressed.connect(_character_info_selected.bind(game_root))
+
+
+func _character_info_selected(game_root: GameRootNode) -> void:
+	if x_texture_rect.visible or arrested_texture_rect.visible:
+		return
+	game_root.character_info_selected.emit(character)

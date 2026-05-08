@@ -45,6 +45,7 @@ func _ready() -> void:
 	game_root.action_editing_started.connect(action_editing_started)
 	game_root.action_editing_canceled.connect(action_editing_canceled)
 	game_root.action_editing_finished.connect(action_editing_finished)
+	game_root.character_info_selected.connect(_transform_select_character_to_select_token_character)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -227,3 +228,9 @@ func action_editing_canceled() -> void:
 
 func action_editing_finished() -> void:
 	action_editing_canceled()
+
+
+func _transform_select_character_to_select_token_character(character: Enums.Character) -> void:
+	var token_character_3d: TokenCharacter3D = game_root.board_3d.get_token_character_3d_by_character(character)
+	if token_character_3d:
+		select_token_character(token_character_3d)

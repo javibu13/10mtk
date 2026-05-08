@@ -39,11 +39,17 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
+[node name="CharacterSelection_TextureButton" type="TextureButton" parent="FreePlace_Control/Character_CenterContainer"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+mouse_behavior_recursive = 1
+
 [node name="Background_TextureRect" type="TextureRect" parent="FreePlace_Control/Character_CenterContainer"]
 self_modulate = Color(0.434, 0.55813336, 0.7, 1)
 clip_children = 2
 custom_minimum_size = Vector2(85, 85)
 layout_mode = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("1_nxf8k")
 expand_mode = 4
 
@@ -98,6 +104,8 @@ stretch_mode = 5
 clip_children = 2
 custom_minimum_size = Vector2(85, 85)
 layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("3_xqhd6")
 expand_mode = 4
 

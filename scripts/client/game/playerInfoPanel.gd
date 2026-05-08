@@ -49,3 +49,10 @@ func reveal_character(character: Enums.Character, status: Enums.PlayerStatus = E
 			player_info_objectives[objective_index].set_character_as_dead()
 		elif status == Enums.PlayerStatus.ARRESTED:
 			player_info_objectives[objective_index].set_character_as_arrested()
+
+
+## Configure all of its character_info elements (assassin and objectives) as local elements to allow them to be selectables and interactives
+func set_up_all_characters_info_as_local(game_root: GameRootNode) -> void:
+	player_info_assassin.set_character_info_of_local_player(game_root)
+	for player_info in player_info_objectives:
+		player_info.set_character_info_of_local_player(game_root)
