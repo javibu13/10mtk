@@ -116,3 +116,22 @@ theme_type_variation = &"ButtonInvestigateAction"
 toggle_mode = true
 button_pressed = true
 text = "INVESTIGATE"
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 458.0
+offset_top = 41.0
+offset_right = 620.0
+offset_bottom = 132.0
+
+[node name="PopupMenu" type="PopupMenu" parent="Control"]
+oversampling_override = 1.0
+visible = true
+theme = ExtResource("1_b2lpe")
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+item_count = 2
+item_0/text = "Option 1"
+item_0/id = 0
+item_1/text = "Option 2"
+item_1/id = 1

@@ -322,6 +322,7 @@ scroll_active = false
 [node name="PlayersToInvestigate_OptionButton" type="OptionButton" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_ieefh")
 theme_override_styles/normal = SubResource("StyleBoxTexture_63pli")
 
 [node name="ConfirmCancel_HBoxContainer" type="HBoxContainer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
