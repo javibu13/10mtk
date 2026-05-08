@@ -66,6 +66,7 @@ func x_close_mouse_exit() -> void:
 
 
 func x_close_pressed() -> void:
+	SoundManager.instance_and_play_sound(null, SoundManager.actions_panel_show_sfx, 1.0, randf_range(0.5, 0.8))
 	game_root.actions_panel_closed.emit()
 	actions_panel_animation_player.play("hide_panel")
 	_last_anim_played_action_container = "hide_panel"

@@ -185,12 +185,15 @@ func set_up_move_to_square(tile: Tile3D) -> void:
 	move_initial_position = pivot_position.position
 	move_final_position = Vector3(tile.position_in_board.x, pivot_position.position.y, tile.position_in_board.y)
 	is_moving = true
+	if move_initial_position != move_final_position:
+		SoundManager.instance_and_play_sound(null, SoundManager.camera_move_sfx, 1.0, 1.5)
 
 
 func select_token_character(token_character: TokenCharacter3D):
 	if ClientGlobalData.is_local_player_turn:
 		if token_character_selected:
 			token_character_selected.deselect()
+		SoundManager.instance_and_play_sound(null, SoundManager.actions_panel_show_sfx, 1, randf_range(0.8, 1.2))
 		token_character_selected = token_character
 		token_character_selected.select()
 		game_root.token_character_selected.emit(token_character)

@@ -7,6 +7,8 @@ var button_mouse_pressed_sfx_resource: Resource = preload("res://sounds/sfx/butt
 var button_select_sfx_resource: Resource = preload("res://sounds/sfx/buttons/switch_005.ogg")
 var background_music_audio_stream_player: AudioStreamPlayer
 var timeout_sfx: Resource = null
+var camera_move_sfx: Resource = null
+var actions_panel_show_sfx: Resource = null
 
 
 func _ready() -> void:
@@ -87,3 +89,5 @@ func add_sound_signals_to_button(button: BaseButton) -> void:
 
 func load_in_game_sfx() -> void:
 	timeout_sfx = load("res://sounds/sfx/referee_whistle_blow_edited.ogg")
+	camera_move_sfx = load("res://sounds/sfx/camera_move_sfx_2.ogg")
+	actions_panel_show_sfx = load("res://sounds/sfx/panel_show_sfx.ogg")
