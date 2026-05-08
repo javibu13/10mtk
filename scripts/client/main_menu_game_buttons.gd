@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func _change_to_quick_match_menu() -> void:
-	SoundManager._instance_and_play_sound(quick_match_button, SoundManager.button_mouse_pressed_sfx_resource)
+	SoundManager.instance_and_play_sound(quick_match_button, SoundManager.button_mouse_pressed_sfx_resource)
 	self.hide()
 	log_out_button.hide()
 	quick_match_button.disabled = true

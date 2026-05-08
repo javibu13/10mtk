@@ -82,7 +82,7 @@ func _show_accept_dialog(title: String, message: String, ok_text: String = "Ok")
 
 
 func _hide_dialog_background():
-	SoundManager._instance_and_play_sound(accept_dialog.get_ok_button(), SoundManager.button_mouse_pressed_sfx_resource) # Needed here to execute the pressed button sfx at scene change
+	SoundManager.instance_and_play_sound(accept_dialog.get_ok_button(), SoundManager.button_mouse_pressed_sfx_resource) # Needed here to execute the pressed button sfx at scene change
 	dialog_background_color_rect.hide()
 
 
@@ -244,10 +244,10 @@ func _request_login(new_text: String = ""):
 		email_login_line_edit.clear()
 		password_login_line_edit.clear()
 		_store_user_data(JSON.parse_string(result.message))
-		SoundManager._instance_and_play_sound.call_deferred(login_button, SoundManager.button_mouse_pressed_sfx_resource) # Needed here to execute the pressed button sfx at scene change
+		SoundManager.instance_and_play_sound.call_deferred(login_button, SoundManager.button_mouse_pressed_sfx_resource) # Needed here to execute the pressed button sfx at scene change
 		_change_to_logged_in_menu()
 	else:
-		SoundManager._instance_and_play_sound.call_deferred(login_button, SoundManager.button_mouse_pressed_sfx_resource) # Needed here to execute the pressed button sfx at scene change
+		SoundManager.instance_and_play_sound.call_deferred(login_button, SoundManager.button_mouse_pressed_sfx_resource) # Needed here to execute the pressed button sfx at scene change
 		_show_accept_dialog("Error", result.message)
 	_set_login_inputs_interaction_status(true)
 

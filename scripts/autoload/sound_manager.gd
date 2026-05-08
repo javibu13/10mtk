@@ -6,6 +6,7 @@ var button_mouse_entered_sfx_resource: Resource = preload("res://sounds/sfx/butt
 var button_mouse_pressed_sfx_resource: Resource = preload("res://sounds/sfx/buttons/click_001.ogg")
 var button_select_sfx_resource: Resource = preload("res://sounds/sfx/buttons/switch_005.ogg")
 var background_music_audio_stream_player: AudioStreamPlayer
+var timeout_sfx: Resource = null
 
 
 func _ready() -> void:
@@ -40,9 +41,9 @@ func resync_control_sounds() -> void:
 	for button in buttons:
 		if button is BaseButton:
 			var button_base_button := button as BaseButton
-			button_base_button.mouse_entered.connect(_instance_and_play_sound.bind(button_base_button, button_mouse_entered_sfx_resource, 0.0, 1))
-			button_base_button.mouse_exited.connect(_instance_and_play_sound.bind(button_base_button, button_mouse_entered_sfx_resource, -10.0, 0.5))
-			button_base_button.pressed.connect(_instance_and_play_sound.bind(button_base_button, button_mouse_pressed_sfx_resource, 0.0, 1))
+			button_base_button.mouse_entered.connect(instance_and_play_sound.bind(button_base_button, button_mouse_entered_sfx_resource, 0.0, 1))
+			button_base_button.mouse_exited.connect(instance_and_play_sound.bind(button_base_button, button_mouse_entered_sfx_resource, -10.0, 0.5))
+			button_base_button.pressed.connect(instance_and_play_sound.bind(button_base_button, button_mouse_pressed_sfx_resource, 0.0, 1))
 		elif button is RichTextLabel:
 			var button_rich_text_label := button as RichTextLabel
 			button_rich_text_label.meta_hover_started.connect(_meta_instance_and_play_sound.bind(button_rich_text_label, button_mouse_entered_sfx_resource, 0.0, 1.2))
@@ -50,15 +51,14 @@ func resync_control_sounds() -> void:
 			button_rich_text_label.meta_clicked.connect(_meta_instance_and_play_sound.bind(button_rich_text_label, button_mouse_pressed_sfx_resource, 0.0, 1))
 	var line_edits = get_tree().get_nodes_in_group("lineEdits")
 	for line_edit: LineEdit in line_edits:
-		line_edit.mouse_entered.connect(_instance_and_play_sound.bind(line_edit, button_mouse_entered_sfx_resource, -8.0, 1.2))
-		line_edit.mouse_exited.connect(_instance_and_play_sound.bind(line_edit, button_mouse_entered_sfx_resource, -16.0, 0.7))
+		line_edit.mouse_entered.connect(instance_and_play_sound.bind(line_edit, button_mouse_entered_sfx_resource, -8.0, 1.2))
+		line_edit.mouse_exited.connect(instance_and_play_sound.bind(line_edit, button_mouse_entered_sfx_resource, -16.0, 0.7))
 		line_edit.editing_toggled.connect(_meta_instance_and_play_sound.bind(line_edit, button_select_sfx_resource, -5.0, 0.65))
 
 
-func _instance_and_play_sound(button: Variant, sound_resource: Resource, volume_db: float = 0.0, pitch_scale: float = 1) -> void:
+func instance_and_play_sound(button: Variant, sound_resource: Resource, volume_db: float = 0.0, pitch_scale: float = 1) -> void:
 	if button is BaseButton and button.disabled:
 		return
-	#Log.pr(button.name)
 	var tmp_audio_stream_player = AudioStreamPlayer.new()
 	tmp_audio_stream_player.bus = "SFX"
 	tmp_audio_stream_player.stream = sound_resource
@@ -72,7 +72,7 @@ func _instance_and_play_sound(button: Variant, sound_resource: Resource, volume_
 func _meta_instance_and_play_sound(meta, button: Variant, sound_resource: Resource, volume_db: float = 0.0, pitch_scale: float = 1) -> void:
 	if meta is bool and meta == false:
 		return
-	_instance_and_play_sound(button, sound_resource, volume_db, pitch_scale)
+	instance_and_play_sound(button, sound_resource, volume_db, pitch_scale)
 
 
 func _queue_free_audio_stream_player(audio_stream_player: AudioStreamPlayer) -> void:
@@ -80,6 +80,10 @@ func _queue_free_audio_stream_player(audio_stream_player: AudioStreamPlayer) -> 
 
 
 func add_sound_signals_to_button(button: BaseButton) -> void:
-	button.mouse_entered.connect(_instance_and_play_sound.bind(button, button_mouse_entered_sfx_resource, 0.0, 1))
-	button.mouse_exited.connect(_instance_and_play_sound.bind(button, button_mouse_entered_sfx_resource, -10.0, 0.5))
-	button.pressed.connect(_instance_and_play_sound.bind(button, button_mouse_pressed_sfx_resource, 0.0, 1))
+	button.mouse_entered.connect(instance_and_play_sound.bind(button, button_mouse_entered_sfx_resource, 0.0, 1))
+	button.mouse_exited.connect(instance_and_play_sound.bind(button, button_mouse_entered_sfx_resource, -10.0, 0.5))
+	button.pressed.connect(instance_and_play_sound.bind(button, button_mouse_pressed_sfx_resource, 0.0, 1))
+
+
+func load_in_game_sfx() -> void:
+	timeout_sfx = load("res://sounds/sfx/referee_whistle_blow_edited.ogg")

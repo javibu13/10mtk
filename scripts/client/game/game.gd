@@ -9,7 +9,7 @@ signal board_built
 signal set_up_ended
 signal turn_timeout
 signal token_character_selected(token_character: TokenCharacter3D)
-signal character_info_selected(character: Enums.Character) # TODO: CONTINUE HERE USING THE SIGNAL IN BOARD3D TO SELECT THE PLAYER IF POSSIBLE
+signal character_info_selected(character: Enums.Character)
 signal actions_panel_closed
 signal action_editing_started(action: Enums.Action)
 signal action_editing_canceled
@@ -39,6 +39,7 @@ var token_character_resource: Resource
 func _ready() -> void:
 	SoundManager.play_in_game_music()
 	SoundManager.resync_control_sounds()
+	SoundManager.load_in_game_sfx()
 	loading_screen_control.show()
 	match_result_control.hide()
 	set_up_ended.connect(_set_up_ended)
@@ -127,6 +128,7 @@ func _turn_timeout() -> void:
 	var player_info_panel_index_for_new_turn = hud_control.player_info_panel_containers_active.find_custom(func(player_info_panel: PlayerInfoPanel): return player_info_panel.player_index == current_turn.player_index)
 	# Check if the player_panel_index is the first in the array. This means that local player had to play the turn
 	hud_control.player_info_panel_containers_active[player_info_panel_index_for_new_turn].hide_timer()
+	SoundManager.instance_and_play_sound(null, SoundManager.timeout_sfx)
 	if player_info_panel_index_for_new_turn == 0:
 		# Skip Turn
 		actions_panel.safe_x_close_pressed()
