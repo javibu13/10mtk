@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://de42nh2pstc31"]
+[gd_scene load_steps=21 format=3 uid="uid://de42nh2pstc31"]
 
 [ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_ieefh"]
 [ext_resource type="PackedScene" uid="uid://b8ufcssc2km2k" path="res://scenes/game/actions_panel_avatar_image.tscn" id="2_0cbgp"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://d0458fh5uu3j1" path="res://themes/style_boxes/main_menu_button_normal_base.svg" id="4_6pxys"]
 [ext_resource type="Texture2D" uid="uid://cwbplus2ui3c" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_cancel.svg" id="4_7rpkf"]
 [ext_resource type="Texture2D" uid="uid://b8bgbrx1xg1xv" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_confirm.svg" id="5_6pxys"]
+[ext_resource type="Texture2D" uid="uid://0wxn3hdys837" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_cancel_hover.svg" id="6_wt318"]
+[ext_resource type="Texture2D" uid="uid://ipph4nms2g44" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_confirm_hover.svg" id="8_duu40"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_63pli"]
 texture = ExtResource("4_6pxys")
@@ -336,6 +338,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_7rpkf")
+texture_hover = ExtResource("6_wt318")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -344,6 +347,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_6pxys")
+texture_hover = ExtResource("8_duu40")
 ignore_texture_size = true
 stretch_mode = 5
 
