@@ -95,6 +95,7 @@ func _set_up_ended() -> void:
 
 
 func _new_turn_process() -> void:
+	camera3D_inputs.allow_player_selection = false # Disable character selection until new turn set_up finish
 	if ClientGlobalData.public_game.turn.previous:
 		var previous_turn: TurnPrev = ClientGlobalData.public_game.turn.previous
 		var player_info_panel_index_for_prev_turn = hud_control.player_info_panel_containers_active.find_custom(func(player_info_panel: PlayerInfoPanel): return player_info_panel.player_index == previous_turn.player_index)
@@ -118,6 +119,7 @@ func _new_turn_process() -> void:
 	if player_info_panel_index_for_new_turn == 0:
 		# Local player turn
 		ClientGlobalData.is_local_player_turn = true
+		camera3D_inputs.allow_player_selection = true
 	else:
 		# Remote player turn
 		ClientGlobalData.is_local_player_turn = false
@@ -138,7 +140,7 @@ func _turn_timeout() -> void:
 									 Enums.Action.NONE,
 									 Enums.Character.NONE)
 		GameManager.server_send_turn_result.rpc_id(1, ClientGlobalData.match_id, turn_result.to_dict())
-		
+		camera3D_inputs.allow_player_selection = false # Disable character selection until new turn starts
 
 
 func _token_charecter_selected(token_character: TokenCharacter3D) -> void:
@@ -201,6 +203,7 @@ func confirm_action(action_info := {}) -> void:
 									 action_info.player_index_option if action_info.has("player_index_option") else -1,
 									 camera3D_inputs.tile_selected.position_in_board if camera3D_inputs.tile_selected and action_info.type == Enums.Action.MOVE else Vector2i.ZERO)
 	GameManager.server_send_turn_result.rpc_id(1, ClientGlobalData.match_id, turn_result.to_dict())
+	camera3D_inputs.allow_player_selection = false # Disable character selection until new turn starts
 
 
 func update_board_with_turn_prev_result(turn_prev_result: TurnPrev) -> void:

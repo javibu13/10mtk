@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://2r8awemlrgmc"]
+[gd_scene load_steps=28 format=3 uid="uid://2r8awemlrgmc"]
 
 [ext_resource type="Script" uid="uid://bxqvpypk3xbba" path="res://scripts/client/game/game.gd" id="1_7qcb4"]
 [ext_resource type="Script" uid="uid://bmtimog66kbia" path="res://scripts/client/game/action_executor.gd" id="2_gynul"]
@@ -40,12 +40,117 @@ colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_aug50"]
 gradient = SubResource("Gradient_bqwap")
 
-[sub_resource type="Curve3D" id="Curve3D_aptqa"]
+[sub_resource type="Curve3D" id="Curve3D_5xhyk"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0.68, 0, 0, 0, -1, 0, 0.625, 0, 0, 0, 0.725, 0, 0, 1),
+"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, -1, 0, -0.1, 0, 0, 0.6, 0, 0, 0.3, -1, 0, 0.6, 0, 0, -0.1, 0, 0, 0.3, 1, 0, 0.1, 0, 0, 0, 0, 0, 0, 1),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Animation" id="Animation_vg8p7"]
+resource_name = "move"
+length = 1.01
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.3, 0, 0.3, 0, 1, -0.3, 0, 0.3, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ActionExecutor")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.01),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"move_character_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2kuj7"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vj8ay"]
+_data = {
+&"RESET": SubResource("Animation_2kuj7"),
+&"move": SubResource("Animation_vg8p7")
+}
+
+[sub_resource type="Curve3D" id="Curve3D_2iokk"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, -0.1, 0, 0, 5, 0, 0, 0.1, 0, 0, -0.1, 0, 0, 0, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="Animation" id="Animation_2iokk"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PoliceSpawn_PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_5xhyk"]
+resource_name = "spawn"
+length = 1.01
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PoliceSpawn_PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0, 3, 2),
+"points": PackedFloat32Array(0, -0.18820731, -0.22157864, 0.16666667, 0.19621862, 1, -0.06666666, -0.104412735, 0.027587771, -0.02207625, 0.96, -0.067, 0, 0.067, 0, 1, -0.02830857, -0.022206545, 0, 0),
+"times": PackedFloat32Array(0, 0.7, 0.85, 1)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ActionExecutor")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.01),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_police_end"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vg8p7"]
+_data = {
+&"RESET": SubResource("Animation_2iokk"),
+&"spawn": SubResource("Animation_5xhyk")
+}
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_7qcb4")
@@ -643,16 +748,38 @@ modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="Path3D" type="Path3D" parent="."]
-visible = false
-curve = SubResource("Curve3D_aptqa")
+[node name="Movement_Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_5xhyk")
 debug_custom_color = Color(0.88883, 0.15259808, 0.6314438, 1)
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-0.999976, -8.675573e-09, -2.8511453e-08, 0, 0.9566915, -0.29110214, 2.9801607e-08, -0.29110393, -0.9566856, 0, 0.41833183, -0.5668107)
-progress = 0.6459306
-rotation_mode = 4
+[node name="PathFollow3D" type="PathFollow3D" parent="Movement_Path3D"]
+transform = Transform3D(0.999976, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+rotation_mode = 0
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Path3D/PathFollow3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Movement_Path3D/PathFollow3D"]
 transform = Transform3D(-4.370971e-08, 1, -8.742157e-08, -0.99999994, -4.3711385e-08, -8.742323e-08, -8.742323e-08, 8.742157e-08, 0.99999994, 0, 0, 0)
+visible = false
 size = Vector3(0.033203125, 0.22070313, 0.14257813)
+
+[node name="MovementPath3D_AnimationPlayer" type="AnimationPlayer" parent="Movement_Path3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_vj8ay")
+}
+
+[node name="PoliceSpawn_Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_2iokk")
+debug_custom_color = Color(0.88883, 0.15259808, 0.6314438, 1)
+
+[node name="PoliceSpawn_PathFollow3D" type="PathFollow3D" parent="PoliceSpawn_Path3D"]
+transform = Transform3D(0.999976, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+rotation_mode = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PoliceSpawn_Path3D/PoliceSpawn_PathFollow3D"]
+transform = Transform3D(-4.370971e-08, 1, -8.742157e-08, -0.99999994, -4.3711385e-08, -8.742323e-08, -8.742323e-08, 8.742157e-08, 0.99999994, 0, 0, 0)
+visible = false
+size = Vector3(0.033203125, 0.22070313, 0.14257813)
+
+[node name="PoliceSpawnPath3D_AnimationPlayer" type="AnimationPlayer" parent="PoliceSpawn_Path3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_vg8p7")
+}

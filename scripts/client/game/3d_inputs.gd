@@ -234,6 +234,7 @@ func action_editing_finished() -> void:
 
 
 func _transform_select_character_to_select_token_character(character: Enums.Character) -> void:
-	var token_character_3d: TokenCharacter3D = game_root.board_3d.get_token_character_3d_by_character(character)
-	if token_character_3d:
-		select_token_character(token_character_3d)
+	if allow_player_selection:
+		var token_character_3d: TokenCharacter3D = game_root.board_3d.get_token_character_3d_by_character(character)
+		if token_character_3d:
+			select_token_character(token_character_3d)
