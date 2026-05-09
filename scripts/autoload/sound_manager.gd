@@ -14,6 +14,10 @@ var background_music_audio_stream_player: AudioStreamPlayer
 var timeout_sfx: Resource = null
 var camera_move_sfx: Resource = null
 var actions_panel_show_sfx: Resource = null
+var police_siren_sfx: Resource = null
+var character_move_sfx: Resource = null
+var jail_door_sfx: Resource = null
+var dead_sfx: Resource = null
 
 
 func _ready() -> void:
@@ -96,3 +100,7 @@ func load_in_game_sfx() -> void:
 	timeout_sfx = load("res://sounds/sfx/referee_whistle_blow_edited.ogg")
 	camera_move_sfx = load("res://sounds/sfx/camera_move_sfx_2.ogg")
 	actions_panel_show_sfx = load("res://sounds/sfx/panel_show_sfx.ogg")
+	police_siren_sfx = load("res://sounds/sfx/police_siren_sfx.ogg")
+	character_move_sfx = load("res://sounds/sfx/character_move_sfx.ogg")
+	jail_door_sfx = load("res://sounds/sfx/jail_door_sfx.ogg")
+	dead_sfx = load("res://sounds/sfx/dead_sfx.ogg")

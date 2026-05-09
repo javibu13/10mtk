@@ -76,6 +76,7 @@ func set_up_kill_action_process(character_killed: Enums.Character) -> void:
 		move_characters()
 		await continue_kill_action
 	# Add or move police
+	SoundManager.instance_and_play_sound(null, SoundManager.police_siren_sfx)
 	var tile_kill: Tile = ClientGlobalData.public_game.board.get_tile_from_location(tile_3d_kill.position_in_board)
 	# # Check if the police placed by server has been placed before in board
 	var police_character: Enums.Character = tile_kill.polices.keys()[0]
@@ -115,6 +116,7 @@ func move_characters() -> void:
 		movement_path_3d.curve.set_point_position(3, current_character_movement.objective_marker_3d.global_position)
 		current_character_movement.token_character_3d.reparent(movement_path_follow_3d, false)
 		movement_path_3d_animation_player.play("move")
+		SoundManager.instance_and_play_sound(null, SoundManager.character_move_sfx, -2.0, randf_range(0.9, 1.2))
 	elif current_action_type == Enums.Action.MOVE:
 		action_execution_finished.emit.call_deferred()
 	elif current_action_type == Enums.Action.KILL:
