@@ -92,7 +92,7 @@ func _countdown_timeout() -> void:
 		MatchmakingManager.server_client_rejects_match.rpc_id(1)
 	else:
 		# Update counter text
-		SoundManager.instance_and_play_sound(null, SoundManager.countdown_beep_sfx_resource, 5.0, 1.0 + (float(countdown_time) / countdown_time_left / 10))
+		SoundManager.instance_and_play_sound(null, SoundManager.countdown_beep_sfx_resource, 5.0, 1.0)
 		counter_text.text = str("[b]", countdown_time_left, "[/b]")
 
 
