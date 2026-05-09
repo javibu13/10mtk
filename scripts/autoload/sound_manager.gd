@@ -5,6 +5,11 @@ var in_game_music_resource: Resource = preload("res://sounds/music/in_game_midni
 var button_mouse_entered_sfx_resource: Resource = preload("res://sounds/sfx/buttons/bong_001.ogg")
 var button_mouse_pressed_sfx_resource: Resource = preload("res://sounds/sfx/buttons/click_001.ogg")
 var button_select_sfx_resource: Resource = preload("res://sounds/sfx/buttons/switch_005.ogg")
+var match_found_sfx_resource: Resource = preload("res://sounds/sfx/buttons/sniper_reload.ogg")
+var countdown_beep_sfx_resource: Resource = preload("res://sounds/sfx/buttons/countdown_beep_sfx.ogg")
+var shoot_accept_countdown_sfx_resource: Resource = preload("res://sounds/sfx/buttons/shoot_accept_countdown_sfx.ogg")
+var wrong_cancel_countdown_sfx_resource: Resource = preload("res://sounds/sfx/buttons/wrong_cancel_countdown_sfx.ogg")
+var wilhelm_countdown_sfx_resource: Resource = preload("res://sounds/sfx/buttons/wilhelm_countdown_sfx.ogg")
 var background_music_audio_stream_player: AudioStreamPlayer
 var timeout_sfx: Resource = null
 var camera_move_sfx: Resource = null

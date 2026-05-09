@@ -3,6 +3,8 @@ extends VBoxContainer
 var waiting_for_players_text = "Waiting for players"
 var waiting_effect_text = ""
 var countdown_time_left := 0
+var countdown_time := 0
+var manual_rejected := false
 
 @onready var waiting_effect_timer: Timer = $WaitingEffect_Timer
 @onready var info_text_label: RichTextLabel = $QuickMatchInfo_VBoxContainer/Info_RichTextLabel
@@ -65,13 +67,15 @@ func _change_to_main_menu_buttons() -> void:
 	ClientGlobalData.resetLobbyData()
 
 
-func _launch_match_accept_countdown(countdown_time: int) -> void:
+func _launch_match_accept_countdown(new_countdown_time: int) -> void:
+	SoundManager.instance_and_play_sound(null, SoundManager.match_found_sfx_resource)
 	accepted_match_texture_rect.hide()
 	rejected_match_texture_rect.hide()
 	aim_texture_rect.modulate = Color.WHITE
 	return_button.disabled = true
 	waiting_effect_timer.paused = false
 	animation_player.play("idle")
+	countdown_time = new_countdown_time
 	countdown_time_left = countdown_time
 	counter_text.text = str("[b]", countdown_time_left, "[/b]")
 	accept_button.disabled = false
@@ -88,11 +92,14 @@ func _countdown_timeout() -> void:
 		MatchmakingManager.server_client_rejects_match.rpc_id(1)
 	else:
 		# Update counter text
+		SoundManager.instance_and_play_sound(null, SoundManager.countdown_beep_sfx_resource, 5.0, 1.0 + (float(countdown_time) / countdown_time_left / 10))
 		counter_text.text = str("[b]", countdown_time_left, "[/b]")
 
 
 func _accept_game_start() -> void:
 	countdown_timer.stop()
+	SoundManager.instance_and_play_sound(null, SoundManager.shoot_accept_countdown_sfx_resource)
+	SoundManager.instance_and_play_sound(null, SoundManager.wilhelm_countdown_sfx_resource, -5.0, randf_range(0.8, 1.2))
 	MatchmakingManager.server_client_accepts_match.rpc_id(1)
 	accepted_match_texture_rect.show()
 	accept_button.disabled = true
@@ -101,11 +108,13 @@ func _accept_game_start() -> void:
 
 func _reject_game_start() -> void:
 	countdown_timer.stop()
+	SoundManager.instance_and_play_sound(null, SoundManager.wrong_cancel_countdown_sfx_resource)
 	MatchmakingManager.server_client_rejects_match.rpc_id(1)
 	#aim_texture_rect.modulate = Color("#696969")
 	rejected_match_texture_rect.show()
 	accept_button.disabled = true
 	reject_button.disabled = true
+	manual_rejected = true
 
 
 func _return_to_quick_mode_search() -> void:
@@ -116,6 +125,9 @@ func _return_to_quick_mode_search() -> void:
 
 
 func _return_to_main_menu_buttons_kicked_from_quick_mode_search() -> void:
+	if not manual_rejected:
+		SoundManager.instance_and_play_sound(null, SoundManager.wrong_cancel_countdown_sfx_resource)
+		manual_rejected = false
 	dialog_background_color_rect.hide()
 	countdown_quick_match_v_box_container.hide()
 	waiting_effect_timer.stop()
