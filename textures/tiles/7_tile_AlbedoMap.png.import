@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://66tblady6yue"
 path.s3tc="res://.godot/imported/7_tile_AlbedoMap.png-720ffbe0c494ef63b6ec06290a9e5182.s3tc.ctex"
+path.etc2="res://.godot/imported/7_tile_AlbedoMap.png-720ffbe0c494ef63b6ec06290a9e5182.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/tiles/7_tile_AlbedoMap.png"
-dest_files=["res://.godot/imported/7_tile_AlbedoMap.png-720ffbe0c494ef63b6ec06290a9e5182.s3tc.ctex"]
+dest_files=["res://.godot/imported/7_tile_AlbedoMap.png-720ffbe0c494ef63b6ec06290a9e5182.s3tc.ctex", "res://.godot/imported/7_tile_AlbedoMap.png-720ffbe0c494ef63b6ec06290a9e5182.etc2.ctex"]
 
 [params]
 

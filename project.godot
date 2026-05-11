@@ -35,7 +35,6 @@ window/stretch/mode="canvas_items"
 
 [editor]
 
-run/main_run_args="--client --ip 127.0.0.1 --port 2828"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
@@ -69,3 +68,4 @@ common/snap_controls_to_pixels=false
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

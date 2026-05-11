@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5qapxpt3gdpd"
 path.s3tc="res://.godot/imported/tileSelector.png-9e15396e9ce0cd77ff8ca790396d7ff9.s3tc.ctex"
+path.etc2="res://.godot/imported/tileSelector.png-9e15396e9ce0cd77ff8ca790396d7ff9.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/tileSelector.png"
-dest_files=["res://.godot/imported/tileSelector.png-9e15396e9ce0cd77ff8ca790396d7ff9.s3tc.ctex"]
+dest_files=["res://.godot/imported/tileSelector.png-9e15396e9ce0cd77ff8ca790396d7ff9.s3tc.ctex", "res://.godot/imported/tileSelector.png-9e15396e9ce0cd77ff8ca790396d7ff9.etc2.ctex"]
 
 [params]
 

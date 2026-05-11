@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://djmeh5rcw47kn"
 path.s3tc="res://.godot/imported/13_dog_dalmatian.png-df125107e59c0be1b2d624f860fa5456.s3tc.ctex"
+path.etc2="res://.godot/imported/13_dog_dalmatian.png-df125107e59c0be1b2d624f860fa5456.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/characters/13_dog_dalmatian.png"
-dest_files=["res://.godot/imported/13_dog_dalmatian.png-df125107e59c0be1b2d624f860fa5456.s3tc.ctex"]
+dest_files=["res://.godot/imported/13_dog_dalmatian.png-df125107e59c0be1b2d624f860fa5456.s3tc.ctex", "res://.godot/imported/13_dog_dalmatian.png-df125107e59c0be1b2d624f860fa5456.etc2.ctex"]
 
 [params]
 

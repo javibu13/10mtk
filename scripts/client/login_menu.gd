@@ -62,7 +62,7 @@ func _ready() -> void:
 	accept_dialog.confirmed.connect(_hide_dialog_background)
 	accept_dialog.canceled.connect(_hide_dialog_background)
 	SoundManager.add_sound_signals_to_button(accept_dialog.get_ok_button())
-	if multiplayer.has_multiplayer_peer():
+	if NetworkManager.client_connected:
 		_connection_to_server_successful()
 	SoundManager.play_main_menu_music()
 	SoundManager.resync_control_sounds()

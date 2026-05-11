@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtsijsy7rlsud"
 path.s3tc="res://.godot/imported/7_mouse.png-7dd32ef7e4946e955ab744ec8b9eb9db.s3tc.ctex"
+path.etc2="res://.godot/imported/7_mouse.png-7dd32ef7e4946e955ab744ec8b9eb9db.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/characters/7_mouse.png"
-dest_files=["res://.godot/imported/7_mouse.png-7dd32ef7e4946e955ab744ec8b9eb9db.s3tc.ctex"]
+dest_files=["res://.godot/imported/7_mouse.png-7dd32ef7e4946e955ab744ec8b9eb9db.s3tc.ctex", "res://.godot/imported/7_mouse.png-7dd32ef7e4946e955ab744ec8b9eb9db.etc2.ctex"]
 
 [params]
 

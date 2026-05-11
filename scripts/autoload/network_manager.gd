@@ -2,6 +2,7 @@ extends Node
 
 signal server_created
 signal server_creation_failed
+signal static_ip_retrieved
 signal connected_to_server
 signal connection_failed
 signal player_connected(id)
@@ -10,10 +11,11 @@ signal server_print_msg(msg)
 
 
 var ip_address := "127.0.0.1"
-var port := 2828
+var port := 28918
 var max_players := 64
 var peer: ENetMultiplayerPeer
 var is_server_mode := false
+var client_connected := false
 
 
 func _ready():
@@ -40,6 +42,9 @@ func _ready():
 		if "--ip" in args:
 			var ip_index: int = args.find("--ip")
 			ip_address = args.get(ip_index + 1)
+		else:
+			request_static_ip()
+			await static_ip_retrieved
 		await get_tree().create_timer(1.0).timeout  # Wait for server launch
 		create_client()
 		return
@@ -104,6 +109,7 @@ func _on_peer_disconnected(id):
 
 func _on_connected_to_server():
 	Log.pr("Connected to server!")
+	client_connected = true
 	connected_to_server.emit()
 
 
@@ -120,3 +126,35 @@ func disconnect_peer():
 	if peer:
 		peer.close()
 		multiplayer.multiplayer_peer = null
+
+
+func request_static_ip() -> void:
+	var httpRequest: HTTPRequest = HTTPRequest.new()
+	add_child(httpRequest)
+	httpRequest.request_completed.connect(_on_http_request_completed)
+	httpRequest.request("https://t.me/s/StaticJaMonGodot")
+
+
+@warning_ignore("unused_parameter")
+func _on_http_request_completed(result, response_code, headers, body) -> void:
+	if response_code == 200:
+		var html: String = body.get_string_from_utf8()
+		var search_string = "SERVER_IP:"
+		var pos = html.find(search_string)
+		if pos != -1:
+			var start = pos + search_string.length()
+			var end = html.find("</div>", start)
+			var a_element = html.substr(start, end - start).strip_edges()
+			# IP Address is recognised by telegram as a link and it is formated as an "a" html tag
+			var start_ip = a_element.find(">")
+			var end_ip = a_element.find("</")
+			var static_ip = a_element.substr(start_ip+1, end_ip - start_ip - 1).strip_edges()
+			Log.info("Retrieved public static IP: ", static_ip)
+			ip_address = static_ip
+		else:
+			Log.error("Public static IP not found in telegram message")
+			ip_address = ""
+	else:
+		Log.error("Error trying to connect with telegram: ", response_code)
+		ip_address = ""
+	static_ip_retrieved.emit()

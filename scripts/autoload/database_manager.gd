@@ -54,7 +54,7 @@ func _configure_database() -> void:
 
 func _create_tables() -> void:
 	# Get tables creation script
-	var schema_path = "res://scripts/server/db_schema_SQLite.sql"
+	var schema_path = "res://scripts/server/db_schema_SQLite.sql.txt"
 	if not FileAccess.file_exists(schema_path):
 		push_error("Schema path not found")
 		return

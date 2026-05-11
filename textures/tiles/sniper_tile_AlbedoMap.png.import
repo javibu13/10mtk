@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://0mfyvnv68x4l"
 path.s3tc="res://.godot/imported/sniper_tile_AlbedoMap.png-3b9a4bd4cbc27aa1766424b553c0d8ed.s3tc.ctex"
+path.etc2="res://.godot/imported/sniper_tile_AlbedoMap.png-3b9a4bd4cbc27aa1766424b553c0d8ed.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/tiles/sniper_tile_AlbedoMap.png"
-dest_files=["res://.godot/imported/sniper_tile_AlbedoMap.png-3b9a4bd4cbc27aa1766424b553c0d8ed.s3tc.ctex"]
+dest_files=["res://.godot/imported/sniper_tile_AlbedoMap.png-3b9a4bd4cbc27aa1766424b553c0d8ed.s3tc.ctex", "res://.godot/imported/sniper_tile_AlbedoMap.png-3b9a4bd4cbc27aa1766424b553c0d8ed.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cjgl6uo1fmla6"
 path.s3tc="res://.godot/imported/2_walrus.png-03a8a04664dbb43c1cd59b1146c91c27.s3tc.ctex"
+path.etc2="res://.godot/imported/2_walrus.png-03a8a04664dbb43c1cd59b1146c91c27.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/characters/2_walrus.png"
-dest_files=["res://.godot/imported/2_walrus.png-03a8a04664dbb43c1cd59b1146c91c27.s3tc.ctex"]
+dest_files=["res://.godot/imported/2_walrus.png-03a8a04664dbb43c1cd59b1146c91c27.s3tc.ctex", "res://.godot/imported/2_walrus.png-03a8a04664dbb43c1cd59b1146c91c27.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://doa7brtioe0ya"
 path.s3tc="res://.godot/imported/tokenCharacter_base_normalMap.jpg-0c4ee6e9d7e70b461a12431cfc548d5d.s3tc.ctex"
+path.etc2="res://.godot/imported/tokenCharacter_base_normalMap.jpg-0c4ee6e9d7e70b461a12431cfc548d5d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/tokenCharacter_base_normalMap.jpg"
-dest_files=["res://.godot/imported/tokenCharacter_base_normalMap.jpg-0c4ee6e9d7e70b461a12431cfc548d5d.s3tc.ctex"]
+dest_files=["res://.godot/imported/tokenCharacter_base_normalMap.jpg-0c4ee6e9d7e70b461a12431cfc548d5d.s3tc.ctex", "res://.godot/imported/tokenCharacter_base_normalMap.jpg-0c4ee6e9d7e70b461a12431cfc548d5d.etc2.ctex"]
 
 [params]
 
