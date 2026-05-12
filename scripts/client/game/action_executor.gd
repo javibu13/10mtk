@@ -52,6 +52,9 @@ func set_up_kill_action_process(character_killed: Enums.Character) -> void:
 	current_action_type = Enums.Action.KILL
 	# Remove character from board
 	var tile_3d_kill: Tile3D = game_root.board_3d.get_tile3d_of_character(character_killed)
+	var token_character_3d_killed: TokenCharacter3D = tile_3d_kill.get_token_character(character_killed)
+	token_character_3d_killed.start_die_anim()
+	await continue_kill_action
 	tile_3d_kill.remove_token_character_3d(character_killed)
 	# Check if the player has been revealed as any player's assassin or objective
 	for player in ClientGlobalData.public_game.players:

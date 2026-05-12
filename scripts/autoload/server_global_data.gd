@@ -64,8 +64,7 @@ func _ready() -> void:
 
 # Used to read the config file with important data to setup and private info/keys
 func _read_config_file():
-	# TODO: Change path by "user://" for production env
-	var result = config_reader.load("res://.env.cfg")
+	var result = config_reader.load("user://.env.cfg")
 	if result != OK:
 		push_error("Config file not found")
 		return

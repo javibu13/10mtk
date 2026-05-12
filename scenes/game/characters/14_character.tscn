@@ -8,6 +8,7 @@ diffuse_mode = 3
 albedo_color = Color(0.57, 0.496375, 0.3933, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngu2w"]
+render_priority = 1
 transparency = 1
 diffuse_mode = 3
 albedo_texture = ExtResource("2_ngu2w")

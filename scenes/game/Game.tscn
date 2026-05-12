@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://2r8awemlrgmc"]
+[gd_scene load_steps=28 format=3 uid="uid://2r8awemlrgmc"]
 
 [ext_resource type="Script" uid="uid://bxqvpypk3xbba" path="res://scripts/client/game/game.gd" id="1_7qcb4"]
 [ext_resource type="Script" uid="uid://bmtimog66kbia" path="res://scripts/client/game/action_executor.gd" id="2_gynul"]
@@ -102,14 +102,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xhyk"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2iokk"]
-next_pass = SubResource("StandardMaterial3D_5xhyk")
-blend_mode = 4
-albedo_color = Color(0.36464792, 0.6561391, 0.78606206, 1)
 
 [sub_resource type="Animation" id="Animation_2iokk"]
 length = 0.001
@@ -784,7 +776,7 @@ rotation_mode = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="PoliceSpawn_Path3D/PoliceSpawn_PathFollow3D"]
 transform = Transform3D(-4.370971e-08, 1, -8.742157e-08, -0.99999994, -4.3711385e-08, -8.742323e-08, -8.742323e-08, 8.742157e-08, 0.99999994, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_2iokk")
+visible = false
 size = Vector3(0.033203125, 0.22070313, 0.14257813)
 
 [node name="PoliceSpawnPath3D_AnimationPlayer" type="AnimationPlayer" parent="PoliceSpawn_Path3D"]

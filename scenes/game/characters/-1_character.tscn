@@ -7,6 +7,7 @@
 diffuse_mode = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n5ore"]
+render_priority = 1
 transparency = 1
 diffuse_mode = 3
 albedo_texture = ExtResource("2_n5ore")
