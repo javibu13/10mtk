@@ -238,3 +238,8 @@ func _transform_select_character_to_select_token_character(character: Enums.Char
 		var token_character_3d: TokenCharacter3D = game_root.board_3d.get_token_character_3d_by_character(character)
 		if token_character_3d:
 			select_token_character(token_character_3d)
+	else:
+		# If character selection is not allowed, it only move camera to the new selected tile tha is the one where the character is placed
+		var tile_3d_of_character: Tile3D = game_root.board_3d.get_tile3d_of_character(character)
+		if tile_3d_of_character: # If there is no Tile3D it means that character is moving from one to another or is not available in board anymore
+			select_tile(tile_3d_of_character)
