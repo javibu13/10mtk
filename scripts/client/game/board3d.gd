@@ -44,7 +44,7 @@ func get_tile3d_of_character(character: Enums.Character) -> Tile3D:
 				break
 	if not character_tile:
 		if character < 0:
-			Log.warn("Police not found in board")
+			Log.info("Police not found in board")
 		else:
 			Log.error("Character not found in board")
 	return character_tile

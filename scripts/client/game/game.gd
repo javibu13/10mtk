@@ -161,7 +161,7 @@ func can_be_killed(character_to_kill: Enums.Character, assassin: Enums.Character
 		return false
 	# Check if character_to_kill and assassin share tile
 	if character_to_kill in orthogonal_cross_of_tiles_of_assassin[0].characters.keys():
-		Log.pr("Allow knife kill")
+		Log.debug("Allow knife kill")
 		return true
 	# Check if the assassin is not alone in his tile because gun and sniper need this condition
 	if orthogonal_cross_of_tiles_of_assassin[0].characters.keys().size() != 1:
@@ -171,7 +171,7 @@ func can_be_killed(character_to_kill: Enums.Character, assassin: Enums.Character
 	for tile in orthogonal_cross_of_tiles_of_assassin:
 		characters_in_tiles_in_cross_arround_assassin.append_array(tile.characters.keys())
 	if character_to_kill in characters_in_tiles_in_cross_arround_assassin:
-		Log.pr("Allow gun kill")
+		Log.debug("Allow gun kill")
 		return true
 	# Check if assassin is placed in a sniper tile
 	if orthogonal_cross_of_tiles_of_assassin[0].type == Enums.TileType.SNIPER:
@@ -181,9 +181,9 @@ func can_be_killed(character_to_kill: Enums.Character, assassin: Enums.Character
 		for tile in orthogonal_extension_of_tiles_arround_assassin:
 			characters_in_tiles_in_extension_arround_assassin.append_array(tile.get_characters_and_police())
 		if character_to_kill in characters_in_tiles_in_extension_arround_assassin:
-			Log.pr("Allow sniper kill")
+			Log.debug("Allow sniper kill")
 			return true
-	Log.pr("Kill not allow")
+	Log.debug("Kill not allow")
 	return false
 
 
