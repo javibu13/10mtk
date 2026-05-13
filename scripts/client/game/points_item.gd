@@ -13,6 +13,6 @@ func _ready() -> void:
 
 func set_up(new_points: int, new_description: String):
 	points = new_points
-	points_label.text = str("+", points) if points > 0 else str("-", points)
+	points_label.text = str("+", points) if points > 0 else str(points)
 	description = new_description
 	description_label.text = description

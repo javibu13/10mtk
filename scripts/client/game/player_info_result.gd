@@ -5,8 +5,8 @@ const POINTS_SAFE_AND_SOUND := 20
 const POINTS_KILLED_OBJECTIVE := 10
 const POINTS_ARRESTED_PLAYER := 10
 const POINTS_KILLED_PLAYER := 30
-const POINTS_KILLED_INNOCENT := -10
-const POINTS_KILLED_POLICE := -1337
+const POINTS_KILLED_INNOCENT: int = -10
+const POINTS_KILLED_POLICE: int = -1337
 
 var player: Player
 var points_items: Array[PointsItem] = []
@@ -84,7 +84,7 @@ func generate_score():
 			points_items.append(points_item)
 			points_items_v_box_container.add_child(points_item)
 			points_item.set_up(POINTS_KILLED_INNOCENT, "Innocent victim killed")
-			total_score += POINTS_KILLED_OBJECTIVE
+			total_score += POINTS_KILLED_INNOCENT
 	for character_arrested in player.arrests:
 		# Add points for arresting an assassin (player)
 		var points_item: PointsItem = points_item_scene.instantiate()
