@@ -3,6 +3,7 @@ class_name ActionExecutor
 
 signal action_execution_finished
 signal continue_kill_action
+signal continue_investigate_action
 
 var current_action_type: Enums.Action = Enums.Action.NONE
 var characters_to_move: Array[Dictionary] = []
@@ -16,6 +17,7 @@ var current_police_spawning: Variant
 @onready var police_spawn_path_3d: Path3D = $"../PoliceSpawn_Path3D"
 @onready var police_spawn_path_follow_3d: PathFollow3D = $"../PoliceSpawn_Path3D/PoliceSpawn_PathFollow3D"
 @onready var police_spawn_path_3d_animation_player: AnimationPlayer = $"../PoliceSpawn_Path3D/PoliceSpawnPath3D_AnimationPlayer"
+@onready var investigate_scene_control: InvestigateScene = $"../CanvasLayer/InvestigateScene_Control"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -101,12 +103,23 @@ func set_up_kill_action_process(character_killed: Enums.Character) -> void:
 
 func set_up_ask_action_process(character_ask: Enums.Character, player_index_asked: int) -> void:
 	current_action_type = Enums.Action.ASK
-	# Check if the player's assassins has been discovered and it ir equal to character_ask
+	var is_correct := false
+	# Check if the player's assassins has been discovered and it is equal to character_ask
 	if ClientGlobalData.public_game.players[player_index_asked].assassin == character_ask:
+		is_correct = true
+	var arrest_tile_3d: Tile3D = game_root.board_3d.get_tile3d_of_character(character_ask)
+	var police_token_characters_3d: Array[TokenCharacter3D] = arrest_tile_3d.get_token_characters().filter(func(token_character: TokenCharacter3D): return token_character.character <= Enums.Character.POLICE_1)
+	var police_character: Enums.Character = police_token_characters_3d[0].character if not police_token_characters_3d.is_empty() else Enums.Character.POLICE_1
+	investigate_scene_control.start_anim(police_character, character_ask, ClientGlobalData.public_game.players[player_index_asked].user_name, is_correct)
+	await continue_investigate_action
+	if is_correct:
+		investigate_scene_control.jail_door_anim()
+		await continue_investigate_action
 		var player_info_panel: PlayerInfoPanel = game_root.hud_control.get_player_info_panel_by_player_index(player_index_asked)
 		player_info_panel.reveal_character(character_ask, Enums.PlayerStatus.ARRESTED)
-		var arrest_tile_3d: Tile3D = game_root.board_3d.get_tile3d_of_character(character_ask)
 		arrest_tile_3d.remove_token_character_3d(character_ask)
+	investigate_scene_control.hide_anim()
+	await continue_investigate_action
 	action_execution_finished.emit.call_deferred()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://2r8awemlrgmc"]
+[gd_scene load_steps=38 format=3 uid="uid://2r8awemlrgmc"]
 
 [ext_resource type="Script" uid="uid://bxqvpypk3xbba" path="res://scripts/client/game/game.gd" id="1_7qcb4"]
 [ext_resource type="Script" uid="uid://bmtimog66kbia" path="res://scripts/client/game/action_executor.gd" id="2_gynul"]
@@ -13,7 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://dfld1s4yllhvo" path="res://scenes/game/player_info_character.tscn" id="7_gg4pt"]
 [ext_resource type="Script" uid="uid://cxo3mn2x368wr" path="res://scripts/client/game/playerInfoPanel.gd" id="8_qf6a8"]
 [ext_resource type="PackedScene" uid="uid://l8p12gupl5vc" path="res://scenes/game/timer_control.tscn" id="10_56wml"]
+[ext_resource type="Texture2D" uid="uid://cio0x01vw3vg" path="res://textures/characters/-1_police.png" id="12_2iokk"]
+[ext_resource type="Script" uid="uid://daq8wu7v01vct" path="res://scripts/client/game/investigate_scene.gd" id="12_07vrc"]
+[ext_resource type="Texture2D" uid="uid://cpjf3nyqlhoqw" path="res://images/comic_speech_bubble.png" id="13_2kuj7"]
+[ext_resource type="Texture2D" uid="uid://cnag2o4nri44p" path="res://textures/characters/15_panda.png" id="13_vg8p7"]
 [ext_resource type="Script" uid="uid://cx8b1akve81vl" path="res://scripts/client/game/match_result.gd" id="14_2iokk"]
+[ext_resource type="Texture2D" uid="uid://b8raem8hljyyw" path="res://images/jail_door.png" id="15_vj8ay"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5xhyk"]
 panorama = ExtResource("3_60iot")
@@ -32,6 +37,358 @@ reflected_light_source = 2
 tonemap_white = 4.81
 fog_sky_affect = 0.04
 volumetric_fog_density = 0.426
+
+[sub_resource type="Animation" id="Animation_07vrc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background_ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.39215687)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/LeftCharacter_Control/Character_TextureRect:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer/RightCharacter_Control/Character_TextureRect:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(50, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer/RightCharacter_Control/JailDoor_TextureRect:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(585, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HBoxContainer/RightCharacter_Control/BubbleText_CenterContainer:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HBoxContainer/RightCharacter_Control/BubbleText_CenterContainer:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HBoxContainer/LeftCharacter_Control/BubbleText_CenterContainer:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HBoxContainer/LeftCharacter_Control/BubbleText_CenterContainer:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("HBoxContainer/LeftCharacter_Control/BubbleText_CenterContainer/Ask_RichTextLabel:visible_ratio")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("HBoxContainer/RightCharacter_Control/BubbleText_CenterContainer/Answer_RichTextLabel:visible_ratio")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("HBoxContainer:position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ysuoy"]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 1),
+"points": PackedFloat32Array(0, -0.24999997, 0.5036457, 0.3, -0.60437495, 650, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background_ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.39215687), Color(0, 0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide_self_and_continue"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vj8ay"]
+resource_name = "investigate"
+length = 3.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background_ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.39215687)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/LeftCharacter_Control/Character_TextureRect:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(1, 0, 0),
+"points": PackedFloat32Array(-530, 0, 0, 0, 0, -530, 0, 0, 0, 0, 0, -0.2, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.6025044)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer/RightCharacter_Control/Character_TextureRect:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(585, 0, 0, 0, 0, 585, 0, 0, 0, 0, 585, 0, 0, 0, 0, 50, -0.2, 0, 0.25, 0),
+"times": PackedFloat32Array(0.13333334, 0.33327556, 0.33333334, 0.7358377)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer/RightCharacter_Control/JailDoor_TextureRect:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(585, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HBoxContainer/RightCharacter_Control/BubbleText_CenterContainer:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.8666667, 2.2333336)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HBoxContainer/RightCharacter_Control/BubbleText_CenterContainer:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.8666667, 2.2333336)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HBoxContainer/LeftCharacter_Control/BubbleText_CenterContainer:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6888171, 1.0991232)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HBoxContainer/LeftCharacter_Control/BubbleText_CenterContainer:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6888171, 1.0991232)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("HBoxContainer/LeftCharacter_Control/BubbleText_CenterContainer/Ask_RichTextLabel:visible_ratio")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 1.3655455)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("HBoxContainer/RightCharacter_Control/BubbleText_CenterContainer/Answer_RichTextLabel:visible_ratio")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5333333, 2.9)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("HBoxContainer:position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath(".")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.13333334, 0.3, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"play_movement_sound"
+}, {
+"args": [],
+"method": &"play_movement_sound"
+}, {
+"args": [],
+"method": &"investigate_anim_ended"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_pbrru"]
+resource_name = "jail_door_close"
+length = 1.2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/RightCharacter_Control/JailDoor_TextureRect:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(585, -0.25, 0, 0.25, 0, 55, -0.10000001, 97.5, 0, 0),
+"times": PackedFloat32Array(0, 0.6)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_jail_door_sound"
+}, {
+"args": [],
+"method": &"investigate_anim_ended"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pbrru"]
+_data = {
+&"RESET": SubResource("Animation_07vrc"),
+&"hide": SubResource("Animation_ysuoy"),
+&"investigate": SubResource("Animation_vj8ay"),
+&"jail_door_close": SubResource("Animation_pbrru")
+}
 
 [sub_resource type="Gradient" id="Gradient_bqwap"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
@@ -154,6 +511,7 @@ _data = {
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_7qcb4")
+metadata/_edit_vertical_guides_ = [577.0]
 
 [node name="ActionExecutor" type="Node3D" parent="."]
 script = ExtResource("2_gynul")
@@ -589,6 +947,162 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="InvestigateScene_Control" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("12_07vrc")
+
+[node name="Background_ColorRect" type="ColorRect" parent="CanvasLayer/InvestigateScene_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InvestigateScene_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -0.00012207031
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="LeftCharacter_Control" type="Control" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Character_TextureRect" type="TextureRect" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer/LeftCharacter_Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -647.0
+offset_right = 522.0
+offset_bottom = 461.0
+grow_vertical = 0
+texture = ExtResource("12_2iokk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BubbleText_CenterContainer" type="CenterContainer" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer/LeftCharacter_Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 333.0
+offset_top = -628.0
+offset_right = 633.0
+offset_bottom = -437.99963
+grow_vertical = 0
+pivot_offset = Vector2(0, 190)
+
+[node name="Bubble_TextureRect" type="TextureRect" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer/LeftCharacter_Control/BubbleText_CenterContainer"]
+custom_minimum_size = Vector2(300, 190)
+layout_mode = 2
+texture = ExtResource("13_2kuj7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ask_RichTextLabel" type="RichTextLabel" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer/LeftCharacter_Control/BubbleText_CenterContainer"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 2
+theme = ExtResource("6_365ku")
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]¿John Doe?[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightCharacter_Control" type="Control" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Character_TextureRect" type="TextureRect" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer/RightCharacter_Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -647.0
+offset_right = 571.9983
+offset_bottom = 461.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("13_vg8p7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BubbleText_CenterContainer" type="CenterContainer" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer/RightCharacter_Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -629.0
+offset_top = -648.0
+offset_right = -329.0
+offset_bottom = -457.99963
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(300, 190)
+
+[node name="Bubble_TextureRect" type="TextureRect" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer/RightCharacter_Control/BubbleText_CenterContainer"]
+custom_minimum_size = Vector2(300, 190)
+layout_mode = 2
+texture = ExtResource("13_2kuj7")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="Answer_RichTextLabel" type="RichTextLabel" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer/RightCharacter_Control/BubbleText_CenterContainer"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 2
+theme = ExtResource("6_365ku")
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Maybe...[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JailDoor_TextureRect" type="TextureRect" parent="CanvasLayer/InvestigateScene_Control/HBoxContainer/RightCharacter_Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 585.0
+offset_top = -727.0
+offset_right = 1107.0007
+offset_bottom = 381.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("15_vj8ay")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/InvestigateScene_Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_pbrru")
+}
 
 [node name="MainUI_Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
