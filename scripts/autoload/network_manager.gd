@@ -45,6 +45,7 @@ func _ready():
 		else:
 			request_static_ip()
 			await static_ip_retrieved
+		get_tree().change_scene_to_file.call_deferred("res://scenes/LoginMenu.tscn")
 		await get_tree().create_timer(1.0).timeout  # Wait for server launch
 		create_client()
 		return
@@ -90,6 +91,10 @@ func create_client():
 	# Assign peer
 	multiplayer.multiplayer_peer = peer
 	is_server_mode = false
+	# Change timeout values
+	peer.host.service(0)
+	var enet_peer = peer.get_peer(1)
+	enet_peer.set_timeout(0, 30000, 30000)
 	# Notify client connection
 	Log.pr("Trying to connect to: ", ip_address, ":", port)
 	return true
@@ -99,6 +104,8 @@ func _on_peer_connected(id):
 	#Log.pr("Player connected: ", id)
 	server_print_msg.emit("Player connected: " + str(id))
 	player_connected.emit(id)
+	var enet_peer: ENetPacketPeer = multiplayer.multiplayer_peer.get_peer(id)
+	enet_peer.set_timeout(0, 30000, 30000)
 
 
 func _on_peer_disconnected(id):

@@ -66,7 +66,7 @@ func _ready() -> void:
 func _read_config_file():
 	var result = config_reader.load("user://.env.cfg")
 	if result != OK:
-		push_error("Config file not found")
+		push_error("Error during config file reading: ", error_string(result), " (Code: ", result, ")")
 		return
 	api_email.key = config_reader.get_value("api", "email_key", "")
 	api_email.secret = config_reader.get_value("api", "email_secret", "")

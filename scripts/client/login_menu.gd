@@ -66,6 +66,9 @@ func _ready() -> void:
 		_connection_to_server_successful()
 	SoundManager.play_main_menu_music()
 	SoundManager.resync_control_sounds()
+	if OS.has_feature("editor"):
+		email_login_line_edit.text = "test@test.com"
+		password_login_line_edit.text = "hola123"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
