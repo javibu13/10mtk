@@ -45,8 +45,11 @@ func client_send_new_turn(public_game_info: Dictionary):
 func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
 	Log.debug(turn_result_dict)
 	var turn_result: TurnResult = TurnResult.from_dict(turn_result_dict)
+	var client_id := multiplayer.get_remote_sender_id()
 	# Check if this is the player and action number expected to accept the turn_result and if the match_id is correct
-	# TODO: ↑
+	if not ServerGameData.games[match_id].private.players.any(func(player: Player): return player.client_id == client_id):
+		Log.warn("The client_id ", client_id, "tried to send a turn result for a game where they are not playing")
+		return
 	# Store turn in private game turn history
 	ServerGameData.games[match_id].private.turn_history.append(turn_result)
 	# Apply action from turn result
