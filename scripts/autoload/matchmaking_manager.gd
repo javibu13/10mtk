@@ -34,7 +34,6 @@ func server_join_client_to_quick_lobby():
 		client_update_joined_players_to_quick_lobby.rpc_id(client_id_joined_to_lobby, str(ServerGlobalData.lobbies[lobby_id].players.size(), "/", ServerGlobalData.lobbies[lobby_id].max_players))
 	# If the lobby is full, try to start game asking clients if they accept the match
 	if not is_space_available:
-		#TODO: Get id of clients in the lobby to ask for game start
 		NetworkManager.server_print_msg.emit(str("Lobby ", lobby_id, " is ready to start the match with players: ", ServerGlobalData.lobbies[lobby_id].players))
 		for client_id_joined_to_lobby in ServerGlobalData.lobbies[lobby_id].players:
 			client_request_accept_match_start.rpc_id(client_id_joined_to_lobby, COUNTDOWN_TIME)

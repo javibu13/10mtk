@@ -149,8 +149,8 @@ func remove_logged_in_user(client_id) -> void:
 # Check if given client_id is already joined to any lobby or game
 func check_client_id_already_joined_or_playing(client_id: int) -> bool:
 	var is_in_lobby = lobbies.values().any(func(lobby): return lobby.players.has(client_id))
-	#var is_in_game = false # TODO: Check if client_id is playing a game
-	return is_in_lobby
+	var is_in_game = ServerGameData.games.values().any(func(game: Game): return game.private.players.any(func(player: Player): return player.client_id == client_id))
+	return is_in_lobby or is_in_game
 
 
 # Get the oldest quick lobby id to fill up
