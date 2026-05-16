@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://2r8awemlrgmc"]
+[gd_scene load_steps=42 format=3 uid="uid://2r8awemlrgmc"]
 
 [ext_resource type="Script" uid="uid://bxqvpypk3xbba" path="res://scripts/client/game/game.gd" id="1_7qcb4"]
 [ext_resource type="Script" uid="uid://bmtimog66kbia" path="res://scripts/client/game/action_executor.gd" id="2_gynul"]
@@ -19,6 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://cnag2o4nri44p" path="res://textures/characters/15_panda.png" id="13_vg8p7"]
 [ext_resource type="Script" uid="uid://cx8b1akve81vl" path="res://scripts/client/game/match_result.gd" id="14_2iokk"]
 [ext_resource type="Texture2D" uid="uid://b8raem8hljyyw" path="res://images/jail_door.png" id="15_vj8ay"]
+[ext_resource type="Texture2D" uid="uid://c5fjrvvbvn25s" path="res://themes/style_boxes/settings_button_normal.svg" id="18_7st5e"]
+[ext_resource type="Texture2D" uid="uid://db3cpnwwghgcx" path="res://themes/style_boxes/settings_button_pressed.svg" id="19_olhyc"]
+[ext_resource type="Texture2D" uid="uid://dmy8auwr6263h" path="res://themes/style_boxes/settings_button_hover.svg" id="20_ib0i5"]
+[ext_resource type="PackedScene" uid="uid://dklssodcc8cok" path="res://scenes/SettingsMenu.tscn" id="21_y8ug0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5xhyk"]
 panorama = ExtResource("3_60iot")
@@ -1196,6 +1200,25 @@ text = "Continue"
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 24
+
+[node name="Settings_TextureButton" type="TextureButton" parent="CanvasLayer" groups=["buttons"]]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 94.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("18_7st5e")
+texture_pressed = ExtResource("19_olhyc")
+texture_hover = ExtResource("20_ib0i5")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="SettingsMenu" parent="CanvasLayer" instance=ExtResource("21_y8ug0")]
+visible = false
 
 [node name="LoadingScreen_Control" type="Control" parent="CanvasLayer"]
 visible = false

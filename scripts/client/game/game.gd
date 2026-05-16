@@ -33,13 +33,16 @@ var token_character_resource: Resource
 @onready var actions_panel: ActionsPanel = $CanvasLayer/HUD_Control/Actions_PanelContainer
 @onready var action_executor: ActionExecutor = $ActionExecutor
 @onready var match_result_control: PlayerResultControl = $CanvasLayer/MatchResult_Control
-
+@onready var settings_texture_button: TextureButton = $CanvasLayer/Settings_TextureButton
+@onready var settings_menu: SettingsMenu = $CanvasLayer/SettingsMenu
 
 
 func _ready() -> void:
 	SoundManager.play_in_game_music()
 	SoundManager.resync_control_sounds()
 	SoundManager.load_in_game_sfx()
+	settings_texture_button.pressed.connect(func(): settings_menu.show())
+	settings_menu.hide()
 	loading_screen_control.show()
 	match_result_control.hide()
 	set_up_ended.connect(_set_up_ended)

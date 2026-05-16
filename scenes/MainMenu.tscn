@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dj33iaayeuttc"]
+[gd_scene load_steps=23 format=3 uid="uid://dj33iaayeuttc"]
 
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="1_0ykhv"]
 [ext_resource type="Script" uid="uid://dj0xseni82by2" path="res://scripts/client/main_menu.gd" id="1_826wr"]
@@ -11,8 +11,12 @@
 [ext_resource type="Script" uid="uid://dycsrvmx5hnil" path="res://scripts/client/main_menu_game_buttons.gd" id="8_8a8k8"]
 [ext_resource type="Script" uid="uid://mf8vroyq1qj6" path="res://scripts/client/quick_match_menu.gd" id="10_7la6k"]
 [ext_resource type="Texture2D" uid="uid://c5fq4yh8shail" path="res://images/aim.svg" id="11_2nypq"]
+[ext_resource type="Texture2D" uid="uid://c5fjrvvbvn25s" path="res://themes/style_boxes/settings_button_normal.svg" id="11_8vx4p"]
 [ext_resource type="Texture2D" uid="uid://cnv6557f4q31" path="res://images/accepted_match.svg" id="12_l4mxc"]
+[ext_resource type="Texture2D" uid="uid://db3cpnwwghgcx" path="res://themes/style_boxes/settings_button_pressed.svg" id="12_tdapf"]
 [ext_resource type="Texture2D" uid="uid://trkq61gmkwia" path="res://images/rejected_match.svg" id="13_5faoh"]
+[ext_resource type="Texture2D" uid="uid://dmy8auwr6263h" path="res://themes/style_boxes/settings_button_hover.svg" id="13_v41fp"]
+[ext_resource type="PackedScene" uid="uid://dklssodcc8cok" path="res://scenes/SettingsMenu.tscn" id="14_7shrw"]
 
 [sub_resource type="Gradient" id="Gradient_l4mxc"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
@@ -278,6 +282,27 @@ text = "Return"
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+
+[node name="Settings_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 94.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("11_8vx4p")
+texture_pressed = ExtResource("12_tdapf")
+texture_hover = ExtResource("13_v41fp")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="SettingsMenu" parent="." instance=ExtResource("14_7shrw")]
+visible = false
+layout_mode = 1
 
 [node name="DialogBackground_ColorRect" type="ColorRect" parent="."]
 visible = false

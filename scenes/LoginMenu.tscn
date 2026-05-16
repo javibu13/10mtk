@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://chyfiqusrxmpw"]
+[gd_scene load_steps=10 format=3 uid="uid://chyfiqusrxmpw"]
 
 [ext_resource type="Script" uid="uid://cyh8s5sr3c7ir" path="res://scripts/client/login_menu.gd" id="1_bqwap"]
 [ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="2_c13uq"]
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="3_1oovu"]
+[ext_resource type="PackedScene" uid="uid://dklssodcc8cok" path="res://scenes/SettingsMenu.tscn" id="4_csu7k"]
+[ext_resource type="Texture2D" uid="uid://c5fjrvvbvn25s" path="res://themes/style_boxes/settings_button_normal.svg" id="5_41cwv"]
+[ext_resource type="Texture2D" uid="uid://db3cpnwwghgcx" path="res://themes/style_boxes/settings_button_pressed.svg" id="6_mnx4m"]
+[ext_resource type="Texture2D" uid="uid://dmy8auwr6263h" path="res://themes/style_boxes/settings_button_hover.svg" id="7_5si07"]
 
 [sub_resource type="Gradient" id="Gradient_c13uq"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
@@ -357,6 +361,27 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("2_c13uq")
 theme_override_font_sizes/font_size = 24
 text = "Return"
+
+[node name="Settings_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 94.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_41cwv")
+texture_pressed = ExtResource("6_mnx4m")
+texture_hover = ExtResource("7_5si07")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="SettingsMenu" parent="." instance=ExtResource("4_csu7k")]
+visible = false
+layout_mode = 1
 
 [node name="DialogBackground_ColorRect" type="ColorRect" parent="."]
 visible = false

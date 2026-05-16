@@ -13,7 +13,6 @@ config_version=5
 config/name="10' To Kill"
 run/main_scene="uid://bgjq54lggswx0"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-boot_splash/show_image=false
 config/icon="uid://dmp1sh6ydsa1o"
 
 [autoload]

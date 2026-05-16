@@ -29,6 +29,8 @@ var confirm_dialog: ConfirmationDialog = ConfirmationDialog.new()
 @onready var password_register_line_edit: LineEdit = $Register_VBoxContainer/PasswordGroup_VBoxContainer/Password_LineEdit
 @onready var password_validation_register_text: RichTextLabel = $Register_VBoxContainer/PasswordGroup_VBoxContainer/PasswordValidationText_RichTextLabel
 @onready var dialog_background_color_rect: ColorRect = $DialogBackground_ColorRect
+@onready var settings_texture_button: TextureButton = $Settings_TextureButton
+@onready var settings_menu: SettingsMenu = $SettingsMenu
 
 
 # Called when the node enters the scene tree for the first time.
@@ -66,6 +68,8 @@ func _ready() -> void:
 		_connection_to_server_successful()
 	SoundManager.play_main_menu_music()
 	SoundManager.resync_control_sounds()
+	settings_texture_button.pressed.connect(func(): settings_menu.show())
+	settings_menu.hide()
 	if OS.has_feature("editor"):
 		email_login_line_edit.text = "test@test.com"
 		password_login_line_edit.text = "hola123"

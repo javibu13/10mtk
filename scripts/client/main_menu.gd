@@ -6,6 +6,9 @@ extends Control
 @onready var quick_match_menu_v_box_container: VBoxContainer = $QuickMatchMenu_VBoxContainer
 @onready var dialog_background_color_rect: ColorRect = $DialogBackground_ColorRect
 @onready var countdown_quick_match_v_box_container: VBoxContainer = $CountdownQuickMatch_VBoxContainer
+@onready var settings_texture_button: TextureButton = $Settings_TextureButton
+@onready var settings_menu: SettingsMenu = $SettingsMenu
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +20,8 @@ func _ready() -> void:
 	countdown_quick_match_v_box_container.hide()
 	SoundManager.play_main_menu_music()
 	SoundManager.resync_control_sounds()
+	settings_texture_button.pressed.connect(func(): settings_menu.show())
+	settings_menu.hide()
 
 
 # Execute function to ask the server to end user's session and change to login view
