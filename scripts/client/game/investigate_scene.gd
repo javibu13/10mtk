@@ -1,6 +1,9 @@
 extends Control
 class_name InvestigateScene
 
+const AFFIRMATIVE_ANSWERS := ["Yes...", "Y-yes...", "I... I suppose so", "I'm affraid so", "Yes, officer...", "I won't deny it"]
+const NEGATIVE_ANSWERS := ["No!", "Nah", "No way!", "Not at all", "Nope", "Hell no!"]
+
 @onready var action_executor: ActionExecutor = $"../../ActionExecutor"
 @onready var police_character_texture_rect: TextureRect = $HBoxContainer/LeftCharacter_Control/Character_TextureRect
 @onready var character_texture_rect: TextureRect = $HBoxContainer/RightCharacter_Control/Character_TextureRect
@@ -31,7 +34,7 @@ func start_anim(police_character: Enums.Character, character_asked: Enums.Charac
 	police_ask_rich_text_label.text = str(player_user_name, "?")
 	character_texture_rect.texture = load(Enums.CHARACTER_INFO[character_asked].image_path)
 	character_texture_rect.flip_h = Enums.CHARACTER_INFO[character_asked].facing_direction == "right"
-	character_answer_rich_text_label.text = "Yes..." if is_correct_assassin else "No!" # TODO: Change to random similar answers 
+	character_answer_rich_text_label.text = AFFIRMATIVE_ANSWERS.pick_random() if is_correct_assassin else NEGATIVE_ANSWERS.pick_random()
 	animation_player.play("investigate")
 	self.show()
 
