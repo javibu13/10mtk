@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dj33iaayeuttc"]
+[gd_scene load_steps=24 format=3 uid="uid://dj33iaayeuttc"]
 
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="1_0ykhv"]
 [ext_resource type="Script" uid="uid://dj0xseni82by2" path="res://scripts/client/main_menu.gd" id="1_826wr"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d32j3g4mviarh" path="res://themes/style_boxes/main_menu_logout_texture_button_base.svg" id="2_ucygd"]
 [ext_resource type="Texture2D" uid="uid://c8xujkjtw67h7" path="res://themes/style_boxes/main_menu_logout_texture_button_pressed.svg" id="3_mipys"]
 [ext_resource type="Texture2D" uid="uid://bv1djar5kwiq" path="res://themes/style_boxes/main_menu_logout_texture_button_hover.svg" id="3_ucygd"]
+[ext_resource type="PackedScene" uid="uid://b8ufcssc2km2k" path="res://scenes/game/actions_panel_avatar_image.tscn" id="5_tdapf"]
 [ext_resource type="Script" uid="uid://dycsrvmx5hnil" path="res://scripts/client/main_menu_game_buttons.gd" id="8_8a8k8"]
 [ext_resource type="Script" uid="uid://mf8vroyq1qj6" path="res://scripts/client/quick_match_menu.gd" id="10_7la6k"]
 [ext_resource type="Texture2D" uid="uid://c5fq4yh8shail" path="res://images/aim.svg" id="11_2nypq"]
@@ -114,11 +115,15 @@ offset_right = 296.0
 offset_bottom = 85.0
 alignment = 1
 
-[node name="Avatar_Control" type="Control" parent="UserInfo_HBoxContainer"]
+[node name="Avatar_Control" parent="UserInfo_HBoxContainer" instance=ExtResource("5_tdapf")]
+layout_mode = 2
+
+[node name="Avatar_Control2" type="Control" parent="UserInfo_HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Avatar_TextureRect" type="TextureRect" parent="UserInfo_HBoxContainer/Avatar_Control"]
+[node name="Avatar_TextureRect" type="TextureRect" parent="UserInfo_HBoxContainer/Avatar_Control2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,7 +136,7 @@ texture = ExtResource("1_ow34m")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Border_TextureRect" type="TextureRect" parent="UserInfo_HBoxContainer/Avatar_Control"]
+[node name="Border_TextureRect" type="TextureRect" parent="UserInfo_HBoxContainer/Avatar_Control2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -342,8 +347,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -0.9575145
-offset_bottom = -0.95751953
+offset_top = -0.957517
+offset_bottom = -0.957517
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_2nypq")

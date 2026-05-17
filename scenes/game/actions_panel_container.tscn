@@ -326,6 +326,7 @@ visible = false
 layout_mode = 2
 theme = ExtResource("1_ieefh")
 theme_override_styles/normal = SubResource("StyleBoxTexture_63pli")
+alignment = 1
 
 [node name="ConfirmCancel_HBoxContainer" type="HBoxContainer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
 custom_minimum_size = Vector2(141, 61)
