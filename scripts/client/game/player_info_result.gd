@@ -1,12 +1,12 @@
 extends Control
 class_name PlayerInfoResult
 
-const POINTS_SAFE_AND_SOUND := 20
-const POINTS_KILLED_OBJECTIVE := 10
-const POINTS_ARRESTED_PLAYER := 10
-const POINTS_KILLED_PLAYER := 30
-const POINTS_KILLED_INNOCENT: int = -10
-const POINTS_KILLED_POLICE: int = -1337
+#const POINTS_SAFE_AND_SOUND := 20
+#const POINTS_KILLED_OBJECTIVE := 10
+#const POINTS_ARRESTED_PLAYER := 10
+#const POINTS_KILLED_PLAYER := 30
+#const POINTS_KILLED_INNOCENT: int = -10
+#const POINTS_KILLED_POLICE: int = -1337
 
 var player: Player
 var points_items: Array[PointsItem] = []
@@ -53,43 +53,43 @@ func generate_score():
 		var points_item: PointsItem = points_item_scene.instantiate()
 		points_items.append(points_item)
 		points_items_v_box_container.add_child(points_item)
-		points_item.set_up(POINTS_SAFE_AND_SOUND, "Safe and sound")
-		total_score += POINTS_SAFE_AND_SOUND
+		points_item.set_up(Enums.ScorePoints.POINTS_SAFE_AND_SOUND, "Safe and sound")
+		total_score += Enums.ScorePoints.POINTS_SAFE_AND_SOUND
 	for character_killed in player.kills:
 		if character_killed <= Enums.Character.POLICE_1:
 			# Add points (negatives) for killing a police
 			var points_item: PointsItem = points_item_scene.instantiate()
 			points_items.append(points_item)
 			points_items_v_box_container.add_child(points_item)
-			points_item.set_up(POINTS_KILLED_POLICE, "Police killed")
-			total_score += POINTS_KILLED_POLICE
+			points_item.set_up(Enums.ScorePoints.POINTS_KILLED_POLICE, "Police killed")
+			total_score += Enums.ScorePoints.POINTS_KILLED_POLICE
 		elif character_killed in player.objectives:
 			# Add points for killing an objective
 			var points_item: PointsItem = points_item_scene.instantiate()
 			points_items.append(points_item)
 			points_items_v_box_container.add_child(points_item)
-			points_item.set_up(POINTS_KILLED_OBJECTIVE, "Objective killed")
-			total_score += POINTS_KILLED_OBJECTIVE
+			points_item.set_up(Enums.ScorePoints.POINTS_KILLED_OBJECTIVE, "Objective killed")
+			total_score += Enums.ScorePoints.POINTS_KILLED_OBJECTIVE
 		elif ClientGlobalData.public_game.players.any(func(player_any: Player): return character_killed == player_any.assassin):
 			# Add points for killing an enemy assassin (player)
 			var player_killed: Player = ClientGlobalData.public_game.players[ClientGlobalData.public_game.players.find_custom(func(player_find: Player): return character_killed == player_find.assassin)]
 			var points_item: PointsItem = points_item_scene.instantiate()
 			points_items.append(points_item)
 			points_items_v_box_container.add_child(points_item)
-			points_item.set_up(POINTS_KILLED_PLAYER, "Other player's assassin killed (" + player_killed.user_name + ")")
-			total_score += POINTS_KILLED_PLAYER
+			points_item.set_up(Enums.ScorePoints.POINTS_KILLED_PLAYER, "Other player's assassin killed (" + player_killed.user_name + ")")
+			total_score += Enums.ScorePoints.POINTS_KILLED_PLAYER
 		else: 
 			# Add points (negative) for killing an innocent
 			var points_item: PointsItem = points_item_scene.instantiate()
 			points_items.append(points_item)
 			points_items_v_box_container.add_child(points_item)
-			points_item.set_up(POINTS_KILLED_INNOCENT, "Innocent victim killed")
-			total_score += POINTS_KILLED_INNOCENT
+			points_item.set_up(Enums.ScorePoints.POINTS_KILLED_INNOCENT, "Innocent victim killed")
+			total_score += Enums.ScorePoints.POINTS_KILLED_INNOCENT
 	for character_arrested in player.arrests:
 		# Add points for arresting an assassin (player)
 		var points_item: PointsItem = points_item_scene.instantiate()
 		points_items.append(points_item)
 		points_items_v_box_container.add_child(points_item)
-		points_item.set_up(POINTS_ARRESTED_PLAYER, "Other player's assassin arrested")
-		total_score += POINTS_ARRESTED_PLAYER
+		points_item.set_up(Enums.ScorePoints.POINTS_ARRESTED_PLAYER, "Other player's assassin arrested")
+		total_score += Enums.ScorePoints.POINTS_ARRESTED_PLAYER
 	total_points_number_label.text = str(total_score)

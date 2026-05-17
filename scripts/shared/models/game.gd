@@ -40,6 +40,8 @@ func add_character_kill_to_player(character: Enums.Character, player_index: int)
 
 ## Search among every player's assassin and objectives to check if the character is assigned to them. Updates public player if the character was assigned in private player and returns the info of which type of character assign was it. Enums.DiscoveredCharacter.NONE if the character was not assigned to any player 
 func try_to_discover_character(character: Enums.Character) -> Enums.DiscoveredCharacter:
+	if character <= Enums.Character.POLICE_1:
+		return Enums.DiscoveredCharacter.POLICE
 	for player in private.players:
 		if player.assassin == character:
 			public.players[player.index].assassin = character

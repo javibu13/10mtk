@@ -46,6 +46,8 @@ func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
 	Log.debug(turn_result_dict)
 	var turn_result: TurnResult = TurnResult.from_dict(turn_result_dict)
 	var client_id := multiplayer.get_remote_sender_id()
+	var player_db_id = ServerGlobalData.logged_in_users[client_id].id
+	var match_player = DatabaseManager.match_player.get_by_player_and_match(player_db_id, match_id)
 	# Check if this is the player and action number expected to accept the turn_result and if the match_id is correct
 	if not ServerGameData.games[match_id].private.players.any(func(player: Player): return player.client_id == client_id):
 		Log.warn("The client_id ", client_id, "tried to send a turn result for a game where they are not playing")
@@ -69,7 +71,21 @@ func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
 			ServerGameData.games[match_id].add_character_kill_to_player(turn_result.character, turn_result.player_index)
 			# Check if killed character was assigned as assassin or objective of any player to make it public
 			var killed_assign_type_character := ServerGameData.games[match_id].try_to_discover_character(turn_result.character)
-			# TODO: Store in DB the character kill for player
+			if killed_assign_type_character == Enums.DiscoveredCharacter.OBJECTIVE:
+				# Check if the objective is one of the player's objectives or not
+				if not ServerGameData.games[match_id].private.players.any(func(player: Player): return player.client_id == client_id and turn_result.character in player.objectives):
+					killed_assign_type_character = Enums.DiscoveredCharacter.NONE
+			var kill_points: int
+			match killed_assign_type_character:
+				Enums.DiscoveredCharacter.NONE:
+					kill_points = Enums.ScorePoints.POINTS_KILLED_INNOCENT
+				Enums.DiscoveredCharacter.OBJECTIVE:
+					kill_points = Enums.ScorePoints.POINTS_KILLED_OBJECTIVE
+				Enums.DiscoveredCharacter.ASSASSIN:
+					kill_points = Enums.ScorePoints.POINTS_KILLED_PLAYER
+				Enums.DiscoveredCharacter.POLICE:
+					kill_points = Enums.ScorePoints.POINTS_KILLED_POLICE
+			DatabaseManager.match_player_kill.create_new(match_player.id, turn_result.character, kill_points)
 			# Move characters from tile where kill took place to other different tiles
 			ServerGameData.games[match_id].public.board.move_characters_from_tile_to_random(tile_kill.location)
 			# Add police to the tile where kill took place
@@ -78,10 +94,9 @@ func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
 			# Check if asked player's assassin is the selected character
 			var is_assassin_discovered := ServerGameData.games[match_id].apply_ask_to_player(turn_result.player_index, turn_result.character, turn_result.asked_player_index)
 			if is_assassin_discovered:
-				# TODO: Store in DB the arrest
-				pass
+				DatabaseManager.match_player_arrest.create_new(match_player.id, turn_result.character, Enums.ScorePoints.POINTS_ARRESTED_PLAYER)
 	# Store in DB the turn result (if there was a kill, store the resulted characters' locations in board to know where the characters in the same tile of the kill went)
-	# TODO: ↑
+	DatabaseManager.turn.create_new(match_player.id, ServerGameData.games[match_id].private.turn_history.size(), turn_result.action_number, JSON.stringify(ServerGameData.games[match_id].public.to_dict()), turn_result.character)
 	# Check if any player have completed their 3 objectives or all players' assassins have been discovered (arrested or killed)
 	# # 3 objectives
 	if ServerGameData.games[match_id].public.check_any_player_all_objectives_dead():
@@ -108,6 +123,6 @@ func server_send_turn_result(match_id: int, turn_result_dict: Dictionary):
 	# Check public_game.status END
 	if ServerGameData.games[match_id].public.status == Enums.GameStatus.END:
 		# After last turn result sent and set public_game result as END, set everything and delete current game
-		# TODO: Store in DB the last info about game
+		DatabaseManager.match_game.set_end_time_by_id(match_id, Time.get_datetime_string_from_system(true))
 		Log.debug("Match ended!")
 		ServerGameData.games.erase(match_id)

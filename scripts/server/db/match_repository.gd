@@ -47,3 +47,13 @@ func update_map_display_by_id(match_id: int, new_map_display: Dictionary) -> Dic
 		RETURNING *;
 	""", [new_map_json, match_id])
 	return _db_manager.db.query_result[0] if not _db_manager.db.query_result.is_empty() else {}
+
+
+func set_end_time_by_id(match_id: int, new_end_time: String) -> Dictionary:
+	_db_manager.db.query_with_bindings("""
+	    UPDATE match
+	    SET end_time = ?
+		WHERE id = ?
+		RETURNING *;
+	""", [new_end_time, match_id])
+	return _db_manager.db.query_result[0] if not _db_manager.db.query_result.is_empty() else {}

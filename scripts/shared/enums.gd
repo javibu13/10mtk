@@ -71,6 +71,7 @@ enum DiscoveredCharacter {
 	NONE,
 	ASSASSIN,
 	OBJECTIVE,
+	POLICE,
 }
 
 enum GameStatus {
@@ -78,6 +79,15 @@ enum GameStatus {
 	ACTIVE,
 	ENDING,
 	END,
+}
+
+enum ScorePoints {
+	POINTS_SAFE_AND_SOUND = 20,
+	POINTS_KILLED_OBJECTIVE = 10,
+	POINTS_ARRESTED_PLAYER = 10,
+	POINTS_KILLED_PLAYER = 30,
+	POINTS_KILLED_INNOCENT = -10,
+	POINTS_KILLED_POLICE = -1337,
 }
 
 const CHARACTER_INFO: Dictionary[int, Dictionary] = {

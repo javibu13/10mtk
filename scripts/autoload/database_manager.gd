@@ -12,6 +12,9 @@ var player: PlayerRepository
 var match_game: MatchRepository
 var match_player: MatchPlayerRepository
 var match_player_objective: MatchPlayerObjectiveRepository
+var match_player_kill: MatchPlayerKillRepository
+var match_player_arrest: MatchPlayerArrestRepository
+var turn: TurnRepository
 
 
 # Initialize database, configure connection and try to create tables if they do not exist 
@@ -72,3 +75,6 @@ func _init_repositories() -> void:
 	match_game = MatchRepository.new(self)
 	match_player = MatchPlayerRepository.new(self)
 	match_player_objective = MatchPlayerObjectiveRepository.new(self)
+	match_player_kill = MatchPlayerKillRepository.new(self)
+	match_player_arrest = MatchPlayerArrestRepository.new(self)
+	turn = TurnRepository.new(self)
