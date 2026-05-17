@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dj33iaayeuttc"]
+[gd_scene load_steps=28 format=3 uid="uid://dj33iaayeuttc"]
 
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="1_0ykhv"]
 [ext_resource type="Script" uid="uid://dj0xseni82by2" path="res://scripts/client/main_menu.gd" id="1_826wr"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://c8xujkjtw67h7" path="res://themes/style_boxes/main_menu_logout_texture_button_pressed.svg" id="3_mipys"]
 [ext_resource type="Texture2D" uid="uid://bv1djar5kwiq" path="res://themes/style_boxes/main_menu_logout_texture_button_hover.svg" id="3_ucygd"]
 [ext_resource type="PackedScene" uid="uid://b8ufcssc2km2k" path="res://scenes/game/actions_panel_avatar_image.tscn" id="5_tdapf"]
+[ext_resource type="Texture2D" uid="uid://cwllxx5y78y4a" path="res://themes/style_boxes/howtoplay_button_normal.svg" id="5_viowm"]
+[ext_resource type="Texture2D" uid="uid://ctitm2u358r8r" path="res://themes/style_boxes/howtoplay_button_pressed.svg" id="6_1n6yq"]
+[ext_resource type="Texture2D" uid="uid://b43fqdr2ls13t" path="res://themes/style_boxes/howtoplay_button_hover.svg" id="7_yovvs"]
 [ext_resource type="Script" uid="uid://dycsrvmx5hnil" path="res://scripts/client/main_menu_game_buttons.gd" id="8_8a8k8"]
 [ext_resource type="Script" uid="uid://mf8vroyq1qj6" path="res://scripts/client/quick_match_menu.gd" id="10_7la6k"]
 [ext_resource type="Texture2D" uid="uid://c5fq4yh8shail" path="res://images/aim.svg" id="11_2nypq"]
@@ -18,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://trkq61gmkwia" path="res://images/rejected_match.svg" id="13_5faoh"]
 [ext_resource type="Texture2D" uid="uid://dmy8auwr6263h" path="res://themes/style_boxes/settings_button_hover.svg" id="13_v41fp"]
 [ext_resource type="PackedScene" uid="uid://dklssodcc8cok" path="res://scenes/SettingsMenu.tscn" id="14_7shrw"]
+[ext_resource type="PackedScene" uid="uid://dauwsao4h8egs" path="res://scenes/HowToPlay.tscn" id="15_1n6yq"]
 
 [sub_resource type="Gradient" id="Gradient_l4mxc"]
 offsets = PackedFloat32Array(0, 0.8103448, 1)
@@ -104,6 +108,23 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_ucygd")
 texture_pressed = ExtResource("3_mipys")
 texture_hover = ExtResource("3_ucygd")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="HowToPlay_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -123.06543
+offset_right = 68.0
+offset_bottom = -12.286133
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_viowm")
+texture_pressed = ExtResource("6_1n6yq")
+texture_hover = ExtResource("7_yovvs")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -287,6 +308,9 @@ text = "Return"
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+
+[node name="HowToPlayMenu" parent="." instance=ExtResource("15_1n6yq")]
+layout_mode = 1
 
 [node name="Settings_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
 layout_mode = 1

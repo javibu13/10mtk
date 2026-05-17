@@ -8,6 +8,8 @@ extends Control
 @onready var countdown_quick_match_v_box_container: VBoxContainer = $CountdownQuickMatch_VBoxContainer
 @onready var settings_texture_button: TextureButton = $Settings_TextureButton
 @onready var settings_menu: SettingsMenu = $SettingsMenu
+@onready var how_to_play_texture_button: TextureButton = $HowToPlay_TextureButton
+@onready var how_to_play_menu: Control = $HowToPlayMenu
 @onready var avatar_control: ActionsPanelAvatar = $UserInfo_HBoxContainer/Avatar_Control
 
 
@@ -23,6 +25,8 @@ func _ready() -> void:
 	SoundManager.resync_control_sounds()
 	settings_texture_button.pressed.connect(func(): settings_menu.show())
 	settings_menu.hide()
+	how_to_play_texture_button.pressed.connect(func(): how_to_play_menu.show())
+	how_to_play_menu.hide()
 	var random_character = Enums.Character.values().pick_random()
 	avatar_control.set_character(random_character if random_character != 0 else Enums.Character.TIGER)
 
