@@ -61,7 +61,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CreditsScene_VBoxContainer"]
-custom_minimum_size = Vector2(800, 4000)
+custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
