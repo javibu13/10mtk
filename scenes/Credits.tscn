@@ -1,0 +1,934 @@
+[gd_scene load_steps=5 format=3 uid="uid://du1vewo5dltaa"]
+
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_spvsy"]
+[ext_resource type="Script" uid="uid://cdhhb1bfgi0f4" path="res://scripts/client/credits_menu.gd" id="2_spvsy"]
+
+[sub_resource type="Gradient" id="Gradient_l4mxc"]
+offsets = PackedFloat32Array(0, 0.8103448, 1)
+colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a5etv"]
+gradient = SubResource("Gradient_l4mxc")
+
+[node name="Credits_Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_spvsy")
+script = ExtResource("2_spvsy")
+
+[node name="Background_ColorRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 2.2117962e-05
+offset_right = 647.9999
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_a5etv")
+
+[node name="CreditsScene_VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="HSeparator" type="HSeparator" parent="CreditsScene_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CreditsTitle_RichTextLabel" type="RichTextLabel" parent="CreditsScene_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 52
+theme_override_font_sizes/bold_font_size = 52
+bbcode_enabled = true
+text = "[b]Credits[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CreditsScene_VBoxContainer"]
+custom_minimum_size = Vector2(800, 4000)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Credits_VBoxContainer" type="VBoxContainer" parent="CreditsScene_VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="DigitalAdaptationTitle1_RichTextLabel" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]DIGITAL ADAPTATION[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeadDevelopmentTitle2_RichTextLabel" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Lead Development & Programming[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeadDevelopmentTitle3_RichTextLabel" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Javibu13
+[i]Javier Sanz Moliné[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Big_HSeparator" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="OriginalBoardGameTitle1_RichTextLabel2" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]ORIGINAL BOARD GAME[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OriginalBoardGameDesignTitle2_RichTextLabel2" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Original Game Design & Concept[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OriginalBoardGameDesignTitle3_RichTextLabel2" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Benoit Bannier
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="OriginalBoardGameArtworkTitle2_RichTextLabel3" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Original Artwork & Illustrations[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OriginalBoardGameArtworkTitle3_RichTextLabel3" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Pauline Detraz
+[i]https://paulinedetraz.fr/[/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Big_HSeparator2" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="GraphicsTitle1_RichTextLabel3" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]GRAPHIC ASSETS & UI[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OriginalImagesTitle2_RichTextLabel4" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Logo, Character & Tile images [/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OriginalImagesTitle3_RichTextLabel4" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Extracted from the original boardgame \"10' to Kill\"
+[i]https://www.laboitedejeu.fr/en/10-to-kill/[/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator2" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="CustomUITitle2_RichTextLabel5" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Login, Main Menu & In Game UI[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CustomUITitle3_RichTextLabel5" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Javibu13
+[i]Javier Sanz Moliné[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator3" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="KenneyTitle2_RichTextLabel6" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Settings, How To Play, Credits & Logout button icons[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KenneyTitle3_RichTextLabel6" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Kenney
+[i]https://kenney.nl/assets/game-icons[/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Big_HSeparator3" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="3D&AnimationTitle1_RichTextLabel4" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]3D & ANIMATION[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="3DModeler&AnimationTitle2_RichTextLabel7" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]3D Modeler & 2D/3D Animator [/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="3DModeler&AnimationTitle3_RichTextLabel7" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Javibu13
+[i]Javier Sanz Moliné[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Big_HSeparator4" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MusicTitle1_RichTextLabel5" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]MUSIC[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuMusicTitle2_RichTextLabel8" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Login & Main Menu Music[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuMusicTitle3_RichTextLabel8" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Trouble Makers\" by Matthew Pablo
+[i]https://matthewpablo.com/[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator4" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="InGameMusicTitle2_RichTextLabel9" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]In Game Music[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InGameMusicTitle3_RichTextLabel9" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Midnight on Miller Street\" by Thor Arisland
+[i]https://tcarisland.no/[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Big_HSeparator5" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SoundEffectsTitle1_RichTextLabel6" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]SOUND EFFECTS[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsTitle2_RichTextLabel12" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Buttons[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsTitle3_RichTextLabel12" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Kenney
+[i]https://kenney.nl/assets/game-icons[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator14" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ReloadingWeaponTitle2_RichTextLabel10" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Reloading Weapon[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReloadingWeaponTitle3_RichTextLabel10" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Guns\" by Gary (submitted by qubodup)
+[i]http://fossilrecords.net/ - https://opengameart.org/content/handling-guns[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator6" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="CameraMoveTitle2_RichTextLabel11" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Camera Movement[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CameraMoveTitle3_RichTextLabel11" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Epic Whoosh 002\" by CreatorsHome
+[i]https://pixabay.com/users/creatorshome-49707711/[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator7" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="CharacterMoveTitle2_RichTextLabel12" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Character Movement[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterMoveTitle3_RichTextLabel12" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Whoosh Short Realistic\" by Virtual_Vibes
+[i]https://pixabay.com/users/virtual_vibes-51361309/[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator8" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="CountdownTitle2_RichTextLabel13" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Countdown Beeps[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountdownTitle3_RichTextLabel13" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Bomb Countdown Beeps\" by snakebarney (Freesound)
+[i]https://pixabay.com/users/freesound_community-46691455/[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator9" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="PanelTitle2_RichTextLabel14" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Panel Movement[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelTitle3_RichTextLabel14" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Quick Whoosh FX\" by Virtual_Vibes
+[i]https://pixabay.com/users/virtual_vibes-51361309/[/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator10" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="PoliceSirenTitle2_RichTextLabel15" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Police Siren[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PoliceSirenTitle3_RichTextLabel15" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Police Siren\" by DRAGON-STUDIO
+[i]https://pixabay.com/users/dragon-studio-38165424/[/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator11" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TimeoutTitle2_RichTextLabel16" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Timeout Whistle[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeoutTitle3_RichTextLabel16" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Referee whistle blow, gymnasium\" by SpliceSound (Freesound)
+[i]https://pixabay.com/users/freesound_community-46691455/[/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator12" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="AcceptedMatchTitle2_RichTextLabel17" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Accepted Match[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceptedMatchTitle3_RichTextLabel17" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Gun Shots From a Distance (5)\" by FilmmakersManual (Freesound)
+[i]https://pixabay.com/users/freesound_community-46691455/[/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator13" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="RejectedMatchTitle2_RichTextLabel18" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Rejected Match[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RejectedMatchTitle3_RichTextLabel18" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "\"Wrong\" by TheBuilder15 (Freesound)
+[i]https://pixabay.com/users/freesound_community-46691455/[/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Big_HSeparator6" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SpecialThanksTitle1_RichTextLabel7" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]SPECIAL THANKS[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OriginalGameTitle2_RichTextLabel19" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Original Boardgame Creators[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OriginalGameTitle3_RichTextLabel19" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Benoit Bannier & Pauline Detraz"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator15" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="OriginalGamePublisherTitle2_RichTextLabel20" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Original Boardgame Spanish Publisher[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OriginalGamePublisherTitle3_RichTextLabel20" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Zacatrus
+[i]https://zacatrus.es/[/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator16" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="PlaytestTitle2_RichTextLabel21" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Playtesting & Feedback[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlaytestTitle3_RichTextLabel21" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "Mgoon13, Zhuny, TBD"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Small_HSeparator17" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="WifeTitle2_RichTextLabel22" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Moral Support & Endless Patience[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WifeTitle3_RichTextLabel22" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "My wonderful wife, Mon, for always believing in me 
+and for always keeping me motivated"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Big_HSeparator18" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="OriginalObjectiveTitle3_RichTextLabel23" type="RichTextLabel" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "This project has been developed as the final project for the Advanced Diploma in Multiplatform Application Development"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 131
+
+[node name="Big_HSeparator19" type="HSeparator" parent="CreditsScene_VBoxContainer/ScrollContainer/Credits_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="Return_Button" type="Button" parent="CreditsScene_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(150, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Return"
+
+[node name="HSeparator3" type="HSeparator" parent="CreditsScene_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
