@@ -10,7 +10,7 @@ const COUNTDOWN_TIME := 10
 
 # Request for server to join client to a quick type lobby
 @rpc("any_peer", "call_remote", "reliable")
-func server_join_client_to_quick_lobby():
+func server_join_client_to_quick_lobby(quick_lobby_type: Enums.QuickLobbyType = Enums.QuickLobbyType.RANDOM):
 	# Get the ID of the client who requested the server process
 	var client_id := multiplayer.get_remote_sender_id()
 	# Check if client_id is free to be added to some lobby
@@ -19,10 +19,14 @@ func server_join_client_to_quick_lobby():
 		client_join_client_to_quick_lobby_response.rpc_id(client_id, false, error_message)
 		return
 	# Get available lobby or create new if none is available
-	var lobby_id = ServerGlobalData.get_quick_lobby_available()
+	var lobby_id = ServerGlobalData.get_quick_lobby_available(quick_lobby_type)
 	if not lobby_id:
-		# Create new lobby with the max default players
-		lobby_id = ServerGlobalData.create_new_lobby(ServerGlobalData.LobbyType.QUICK)
+		# Create new lobby with the specified number of players in QuickLobbyType or with max default players if it was RANDOM
+		if quick_lobby_type != Enums.QuickLobbyType.RANDOM:
+			var max_players = str(Enums.QuickLobbyType.find_key(quick_lobby_type)).split("_")[1].to_int()
+			lobby_id = ServerGlobalData.create_new_lobby(ServerGlobalData.LobbyType.QUICK, max_players)
+		else:
+			lobby_id = ServerGlobalData.create_new_lobby(ServerGlobalData.LobbyType.QUICK)
 		NetworkManager.server_print_msg.emit(str("New lobby created: ", lobby_id))
 	# Add client to lobby
 	var is_space_available = ServerGlobalData.add_player_to_lobby(client_id, lobby_id)

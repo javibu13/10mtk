@@ -1,6 +1,13 @@
 class_name Enums
 extends RefCounted
 
+enum QuickLobbyType {
+	RANDOM = 0,
+	PLAYERS_2 = 1,
+	PLAYERS_3 = 2,
+	PLAYERS_4 = 3,
+}
+
 enum Character {
 	POLICE_1 = -1,
 	POLICE_2 = -2,

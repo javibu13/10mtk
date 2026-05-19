@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dj33iaayeuttc"]
+[gd_scene load_steps=35 format=3 uid="uid://dj33iaayeuttc"]
 
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="1_0ykhv"]
 [ext_resource type="Script" uid="uid://dj0xseni82by2" path="res://scripts/client/main_menu.gd" id="1_826wr"]
@@ -25,6 +25,9 @@
 [ext_resource type="Texture2D" uid="uid://dmy8auwr6263h" path="res://themes/style_boxes/settings_button_hover.svg" id="13_v41fp"]
 [ext_resource type="PackedScene" uid="uid://dklssodcc8cok" path="res://scenes/SettingsMenu.tscn" id="14_7shrw"]
 [ext_resource type="PackedScene" uid="uid://dauwsao4h8egs" path="res://scenes/HowToPlay.tscn" id="15_1n6yq"]
+[ext_resource type="Texture2D" uid="uid://cjcjd3gqrljt4" path="res://themes/style_boxes/main_menu_arrow_left_normal.svg" id="17_duata"]
+[ext_resource type="Texture2D" uid="uid://dgae4rdku0jxl" path="res://themes/style_boxes/main_menu_arrow_left_pressed.svg" id="18_lw0hr"]
+[ext_resource type="Texture2D" uid="uid://c5vqfkqhbmhbp" path="res://themes/style_boxes/main_menu_arrow_left_hover.svg" id="19_gnvml"]
 [ext_resource type="PackedScene" uid="uid://du1vewo5dltaa" path="res://scenes/Credits.tscn" id="19_hm0al"]
 
 [sub_resource type="Gradient" id="Gradient_l4mxc"]
@@ -235,8 +238,22 @@ layout_mode = 2
 theme_override_constants/separation = 28
 alignment = 1
 
-[node name="QuickMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer" groups=["buttons"]]
-custom_minimum_size = Vector2(200, 69)
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="QuickMatchLeftArrowTextureButton" type="TextureButton" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture_normal = ExtResource("17_duata")
+texture_pressed = ExtResource("18_lw0hr")
+texture_hover = ExtResource("19_gnvml")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="QuickMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(210, 69)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
@@ -244,8 +261,18 @@ theme = ExtResource("1_yqorp")
 theme_override_font_sizes/font_size = 32
 text = "Quick Match"
 
+[node name="QuickMatchRightArrowTextureButton" type="TextureButton" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture_normal = ExtResource("17_duata")
+texture_pressed = ExtResource("18_lw0hr")
+texture_hover = ExtResource("19_gnvml")
+ignore_texture_size = true
+stretch_mode = 5
+flip_h = true
+
 [node name="CreateMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer" groups=["buttons"]]
-custom_minimum_size = Vector2(200, 69)
+custom_minimum_size = Vector2(210, 69)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
@@ -255,7 +282,7 @@ disabled = true
 text = "Create Match"
 
 [node name="JoinMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer" groups=["buttons"]]
-custom_minimum_size = Vector2(200, 69)
+custom_minimum_size = Vector2(210, 69)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2

@@ -10,7 +10,7 @@ var manual_rejected := false
 @onready var info_text_label: RichTextLabel = $QuickMatchInfo_VBoxContainer/Info_RichTextLabel
 @onready var return_button: Button = $QuickMatchInfo_VBoxContainer/Return_Button
 @onready var main_menu_buttons_v_box_container: VBoxContainer = $"../MainMenuButtons_VBoxContainer"
-@onready var quick_match_button: Button = $"../MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/QuickMatch_Button"
+@onready var quick_match_button: Button = $"../MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer/QuickMatch_Button"
 @onready var log_out_button: TextureButton = $"../LogOut_TextureButton"
 @onready var animation_player: AnimationPlayer = $"../CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/Aim_TextureRect/AnimationPlayer"
 @onready var aim_texture_rect: TextureRect = $"../CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/Aim_TextureRect"
@@ -37,13 +37,13 @@ func _ready() -> void:
 	MatchmakingManager.change_to_match.connect(_change_to_game_scene)
 
 
-func initialize() -> void:
+func initialize(quick_lobby_type: Enums.QuickLobbyType = Enums.QuickLobbyType.RANDOM) -> void:
 	return_button.disabled = false
 	info_text_label.text = waiting_for_players_text
 	info_text_label.show()
 	waiting_effect_timer.paused = false
 	waiting_effect_timer.start()
-	MatchmakingManager.server_join_client_to_quick_lobby.rpc_id(1)
+	MatchmakingManager.server_join_client_to_quick_lobby.rpc_id(1, quick_lobby_type)
 
 
 func _update_waiting_effect() -> void:

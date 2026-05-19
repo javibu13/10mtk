@@ -5,7 +5,7 @@ enum LobbyType {
 	CUSTOM,
 }
 
-const MAX_PLAYERS_PER_GAME = 2
+const DEFAULT_MAX_PLAYERS_PER_GAME = 2
 const VERSION : String = "v0.0.1"
 
 var http_request: HTTPRequest = HTTPRequest.new()
@@ -154,10 +154,16 @@ func check_client_id_already_joined_or_playing(client_id: int) -> bool:
 
 
 # Get the oldest quick lobby id to fill up
-func get_quick_lobby_available() -> String:
+func get_quick_lobby_available(quick_lobby_type: Enums.QuickLobbyType = Enums.QuickLobbyType.RANDOM) -> String:
 	var lobby_id := ""
+	var quick_lobby_type_max_players: int = 0
+	if quick_lobby_type != Enums.QuickLobbyType.RANDOM:
+		var quick_lobby_type_key: String = Enums.QuickLobbyType.find_key(quick_lobby_type)
+		quick_lobby_type_max_players = quick_lobby_type_key.split("_")[1].to_int()
 	for available_lobby_id in available_lobbies_quick:
 		if lobbies.has(available_lobby_id) and lobbies[available_lobby_id].players.size() < lobbies[available_lobby_id].max_players:
+			if quick_lobby_type_max_players > 0 and quick_lobby_type_max_players != lobbies[available_lobby_id].max_players:
+				continue
 			lobby_id = available_lobby_id
 			break
 	return lobby_id
@@ -191,7 +197,7 @@ func get_lobby_of_client(client_id: int) -> String:
 
 
 # Create new lobby and return its id
-func create_new_lobby(type: LobbyType, max_players: int = MAX_PLAYERS_PER_GAME) -> String:
+func create_new_lobby(type: LobbyType, max_players: int = DEFAULT_MAX_PLAYERS_PER_GAME) -> String:
 	var lobby_id = Utils.generate_uuid()
 	lobbies[lobby_id] = {
 		"players": [],
