@@ -13,6 +13,8 @@ extends Control
 @onready var credits_texture_button: TextureButton = $Credits_TextureButton
 @onready var credits_menu: Control = $CreditsMenu
 @onready var avatar_control: ActionsPanelAvatar = $UserInfo_HBoxContainer/Avatar_Control
+@onready var character_left_background_texture_rect: TextureRect = $CharacterLeftBackground_TextureRect
+@onready var character_right_background_texture_rect: TextureRect = $CharacterRightBackground_TextureRect
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +33,7 @@ func _ready() -> void:
 	how_to_play_menu.hide()
 	credits_texture_button.pressed.connect(func(): credits_menu.show())
 	credits_menu.hide()
+	_set_up_background_characters(ClientGlobalData.character_left, ClientGlobalData.character_right)
 	var random_character = Enums.Character.values().pick_random()
 	avatar_control.set_character(random_character if random_character != 0 else Enums.Character.TIGER)
 
@@ -39,3 +42,20 @@ func _ready() -> void:
 func _logout() -> void:
 	AuthManager.server_log_out.rpc_id(1)
 	get_tree().change_scene_to_file("res://scenes/LoginMenu.tscn")
+
+
+func _set_up_background_characters(stored_character_left: int, stored_character_right: int) -> void:
+	var available_characters_array = Enums.Character.values()
+	available_characters_array.erase(0)
+	var character_left = available_characters_array.pick_random()
+	available_characters_array.erase(character_left)
+	var character_right = available_characters_array.pick_random()
+	if stored_character_left != 0 and stored_character_right != 0:
+		character_left = stored_character_left
+		character_right = stored_character_right
+	var character_left_info = Enums.CHARACTER_INFO[character_left]
+	var character_right_info = Enums.CHARACTER_INFO[character_right]
+	character_left_background_texture_rect.texture = load(character_left_info.image_path)
+	character_left_background_texture_rect.flip_h = character_left_info.facing_direction == "left"
+	character_right_background_texture_rect.texture = load(character_right_info.image_path)
+	character_right_background_texture_rect.flip_h = character_right_info.facing_direction == "right"

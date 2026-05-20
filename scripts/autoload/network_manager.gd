@@ -35,6 +35,7 @@ func _ready():
 		create_server()
 		return
 	if "--client" in args:
+		get_tree().change_scene_to_file.call_deferred("res://scenes/LoginMenu.tscn")
 		Log.pr("Starting as CLIENT")
 		if "--port" in args:
 			var port_index: int = args.find("--port")
@@ -45,7 +46,6 @@ func _ready():
 		else:
 			request_static_ip()
 			await static_ip_retrieved
-		get_tree().change_scene_to_file.call_deferred("res://scenes/LoginMenu.tscn")
 		await get_tree().create_timer(1.0).timeout  # Wait for server launch
 		create_client()
 		return

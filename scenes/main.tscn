@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://bgjq54lggswx0"]
+[gd_scene load_steps=3 format=3 uid="uid://bgjq54lggswx0"]
+
+[sub_resource type="Gradient" id="Gradient_c13uq"]
+offsets = PackedFloat32Array(0, 0.8103448, 1)
+colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sgp6g"]
+gradient = SubResource("Gradient_c13uq")
 
 [node name="Main" type="Node"]
+
+[node name="DialogBackground_ColorRect2" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 2.2117962e-05
+offset_right = 647.9999
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+size_flags_vertical = 3
+texture = SubResource("GradientTexture1D_sgp6g")

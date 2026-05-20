@@ -14,6 +14,8 @@ var lobby_size_status: String = ""
 var match_id: int = 0
 var public_game: PublicGame
 var is_local_player_turn: bool = false
+var character_left: int
+var character_right: int
 
 
 func storeUserInfo(user_info_to_store: Dictionary):

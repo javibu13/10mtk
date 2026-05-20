@@ -1,11 +1,13 @@
-[gd_scene load_steps=35 format=3 uid="uid://dj33iaayeuttc"]
+[gd_scene load_steps=37 format=3 uid="uid://dj33iaayeuttc"]
 
 [ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="1_0ykhv"]
 [ext_resource type="Script" uid="uid://dj0xseni82by2" path="res://scripts/client/main_menu.gd" id="1_826wr"]
 [ext_resource type="Texture2D" uid="uid://cpc3qg5u50dii" path="res://images/main_menu_avatar_placeholder.svg" id="1_ow34m"]
 [ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_yqorp"]
+[ext_resource type="Texture2D" uid="uid://vkldgsanukie" path="res://textures/characters/6_tiger.png" id="2_gnvml"]
 [ext_resource type="Texture2D" uid="uid://4q3u6wnihtae" path="res://images/main_menu_avatar_border.svg" id="2_l72w3"]
 [ext_resource type="Texture2D" uid="uid://d32j3g4mviarh" path="res://themes/style_boxes/main_menu_logout_texture_button_base.svg" id="2_ucygd"]
+[ext_resource type="Texture2D" uid="uid://dtsijsy7rlsud" path="res://textures/characters/7_mouse.png" id="3_d3xvo"]
 [ext_resource type="Texture2D" uid="uid://c8xujkjtw67h7" path="res://themes/style_boxes/main_menu_logout_texture_button_pressed.svg" id="3_mipys"]
 [ext_resource type="Texture2D" uid="uid://bv1djar5kwiq" path="res://themes/style_boxes/main_menu_logout_texture_button_hover.svg" id="3_ucygd"]
 [ext_resource type="PackedScene" uid="uid://b8ufcssc2km2k" path="res://scenes/game/actions_panel_avatar_image.tscn" id="5_tdapf"]
@@ -97,6 +99,52 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 1.5707964
 texture = SubResource("GradientTexture1D_0ykhv")
+
+[node name="CharacterLeftBackground_TextureRect" type="TextureRect" parent="."]
+clip_children = 1
+layout_mode = 0
+offset_left = -106.0
+offset_right = 467.0
+offset_bottom = 1041.0
+texture = ExtResource("2_gnvml")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CharacterLeftBackground_TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.98, 0.89474, 0.8036, 0.7058824)
+metadata/_edit_lock_ = true
+
+[node name="CharacterRightBackground_TextureRect" type="TextureRect" parent="."]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -463.0
+offset_right = 110.0
+offset_bottom = 1041.0
+grow_horizontal = 0
+texture = ExtResource("3_d3xvo")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CharacterRightBackground_TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.98, 0.89474, 0.8036, 0.7058824)
+metadata/_edit_lock_ = true
 
 [node name="LogOut_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
 layout_mode = 1
@@ -243,7 +291,7 @@ layout_mode = 2
 theme_override_constants/separation = 22
 alignment = 1
 
-[node name="QuickMatchLeftArrowTextureButton" type="TextureButton" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer"]
+[node name="QuickMatchLeftArrowTextureButton" type="TextureButton" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 texture_normal = ExtResource("17_duata")
@@ -261,7 +309,7 @@ theme = ExtResource("1_yqorp")
 theme_override_font_sizes/font_size = 32
 text = "Quick Match"
 
-[node name="QuickMatchRightArrowTextureButton" type="TextureButton" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer"]
+[node name="QuickMatchRightArrowTextureButton" type="TextureButton" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 texture_normal = ExtResource("17_duata")

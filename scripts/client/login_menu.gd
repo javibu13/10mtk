@@ -18,6 +18,7 @@ var confirm_dialog: ConfirmationDialog = ConfirmationDialog.new()
 @onready var return_from_forgot_your_password_button: Button = $ForgotYourPassword_VBoxContainer/ButtonsGroup_VBoxContainer/Return_Button
 @onready var email_login_line_edit: LineEdit = $Login_VBoxContainer/Email_LineEdit
 @onready var password_login_line_edit: LineEdit = $Login_VBoxContainer/PasswordGroup_VBoxContainer/Password_LineEdit
+@onready var password_toggle_view_texture_button: TextureButton = $Login_VBoxContainer/PasswordGroup_VBoxContainer/Password_LineEdit/PasswordToggleView_TextureButton
 @onready var email_forgot_your_password_line_edit: LineEdit = $ForgotYourPassword_VBoxContainer/Email_LineEdit
 @onready var register_now_login_text_button: RichTextLabel = $Login_VBoxContainer/LoginRegister_VBoxContainer/ForgotPassword_RichTextLabel
 @onready var return_from_register_button: Button = $Register_VBoxContainer/ButtonsGroup_VBoxContainer/Return_Button
@@ -31,6 +32,8 @@ var confirm_dialog: ConfirmationDialog = ConfirmationDialog.new()
 @onready var dialog_background_color_rect: ColorRect = $DialogBackground_ColorRect
 @onready var settings_texture_button: TextureButton = $Settings_TextureButton
 @onready var settings_menu: SettingsMenu = $SettingsMenu
+@onready var character_left_background_texture_rect: TextureRect = $CharacterLeftBackground_TextureRect
+@onready var character_right_background_texture_rect: TextureRect = $CharacterRightBackground_TextureRect
 
 
 # Called when the node enters the scene tree for the first time.
@@ -42,6 +45,7 @@ func _ready() -> void:
 	forgot_your_password_text_button.meta_clicked.connect(_change_to_forgot_your_password_panel)
 	login_button.pressed.connect(_request_login)
 	password_login_line_edit.text_submitted.connect(_request_login)
+	password_toggle_view_texture_button.pressed.connect(_toggle_password_visibility)
 	email_login_line_edit.text_submitted.connect(_request_login)
 	reset_password_button.pressed.connect(_request_password_reset)
 	return_from_forgot_your_password_button.pressed.connect(_return_to_login_panel)
@@ -70,6 +74,7 @@ func _ready() -> void:
 	SoundManager.resync_control_sounds()
 	settings_texture_button.pressed.connect(func(): settings_menu.show())
 	settings_menu.hide()
+	_set_up_background_characters(ClientGlobalData.character_left, ClientGlobalData.character_right)
 	if OS.has_feature("editor"):
 		email_login_line_edit.text = "test@test.com"
 		password_login_line_edit.text = "hola123"
@@ -296,3 +301,26 @@ func wait_for_signal_response(desired_signal: Signal, timeout: float) -> Diction
 # Change scene to 
 func _change_to_logged_in_menu():
 	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+
+
+func _set_up_background_characters(stored_character_left: int, stored_character_right: int) -> void:
+	var available_characters_array = Enums.Character.values()
+	available_characters_array.erase(0)
+	var character_left = available_characters_array.pick_random()
+	available_characters_array.erase(character_left)
+	var character_right = available_characters_array.pick_random()
+	if stored_character_left != 0 and stored_character_right != 0:
+		character_left = stored_character_left
+		character_right = stored_character_right
+	var character_left_info = Enums.CHARACTER_INFO[character_left]
+	var character_right_info = Enums.CHARACTER_INFO[character_right]
+	character_left_background_texture_rect.texture = load(character_left_info.image_path)
+	character_left_background_texture_rect.flip_h = character_left_info.facing_direction == "left"
+	character_right_background_texture_rect.texture = load(character_right_info.image_path)
+	character_right_background_texture_rect.flip_h = character_right_info.facing_direction == "right"
+	ClientGlobalData.character_left = character_left
+	ClientGlobalData.character_right = character_right
+
+
+func _toggle_password_visibility() -> void:
+	password_login_line_edit.secret = !password_login_line_edit.secret
