@@ -1,0 +1,192 @@
+[gd_scene load_steps=13 format=3 uid="uid://dfld1s4yllhvo"]
+
+[ext_resource type="Script" uid="uid://cjfl7qip1dtmc" path="res://scripts/client/game/playerInfoCharacter.gd" id="1_0w80q"]
+[ext_resource type="Texture2D" uid="uid://cptmhjunr8itd" path="res://themes/style_boxes/in_game/game_player_info_character_square.svg" id="1_nxf8k"]
+[ext_resource type="Texture2D" uid="uid://cjgl6uo1fmla6" path="res://textures/characters/2_walrus.png" id="2_33xmm"]
+[ext_resource type="Texture2D" uid="uid://cs6p5atp2cqww" path="res://themes/style_boxes/in_game/game_player_info_unknown.svg" id="3_0w80q"]
+[ext_resource type="Texture2D" uid="uid://4jtn4j8hb6b2" path="res://themes/style_boxes/in_game/game_player_info_character_square_border.svg" id="3_xqhd6"]
+[ext_resource type="Texture2D" uid="uid://j046nhfb05ph" path="res://themes/style_boxes/in_game/game_player_info_character_type_square.svg" id="4_0w80q"]
+[ext_resource type="Texture2D" uid="uid://br1ix0qgixo8w" path="res://themes/style_boxes/in_game/game_player_info_character_square_X.svg" id="4_33xmm"]
+[ext_resource type="Texture2D" uid="uid://yyiifkhsmnyo" path="res://themes/style_boxes/in_game/game_player_info_type_objective.svg" id="5_g1ko0"]
+[ext_resource type="Texture2D" uid="uid://bx7iwru1lwmhp" path="res://themes/style_boxes/in_game/game_player_info_arrested.svg" id="5_hh17w"]
+[ext_resource type="Texture2D" uid="uid://xx6mnrhulx3j" path="res://themes/style_boxes/in_game/game_player_info_type_player.svg" id="6_hh17w"]
+[ext_resource type="Texture2D" uid="uid://c64387pfsv1n8" path="res://themes/style_boxes/in_game/game_player_info_character_type_square_border.svg" id="7_5w7tf"]
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="11_hh17w"]
+
+[node name="CharacterInfo_MarginControl" type="MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(113.03, 109)
+offset_right = 113.03
+offset_bottom = 109.0
+mouse_filter = 2
+theme_override_constants/margin_top = 10
+script = ExtResource("1_0w80q")
+
+[node name="FreePlace_Control" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Character_CenterContainer" type="CenterContainer" parent="FreePlace_Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+use_top_left = true
+
+[node name="CharacterSelection_TextureButton" type="TextureButton" parent="FreePlace_Control/Character_CenterContainer"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+mouse_behavior_recursive = 1
+
+[node name="Background_TextureRect" type="TextureRect" parent="FreePlace_Control/Character_CenterContainer"]
+self_modulate = Color(0.434, 0.55813336, 0.7, 1)
+clip_children = 2
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("1_nxf8k")
+expand_mode = 4
+
+[node name="CharacterImage_TextureRect" type="TextureRect" parent="FreePlace_Control/Character_CenterContainer/Background_TextureRect"]
+custom_minimum_size = Vector2(87.785, 156.51)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.999985
+offset_top = -2.9999924
+offset_right = 24.999985
+offset_bottom = 68.51001
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_33xmm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UnknownImage_TextureRect" type="TextureRect" parent="FreePlace_Control/Character_CenterContainer/Background_TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.5
+offset_top = 12.5
+offset_right = -12.5
+offset_bottom = -10.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0w80q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Arrested_TextureRect" type="TextureRect" parent="FreePlace_Control/Character_CenterContainer/Background_TextureRect"]
+self_modulate = Color(0.23753911, 0.23753914, 0.23753911, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.5
+offset_top = 0.1000061
+offset_right = -0.5
+offset_bottom = 1.8999939
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_hh17w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Border_TextureRect" type="TextureRect" parent="FreePlace_Control/Character_CenterContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("3_xqhd6")
+expand_mode = 4
+
+[node name="X_TextureRect" type="TextureRect" parent="FreePlace_Control/Character_CenterContainer"]
+self_modulate = Color(0.85, 0.85, 0.85, 1)
+clip_children = 2
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("4_33xmm")
+expand_mode = 4
+
+[node name="Type_CenterContainer" type="CenterContainer" parent="FreePlace_Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = 29.5
+offset_right = -32.5
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+use_top_left = true
+
+[node name="Background_TextureRect" type="TextureRect" parent="FreePlace_Control/Type_CenterContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("4_0w80q")
+expand_mode = 4
+
+[node name="Objective_TextureRect" type="TextureRect" parent="FreePlace_Control/Type_CenterContainer/Background_TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_g1ko0")
+expand_mode = 1
+
+[node name="Player_TectureRect" type="TextureRect" parent="FreePlace_Control/Type_CenterContainer/Background_TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_hh17w")
+expand_mode = 1
+
+[node name="ResultPosition_RichTextLabel" type="RichTextLabel" parent="FreePlace_Control/Type_CenterContainer/Background_TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_hh17w")
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[b]1º[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Border_TextureRect2" type="TextureRect" parent="FreePlace_Control/Type_CenterContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("7_5w7tf")
+expand_mode = 4

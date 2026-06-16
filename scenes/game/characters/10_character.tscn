@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4w4cjqgsp3yr"]
+
+[ext_resource type="PackedScene" uid="uid://cc0x860kwg2eo" path="res://geometry/characters/10_character.glb" id="1_hdibk"]
+[ext_resource type="Texture2D" uid="uid://bulc01gj110kl" path="res://textures/characters/10_giraffe.png" id="2_evbqs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdibk"]
+diffuse_mode = 3
+albedo_color = Color(0.7, 0.6216, 0.476, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evbqs"]
+render_priority = 1
+transparency = 1
+diffuse_mode = 3
+albedo_texture = ExtResource("2_evbqs")
+
+[node name="10_character" instance=ExtResource("1_hdibk")]
+
+[node name="Curve_044" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_hdibk")
+material_overlay = SubResource("StandardMaterial3D_evbqs")

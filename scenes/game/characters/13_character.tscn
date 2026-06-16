@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://byl27p5t1f6y5"]
+
+[ext_resource type="PackedScene" uid="uid://dqugca340u3el" path="res://geometry/characters/13_character.glb" id="1_m3mxa"]
+[ext_resource type="Texture2D" uid="uid://djmeh5rcw47kn" path="res://textures/characters/13_dog_dalmatian.png" id="2_yuxeu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3mxa"]
+diffuse_mode = 3
+albedo_color = Color(0.59, 0.4189, 0.55578, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuxeu"]
+render_priority = 1
+transparency = 1
+diffuse_mode = 3
+albedo_texture = ExtResource("2_yuxeu")
+
+[node name="13_character" instance=ExtResource("1_m3mxa")]
+
+[node name="Curve_047" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_m3mxa")
+material_overlay = SubResource("StandardMaterial3D_yuxeu")

@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://des8uhakyv33g"]
+
+[ext_resource type="Material" uid="uid://71nctj1j6t6d" path="res://materials/TileSelector.tres" id="1_hg34b"]
+
+[sub_resource type="Animation" id="Animation_lwr7w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGCombiner3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_agb0j"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGCombiner3D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 0.615572),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.05, 1, 1.05), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tm1kf"]
+_data = {
+&"RESET": SubResource("Animation_lwr7w"),
+&"idle": SubResource("Animation_agb0j")
+}
+
+[node name="TileSelector" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("1_hg34b")
+cast_shadow = 0
+gi_mode = 0
+calculate_tangents = false
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.447065, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.494944, 0)
+operation = 2
+size = Vector3(1.2, 1, 1.2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tm1kf")
+}
+speed_scale = 1.5

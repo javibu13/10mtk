@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://0c7xte4x7j5g"]
+
+[resource]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.4
+roughness = 0.4
+stencil_flags = 2

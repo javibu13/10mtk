@@ -1,0 +1,322 @@
+[gd_scene load_steps=5 format=3 uid="uid://dauwsao4h8egs"]
+
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_j20v8"]
+[ext_resource type="Script" uid="uid://bx6rk056qevcg" path="res://scripts/client/how_to_play_menu.gd" id="2_j20v8"]
+
+[sub_resource type="Gradient" id="Gradient_l4mxc"]
+offsets = PackedFloat32Array(0, 0.8103448, 1)
+colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a5etv"]
+gradient = SubResource("Gradient_l4mxc")
+
+[node name="HowToPlay_Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_j20v8")
+script = ExtResource("2_j20v8")
+
+[node name="Background_ColorRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 2.2117962e-05
+offset_right = 647.9999
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_a5etv")
+
+[node name="HowToPlayScreen_VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="HSeparator" type="HSeparator" parent="HowToPlayScreen_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HowToPlayTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 52
+theme_override_font_sizes/bold_font_size = 52
+bbcode_enabled = true
+text = "[b]How To Play[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HowToPlayScreen_VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="HowToPlay_VBoxContainer" type="VBoxContainer" parent="HowToPlayScreen_VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="GoalTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Goal[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="GoalDescription_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "In 10 minutes to kill, you are a hitman armed with a sniper rifle, a revolver and a knife. Your goal is to kill 3 targets without being discovered. Each time you kill or arrest characters, you earn points. At the end of the game, the winner is the player with the most prestige points.
+
+"
+fit_content = true
+scroll_active = false
+justification_flags = 131
+
+[node name="SetUpTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Set Up[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="SetUpDescription_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "The 16 tiles are randomly arranged to form the game board.
+Each of the 16 characters is placed on a different tile.
+Each player is assigned 1 character as the assassin and 3 characters as targets. None of these characters may be repeated during the assignment, so no player can end up targeting another player or any of another player’s targets.
+The order of play will be chosen at random.
+
+"
+fit_content = true
+scroll_active = false
+justification_flags = 131
+
+[node name="PlayingTheGameTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Playing The Game[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="PlayingTheGameDescription_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "On his turn, a player chooses 2 actions among 3:
+[ul][b]Move a character[/b] (policemen included) on the board[/ul]
+[ul][b]Kill a character[/b][/ul]
+[ul][b]Investigate a characters' identity[/b] using a policeman[/ul]
+A player may choose the same action twice in the same turn with the exception of Kill a character. A player may only ever kill one character per turn.
+
+"
+fit_content = true
+scroll_active = false
+justification_flags = 131
+
+[node name="MovingTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Moving a Character[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="MovingDescription_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "A player can move any character on the board he wants, including policemen. To move a character, select it, interact with \"MOVE\" button, select the objective tile and hit the confirm action button.
+
+"
+fit_content = true
+scroll_active = false
+justification_flags = 131
+
+[node name="KillingTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Killing a Character[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="KillingDescription_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "Once per turn, a player may kill a character on the board:
+[ul]A character can only be killed with the player’s hitman.[/ul]
+[ul]The hitman must use one of the three weapons he’s armed with: either the Revolver, the Sniper rifle, or the Knife (you may use any weapon at each killing).[/ul]
+[ul]The hitman must not be seen killing his target.[/ul]
+A hitman is seen if:
+[ul]He uses the Revolver or the Sniper rifle when another character is on the same tile as his. If the hitman uses the Knife, he is not seen by the non-policeman characters on his tile (see killing with the Knife).[/ul]
+[ul]A policeman is on the same tile as the hitman or an adjacent one, even if the hitman uses a Knife (see The Police).[/ul]
+A character can be killed even if he’s sharing his tile with another character.
+	[b]The Revolver[/b]
+The Revolver allows a hitman to kill a character on a tile adjacent to his. [u]The hitman must be alone on his tile to use the Revolver.[/u]
+	[b]The Sniper rifle[/b]
+The Sniper rifle allows a hitman to kill any character whose location tile is orthogonal to the hitman’s. The Sniper rifle can be used from any distance but may never shoot diagonally. Shooting through empty gaps between location tiles is allowed. Other characters do not block a Sniper rifle’s line-of-sight.
+A hitman must be on a location tile with the “target” symbol to use the Sniper rifle. The tiles with this symbol can be identified with their blue-colored edges. [u]The hitman must be alone on his tile to use a Sniper rifle.[/u]
+	[b]The Knife[/b]
+The Knife allows a hitman to kill any character occupying the same tile as his. Thanks to this weapon’s discreet nature, the Knife can be use even if there are other characters on the tile. The use of a Knife is unnoticeable by other characters except the policemen.
+
+To kill a character, select it, interact with \"KILL\" button and hit the confirm action button.
+
+"
+fit_content = true
+scroll_active = false
+justification_flags = 131
+
+[node name="ConsecuencesTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Consecuences Of a Kill[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="ConsecuencesDescription_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "When a character is killed, he is removed from the board. If the character was the killer or the target will be revealed in the corresponding player's panel. Afterwards, all characters on the same tile as the victim flee the crime scene. Each of them will be placed on a different tile randomly. Then, a policeman is added to the crime scene tile. If there is no more policeman available, one policeman on the board will be moved to the crime scene tile randomly.
+
+"
+fit_content = true
+scroll_active = false
+justification_flags = 131
+
+[node name="ThePoliceTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]The Police[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="ThePoliceDescription_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "Policemen can be moved like any other character in the game. Any player may move a policeman using the Moving a character action. A policeman is a specific character that always witnesses a hitman’s attempts if he’s occupying the same or directly adjacent tile (no diagonal), even if the hitman uses a Knife!
+
+"
+fit_content = true
+scroll_active = false
+justification_flags = 131
+
+[node name="InvestigateTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Investigate a Character's Identity[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="InvestigateDescription_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "A player can choose to investigate the identity of a character on the board. Identity checks are performed only by policemen. To check another player’s identity, the policeman must be on the same tile. The player who wishes to check someone’s identity selects a character from the same tile as a policeman and hits the \"INVESTIGATE\" action button. After that, the designated player to be asked can be selected from a drowpdown menu and confirma action button has to be clicked to proceed. If the character is the player’s hitman, he will be revealed and removed from the board.
+
+A player is never eliminated from the game. Even when he has lost his hitman (killed or arrested), the player is still in play and may even win by successfully checking the identity of other players’ hitmen.
+
+"
+fit_content = true
+scroll_active = false
+justification_flags = 131
+
+[node name="EndOfTheGameTitle_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]End Of The Game[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="EndOfTheGameDescription_RichTextLabel" type="RichTextLabel" parent="HowToPlayScreen_VBoxContainer/ScrollContainer/HowToPlay_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "Player’s hitman still alive and not arrested by the police: 20 pts
+Each target killed: 10 pts
+Other player’s arrested hitman: 10 pts
+Other player’s killed hitman: 30 pts
+Innocent victim killed: -10 pts
+Policeman killed: -1337 pts"
+fit_content = true
+scroll_active = false
+justification_flags = 131
+
+[node name="Return_Button" type="Button" parent="HowToPlayScreen_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(150, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Return"
+
+[node name="HSeparator3" type="HSeparator" parent="HowToPlayScreen_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqfac41t4oydc"]
+
+[ext_resource type="PackedScene" uid="uid://ciick5cfpp5sb" path="res://geometry/characters/9_character.glb" id="1_ywff5"]
+[ext_resource type="Texture2D" uid="uid://cgrioagwyeirj" path="res://textures/characters/9_fox.png" id="2_u263s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywff5"]
+diffuse_mode = 3
+albedo_color = Color(0.42159998, 0.62, 0.372, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u263s"]
+render_priority = 1
+transparency = 1
+diffuse_mode = 3
+albedo_texture = ExtResource("2_u263s")
+
+[node name="9_character" instance=ExtResource("1_ywff5")]
+
+[node name="Curve_043" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_ywff5")
+material_overlay = SubResource("StandardMaterial3D_u263s")

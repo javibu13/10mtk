@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://g540opcnqgqq"]
+
+[ext_resource type="PackedScene" uid="uid://cqyykiffyt8x1" path="res://geometry/characters/12_character.glb" id="1_3x3cf"]
+[ext_resource type="Texture2D" uid="uid://od80yg7r31ri" path="res://textures/characters/12_koala.png" id="2_1b77r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3x3cf"]
+diffuse_mode = 3
+albedo_color = Color(0.76, 0.74556, 0.3268, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1b77r"]
+render_priority = 1
+transparency = 1
+diffuse_mode = 3
+albedo_texture = ExtResource("2_1b77r")
+
+[node name="12_character" instance=ExtResource("1_3x3cf")]
+
+[node name="Curve_046" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_3x3cf")
+material_overlay = SubResource("StandardMaterial3D_1b77r")

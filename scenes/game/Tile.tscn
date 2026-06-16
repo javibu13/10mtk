@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3 uid="uid://b4rgpmpdraxfi"]
+
+[ext_resource type="Script" uid="uid://b5ecbemqtf5l2" path="res://scripts/client/game/tile3d.gd" id="1_37jpg"]
+[ext_resource type="Material" uid="uid://c3vdti8ftpesn" path="res://materials/tiles/TileSniperMaterial.tres" id="2_37jpg"]
+[ext_resource type="Texture2D" uid="uid://66tblady6yue" path="res://textures/tiles/7_tile_AlbedoMap.png" id="3_2doth"]
+[ext_resource type="PackedScene" uid="uid://des8uhakyv33g" path="res://scenes/game/TileSelector.tscn" id="3_i8lru"]
+[ext_resource type="PackedScene" uid="uid://605jtbkbk088" path="res://scenes/game/TileBase.tscn" id="4_cqwc2"]
+[ext_resource type="Texture2D" uid="uid://k8ofuuq05aal" path="res://textures/tiles/8_tile_AlbedoMap.png" id="4_ywerg"]
+[ext_resource type="Texture2D" uid="uid://cmhkcl2yck3jt" path="res://textures/tiles/9_tile_AlbedoMap.png" id="5_qsf5x"]
+[ext_resource type="Texture2D" uid="uid://ca5fv4lso4446" path="res://textures/tiles/10_tile_AlbedoMap.png" id="6_oacwp"]
+[ext_resource type="Texture2D" uid="uid://qh2tfs8vlrsh" path="res://textures/tiles/11_tile_AlbedoMap.png" id="7_3eqv3"]
+[ext_resource type="Texture2D" uid="uid://cc3476d28isdk" path="res://textures/tiles/12_tile_AlbedoMap.png" id="8_iio8x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rp1iq"]
+size = Vector3(1, 0.1, 1)
+
+[node name="Tile3D" type="Node3D" node_paths=PackedStringArray("tile_base", "tile_selector", "token_character_positions_to_place")]
+script = ExtResource("1_37jpg")
+sniper_material_overlay = ExtResource("2_37jpg")
+texture_tile_base_pool = Array[Texture2D]([null, null, null, null, null, null, ExtResource("3_2doth"), ExtResource("4_ywerg"), ExtResource("5_qsf5x"), ExtResource("6_oacwp"), ExtResource("7_3eqv3"), ExtResource("8_iio8x"), null, null, null, null])
+tile_base = NodePath("TileBase")
+tile_selector = NodePath("TileSelector")
+token_character_positions_to_place = NodePath("TokenCharacterPositions_Node3D")
+
+[node name="TileSelector" parent="." instance=ExtResource("3_i8lru")]
+visible = false
+
+[node name="TileBase" parent="." instance=ExtResource("4_cqwc2")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_rp1iq")
+
+[node name="TokenCharacterPositions_Node3D" type="Node3D" parent="."]
+
+[node name="1_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102913976, 0, -0.08972938)
+gizmo_extents = 0.1
+
+[node name="2_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09426361, 0, 0.059912816)
+gizmo_extents = 0.1
+
+[node name="3_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12071246, 0, 0.13992675)
+gizmo_extents = 0.1
+
+[node name="4_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15512466, 0, -0.14906695)
+gizmo_extents = 0.1
+
+[node name="5_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12822789, 0, 0.28526837)
+gizmo_extents = 0.1
+
+[node name="6_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32286358, 0, -0.12506486)
+gizmo_extents = 0.1
+
+[node name="7_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3130381, 0, 0.13323236)
+gizmo_extents = 0.1
+
+[node name="8_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35128975, 0, 0.093856916)
+gizmo_extents = 0.1
+
+[node name="9_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13886756, 0, -0.31870404)
+gizmo_extents = 0.1
+
+[node name="10_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08426595, 0, -0.35529125)
+gizmo_extents = 0.1
+
+[node name="11_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36593968, 0, -0.08415446)
+gizmo_extents = 0.1
+
+[node name="12_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07576692, 0, 0.3637853)
+gizmo_extents = 0.1
+
+[node name="13_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3177234, 0, 0.32182756)
+gizmo_extents = 0.1
+
+[node name="14_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34581012, 0, 0.3541947)
+gizmo_extents = 0.1
+
+[node name="15_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3722685, 0, -0.339707)
+gizmo_extents = 0.1
+
+[node name="16_Marker3D" type="Marker3D" parent="TokenCharacterPositions_Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33641547, 0, -0.33071506)
+gizmo_extents = 0.1

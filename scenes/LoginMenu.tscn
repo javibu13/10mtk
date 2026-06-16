@@ -1,0 +1,437 @@
+[gd_scene load_steps=13 format=3 uid="uid://chyfiqusrxmpw"]
+
+[ext_resource type="Script" uid="uid://cyh8s5sr3c7ir" path="res://scripts/client/login_menu.gd" id="1_bqwap"]
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="2_c13uq"]
+[ext_resource type="Texture2D" uid="uid://vkldgsanukie" path="res://textures/characters/6_tiger.png" id="2_xg5v7"]
+[ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="3_1oovu"]
+[ext_resource type="Texture2D" uid="uid://dtsijsy7rlsud" path="res://textures/characters/7_mouse.png" id="3_41cwv"]
+[ext_resource type="PackedScene" uid="uid://dklssodcc8cok" path="res://scenes/SettingsMenu.tscn" id="4_csu7k"]
+[ext_resource type="Texture2D" uid="uid://c5fjrvvbvn25s" path="res://themes/style_boxes/settings_button_normal.svg" id="5_41cwv"]
+[ext_resource type="Texture2D" uid="uid://beeybqmrpyr8w" path="res://themes/style_boxes/login_password_icon.svg" id="6_41cwv"]
+[ext_resource type="Texture2D" uid="uid://db3cpnwwghgcx" path="res://themes/style_boxes/settings_button_pressed.svg" id="6_mnx4m"]
+[ext_resource type="Texture2D" uid="uid://dmy8auwr6263h" path="res://themes/style_boxes/settings_button_hover.svg" id="7_5si07"]
+
+[sub_resource type="Gradient" id="Gradient_xg5v7"]
+offsets = PackedFloat32Array(0, 0.8103448, 1)
+colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c13uq"]
+gradient = SubResource("Gradient_xg5v7")
+
+[node name="LoginMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_bqwap")
+
+[node name="DialogBackground_ColorRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 2.2117962e-05
+offset_right = 647.9999
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_c13uq")
+
+[node name="CharacterLeftBackground_TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -106.0
+offset_right = 467.0
+offset_bottom = 1041.0
+texture = ExtResource("2_xg5v7")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="CharacterRightBackground_TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -463.0
+offset_right = 110.0
+offset_bottom = 1041.0
+grow_horizontal = 0
+texture = ExtResource("3_41cwv")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="TryingToConnect_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 208.0
+offset_top = 117.0
+offset_right = -208.0
+offset_bottom = -117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="ServerConnection_Label" type="Label" parent="TryingToConnect_VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+text = "Connecting to Server..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConnectionFailed_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 208.0
+offset_top = 117.0
+offset_right = -208.0
+offset_bottom = -117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="ServerConnectionFailure_Label" type="Label" parent="ConnectionFailed_VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+text = "Server connection failure"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TryAgain_Button" type="Button" parent="ConnectionFailed_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(200, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+text = "Retry"
+
+[node name="Login_VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 326.0
+offset_top = 2.0
+offset_right = -326.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="GameLogo_TextureRect" type="TextureRect" parent="Login_VBoxContainer"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+texture = ExtResource("3_1oovu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Email_LineEdit" type="LineEdit" parent="Login_VBoxContainer" groups=["lineEdits"]]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Email"
+max_length = 100
+emoji_menu_enabled = false
+virtual_keyboard_type = 5
+clear_button_enabled = true
+caret_blink = true
+
+[node name="PasswordGroup_VBoxContainer" type="VBoxContainer" parent="Login_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Password_LineEdit" type="LineEdit" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer" groups=["lineEdits"]]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Password"
+max_length = 100
+emoji_menu_enabled = false
+virtual_keyboard_type = 6
+right_icon = ExtResource("6_41cwv")
+caret_blink = true
+secret = true
+
+[node name="PasswordToggleView_TextureButton" type="TextureButton" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer/Password_LineEdit"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -15.5
+offset_right = 4.0
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="ForgotPassword_RichTextLabel" type="RichTextLabel" parent="Login_VBoxContainer/PasswordGroup_VBoxContainer" groups=["buttons"]]
+clip_contents = false
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
+bbcode_enabled = true
+text = "[url][u]Forgot your password?[/u][/url]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+vertical_alignment = 3
+
+[node name="LoginRegister_VBoxContainer" type="VBoxContainer" parent="Login_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Login_Button" type="Button" parent="Login_VBoxContainer/LoginRegister_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(200, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+text = "Log In"
+
+[node name="ForgotPassword_RichTextLabel" type="RichTextLabel" parent="Login_VBoxContainer/LoginRegister_VBoxContainer" groups=["buttons"]]
+clip_contents = false
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
+bbcode_enabled = true
+text = "[url]Register now![/url]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="ForgotYourPassword_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 326.0
+offset_top = 117.0
+offset_right = -326.0
+offset_bottom = -117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ForgotYourPassword_VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/normal_font_size = 48
+text = "Reset Password"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Email_LineEdit" type="LineEdit" parent="ForgotYourPassword_VBoxContainer" groups=["lineEdits"]]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Email"
+max_length = 100
+emoji_menu_enabled = false
+virtual_keyboard_type = 5
+caret_blink = true
+
+[node name="ButtonsGroup_VBoxContainer" type="VBoxContainer" parent="ForgotYourPassword_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Reset_Button" type="Button" parent="ForgotYourPassword_VBoxContainer/ButtonsGroup_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(350, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+text = "Send password reset"
+
+[node name="Return_Button" type="Button" parent="ForgotYourPassword_VBoxContainer/ButtonsGroup_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 24
+text = "Return"
+
+[node name="Register_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 326.0
+offset_top = 117.0
+offset_right = -326.0
+offset_bottom = -117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Register_VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/normal_font_size = 48
+text = "Create your account"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NicknameGroup_VBoxContainer2" type="VBoxContainer" parent="Register_VBoxContainer"]
+layout_mode = 2
+
+[node name="Nickname_LineEdit" type="LineEdit" parent="Register_VBoxContainer/NicknameGroup_VBoxContainer2" groups=["lineEdits"]]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Nickname"
+max_length = 16
+emoji_menu_enabled = false
+virtual_keyboard_type = 5
+caret_blink = true
+
+[node name="NicknameValidationText_RichTextLabel" type="RichTextLabel" parent="Register_VBoxContainer/NicknameGroup_VBoxContainer2"]
+clip_contents = false
+custom_minimum_size = Vector2(497, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_c13uq")
+scroll_active = false
+vertical_alignment = 3
+
+[node name="EmailGroup_VBoxContainer" type="VBoxContainer" parent="Register_VBoxContainer"]
+layout_mode = 2
+
+[node name="Email_LineEdit" type="LineEdit" parent="Register_VBoxContainer/EmailGroup_VBoxContainer" groups=["lineEdits"]]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Email"
+max_length = 100
+emoji_menu_enabled = false
+virtual_keyboard_type = 5
+caret_blink = true
+
+[node name="EmailValidationText_RichTextLabel" type="RichTextLabel" parent="Register_VBoxContainer/EmailGroup_VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(497, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_c13uq")
+scroll_active = false
+vertical_alignment = 3
+
+[node name="PasswordGroup_VBoxContainer" type="VBoxContainer" parent="Register_VBoxContainer"]
+layout_mode = 2
+
+[node name="Password_LineEdit" type="LineEdit" parent="Register_VBoxContainer/PasswordGroup_VBoxContainer" groups=["lineEdits"]]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Password"
+max_length = 100
+emoji_menu_enabled = false
+virtual_keyboard_type = 6
+caret_blink = true
+secret = true
+
+[node name="PasswordValidationText_RichTextLabel" type="RichTextLabel" parent="Register_VBoxContainer/PasswordGroup_VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(497, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_c13uq")
+scroll_active = false
+vertical_alignment = 3
+
+[node name="ButtonsGroup_VBoxContainer" type="VBoxContainer" parent="Register_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Register_Button" type="Button" parent="Register_VBoxContainer/ButtonsGroup_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(192.41, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 32
+text = "Register"
+
+[node name="Return_Button" type="Button" parent="Register_VBoxContainer/ButtonsGroup_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_c13uq")
+theme_override_font_sizes/font_size = 24
+text = "Return"
+
+[node name="Settings_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 94.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_41cwv")
+texture_pressed = ExtResource("6_mnx4m")
+texture_hover = ExtResource("7_5si07")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="SettingsMenu" parent="." instance=ExtResource("4_csu7k")]
+visible = false
+layout_mode = 1
+
+[node name="DialogBackground_ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.78431374)

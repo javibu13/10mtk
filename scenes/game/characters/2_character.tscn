@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsk3fqn58kpen"]
+
+[ext_resource type="PackedScene" uid="uid://bf1wjoqa6ldvk" path="res://geometry/characters/2_character.glb" id="1_mq22u"]
+[ext_resource type="Texture2D" uid="uid://cjgl6uo1fmla6" path="res://textures/characters/2_walrus.png" id="2_0y8h6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hjrv"]
+diffuse_mode = 3
+albedo_color = Color(0.42249995, 0.5286667, 0.65, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ft1l3"]
+render_priority = 1
+transparency = 1
+diffuse_mode = 3
+albedo_texture = ExtResource("2_0y8h6")
+
+[node name="2_character" instance=ExtResource("1_mq22u")]
+
+[node name="Curve_034" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_0hjrv")
+material_overlay = SubResource("StandardMaterial3D_ft1l3")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqgpwm5hfpm1r"]
+
+[ext_resource type="PackedScene" uid="uid://61nuxcmad1gq" path="res://geometry/characters/14_character.glb" id="1_paphy"]
+[ext_resource type="Texture2D" uid="uid://8ot5kyj237pj" path="res://textures/characters/14_opossum.png" id="2_ngu2w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paphy"]
+diffuse_mode = 3
+albedo_color = Color(0.57, 0.496375, 0.3933, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngu2w"]
+render_priority = 1
+transparency = 1
+diffuse_mode = 3
+albedo_texture = ExtResource("2_ngu2w")
+
+[node name="14_character" instance=ExtResource("1_paphy")]
+
+[node name="Curve_048" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_paphy")
+material_overlay = SubResource("StandardMaterial3D_ngu2w")

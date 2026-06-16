@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://0b6m7f0wrh1m"]
+
+[ext_resource type="Texture2D" uid="uid://dp8bn46pvnif7" path="res://textures/tile_AlbedoMap.jpg" id="1_y8t14"]
+[ext_resource type="Texture2D" uid="uid://bvrhsfridg06g" path="res://textures/tiles/tile_normalMap.jpg" id="2_0fmxc"]
+
+[resource]
+albedo_texture = ExtResource("1_y8t14")
+roughness = 0.85
+normal_enabled = true
+normal_texture = ExtResource("2_0fmxc")

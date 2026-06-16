@@ -1,0 +1,255 @@
+[gd_scene load_steps=5 format=3 uid="uid://dklssodcc8cok"]
+
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_c8k7n"]
+[ext_resource type="Script" uid="uid://ix6wmjqixb22" path="res://scripts/client/settings_menu.gd" id="2_onm7i"]
+
+[sub_resource type="Gradient" id="Gradient_l4mxc"]
+offsets = PackedFloat32Array(0, 0.8103448, 1)
+colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a5etv"]
+gradient = SubResource("Gradient_l4mxc")
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_c8k7n")
+script = ExtResource("2_onm7i")
+
+[node name="Background_ColorRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.9019608)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 2.2117962e-05
+offset_right = 647.9999
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_a5etv")
+
+[node name="Settings_VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="HSeparator" type="HSeparator" parent="Settings_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SettingsTitle_RichTextLabel" type="RichTextLabel" parent="Settings_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 52
+theme_override_font_sizes/bold_font_size = 52
+bbcode_enabled = true
+text = "[b]Settings[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Display_VBoxContainer" type="VBoxContainer" parent="Settings_VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="DisplayTitle_RichTextLabel" type="RichTextLabel" parent="Settings_VBoxContainer/Display_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Display[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="WindowMode_HBoxContainer" type="HBoxContainer" parent="Settings_VBoxContainer/Display_VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Settings_VBoxContainer/Display_VBoxContainer/WindowMode_HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="WindowModeTitle_RichTextLabel" type="RichTextLabel" parent="Settings_VBoxContainer/Display_VBoxContainer/WindowMode_HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "Window Mode"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Settings_VBoxContainer/Display_VBoxContainer/WindowMode_HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="WindowMode_OptionButton" type="OptionButton" parent="Settings_VBoxContainer/Display_VBoxContainer/WindowMode_HBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme = ExtResource("1_c8k7n")
+theme_override_font_sizes/font_size = 22
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Borderless Window"
+popup/item_1/id = 3
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 4
+
+[node name="Audio_VBoxContainer" type="VBoxContainer" parent="Settings_VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="AudioTitle_RichTextLabel" type="RichTextLabel" parent="Settings_VBoxContainer/Audio_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Audio[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Master_HBoxContainer" type="HBoxContainer" parent="Settings_VBoxContainer/Audio_VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Settings_VBoxContainer/Audio_VBoxContainer/Master_HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="MasterAudioTitle_RichTextLabel" type="RichTextLabel" parent="Settings_VBoxContainer/Audio_VBoxContainer/Master_HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "Master"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Settings_VBoxContainer/Audio_VBoxContainer/Master_HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="MasterAudio_HSlider" type="HSlider" parent="Settings_VBoxContainer/Audio_VBoxContainer/Master_HBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(500, 20)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="Music_HBoxContainer" type="HBoxContainer" parent="Settings_VBoxContainer/Audio_VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Settings_VBoxContainer/Audio_VBoxContainer/Music_HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="MusicAudioTitle_RichTextLabel" type="RichTextLabel" parent="Settings_VBoxContainer/Audio_VBoxContainer/Music_HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "Music"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Settings_VBoxContainer/Audio_VBoxContainer/Music_HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="MusicAudio_HSlider" type="HSlider" parent="Settings_VBoxContainer/Audio_VBoxContainer/Music_HBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="SFX_HBoxContainer" type="HBoxContainer" parent="Settings_VBoxContainer/Audio_VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Settings_VBoxContainer/Audio_VBoxContainer/SFX_HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="SFXAudioTitle_RichTextLabel" type="RichTextLabel" parent="Settings_VBoxContainer/Audio_VBoxContainer/SFX_HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "Sound Effects"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Settings_VBoxContainer/Audio_VBoxContainer/SFX_HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="SFXAudio_HSlider" type="HSlider" parent="Settings_VBoxContainer/Audio_VBoxContainer/SFX_HBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="HSeparator2" type="HSeparator" parent="Settings_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Return_Button" type="Button" parent="Settings_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(150, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Return"
+
+[node name="HSeparator3" type="HSeparator" parent="Settings_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 30

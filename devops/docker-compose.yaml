@@ -1,0 +1,14 @@
+services:
+  godot-server:
+    build: .
+    container_name: godot_server_instance
+    restart: unless-stopped
+    ports:
+      - "28918:28918/udp"
+    volumes:
+      # Link the .env.cfg file inside container
+      - ./.env.cfg:/server/.env.cfg
+      # Link local db folder to store the .db file
+      - ./db:/root/.local/share/godot/app_userdata/10' To Kill/
+    environment:
+      - TERM=xterm

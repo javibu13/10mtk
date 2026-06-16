@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4xceapwprrl1"]
+
+[ext_resource type="Script" uid="uid://c8ecwwooxd4hc" path="res://scripts/server/server.gd" id="1_r1sct"]
+
+[node name="Node" type="Node" node_paths=PackedStringArray("vbox_container_print")]
+script = ExtResource("1_r1sct")
+vbox_container_print = NodePath("ScrollContainer/VBoxContainer")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2

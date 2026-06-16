@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg10wfk5jfe02"]
+
+[ext_resource type="PackedScene" uid="uid://bbidc4s254fxs" path="res://geometry/characters/-1_character.glb" id="1_xe8fc"]
+[ext_resource type="Texture2D" uid="uid://cio0x01vw3vg" path="res://textures/characters/-1_police.png" id="2_n5ore"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xe8fc"]
+diffuse_mode = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n5ore"]
+render_priority = 1
+transparency = 1
+diffuse_mode = 3
+albedo_texture = ExtResource("2_n5ore")
+
+[node name="-1_character" instance=ExtResource("1_xe8fc")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Curve_057" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_xe8fc")
+material_overlay = SubResource("StandardMaterial3D_n5ore")

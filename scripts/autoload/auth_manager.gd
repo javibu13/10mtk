@@ -1,0 +1,164 @@
+extends Node
+
+
+signal register_user_end(success, message)
+signal login_user_end(success, message)
+signal reset_password_end(success, message)
+
+
+# Request for server to create new user
+@rpc("any_peer", "call_remote", "reliable")
+func server_register_user(nickname: String, email: String, password_hash: String):
+	if not multiplayer.is_server():
+		return
+	# Get the ID of the client who requested the creation of the user
+	var client_id := multiplayer.get_remote_sender_id()
+	# Validate data sent from client
+	var validation_error := _validate_user_register_data(nickname, email, password_hash)
+	if not validation_error.is_empty():
+		var error_message = "❌ Invalid data for user creation (" + validation_error + ")"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_register_response.rpc_id(client_id, false, error_message)
+		return
+	# Validate if nickname already exists
+	var existing_nickname = DatabaseManager.player.get_by_nickname(nickname)
+	if not existing_nickname.is_empty():
+		var error_message = "❌ Nickname is not available"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_register_response.rpc_id(client_id, false, error_message)
+		return
+	# Validate if email already exists
+	var existing_email = DatabaseManager.player.get_by_email(email)
+	if not existing_email.is_empty():
+		var error_message = "❌ Email is already registered"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_register_response.rpc_id(client_id, false, error_message)
+		return
+	# Create user in database
+	var player = DatabaseManager.player.create_new(nickname, email, password_hash)
+	if player.is_empty():
+		var error_message = "❌ Error during user creation"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_register_response.rpc_id(client_id, false, error_message)
+		return
+	# Send notification to client
+	client_register_response.rpc_id(client_id, true, "✅ User registered!")
+
+
+# Validate data for new user creation
+func _validate_user_register_data(nickname: String, email: String, password_hash: String) -> String:
+	var errors: Array = []
+	# Validate Nickname
+	var nickname_regex = RegEx.create_from_string("^[a-zA-Z0-9_ ]{1,16}$")
+	if nickname.is_empty() or nickname_regex.search(nickname) == null:
+		errors.append("Invalid nickname")
+	# Validate Email
+	var email_regex = RegEx.create_from_string("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+	if email.is_empty() or email_regex.search(email) == null:
+		errors.append("Invalid email")
+	# Validate Password HASH (SHA-256 = 64 characters)
+	if password_hash.length() != 64:
+		errors.append("Invalid password")
+	return ", ".join(errors)
+
+
+@rpc("authority", "call_remote", "reliable")
+func client_register_response(success: bool, message: String):
+	register_user_end.emit(success, message)
+
+
+# Request for server to login user
+@rpc("any_peer", "call_remote", "reliable")
+func server_login_user(email: String, password_hash: String):
+	if not multiplayer.is_server():
+		return
+	var client_id := multiplayer.get_remote_sender_id()
+	var user = DatabaseManager.player.get_by_login(email, password_hash)
+	if user.is_empty():
+		var error_message = "❌ Incorrect email or password"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_login_response.rpc_id(client_id, false, error_message)
+		return
+	# Check if the client_id has the id registered in the logged_in_users dict
+	if ServerGlobalData.logged_in_users.has(client_id):
+		var error_message = "❌ Client is already logged in"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_login_response.rpc_id(client_id, false, error_message)
+		return
+	# Check if the user has been logged in by other client
+	if ServerGlobalData.logged_in_users.values().any(func(logged_in_user): return logged_in_user.id == user.id):
+		var error_message = "❌ User already has an active session"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_login_response.rpc_id(client_id, false, error_message)
+		return
+	# Check if new_password stores something to clear it and assign as main password the used to access this time
+	if user.new_password != null or str(user.new_password) == "":
+		DatabaseManager.player.update_new_password_by_id(user.id, null)
+		DatabaseManager.player.update_password_by_id(user.id, password_hash)
+	user.erase('password')
+	user.erase('new_password')
+	ServerGlobalData.logged_in_users[client_id] = user
+	client_login_response.rpc_id(client_id, true, JSON.stringify(user))
+
+
+@rpc("authority", "call_remote", "reliable")
+func client_login_response(success: bool, message: String):
+	login_user_end.emit(success, message)
+
+
+# Request for server to reset password
+@rpc("any_peer", "call_remote", "reliable")
+func server_reset_password(email: String):
+	if not multiplayer.is_server():
+		return
+	# Get the ID of the client who requested the creation of the user
+	var client_id := multiplayer.get_remote_sender_id()
+	var user = DatabaseManager.player.get_by_email(email)
+	if user.is_empty():
+		var error_message = "❌ Email not found"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_reset_password_response.rpc_id(client_id, false, error_message)
+		return
+	# TODO: Close active sessions?
+	# Create new password and assign to user
+	var new_password = _generate_password(8, true)
+	var user_new_password = DatabaseManager.player.update_new_password_by_id(user.id, new_password.sha256_text())
+	if user_new_password.is_empty():
+		var error_message = "❌ Error during password reset"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_reset_password_response.rpc_id(client_id, false, error_message)
+		return
+	var email_sending_result = await ServerGlobalData.send_reset_password_email(user_new_password.email, user_new_password.user_name, new_password)
+	if !email_sending_result:
+		var error_message = "❌ Error during password reset email sending process"
+		NetworkManager.server_print_msg.emit(error_message)
+		client_reset_password_response.rpc_id(client_id, false, error_message)
+	else:
+		client_reset_password_response.rpc_id(client_id, true, "Email sent to " + str(user_new_password.email))
+
+
+@rpc("authority", "call_remote", "reliable")
+func client_reset_password_response(success: bool, message: String):
+	reset_password_end.emit(success, message)
+
+
+func _generate_password(length: int = 12, use_symbols: bool = true) -> String:
+	var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	var symbols = "!@#$%&*()-_=+"
+	if use_symbols:
+		characters += symbols
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var password = ""
+	for i in range(length):
+		var index = rng.randi_range(0, characters.length() - 1)
+		password += characters[index]
+	return password
+
+
+# Request for server to close the session
+@rpc("any_peer", "call_remote", "reliable")
+func server_log_out():
+	# Get the ID of the client who requested the close of the session
+	var client_id := multiplayer.get_remote_sender_id()
+	ServerGlobalData.remove_logged_in_user(client_id)

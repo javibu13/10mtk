@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqajnsw1w7djl"]
+
+[ext_resource type="PackedScene" uid="uid://1ufn755vb5fs" path="res://geometry/characters/3_character.glb" id="1_rbk6c"]
+[ext_resource type="Texture2D" uid="uid://ch4u2k3pgga2y" path="res://textures/characters/3_cat.png" id="2_i3xbh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejtrd"]
+diffuse_mode = 3
+albedo_color = Color(0.62, 0.5823867, 0.5332, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2blaq"]
+render_priority = 1
+transparency = 1
+diffuse_mode = 3
+albedo_texture = ExtResource("2_i3xbh")
+
+[node name="3_character" instance=ExtResource("1_rbk6c")]
+
+[node name="Curve_035" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_ejtrd")
+material_overlay = SubResource("StandardMaterial3D_2blaq")

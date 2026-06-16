@@ -1,0 +1,568 @@
+[gd_scene load_steps=37 format=3 uid="uid://dj33iaayeuttc"]
+
+[ext_resource type="Texture2D" uid="uid://h1qq7hf8a668" path="res://images/logo_resized_edited.webp" id="1_0ykhv"]
+[ext_resource type="Script" uid="uid://dj0xseni82by2" path="res://scripts/client/main_menu.gd" id="1_826wr"]
+[ext_resource type="Texture2D" uid="uid://cpc3qg5u50dii" path="res://images/main_menu_avatar_placeholder.svg" id="1_ow34m"]
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_yqorp"]
+[ext_resource type="Texture2D" uid="uid://vkldgsanukie" path="res://textures/characters/6_tiger.png" id="2_gnvml"]
+[ext_resource type="Texture2D" uid="uid://4q3u6wnihtae" path="res://images/main_menu_avatar_border.svg" id="2_l72w3"]
+[ext_resource type="Texture2D" uid="uid://d32j3g4mviarh" path="res://themes/style_boxes/main_menu_logout_texture_button_base.svg" id="2_ucygd"]
+[ext_resource type="Texture2D" uid="uid://dtsijsy7rlsud" path="res://textures/characters/7_mouse.png" id="3_d3xvo"]
+[ext_resource type="Texture2D" uid="uid://c8xujkjtw67h7" path="res://themes/style_boxes/main_menu_logout_texture_button_pressed.svg" id="3_mipys"]
+[ext_resource type="Texture2D" uid="uid://bv1djar5kwiq" path="res://themes/style_boxes/main_menu_logout_texture_button_hover.svg" id="3_ucygd"]
+[ext_resource type="PackedScene" uid="uid://b8ufcssc2km2k" path="res://scenes/game/actions_panel_avatar_image.tscn" id="5_tdapf"]
+[ext_resource type="Texture2D" uid="uid://cwllxx5y78y4a" path="res://themes/style_boxes/howtoplay_button_normal.svg" id="5_viowm"]
+[ext_resource type="Texture2D" uid="uid://ctitm2u358r8r" path="res://themes/style_boxes/howtoplay_button_pressed.svg" id="6_1n6yq"]
+[ext_resource type="Texture2D" uid="uid://b43fqdr2ls13t" path="res://themes/style_boxes/howtoplay_button_hover.svg" id="7_yovvs"]
+[ext_resource type="Script" uid="uid://dycsrvmx5hnil" path="res://scripts/client/main_menu_game_buttons.gd" id="8_8a8k8"]
+[ext_resource type="Texture2D" uid="uid://be5il5htpmgea" path="res://themes/style_boxes/credits_button_normal.svg" id="8_wrgne"]
+[ext_resource type="Texture2D" uid="uid://dtjb6mkqo8ljn" path="res://themes/style_boxes/credits_button_pressed.svg" id="9_hm0al"]
+[ext_resource type="Script" uid="uid://mf8vroyq1qj6" path="res://scripts/client/quick_match_menu.gd" id="10_7la6k"]
+[ext_resource type="Texture2D" uid="uid://ckwyi5nhb7fa7" path="res://themes/style_boxes/credits_button_hover.svg" id="10_i7r3k"]
+[ext_resource type="Texture2D" uid="uid://c5fq4yh8shail" path="res://images/aim.svg" id="11_2nypq"]
+[ext_resource type="Texture2D" uid="uid://c5fjrvvbvn25s" path="res://themes/style_boxes/settings_button_normal.svg" id="11_8vx4p"]
+[ext_resource type="Texture2D" uid="uid://cnv6557f4q31" path="res://images/accepted_match.svg" id="12_l4mxc"]
+[ext_resource type="Texture2D" uid="uid://db3cpnwwghgcx" path="res://themes/style_boxes/settings_button_pressed.svg" id="12_tdapf"]
+[ext_resource type="Texture2D" uid="uid://trkq61gmkwia" path="res://images/rejected_match.svg" id="13_5faoh"]
+[ext_resource type="Texture2D" uid="uid://dmy8auwr6263h" path="res://themes/style_boxes/settings_button_hover.svg" id="13_v41fp"]
+[ext_resource type="PackedScene" uid="uid://dklssodcc8cok" path="res://scenes/SettingsMenu.tscn" id="14_7shrw"]
+[ext_resource type="PackedScene" uid="uid://dauwsao4h8egs" path="res://scenes/HowToPlay.tscn" id="15_1n6yq"]
+[ext_resource type="Texture2D" uid="uid://cjcjd3gqrljt4" path="res://themes/style_boxes/main_menu_arrow_left_normal.svg" id="17_duata"]
+[ext_resource type="Texture2D" uid="uid://dgae4rdku0jxl" path="res://themes/style_boxes/main_menu_arrow_left_pressed.svg" id="18_lw0hr"]
+[ext_resource type="Texture2D" uid="uid://c5vqfkqhbmhbp" path="res://themes/style_boxes/main_menu_arrow_left_hover.svg" id="19_gnvml"]
+[ext_resource type="PackedScene" uid="uid://du1vewo5dltaa" path="res://scenes/Credits.tscn" id="19_hm0al"]
+
+[sub_resource type="Gradient" id="Gradient_l4mxc"]
+offsets = PackedFloat32Array(0, 0.8103448, 1)
+colors = PackedColorArray(0.9918335, 0.9755469, 0.9560786, 1, 0.9822853, 0.94063556, 0.8951995, 1, 0.9843137, 0.8980392, 0.8039216, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0ykhv"]
+gradient = SubResource("Gradient_l4mxc")
+
+[sub_resource type="Animation" id="Animation_bky6r"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_2nypq"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(3, 3, 3, 3, 3),
+"points": PackedFloat32Array(0, -0.25, 2.5, 0.25, -2.5, -10, -0.25, 0, 0.25, 0, 0, -0.25, -5, 0.25, 5, 10, -0.25, 0, 0.25, 0, 0, -0.25, 2.5, 0.25, -2.5),
+"times": PackedFloat32Array(0, 1, 2, 3, 4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(3, 3, 3, 3, 3, 3, 3, 3, 3),
+"points": PackedFloat32Array(-0.9575096, -0.1, 2.5, 0.1, -2.5, -5.96449, -0.125, 0, 0.125, 0, -0.9575096, -0.125, -2.5034904, 0.125, 2.5034904, 4.0494714, -0.125, 0, 0.125, 0, -0.9575096, -0.125, 2.5034904, 0.125, -2.5034904, -5.96449, -0.125, 0, 0.125, 0, -0.9575096, -0.125, -2.5034904, 0.125, 2.5034904, 4.0494714, -0.125, 0, 0.125, 0, -0.9575096, -0.1, 2.5, 0.1, -2.5),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l4mxc"]
+_data = {
+&"RESET": SubResource("Animation_bky6r"),
+&"idle": SubResource("Animation_2nypq")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_826wr")
+
+[node name="DialogBackground_ColorRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 2.2117962e-05
+offset_right = 647.9999
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_0ykhv")
+
+[node name="CharacterLeftBackground_TextureRect" type="TextureRect" parent="."]
+clip_children = 1
+layout_mode = 0
+offset_left = -106.0
+offset_right = 467.0
+offset_bottom = 1041.0
+texture = ExtResource("2_gnvml")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CharacterLeftBackground_TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.98, 0.89474, 0.8036, 0.7058824)
+metadata/_edit_lock_ = true
+
+[node name="CharacterRightBackground_TextureRect" type="TextureRect" parent="."]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -463.0
+offset_right = 110.0
+offset_bottom = 1041.0
+grow_horizontal = 0
+texture = ExtResource("3_d3xvo")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CharacterRightBackground_TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.98, 0.89474, 0.8036, 0.7058824)
+metadata/_edit_lock_ = true
+
+[node name="LogOut_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -104.0
+offset_right = -11.0
+offset_bottom = -11.286133
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_ucygd")
+texture_pressed = ExtResource("3_mipys")
+texture_hover = ExtResource("3_ucygd")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="HowToPlay_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -123.06543
+offset_right = 68.0
+offset_bottom = -12.286133
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_viowm")
+texture_pressed = ExtResource("6_1n6yq")
+texture_hover = ExtResource("7_yovvs")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Credits_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 77.0
+offset_top = -101.0
+offset_right = 167.0
+offset_bottom = -12.286133
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_wrgne")
+texture_pressed = ExtResource("9_hm0al")
+texture_hover = ExtResource("10_i7r3k")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="UserInfo_HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 15.0
+offset_right = 296.0
+offset_bottom = 85.0
+alignment = 1
+
+[node name="Avatar_Control" parent="UserInfo_HBoxContainer" instance=ExtResource("5_tdapf")]
+layout_mode = 2
+
+[node name="Avatar_Control2" type="Control" parent="UserInfo_HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Avatar_TextureRect" type="TextureRect" parent="UserInfo_HBoxContainer/Avatar_Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("1_ow34m")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Border_TextureRect" type="TextureRect" parent="UserInfo_HBoxContainer/Avatar_Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("2_l72w3")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VSeparator" type="VSeparator" parent="UserInfo_HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="UserName_RichTextLabel" type="RichTextLabel" parent="UserInfo_HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/normal_font_size = 22
+text = "John Doe"
+vertical_alignment = 1
+
+[node name="MainMenuButtons_VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 394.0
+offset_right = -394.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("8_8a8k8")
+
+[node name="GameLogo_TextureRect" type="TextureRect" parent="MainMenuButtons_VBoxContainer"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+texture = ExtResource("1_0ykhv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="MainMenuButtons_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="PlayButtons_VBoxContainer" type="VBoxContainer" parent="MainMenuButtons_VBoxContainer"]
+custom_minimum_size = Vector2(0, 263)
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="QuickMatchLeftArrowTextureButton" type="TextureButton" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture_normal = ExtResource("17_duata")
+texture_pressed = ExtResource("18_lw0hr")
+texture_hover = ExtResource("19_gnvml")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="QuickMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(210, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/font_size = 32
+text = "Quick Match"
+
+[node name="QuickMatchRightArrowTextureButton" type="TextureButton" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer/HBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture_normal = ExtResource("17_duata")
+texture_pressed = ExtResource("18_lw0hr")
+texture_hover = ExtResource("19_gnvml")
+ignore_texture_size = true
+stretch_mode = 5
+flip_h = true
+
+[node name="CreateMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(210, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Create Match"
+
+[node name="JoinMatch_Button" type="Button" parent="MainMenuButtons_VBoxContainer/PlayButtons_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(210, 69)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Join Match"
+
+[node name="HSeparator2" type="HSeparator" parent="MainMenuButtons_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="QuickMatchMenu_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 326.0
+offset_right = -326.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("10_7la6k")
+
+[node name="WaitingEffect_Timer" type="Timer" parent="QuickMatchMenu_VBoxContainer"]
+
+[node name="GameLogo_TextureRect" type="TextureRect" parent="QuickMatchMenu_VBoxContainer"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+texture = ExtResource("1_0ykhv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="QuickMatchMenu_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="QuickMatchInfo_VBoxContainer" type="VBoxContainer" parent="QuickMatchMenu_VBoxContainer"]
+custom_minimum_size = Vector2(0, 263)
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Info_RichTextLabel" type="RichTextLabel" parent="QuickMatchMenu_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/normal_font_size = 36
+text = "Waiting for players"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="QuickMatchMenu_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Return_Button" type="Button" parent="QuickMatchMenu_VBoxContainer/QuickMatchInfo_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/font_size = 24
+text = "Return"
+
+[node name="HSeparator2" type="HSeparator" parent="QuickMatchMenu_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HowToPlayMenu" parent="." instance=ExtResource("15_1n6yq")]
+visible = false
+layout_mode = 1
+
+[node name="CreditsMenu" parent="." instance=ExtResource("19_hm0al")]
+visible = false
+layout_mode = 1
+
+[node name="Settings_TextureButton" type="TextureButton" parent="." groups=["buttons"]]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 94.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("11_8vx4p")
+texture_pressed = ExtResource("12_tdapf")
+texture_hover = ExtResource("13_v41fp")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="SettingsMenu" parent="." instance=ExtResource("14_7shrw")]
+visible = false
+layout_mode = 1
+
+[node name="DialogBackground_ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="CountdownQuickMatch_VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 357.0
+offset_right = -357.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Countdown_Timer" type="Timer" parent="CountdownQuickMatch_VBoxContainer"]
+
+[node name="HSeparator1" type="HSeparator" parent="CountdownQuickMatch_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="CountdownCounter_Container" type="Control" parent="CountdownQuickMatch_VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Aim_TextureRect" type="TextureRect" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.957517
+offset_bottom = -0.957517
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_2nypq")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container/Aim_TextureRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_l4mxc")
+}
+autoplay = "idle"
+next/idle = &"idle"
+
+[node name="Counter_RichTextLabel" type="RichTextLabel" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/normal_font_size = 128
+theme_override_font_sizes/bold_font_size = 128
+bbcode_enabled = true
+text = "[b]10[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceptedMatch_TextureRect" type="TextureRect" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.9575096
+offset_bottom = -0.95751953
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_l4mxc")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RejectedMatch_TextureRect" type="TextureRect" parent="CountdownQuickMatch_VBoxContainer/CountdownCounter_Container"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.9575096
+offset_bottom = -0.95751953
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_5faoh")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="HSeparator2" type="HSeparator" parent="CountdownQuickMatch_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="QuickMatchInfo_VBoxContainer" type="VBoxContainer" parent="CountdownQuickMatch_VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+alignment = 1
+
+[node name="Accept_Button" type="Button" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(215, 85)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/font_size = 40
+text = "Accept"
+
+[node name="HSeparator" type="HSeparator" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Reject_Button" type="Button" parent="CountdownQuickMatch_VBoxContainer/QuickMatchInfo_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_yqorp")
+theme_override_font_sizes/font_size = 24
+text = "Decline"
+
+[node name="HSeparator3" type="HSeparator" parent="CountdownQuickMatch_VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2

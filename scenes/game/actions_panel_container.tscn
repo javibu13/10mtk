@@ -1,0 +1,423 @@
+[gd_scene load_steps=21 format=3 uid="uid://de42nh2pstc31"]
+
+[ext_resource type="Theme" uid="uid://bxcq1oni3q67" path="res://themes/login_menu.theme" id="1_ieefh"]
+[ext_resource type="PackedScene" uid="uid://b8ufcssc2km2k" path="res://scenes/game/actions_panel_avatar_image.tscn" id="2_0cbgp"]
+[ext_resource type="Script" uid="uid://ddt0spxtupwe6" path="res://scripts/client/game/actions_panel.gd" id="2_3gd0y"]
+[ext_resource type="Texture2D" uid="uid://7o74b030edv7" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_close_x.svg" id="4_3gd0y"]
+[ext_resource type="Texture2D" uid="uid://d0458fh5uu3j1" path="res://themes/style_boxes/main_menu_button_normal_base.svg" id="4_6pxys"]
+[ext_resource type="Texture2D" uid="uid://cwbplus2ui3c" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_cancel.svg" id="4_7rpkf"]
+[ext_resource type="Texture2D" uid="uid://b8bgbrx1xg1xv" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_confirm.svg" id="5_6pxys"]
+[ext_resource type="Texture2D" uid="uid://0wxn3hdys837" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_cancel_hover.svg" id="6_wt318"]
+[ext_resource type="Texture2D" uid="uid://ipph4nms2g44" path="res://themes/style_boxes/in_game/actions_panel/game_actions_panel_confirm_hover.svg" id="8_duu40"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_63pli"]
+texture = ExtResource("4_6pxys")
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="Animation" id="Animation_wt318"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions_VBoxContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActionConfirmation_VBoxContainer2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(140, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_duu40"]
+resource_name = "action_details_to_actions"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions_VBoxContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(140, -0.25, 0, 0.06666667, -0.020492554, 140, -0.03333334, -0.1694336, 0.053956166, -24.298698, 0, -0.099999994, 0.11916023, 0, 0),
+"times": PackedFloat32Array(0, 0.06666667, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActionConfirmation_VBoxContainer2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.13333334, 0.11916023, 140, -0.13349926, -70.17408, 0, 0),
+"times": PackedFloat32Array(0.00028510392, 0.23333333)
+}
+
+[sub_resource type="Animation" id="Animation_63pli"]
+resource_name = "actions_to_action_details"
+length = 0.35
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions_VBoxContainer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.13333334, 0.11916023, 140, -0.13349926, -70.17408, 0, 0),
+"times": PackedFloat32Array(0, 0.23333333)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActionConfirmation_VBoxContainer2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(140, -0.25, 0, 0.06666667, -0.020492554, 140, -0.03333334, -0.1694336, 0.053956166, -24.298698, 0, -0.099999994, 0.11916023, 0, 0),
+"times": PackedFloat32Array(0, 0.10000001, 0.33333334)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_duu40"]
+_data = {
+&"RESET": SubResource("Animation_wt318"),
+&"action_details_to_actions": SubResource("Animation_duu40"),
+&"actions_to_action_details": SubResource("Animation_63pli")
+}
+
+[sub_resource type="Animation" id="Animation_3gd0y"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(838, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(445, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_7rpkf"]
+resource_name = "hidden"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(838, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(665, -0.15524384, 88.52973, 0.2, -114.05249),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ootfx"]
+resource_name = "hide_panel"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(838, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(445, -0.17765868, -3.622929, 0.16666667, 3.3987732, 665, -0.23333333, -215.11322, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+
+[sub_resource type="Animation" id="Animation_0cbgp"]
+resource_name = "show_panel"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(838, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(665, -0.15524384, 88.52973, 0.2, -114.05249, 445, -0.26666668, 2.5287476, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+
+[sub_resource type="Animation" id="Animation_6pxys"]
+resource_name = "shown"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(838, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(445, -0.17765868, -3.622929, 0.16666667, 3.3987732),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ootfx"]
+_data = {
+&"RESET": SubResource("Animation_3gd0y"),
+&"hidden": SubResource("Animation_7rpkf"),
+&"hide_panel": SubResource("Animation_ootfx"),
+&"show_panel": SubResource("Animation_0cbgp"),
+&"shown": SubResource("Animation_6pxys")
+}
+
+[node name="Actions_PanelContainer" type="PanelContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 262.0
+offset_top = -203.0
+offset_right = 443.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("1_ieefh")
+theme_type_variation = &"PanelContainerActionsPanel"
+script = ExtResource("2_3gd0y")
+
+[node name="Main_MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main_MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="HSplitContainer" type="HBoxContainer" parent="Main_MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 51)
+layout_mode = 2
+
+[node name="Avatar_Control" parent="Main_MarginContainer/VBoxContainer/HSplitContainer" instance=ExtResource("2_0cbgp")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.6
+mouse_filter = 2
+
+[node name="CharacterInfo_RichTextLabel" type="RichTextLabel" parent="Main_MarginContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "Harambe
+Gorilla
+Police"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="ButtonsArea_Control" type="Control" parent="Main_MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 122)
+layout_mode = 2
+
+[node name="ActionConfirmation_VBoxContainer2" type="VBoxContainer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control"]
+custom_minimum_size = Vector2(141, 122)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.5
+offset_top = 79.0
+offset_right = 70.5
+offset_bottom = 201.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="HSeparator" type="HSeparator" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="ActionInfo_RichTextLabel" type="RichTextLabel" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "Select the tile you want to move the character to and confirm"
+fit_content = true
+scroll_active = false
+
+[node name="PlayersToInvestigate_OptionButton" type="OptionButton" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_ieefh")
+theme_override_styles/normal = SubResource("StyleBoxTexture_63pli")
+alignment = 1
+
+[node name="ConfirmCancel_HBoxContainer" type="HBoxContainer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2"]
+custom_minimum_size = Vector2(141, 61)
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Cancel_TextureButton" type="TextureButton" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2/ConfirmCancel_HBoxContainer" groups=["buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_7rpkf")
+texture_hover = ExtResource("6_wt318")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Confirm_TextureButton" type="TextureButton" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/ActionConfirmation_VBoxContainer2/ConfirmCancel_HBoxContainer" groups=["buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_6pxys")
+texture_hover = ExtResource("8_duu40")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Actions_VBoxContainer" type="VBoxContainer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control"]
+custom_minimum_size = Vector2(141, 122)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.5
+offset_top = -61.0
+offset_right = 70.5
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="MoveAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/Actions_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_ieefh")
+theme_type_variation = &"ButtonMoveAction"
+text = "MOVE"
+
+[node name="KillAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/Actions_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_ieefh")
+theme_type_variation = &"ButtonKillAction"
+text = "KILL"
+
+[node name="InvestigateAction_Button" type="Button" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control/Actions_VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_ieefh")
+theme_type_variation = &"ButtonInvestigateAction"
+text = "INVESTIGATE"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Main_MarginContainer/VBoxContainer/ButtonsArea_Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_duu40")
+}
+
+[node name="X_MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_right = 10
+
+[node name="X_TextureButton" type="TextureButton" parent="X_MarginContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_3gd0y")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ootfx")
+}
