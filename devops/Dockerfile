@@ -4,7 +4,8 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     libfontconfig1 \
     libxcursor1 \
-    libsqlite3-0 \ 
+    # SQLite native library is required for the server to run
+    libsqlite3-0 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /server
@@ -16,7 +17,7 @@ COPY libgdsqlite.linux.template_debug.arm64.so .
 # Grant execution permission
 RUN chmod +x 10MinutesToKill_server.arm64
 
-# Add /server path to available paths in system where look for libraries
+# Set the LD_LIBRARY_PATH environment variable to include the /server directory
 ENV LD_LIBRARY_PATH=/server
 
 EXPOSE 28918/udp
